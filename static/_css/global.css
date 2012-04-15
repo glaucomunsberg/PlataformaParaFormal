@@ -1,0 +1,36 @@
+html {overflow-y:scroll; overflow-x:hidden;}
+body {font-family: Arial,sans-serif; font-size: 65%; margin: 0px 0px 30px 0px; background: none !important;}
+br{clear: both; display: block;}
+button{margin-bottom: 5px;}
+textarea{padding: 2px; display: block; float: left; margin-bottom: 5px; margin-right: 5px;}
+input[type="text"]{height: 18px; line-height:18px; padding: 2px; display: block; float: left; margin-bottom: 5px; margin-right: 5px;}
+input[type="password"]{height: 18px; line-height:18px; padding: 2px; display: block; float: left; margin-bottom: 5px; margin-right: 5px;}
+input[type="button"]{display: block; float: left; margin-left:0px; margin-bottom: 5px; margin-right: 5px;}
+input[type="checkbox"]{display: block; float: left; margin-left:0px; margin-bottom: 5px; margin-right: 5px;}
+input[type="radio"]{display: block; float: left; margin-left:0px; margin-bottom: 5px; margin-right: 5px;}
+label{padding: 4px 2px 0px 2px; display: block; float: left; margin-bottom: 5px; margin-right: 5px;}
+fieldset{padding: 2px; display: block; float: left; margin-bottom: 5px; margin-right: 5px;}
+.highlight{background-color: yellow;}
+
+#carregando{position: fixed; z-index: 2000; top: 0px; right: auto; left: 43%; padding: 5px; margin: 3px 5px 3px; border-width: 2px; font-weight:bold; display: none;}
+#footer{margin-top: 30px; width: 100%; padding: 5px; border-right: none; border-left: none; border-bottom: none; clear:both; text-align: center; position: fixed; bottom: 0px;}
+.legend{font-weight: bold;}
+.description-cobalto{background: url("../../_img/banner_cobalto.png") right bottom no-repeat;}
+.logo{display: block; height: 61px; width: 90px; float: left; margin: 10px 10px 2px 10px; background: url("../../_img/logo.jpg") left top no-repeat;}
+.path-bread{padding: 4px; margin-bottom: 5px; font-size: 14px;}
+.menu{padding: 4px; margin-bottom: 3px; font-size: 14px;}
+.toolbar{padding: 2px; margin-bottom: 5px;}
+.tabs{margin-bottom: 5px;}
+.toolbar button{margin-bottom: 1px;}
+.sortable {list-style-type:none; padding:0; float:left; margin:0px 0px 5px 0px; padding:2px; width:99%;}
+.sortable li {margin: 2px; padding: 2px 3px 2px 5px; width: 98%;}
+
+.ui-layout-west{padding:5px; border-width:1px; border-left: none; border-right: none; border-bottom: none; border-top: none; overflow: auto !important}
+.ui-layout-center{padding:5px; border-width:1px; border-right: none; border-bottom: none; border-top: none; overflow: auto !important;}
+.ui-layout-north{border-top: none; border-left: none; border-right: none; height: 80px; margin-bottom: 0px;}
+.ui-datepicker-trigger{margin-top: 3px;}
+.ui-datepicker-trigger{float: left; margin: 4px 5px 0px 0px;}
+.ui-widget { font-family: Helvetica, Arial, sans-serif; font-size: 1.1em; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Helvetica, Arial, sans-serif;}
+.ui-selectmenu { display: block; position:relative; height: 22px; text-decoration: none; overflow:hidden; float: left; margin-right: 5px; margin-bottom: 5px;}
+.ui-selectmenu-menu li a,.ui-selectmenu-status {line-height: 1.4em; display:block; padding: 3px 2px 2px 3px; outline:none; text-decoration:none; }
