@@ -39,10 +39,10 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "postgres";
-$db['default']['password'] = "postgres";
-$db['default']['database'] = "avatar";
-$db['default']['dbdriver'] = "postgre";
+$db['default']['username'] = "root";
+$db['default']['password'] = "root";
+$db['default']['database'] = "aurora";
+$db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = FALSE;

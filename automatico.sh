@@ -18,7 +18,7 @@ lido=1                	#Verifica se já foi lido o nome do usuário e do projeto
 exec="Y"         	    #Garante que haverá a execução do programa mesmo existindo o automatico.
 autoself="1"	        #Esse identificador identifica se é o Creator ou Automatico
 user="glaucomunsberg"                   #Descomentado no Automatico.sh para conter o nome do usuário do Github
-project="C-C"			    #Desbloqueado no Automatico.sh para conter o nome do projeto do Github
+project="plataformaParaFormal"			    #Desbloqueado no Automatico.sh para conter o nome do projeto do Github
 
 #---------------------------------------------------------------------------------------------
 #---------------------------------------- Funções --------------------------------------------
