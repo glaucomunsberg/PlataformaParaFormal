@@ -24,7 +24,7 @@
 			</div>
 			<div class="logo"><!-- --></div>
 			<h1 style="float: left; background:none !important; border: none !important; font-size: 21px; padding: 0px; margin-top: 15px; margin-bottom: 0px;" class="ui-widget-content">
-				<i>Audigital 3.0<br />Sistema de auditoria digital</i>
+				<i>Sistema de cadastro de Para-Formalidades<br />Versão 0.1</i>
 			</h1>
 			<div class="ui-widget-content ui-corner-all" style="float:right; padding: 5px 0px 5px 5px; margin: 3px 5px 0px 5px; height: 60px;">
 				<!--<div class="ui-state-default ui-corner-all" style="float:left; padding: 4px 3px 2px 3px;">

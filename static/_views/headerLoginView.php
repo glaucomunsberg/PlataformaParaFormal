@@ -24,7 +24,7 @@
 			</div>
 			<div class="logo"><!-- --></div>
 			<h1 style="float: left; background:none !important; border: none !important; font-size: 21px; padding: 0px; margin-top: 15px; margin-bottom: 0px;" class="ui-widget-content">
-				<i>Audigital 3.0<br />Sistema de auditoria digital</i>
+				<i>Plataforma do Para-formal<br />Cidade+Contemporaneidade</i>
 			</h1>			
 		</div>
 		<span style="clear:both;"><!-- --></span>				
