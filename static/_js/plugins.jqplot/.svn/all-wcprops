@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot
+END
+jqplot.canvasTextRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.canvasTextRenderer.min.js
+END
+jqplot.ciParser.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.ciParser.min.js
+END
+jqplot.enhancedLegendRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.enhancedLegendRenderer.min.js
+END
+jqplot.meterGaugeRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.meterGaugeRenderer.min.js
+END
+jqplot.ohlcRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.ohlcRenderer.min.js
+END
+jqplot.pointLabels.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.pointLabels.min.js
+END
+jqplot.BezierCurveRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.BezierCurveRenderer.min.js
+END
+jqplot.cursor.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.cursor.min.js
+END
+jqplot.canvasOverlay.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.canvasOverlay.min.js
+END
+jqplot.funnelRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.funnelRenderer.min.js
+END
+jqplot.donutRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.donutRenderer.min.js
+END
+jqplot.blockRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.blockRenderer.min.js
+END
+jqplot.pyramidAxisRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.pyramidAxisRenderer.min.js
+END
+jqplot.mekkoAxisRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.mekkoAxisRenderer.min.js
+END
+jqplot.bubbleRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.bubbleRenderer.min.js
+END
+jqplot.trendline.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.trendline.min.js
+END
+jqplot.canvasAxisLabelRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.canvasAxisLabelRenderer.min.js
+END
+jqplot.dateAxisRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.dateAxisRenderer.min.js
+END
+jqplot.categoryAxisRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.categoryAxisRenderer.min.js
+END
+jqplot.json2.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.json2.min.js
+END
+jqplot.barRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.barRenderer.min.js
+END
+jqplot.pyramidRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.pyramidRenderer.min.js
+END
+jqplot.logAxisRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.logAxisRenderer.min.js
+END
+jqplot.mekkoRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.mekkoRenderer.min.js
+END
+jqplot.highlighter.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.highlighter.min.js
+END
+jqplot.dragable.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.dragable.min.js
+END
+jqplot.canvasAxisTickRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.canvasAxisTickRenderer.min.js
+END
+jqplot.pyramidGridRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.pyramidGridRenderer.min.js
+END
+jqplot.pieRenderer.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/14/trunk/static/_js/plugins.jqplot/jqplot.pieRenderer.min.js
+END

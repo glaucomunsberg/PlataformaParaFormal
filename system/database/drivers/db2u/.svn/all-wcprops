@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/9/trunk/system/database/drivers/db2u
+END
+db2u_utility.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/9/trunk/system/database/drivers/db2u/db2u_utility.php
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/9/trunk/system/database/drivers/db2u/index.html
+END
+db2u_driver.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/9/trunk/system/database/drivers/db2u/db2u_driver.php
+END
+db2u_result.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/9/trunk/system/database/drivers/db2u/db2u_result.php
+END

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/9/trunk/autenticacao/config
+END
+user_agents.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/9/trunk/autenticacao/config/user_agents.php
+END
+routes.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/9/trunk/autenticacao/config/routes.php
+END
+hooks.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/9/trunk/autenticacao/config/hooks.php
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/9/trunk/autenticacao/config/index.html
+END
+database.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/9/trunk/autenticacao/config/database.php
+END
+mongodb.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/9/trunk/autenticacao/config/mongodb.php
+END
+smileys.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/9/trunk/autenticacao/config/smileys.php
+END
+config.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/9/trunk/autenticacao/config/config.php
+END
+filters.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/9/trunk/autenticacao/config/filters.php
+END
+autoload.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/9/trunk/autenticacao/config/autoload.php
+END
+doctypes.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/9/trunk/autenticacao/config/doctypes.php
+END
+mimes.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/9/trunk/autenticacao/config/mimes.php
+END
+constants.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/9/trunk/autenticacao/config/constants.php
+END
