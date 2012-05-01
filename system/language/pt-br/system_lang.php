@@ -34,8 +34,8 @@ $lang['loginDadosInvalidos'] = 'Login ou senha inválida';
 $lang['loginCapcthaInvalido'] = 'Informe o código da imagem corretamente';
 
 //-------- Header -------
-$lang['titulo'] = 'Cobalto';
-$lang['sigla'] = 'Cobalto <br /> Framework para desenvolvimento ágil';
+$lang['titulo'] = 'Plataforma do Paraformal';
+$lang['sigla'] = '<br>Cidade+Contemporaneidade';
 $lang['setor'] = 'Setor';
 $lang['modulo'] = 'Módulo';
 $lang['sair'] = 'Sair';

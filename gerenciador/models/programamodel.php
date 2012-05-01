@@ -90,6 +90,7 @@ class ProgramaModel extends Model {
         $result = $this->db->get('programas', $paramsJqGrid->limit, $paramsJqGrid->start);
 
         $paramsJqGrid->rows = $result->result();
+        
         return $paramsJqGrid;
     }
 
@@ -111,9 +112,13 @@ class ProgramaModel extends Model {
     }
 
     function getProgramasCombo() {
-        $this->db->select('id, nome_programa||\' (\'||link||\')\' as nome', false);
-        $this->db->orderby('nome_programa', 'asc');
-        return $this->db->get('programas')->result_array();
+        //$this->db->select('id, nome_programa||\' (\'||link||\')\' as nome', false);
+        //$this->db->orderby('nome_programa', 'asc');
+        //logLastSQL();
+        //return $this->db->get('programas')->result_array();
+        $this->db->select('id, concat(nome_programa, \' (\', link, \')\') as nome', false);
+			$this->db->orderby('nome_programa', 'asc');
+			return $this->db->get('programas')->result_array();
     }
 
     function getPrograma($id) {

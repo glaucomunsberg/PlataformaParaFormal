@@ -1,6 +1,6 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-//--------- Concursos -----------
+//--------- Gerencador -----------
 $lang['gerenciadorRelatorioCodigo'] = 'Código';
 $lang['gerenciadorRelatorioNome'] = 'Nome';
 $lang['gerenciadorRelatorioLink'] = 'Link';
@@ -9,3 +9,11 @@ $lang['gerenciadorRelatorioTab1'] = 'Relatório';
 $lang['gerenciadorRelatorioModulosAcesso'] = 'Módulos com acesso';
 $lang['gerenciadorRelatorioNomeNaoInformado'] = 'Nome deve ser informado';
 $lang['gerenciadorRelatorioLinkNaoInformado'] = 'Link deve ser informado';
+
+//--------- PessoaTipo -----------
+$lang['pessoaTipoRequerido'] = 'Você precisa informar o nome do tipo de pessoa';
+$lang['tipoPessoa'] = 'Tipo Pessoa';
+$lang['tipoPessoaTipo'] = 'Tipo';
+$lang['tipoPessoaGrid'] = 'Lista de tipos de pessoas';
+
+
