@@ -7,9 +7,10 @@ class ColaboradorModel extends Model {
         $this->db->set('nome', $colaborador['txtColaboradorNome']);
         $this->db->set('email', $colaborador['txtColaboradorEmail']);
         $this->db->set('sexo', $colaborador['cmbColaboradorSexo']);
-        $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
+        if($colaborador['txtColaboradorCidadeId'] != '')
+            $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
         $this->db->set('dt_cadastro', 'NOW()', false);
-        $this->db->set('pessoa_tipo_id', 11);
+        $this->db->set('pessoa_tipo_id', '1');
 	$this->db->insert('pessoas');
 	$this->db->trans_complete();
         logLastSQL();
@@ -26,7 +27,8 @@ class ColaboradorModel extends Model {
 	$this->db->trans_start();
 	$this->db->set('nome', $colaborador['txtColaboradorNome']);
         $this->db->set('email', $colaborador['txtColaboradorEmail']);
-        $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
+        if($colaborador['txtColaboradorCidadeId'] != '')
+            $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
         $this->db->set('sexo', $colaborador['cmbColaboradorSexo']);
 	$this->db->where('id', $colaborador['txtColaboradorId']);
 	$this->db->update('pessoas');
@@ -67,8 +69,9 @@ class ColaboradorModel extends Model {
             $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
         if(@$parametros['txtColaboradorCidadeId'] != null )
             $this->db->like('cidade_id', @$parametros['txtColaboradorCidadeId']);
-        $this->db->where('p.pessoa_tipo_id = 11');
+        $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
         $this->db->sendToGrid();
+        logLastSQL();
     }
 
     function getColaborador($colabordorId){

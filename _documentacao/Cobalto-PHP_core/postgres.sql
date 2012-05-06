@@ -4157,7 +4157,7 @@ COPY cidades (id, unidade_federativa_id, nome, dt_cadastro) FROM stdin;
 3227	18	BITURUNA	2010-03-11
 3228	18	BOA ESPERANÇA	2010-03-11
 3229	18	BOA ESPERANÇA DO IGUAÇU	2010-03-11
-3230	18	BOA VENTURA DE SÃO ROQUE	2010-03-11
+3230	18	BOA VENTURA DE SÃO ROQUE	2010-03-11CONSTRAINT fk_cidades_1 FOREIGN KEY (unidade_federativa_id) REFERENCES unidades_federativas(id);
 3231	18	BOA VISTA DA APARECIDA	2010-03-11
 3232	18	BOCAIÚVA DO SUL	2010-03-11
 3233	18	BOM JESUS DO SUL	2010-03-11
@@ -4204,7 +4204,7 @@ COPY cidades (id, unidade_federativa_id, nome, dt_cadastro) FROM stdin;
 3274	18	CONTENDA	2010-03-11
 3275	18	CORBÉLIA	2010-03-11
 3276	18	CORNÉLIO PROCÓPIO	2010-03-11
-3277	18	CORONEL DOMINGOS  SOARES	2010-03-11
+3277	18	CORONEL DOMINGOS  SOARES	2010-03-11CONSTRAINT fk_cidades_1 FOREIGN KEY (unidade_federativa_id) REFERENCES unidades_federativas(id);
 3278	18	CORONEL VIVIDA	2010-03-11
 3279	18	CORUMBATAÍ DO SUL	2010-03-11
 3280	18	CRUZ MACHADO	2010-03-11
@@ -4313,7 +4313,7 @@ COPY cidades (id, unidade_federativa_id, nome, dt_cadastro) FROM stdin;
 3383	18	LONDRINA	2010-03-11
 3384	18	LUIZIANA	2010-03-11
 3385	18	LUNARDELLI	2010-03-11
-3386	18	LUPIONÓPOLIS	2010-03-11
+3386	18	LUPIONÓPOLIS	2010-03-11CONSTRAINT fk_cidades_1 FOREIGN KEY (unidade_federativa_id) REFERENCES unidades_federativas(id);
 3387	18	MALLET	2010-03-11
 3388	18	MAMBORÉ	2010-03-11
 3389	18	MANDAGUAÇU	2010-03-11
@@ -4718,7 +4718,7 @@ COPY cidades (id, unidade_federativa_id, nome, dt_cadastro) FROM stdin;
 3788	20	PENDÊNCIAS	2010-03-11
 3789	20	PILÕES	2010-03-11
 3790	20	POÇO BRANCO	2010-03-11
-3791	20	PORTALEGRE	2010-03-11
+3791	20	PORTALEGRE	2010-03-11CONSTRAINT fk_cidades_1 FOREIGN KEY (unidade_federativa_id) REFERENCES unidades_federativas(id);
 3792	20	PORTO DO MANGUE	2010-03-11
 3793	20	PRESIDENTE JUSCELINO	2010-03-11
 3794	20	PUREZA	2010-03-11
@@ -5014,7 +5014,7 @@ COPY cidades (id, unidade_federativa_id, nome, dt_cadastro) FROM stdin;
 4084	23	FLORIANO PEIXOTO	2010-03-11
 4085	23	FONTOURA XAVIER	2010-03-11
 4086	23	FORMIGUEIRO	2010-03-11
-4087	23	FORQUETINHA	2010-03-11
+4087	23	FORQUETINHA	2010-03-11CONSTRAINT fk_cidades_1 FOREIGN KEY (unidade_federativa_id) REFERENCES unidades_federativas(id);
 4088	23	FORTALEZA DOS VALOS	2010-03-11
 4089	23	FREDERICO WESTPHALEN	2010-03-11
 4090	23	GARIBALDI	2010-03-11
@@ -6899,5 +6899,118 @@ ALTER TABLE ONLY pessoas
 ALTER TABLE ONLY pessoas
     ADD CONSTRAINT pessoas_pessoa_tipo_id_fkey FOREIGN KEY (pessoa_tipo_id) REFERENCES pessoas_tipos(id);
 
+CREATE TABLE tipos_condicoes_ambientais (
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipos_elementos_situacoes(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipos_locais(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipos_participacoes(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipos_pontes(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipos_registros_atividades(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE grupos_atividades(
+    id integer NOT NULL,
+    cidade_id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE imagens(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    figura lo,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE paraformalidades(
+    id integer NOT NULL,
+    descricao varchar(255) DEFAULT NULL,
+    imagem_id integer NOT NULL,
+    cod_panoramio_id integer NOT NULL,
+    grupo_atividade_id integer NOT NULL,
+    colaborador_pessao_id integer NOT NULL,
+    tipo_registro_atividade_id integer NOT NULL,
+    tipo_local_id integer NOT NULL,
+    tipo_condicao_ambiental_id integer NOT NULL,
+    tipo_elemento_situacao_id integer NOT NULL,
+    tipo_ponte_id integer NOT NULL,
+    esta_ativo varchar(1) DEFAULT NULL,
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    PRIMARY KEY (`id`)
+);
+
+--CREATE TABLE enderecos (
+--    id integer NOT NULL,
+--    pessoa_id integer,
+--    endereco_tipo_id integer,
+--    cidade_id integer,
+--    cep varchar(20) DEFAULT NULL,
+--    rua varchar(255) DEFAULT NULL,
+--    numero varchar(10) DEFAULT NULL,
+--    bairro varchar(255) DEFAULT NULL,
+--    complemento varchar(255) DEFAULT NULL,
+--    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
+--);
+
+
+
+--DROP TABLE IF EXISTS `paraformalidades`;
+--CREATE TABLE IF NOT EXISTS `paraformalidades` (
+--  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+--  `imagem` blob NOT NULL,
+-- `descricao` longtext NOT NULL,
+--  `cod_panoramio_id` int(11) NOT NULL COMMENT 'ID vinculada a imagem no panoramio',
+--  `grupo_atividade_id` int(11) NOT NULL,
+--  `colaborador_pessao_id` int(10) unsigned NOT NULL COMMENT 'colaborador que fez a captura da paraformalidade',
+--  `tipo_registro_atividade_id` int(10) unsigned NOT NULL,
+--  `tipo_local_id` int(10) unsigned NOT NULL,
+--  `tipo_condicao_ambiental_id` int(10) unsigned NOT NULL,
+--  `tipo_elemento_situacao_id` int(10) unsigned NOT NULL,
+--  `tipo_ponte_id` int(10) unsigned DEFAULT NULL,
+--  `esta_ativo` char(1) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'S',
+--  `dt_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_grupo_atividade_id` (`grupo_atividade_id`),
+  KEY `fk_tipo_elemento_situacao_id` (`tipo_elemento_situacao_id`),
+  KEY `fk_tipo_condicao_ambiental_id` (`tipo_condicao_ambiental_id`),
+  KEY `fk_tipo_local_id` (`tipo_local_id`),
+  KEY `fk_tipo_registro_atividade_id` (`tipo_registro_atividade_id`),
+  KEY `fk_tipo_ponte_id` (`tipo_ponte_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='todas as paraformalidades' AUTO_INCREMENT=1 ;
 
 

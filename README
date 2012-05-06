@@ -22,3 +22,6 @@ Versão 0.1.6
 	 	Criação do programa gerencidor/pessoasTipo
 		Criação do módulo paraformalidade
 		Criação do programa Colaborador
+Versão 0.1.7
+	Correção
+		DB aurora migrado para PostgreSQL

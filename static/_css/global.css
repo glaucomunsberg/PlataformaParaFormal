@@ -15,8 +15,8 @@ fieldset{padding: 2px; display: block; float: left; margin-bottom: 5px; margin-r
 #carregando{position: fixed; z-index: 2000; top: 0px; right: auto; left: 43%; padding: 5px; margin: 3px 5px 3px; border-width: 2px; font-weight:bold; display: none;}
 #footer{margin-top: 30px; width: 100%; padding: 5px; border-right: none; border-left: none; border-bottom: none; clear:both; text-align: center; position: fixed; bottom: 0px;}
 .legend{font-weight: bold;}
-.description-cobalto{background: url("../../_img/banner_cobalto.png") right bottom no-repeat;}
-.logo{display: block; height: 70px; width: 140px; float: left; margin: 3px 5px 2px 5px; background: url("../../_img/logo_cobalto.png") left top no-repeat;}
+.description-cobalto{background: url("../../_img/logo_plataforma_paraformal.png") right bottom no-repeat;}
+.logo{display: block; height: 70px; width: 140px; float: left; margin: 3px 5px 2px 5px; background: url("../../_img/logo_plataforma_paraformal.png") left top no-repeat;}
 .path-bread{padding: 4px; margin-bottom: 5px; font-size: 14px;}
 .menu{padding: 4px; margin-bottom: 3px; font-size: 14px;}
 .toolbar{padding: 2px; margin-bottom: 5px;}

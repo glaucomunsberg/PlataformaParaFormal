@@ -24,7 +24,7 @@
 				Carregando <img src="<?=IMG;?>/ajax-loader.gif" style="margin-right: 5px; margin-left: 2px;" width="16px" height="11px"/>
 			</div>
 			<div class="logo">
-                            <img src="<?=IMG;?>/logo_plataforma_do_paraformal.jpg"/>
+                            <!--img src="<?=IMG;?>/logo_plataforma_paraformal.png"/!-->
                         </div>
 			<h1 style="float: left; background:none !important; border: none !important; font-size: 21px; padding: 0px; margin-top: 15px; margin-bottom: 0px;" class="ui-widget-content">
 				<?=lang("sigla")?>
