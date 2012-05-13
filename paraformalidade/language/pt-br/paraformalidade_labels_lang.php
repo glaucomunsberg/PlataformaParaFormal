@@ -11,3 +11,18 @@ $lang['colaboradorGrid'] = 'Lista de Colaboradores';
 $lang['colaboradorCidade'] = 'Cidade';
 $lang['colaboradorCidadeGrid'] = 'Lista de Colaboradores';
 
+//--------- Colaboradores -----------
+$lang['condicoesAmbientaisFiltro'] = 'Filtro';
+$lang['condicoesAmbientaisDescricao'] = 'Descrição';
+$lang['condicoesAmbientaisDtCadastro'] = 'Dt. Cadastro';
+$lang['condicoesAmbientaisLista'] = 'Lista de Condições Ambientais';
+$lang['condicoesAmbientais'] = '';
+$lang['condicoesAmbientais'] = '';
+$lang['condicoesAmbientais'] = '';
+$lang['condicoesAmbientais'] = '';
+$lang['condicoesAmbientais'] = '';
+$lang['condicoesAmbientais'] = '';
+
+
+
+

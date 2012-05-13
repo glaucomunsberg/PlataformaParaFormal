@@ -12,7 +12,8 @@ class CidadeModel extends Model {
     public function getCidadeByNome($nome, $limit = 20) {
         $this->db->select('id, nome');
         $this->db->from('cidades');
-        $this->db->like('nome', $nome);
+        if($nome != '')
+            $this->db->like(nome, strtoupper($nome));
         $this->db->order_by('nome', 'asc');
         $this->db->limit($limit);
         return $this->db->get()->result();
