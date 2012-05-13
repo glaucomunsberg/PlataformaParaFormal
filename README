@@ -1,27 +1,9 @@
-Versão 0.0
-	Configuração do Yii na máquina
-	Criação do banco de dados
-	Criação do programa Cidades
+O desenvolvimento se dá como uma plataforma para a divulgação das capturas das para-formalidades na internet através de um conjuntos de ferramentas integradas para tornar a informação organizada geograficamente em um espaço virtual representando o local de onde foi retirada, sendo essa representação visual através de imagens, textos de descrição e discriminação da para-formalidade e espaços para a divulgação através de outros meios daquela informação visualizada.
 
-Versão 0.1.0 
-	Primeira versão de fato commmitado
-Versão 0.1.1 
-	Remoção de arquivos
-Versão 0.1.2 
-	Inserção de novos arquivos da plataforma
-Versão 0.1.3 
-	Envio da grande maioria dos arquivos do cobalto-php
-Versão 0.1.4
-	Correções de integração com o banco de Dados
-Versão 0.1.5
-	UPGRADE da base Cobalto-php
-Versão 0.1.6
-	Correção
-		das chamadas dos programas
-	Implementação
-	 	Criação do programa gerencidor/pessoasTipo
-		Criação do módulo paraformalidade
-		Criação do programa Colaborador
-Versão 0.1.7
-	Correção
-		DB aurora migrado para PostgreSQL
+O que é Para-Formal?!
+
+Para-formalidade é o conceito de aproximar as ecologias urbanas às frestas da contemporaneidade, ou seja, o “para-formal” habita o “entre” a “formalidade” e a “informalidade” existente nos territórios da cidade.
+
+Como colaborar no gitHub
+
+git@github.com:glaucomunsberg/C-C.git

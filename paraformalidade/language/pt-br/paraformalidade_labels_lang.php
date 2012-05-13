@@ -11,18 +11,21 @@ $lang['colaboradorGrid'] = 'Lista de Colaboradores';
 $lang['colaboradorCidade'] = 'Cidade';
 $lang['colaboradorCidadeGrid'] = 'Lista de Colaboradores';
 
-//--------- Colaboradores -----------
+//--------- Condições Ambientais -----------
 $lang['condicoesAmbientaisFiltro'] = 'Filtro';
 $lang['condicoesAmbientaisDescricao'] = 'Descrição';
 $lang['condicoesAmbientaisDtCadastro'] = 'Dt. Cadastro';
 $lang['condicoesAmbientaisLista'] = 'Lista de Condições Ambientais';
-$lang['condicoesAmbientais'] = '';
-$lang['condicoesAmbientais'] = '';
-$lang['condicoesAmbientais'] = '';
-$lang['condicoesAmbientais'] = '';
-$lang['condicoesAmbientais'] = '';
-$lang['condicoesAmbientais'] = '';
 
 
+//--------- Locais -----------
+$lang['locaisFiltro'] = 'Filtro';
+$lang['locaisDescricao'] = 'Descrição';
+$lang['locaisDtCadastro'] = 'Dt. Cadastro';
+$lang['locaisLista'] = 'Lista de Locais';
 
-
+//--------- Atividades Registradas -----------
+$lang['atividadesRegistradasFiltro'] = 'Filtro';
+$lang['atividadesRegistradasDescricao'] = 'Descrição';
+$lang['atividadesRegistradasDtCadastro'] = 'Dt. Cadastro';
+$lang['atividadesRegistradasLista'] = 'Lista de Atividades Registradas';

@@ -12,7 +12,7 @@
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
 	
-	<?=begin_JqGridPanel('gridCondicaoAmbiental', '', '', base_url().'paraformalidade/cadastrosBasicos/condicaoAmbiental/listaCondicoesAmbientais/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('condicoesAmbientaisLista')));?>
+	<?=begin_JqGridPanel('gridCondicaoAmbiental', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/condicaoAmbiental/listaCondicoesAmbientais/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('condicoesAmbientaisLista')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
 		<?=addJqGridColumn('descricao', lang('condicoesAmbientaisDescricao'), 300, 'left', array('sortable'=>true));?>
 		<?=addJqGridColumn('dt_cadastro', lang('condicoesAmbientaisDtCadastro'), 70, 'center', array('sortable'=>true));?>
