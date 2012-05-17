@@ -29,6 +29,8 @@ Versão 0.1.7
 		DB aurora migrado para PostgreSQL
 Versão 0.1.8
 	Implementação
-		Criaçãodo programa Atividades Registradas - paraformalidade/cadastrosBasicos/atividadeRegistrada
-		Criaçãodo programa Locais - paraformalidade/cadastrosBasicos/local
-	Correção do programa Condições Ambientais
+		Criação do programa Atividades Registradas - paraformalidade/cadastrosBasicos/atividadeRegistrada
+		Criação do programa Locais - paraformalidade/cadastrosBasicos/local
+                Criação do programa Elementos Situação -  paraformalidade/cadastrosBasicos/elementosSituacoes
+	Correção 
+                Programa Condições Ambientais

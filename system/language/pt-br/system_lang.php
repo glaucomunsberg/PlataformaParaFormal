@@ -35,7 +35,7 @@ $lang['loginCapcthaInvalido'] = 'Informe o código da imagem corretamente';
 
 //-------- Header -------
 $lang['titulo'] = 'Plataforma do Paraformal';
-$lang['sigla'] = '<br>Cidade+Contemporaneidade';
+$lang['sigla'] = 'Cidade<FONT COLOR="red">+</FONT>Contemporaneidade';
 $lang['setor'] = 'Setor';
 $lang['modulo'] = 'Módulo';
 $lang['sair'] = 'Sair';
