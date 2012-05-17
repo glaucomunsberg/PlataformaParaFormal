@@ -10,7 +10,7 @@ class Colaborador extends Controller {
     }
     
     function index() {
-        $data['path_bread'] = $this->programaModel->pathBread($this->uri->segment(1) . '/' . $this->uri->segment(2));
+        $data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
         $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
         $this->load->view('cadastrosBasicos/colaboradorFiltroView', $data);
     }
