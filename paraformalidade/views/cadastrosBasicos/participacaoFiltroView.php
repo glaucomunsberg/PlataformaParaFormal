@@ -6,16 +6,16 @@
 	<?=end_ToolBar();?>
 
 	<?=begin_TabPanel('tabLocais');?>
-		<?=begin_Tab(lang('locaisFiltro'));?>
-			<?=form_label('lblDescricao', lang('locaisDescricao'), 80);?>
+		<?=begin_Tab(lang('particupacaoFiltro'));?>
+			<?=form_label('lblDescricao', lang('particupacaoDescricao'), 80);?>
 			<?=form_textField('txtDescricao', '', 300, '');?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
 	
-	<?=begin_JqGridPanel('gridParticipacao', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/participacao/listaParticipacoes/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('locaisLista')));?>
+	<?=begin_JqGridPanel('gridParticipacao', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/participacao/listaParticipacoes/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('particupacaoLista')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-		<?=addJqGridColumn('descricao', lang('locaisDescricao'), 300, 'left', array('sortable'=>true));?>
-		<?=addJqGridColumn('dt_cadastro', lang('locaisDtCadastro'), 70, 'center', array('sortable'=>true));?>
+		<?=addJqGridColumn('descricao', lang('particupacaoDescricao'), 300, 'left', array('sortable'=>true));?>
+		<?=addJqGridColumn('dt_cadastro', lang('particupacaoDtCadastro'), 70, 'center', array('sortable'=>true));?>
 	<?=end_JqGridPanel();?>
 	
 <?=$this->load->view("../../static/_views/footerGlobalView");?>

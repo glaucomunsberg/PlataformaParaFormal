@@ -5,12 +5,12 @@
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
 	<?=end_ToolBar();?>
 
-	<?=begin_TabPanel('tabNotaTipo');?>
-		<?=begin_Tab(lang('locaisFiltro'));?>
+	<?=begin_TabPanel('tabparticipacao');?>
+		<?=begin_Tab(lang('particupacaoFiltro'));?>
 			<?=begin_form('paraformalidade/cadastrosBasicos/participacao/salvar', 'formParticipacao');?>
 				<?=form_hidden('txtParticipacaoId', @$participacao->id);?>
 
-				<?=form_label('lblDescricao', lang('locaisDescricao'), 80);?>
+				<?=form_label('lblDescricao', lang('particupacaoDescricao'), 80);?>
 				<?=form_textField('txtDescricao', @$participacao->descricao, 400, '');?>
 
 			<?=end_form();?>

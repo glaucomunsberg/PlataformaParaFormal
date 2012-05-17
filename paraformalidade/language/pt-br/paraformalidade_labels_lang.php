@@ -30,8 +30,14 @@ $lang['atividadesRegistradasDescricao'] = 'Descrição';
 $lang['atividadesRegistradasDtCadastro'] = 'Dt. Cadastro';
 $lang['atividadesRegistradasLista'] = 'Lista de Atividades Registradas';
 
-//--------- Atividades Registradas -----------
+//--------- Elementos Situações -----------
 $lang['elementosSituacoesFiltro'] = 'Filtro';
 $lang['elementosSituacoesDescricao'] = 'Descrição';
 $lang['elementosSituacoesDtCadastro'] = 'Dt. Cadastro';
 $lang['elementosSituacoesLista'] = 'Lista de Situações Elementos Registradas';
+
+//--------- Elementos Situações -----------
+$lang['particupacaoFiltro'] = 'Filtro';
+$lang['particupacaoDescricao'] = 'Descrição';
+$lang['particupacaoDtCadastro'] = 'Dt. Cadastro';
+$lang['particupacaoLista'] = 'Lista de Participações';
