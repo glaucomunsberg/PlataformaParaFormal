@@ -31,6 +31,11 @@ Versão 0.1.8
 	Implementação
 		Criação do programa Atividades Registradas - paraformalidade/cadastrosBasicos/atividadeRegistrada
 		Criação do programa Locais - paraformalidade/cadastrosBasicos/local
-                Criação do programa Elementos Situação -  paraformalidade/cadastrosBasicos/elementosSituacoes
 	Correção 
                 Programa Condições Ambientais
+Versão 0.1.9
+        Implementação
+                Criação do programa Elementos Situação -  paraformalidade/cadastrosBasicos/elementosSituacoes
+                Criação do programa Participação -  paraformalidade/cadastrosBasicos/participacao
+        Correção
+                Nava cor que dá fundo ao nome do grupo, criacao do autualizarPlataforma.sh para auxiliar na atualização
