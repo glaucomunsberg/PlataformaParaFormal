@@ -28,7 +28,7 @@
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                 <?=addJqGridColumn('nome', lang('colaboradorNome'), 60, 'left', array('sortable'=>true));?>
                 <?=addJqGridColumn('email', lang('colaboradorEmail'), 40, 'left', array('sortable'=>true));?>
-                <?=addJqGridColumn('cidadeNome', lang('colaboradorCidade'), 40, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('nomecidade', lang('colaboradorCidade'), 40, 'left', array('sortable'=>true));?>
                 <?=addJqGridColumn('sexo', lang('colaboradorSexo'), 5, 'center', array('sortable'=>true));?>
                 <?=addJqGridColumn('dt_cadastro', lang('pessoaDtCadastro'), 15, 'center', array('sortable'=>true));?>
 	<?=end_JqGridPanel();?>

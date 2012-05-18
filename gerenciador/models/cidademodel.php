@@ -9,14 +9,14 @@ class CidadeModel extends Model {
         return $this->db->get('cidades')->result_array();
     }
     
-    public function getCidadeByNome($nome, $limit = 20) {
+    public function getCidadeByNome($nome) {
         $this->db->select('id, nome');
         $this->db->from('cidades');
         if($nome != '')
-            $this->db->like(nome, strtoupper($nome));
+            $this->db->like('upper(nome)', strtoupper($nome));
         $this->db->order_by('nome', 'asc');
-        $this->db->limit($limit);
-        return $this->db->get()->result();
+        $this->db->limit('20');
+        return $this->db->get('')->result();
     }
     
     function getCidadeById($cidadeId){

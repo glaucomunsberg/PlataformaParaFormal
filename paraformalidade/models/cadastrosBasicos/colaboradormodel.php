@@ -9,6 +9,9 @@ class ColaboradorModel extends Model {
         $this->db->set('sexo', $colaborador['cmbColaboradorSexo']);
         if($colaborador['txtColaboradorCidadeId'] != '')
             $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
+        if($colaborador['txtColaboradorProfissao'] != '')
+            $this->db->set('profissao', $colaborador['txtColaboradorProfissao']);
+        $this->db->set('dt_nascimento', ($colaborador['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
         $this->db->set('dt_cadastro', 'NOW()', false);
         $this->db->set('pessoa_tipo_id', '1');
 	$this->db->insert('pessoas');
@@ -29,6 +32,9 @@ class ColaboradorModel extends Model {
         $this->db->set('email', $colaborador['txtColaboradorEmail']);
         if($colaborador['txtColaboradorCidadeId'] != '')
             $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
+        if($colaborador['txtColaboradorProfissao'] != '')
+            $this->db->set('profissao', $colaborador['txtColaboradorProfissao']);
+        $this->db->set('dt_nascimento', ($colaborador['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
         $this->db->set('sexo', $colaborador['cmbColaboradorSexo']);
 	$this->db->where('id', $colaborador['txtColaboradorId']);
 	$this->db->update('pessoas');
@@ -58,7 +64,7 @@ class ColaboradorModel extends Model {
     }
 
     function getColaboradores($parametros) {
-        $this->db->select('p.id, p.nome, p.sexo, p.email,c.id as cidadeId, c.nome as cidadeNome, p.dt_cadastro', false);
+        $this->db->select('p.id, p.nome, p.sexo,p.profissao, p.email, c.id as cidadeId, c.nome as nomecidade, to_char(p.dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
         $this->db->from('pessoas as p');
         $this->db->join('cidades as c','p.cidade_id = c.id', 'left');
         if(@$parametros['txtColaboradorNome'] != null )
@@ -68,15 +74,16 @@ class ColaboradorModel extends Model {
         if(@$parametros['txtColaboradorEmail'] != null )
             $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
         if(@$parametros['txtColaboradorCidadeId'] != null )
-            $this->db->like('cidade_id', @$parametros['txtColaboradorCidadeId']);
+            $this->db->where('p.cidade_id', @$parametros['txtColaboradorCidadeId']);
         $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
         $this->db->sendToGrid();
-        logLastSQL();
     }
 
     function getColaborador($colabordorId){
+        $this->db->select('p.id, p.nome, p.cidade_id, p.sexo, p.profissao, p.email, to_char(p.dt_nascimento, \'dd/mm/yyyy hh24:mi:ss\') as dt_nascimento',false);
+        $this->db->from('pessoas as p');
 	$this->db->where('id', $colabordorId);
-	return $this->db->get('pessoas')->row();
+	return $this->db->get('')->row();
     }
 
     function validaColaborador($data) {

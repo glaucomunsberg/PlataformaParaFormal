@@ -24,6 +24,14 @@
 				<?=form_textField('txtColaboradorEmail', @$colaborador->email, 250, '');?>
 				<?=new_line();?>
 
+                                <?=form_label('lblProfissao', lang('colaboradorProfissaoInstituicao'), 80);?>
+				<?=form_textField('txtColaboradorProfissao', @$colaborador->profissao, 250, '');?>
+                                <?=new_line();?>
+
+                                <?=form_label('lblAte',lang('colaboradorProfissaoDtNacimento'), 80);?>
+                                <?=form_dateField('txtDtNascimento', @$colaborador->dt_nascimento);?>
+                                <?=new_line();?>
+
 			<?=end_form();?>
 		<?=end_Tab();?>
 	<?=end_TabPanel()?>

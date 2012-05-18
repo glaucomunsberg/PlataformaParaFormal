@@ -63,7 +63,7 @@ class Colaborador extends Controller {
     
     function buscarCidade(){
         $this->ajax->addAjaxCombo(
-                $this->cidadeModel->getCidadeByNome($_GET['q'], 20)
+                $this->cidadeModel->getCidadeByNome($_GET['q'])
         );
         $this->ajax->returnAjax();
     }
