@@ -37,5 +37,7 @@ Versão 0.1.9
         Implementação
                 Criação do programa Elementos Situação -  paraformalidade/cadastrosBasicos/elementosSituacoes
                 Criação do programa Participação -  paraformalidade/cadastrosBasicos/participacao
+                Criação do programa Registro Atividade - paraformalidade/equipe/registroAtividade
+                Criação do programa Ver Registro Atividade - paraformalidade/equipe/verRegistroAtividade
         Correção
-                Nava cor que dá fundo ao nome do grupo, criacao do autualizarPlataforma.sh para auxiliar na atualização
+                Nova cor que dá fundo ao nome do grupo, criacao do autualizarPlataforma.sh para auxiliar na atualização

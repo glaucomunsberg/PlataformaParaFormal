@@ -43,3 +43,20 @@ $lang['particupacaoFiltro'] = 'Filtro';
 $lang['particupacaoDescricao'] = 'Descrição';
 $lang['particupacaoDtCadastro'] = 'Dt. Cadastro';
 $lang['particupacaoLista'] = 'Lista de Participações';
+
+
+//--------- Atividades Registradas -----------
+$lang['registroAtividadePeriodo'] = 'Período';
+$lang['registroAtividadeEntradaSaída'] = 'Entrada/Saida';
+$lang['registroAtividadeAtividade'] = 'Atividade';
+$lang['registroAtividadeDtCadastro'] = 'Dt. Cadastro';
+$lang['registroAtividadeFiltro'] = 'Filtro';
+$lang['registroAtividadeLista'] = 'Lista de Atividades';
+
+//--------- Ver Registros de Atividade -----------
+$lang['verRegistroAtividadeFiltro'] = 'Filtro';
+$lang['verRegistroAtividadeListaEquipe'] = 'Lista de membros da Equipe';
+$lang['verRegistroAtividadePessoa'] = 'Pessoa';
+$lang['verRegistroAtividadeMembroDaEquipe'] = 'Membros da Equipe';
+
+

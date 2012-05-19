@@ -14,3 +14,6 @@ $lang['elementosSituacoesDescricaoDeveSerInformado'] = 'Elemento Situação deve
 
 //--------- Participacoes -----------
 $lang['participacaoDescricaoDeveSerInformado'] = 'Tipo de Participação deve ser informado';
+
+//--------- Participacoes -----------
+$lang['atividadeRegistradaDeveSerInformado'] = 'Saída ou Entrada deve ser informado';
