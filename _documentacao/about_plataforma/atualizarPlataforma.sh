@@ -36,6 +36,6 @@ echo "-------------------------------------------"
 echo "-Programa de atualização da plataforma... -"
 echo "-Etapa 3                                  -"
 echo "-Permissão de arquivos                    -"
-sudo chmod +x /_documentacao/about_plataforma/atualizarPlataforma.sh
+sudo chmod +x _documentacao/about_plataforma/atualizarPlataforma.sh
 echo "Etapa 3 finalizada! Enter para sair...    -"
 read a
