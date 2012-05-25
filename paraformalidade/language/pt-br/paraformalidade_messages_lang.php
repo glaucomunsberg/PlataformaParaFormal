@@ -17,3 +17,6 @@ $lang['participacaoDescricaoDeveSerInformado'] = 'Tipo de Participação deve se
 
 //--------- Participacoes -----------
 $lang['atividadeRegistradaDeveSerInformado'] = 'Saída ou Entrada deve ser informado';
+
+//--------- Participacoes -----------
+$lang['ponteDescricaoDeveSerInformado'] = 'Ponte deve ser informado';
