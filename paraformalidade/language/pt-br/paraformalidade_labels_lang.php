@@ -59,4 +59,11 @@ $lang['verRegistroAtividadeListaEquipe'] = 'Lista de membros da Equipe';
 $lang['verRegistroAtividadePessoa'] = 'Pessoa';
 $lang['verRegistroAtividadeMembroDaEquipe'] = 'Membros da Equipe';
 
+//--------- Pontes -----------
+$lang['ponteFiltro'] = 'Filtro';
+$lang['ponteDescricao'] = 'Descrição';
+$lang['ponteLista'] = 'Lista de Ponte';
+$lang['ponteDtCadastro'] = 'Dt. Cadastro';
+$lang['ponte'] = '';
+
 
