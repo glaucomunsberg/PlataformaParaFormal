@@ -2,7 +2,7 @@
 		</div>		
 		<div style="clear: both; margin-top: 10px;"><!----></div>
 		<div id="footer" class="ui-state-highlight ui-widget">
-			&copy;2010 Plataforma do Paraformal / <a href="javascript:;">Sobre</a> / <a href="javascript:;">Termos de serviço</a>
+			&copy;2012 Plataforma do Paraformal / <a href="javascript:;">Sobre</a> / <a href="javascript:;">Termos de serviço</a>
 		</div>
 		<div id="dialog-message-error" style="display:none;"><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 0;"></span><label></label></p></div>
 		<div id="dialog-message-info" style="display:none;"><p><span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0;"></span><label></label></p></div>
