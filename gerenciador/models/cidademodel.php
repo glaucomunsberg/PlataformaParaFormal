@@ -10,11 +10,12 @@ class CidadeModel extends Model {
     }
     
     public function getCidadeByNome($nome) {
-        $this->db->select('id, nome');
-        $this->db->from('cidades');
+        $this->db->select('c.id, c.nome || \' - \' || uf.sigla');
+        $this->db->from('cidades as c');
+        $this->db->join('unidades_federativas as uf','c.unidade_federativa_id = uf.id');
         if($nome != '')
-            $this->db->like('upper(nome)', strtoupper($nome));
-        $this->db->order_by('nome', 'asc');
+            $this->db->like('upper(c.nome)', strtoupper($nome));
+        $this->db->order_by('c.nome', 'asc');
         $this->db->limit('20');
         return $this->db->get('')->result();
     }

@@ -871,4 +871,32 @@ function _style_height($height) {
     return $height;
 }
 
+/**
+ * Formulário para exibir a posição no mapa de uma referência
+ * @param type $nameMarker
+ * @param type $latitude
+ * @param type $longitude
+ * @param type $width
+ * @param type $height
+ * @param type $draggableMap
+ * @param type $draggableMarker 
+ */
+function form_MapWithMarker($nameMarker = '', $latitude = -31.771083, $longitude = -52.325821, $width = 200, $height = 300, $mapTipe= 'map', $draggableMap = true, $draggableMarker = false){
+    logVar('carregando api do Maps', 'DESCRICAO');
+    $this->gmap->addDirections("Some Street, Some Town, Some City, Some Country", "57 Cardigan Lane, Leeds, UK", 'map_directions', $display_markers=true);
+    $this->load->library('GMap');
+    $this->gmap->GoogleMapAPI();
+    $this->gmap->setMapType($mapTipe);
+    $this->gmap->setCenterCoords($longitude,$latitude);
+    $this->gmap->addMarkerByCoords($longitude,$latitude,$nameMarker,'','');
+    $this->gmap->setWidth($width);
+    $this->gmap->setHeight($height);
+    echo $this->gmap->getHeaderJS();
+    echo $this->gmap->getMapJS();
+    echo $this->gmap->printOnLoad();
+    echo $this->gmap->printMap();
+    return false;
+    
+}
+
 ?>

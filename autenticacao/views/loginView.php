@@ -1,9 +1,10 @@
 <?=$this->load->view("../../static/_views/headerLoginView");?>
+<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 <div style="margin: 5px;">
 		<div style="float: right; padding: 10px 0; left: 420px; right: 0; position: absolute;">										
-			 <ul style="list-style-type: none;">
+			 <ul style="list-style-type: none; font-family: 'Ubuntu', sans-serif;">
 			 	<li>			 		
-			 		<h1>Plataforma do Paraformal - Portal de Gerenciamento de Para-Formalidades</h1>
+			 		<h1 >Plataforma do Para-formal - Portal de Gerenciamento de Para-Formalidades.</h1>
 			 		<ul style="padding-left: 0px;">
 			 			<li style="list-style-type: none;">						 		
 					 		<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">					 			
@@ -15,10 +16,10 @@
 							<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">
 								Deseja saber mais sobre o Portal?!
 							</p>
-							<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">
-								Conheça o Projeto da Plataforma do Parformal: <a href="http://glaucomunsberg.github.com/C-C/" target="_blank">Plataforma Source</a>
+							<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px; margin-left: 20px">
+								Conheça o Projeto Plataforma do Parformal: <a href="http://glaucomunsberg.github.com/C-C/" target="_blank">Plataforma Source</a>
 							</p>
-                                                        <p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">
+                                                        <p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px; margin-left: 20px">
 								Conheça a Equipe Idealizadora do projeto : <a href="http://www.wix.com/contemporaneidade/faurb#!__quem-somos" target="_blank">Cidade+Contemporaneidade</a>
 							</p>
                                                         
