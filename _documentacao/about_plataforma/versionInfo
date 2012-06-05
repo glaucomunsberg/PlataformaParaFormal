@@ -40,6 +40,7 @@ Versão 0.1.9
                 Criação do programa Registro Atividade - paraformalidade/equipe/registroAtividade
                 Criação do programa Ver Registro Atividade - paraformalidade/equipe/verRegistroAtividade
                 Criação do programa Pontes - paraformalidade/equipe/ponte
+                Criação do helper form_MapWithMarker
         Correção
                 Nova cor que dá fundo ao nome do grupo
                 Criacao do autualizarPlataforma.sh para auxiliar na atualização

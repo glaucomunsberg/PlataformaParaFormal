@@ -872,31 +872,145 @@ function _style_height($height) {
 }
 
 /**
- * Formulário para exibir a posição no mapa de uma referência
- * @param type $nameMarker
- * @param type $latitude
- * @param type $longitude
- * @param type $width
- * @param type $height
- * @param type $draggableMap
- * @param type $draggableMarker 
+ * @ignore
+ * Retorna um map com um marcado de uma localização com coordenadas: Latitude e Longitude
+ *  Tanto mapa como marcador estão centralizados no espaço. Para retorno de lat e long
+ *  do marcador é necessário implementar a função
+ *      function form_MapWithMarker_position(lat,longi);
+ * 
+ *  caso não seja, executa apenas demonstrando a posição
+ * 
+ * @author Glauco Roberto Munsberg dos Santos
+ * 
+ * @param String $nameMarker Nome que o marcador receberá
+ * @param integer|String $latitude varia entre -90º e 90º 
+ * @param integer|String $longitude varia entre -180 e 180º
+ * @param integer|String $width largura da div, padrão 200
+ * @param integer|String $height comprimento da div, padrão 300
+ * @param String $mapTipe tipos de mapas suportados{HYBRID, ROADMAP, SATELLITE, TERRAIN}, default: ROADMAP
+ * @param Boolean|String $draggableMap referente ao arraste do map. Padrão: true
+ * @param Boolean|String $draggableMarker referente ao arraste do marcador. Padrão: false
+ * @return Retorna o style, script e a div com id "map_canvas"
  */
-function form_MapWithMarker($nameMarker = '', $latitude = -31.771083, $longitude = -52.325821, $width = 200, $height = 300, $mapTipe= 'map', $draggableMap = true, $draggableMarker = false){
-    logVar('carregando api do Maps', 'DESCRICAO');
-    $this->gmap->addDirections("Some Street, Some Town, Some City, Some Country", "57 Cardigan Lane, Leeds, UK", 'map_directions', $display_markers=true);
-    $this->load->library('GMap');
-    $this->gmap->GoogleMapAPI();
-    $this->gmap->setMapType($mapTipe);
-    $this->gmap->setCenterCoords($longitude,$latitude);
-    $this->gmap->addMarkerByCoords($longitude,$latitude,$nameMarker,'','');
-    $this->gmap->setWidth($width);
-    $this->gmap->setHeight($height);
-    echo $this->gmap->getHeaderJS();
-    echo $this->gmap->getMapJS();
-    echo $this->gmap->printOnLoad();
-    echo $this->gmap->printMap();
-    return false;
+function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.771083, $longitude = -52.325821, $width = 250, $height = 250, $mapTipe= 'map', $draggableMap = true, $draggableMarker = false){
+    $mapTipe = strtoupper($mapTipe);
+    switch($mapTipe)
+    {
+        case 'HYBRID':
+        case 'ROADMAP':
+        case 'SATELLITE':
+        case 'TERRAIN':
+            break;
+        default: $mapTipe = 'ROADMAP';  
+    }
     
+    if($draggableMap){
+        $draggableMap = 'true';
+    }else{
+        $draggableMap = 'false';
+    }
+    
+    if($draggableMarker){
+        $draggableMarker = 'true';
+    }else{
+        $draggableMarker = 'false';
+    }
+    
+    // Certifica-se que respeite o tamanho mínimo 250 x 250
+    if(!is_numeric($width)){
+        $width = (int)$width;
+    }
+    if($width < 250)
+            $width = 250;
+    
+    if(!is_numeric($height)){
+        $height = (int)$height;
+    }
+    if($height < 250)
+            $height = 250;
+    
+    
+    $script = "<style type=\"text/css\">
+                    #map_canvas { height: 100% }
+                </style>";
+    $script .= "<script type=\"text/javascript\"
+                    src=\"https://maps.google.com/maps/api/js?sensor=false\">
+                </script>";
+    /*
+     * Certifica que os tipos são válido
+     */    
+    
+    $script .= "    <script type=\"text/javascript\">
+                    function init() {
+                    var latlng = new google.maps.LatLng(". $latitude ."," .$longitude .");
+                    var myOptions = {
+                    zoom: 15,
+                    center: latlng,
+                    draggable:". $draggableMap .",
+                    zoomControl:true,
+                    mapTypeId: google.maps.MapTypeId.". $mapTipe ."
+                };";
+   
+    
+    $script .="var map = new google.maps.Map(document.getElementById(\"map_canvas\"), myOptions);
+                    var latitude, logitude;
+                    var marker = new google.maps.Marker({ 
+                    position: latlng, 
+                    map: map,
+                    draggable:".$draggableMarker.",
+                    animation: google.maps.Animation.DROP,
+                    title:\"".$nameMarker ."\"
+                });";
+    $script .= "google.maps.event.addListener(marker, 'click', toggleBounce);
+                    google.maps.event.addListener(marker, 'dragend', function() {
+                    latitude = marker.getPosition().lat();
+                    longitude = marker.getPosition().lng();
+                        if(typeof (window.form_MapWithMarker_position) == 'function'){
+                            form_MapWithMarker_position(latitude, longitude);
+                        }
+                    });
+                  }
+                  function toggleBounce() {
+                    if (marker.getAnimation() != null) {
+                        marker.setAnimation(null);
+                    } else {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                        }
+                    }
+                    </script>";
+    $script .= "<div id=\"map_canvas\" style=\"height: ". $height ."px; width: ". $width ."px;\" load=init() class =\"ui-state-default ui-corner-all\" ></div>";
+    return $script;
 }
 
+function form_MapWithRoute($mapNome = 'Mapa com Rota', $PosicaoALatitude, $PosicaoALongitude, $PosicaoBLatitude, $mapTipe= 'map', $PosicaoBLongitude, $width = 250, $height = 250,  $draggableMap = true)
+{
+    $mapTipe = strtoupper($mapTipe);
+    switch($mapTipe)
+    {
+        case 'BICYCLING':
+        case 'DRIVING':
+        case 'WALKING':
+            break;
+        default: $mapTipe = 'DRIVING';  
+    }
+    
+    // Certifica-se que respeite o tamanho mínimo 250 x 250
+    if(!is_numeric($width)){
+        $width = (int)$width;
+    }
+    if($width < 250)
+            $width = 250;
+    
+    if(!is_numeric($height)){
+        $height = (int)$height;
+    }
+    if($height < 250)
+            $height = 250;
+    
+    if($draggableMap){
+        $draggableMap = 'true';
+    }else{
+        $draggableMap = 'false';
+    }
+}
 ?>
