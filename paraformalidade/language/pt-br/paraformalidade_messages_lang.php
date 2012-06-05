@@ -15,8 +15,14 @@ $lang['elementosSituacoesDescricaoDeveSerInformado'] = 'Elemento Situação deve
 //--------- Participacoes -----------
 $lang['participacaoDescricaoDeveSerInformado'] = 'Tipo de Participação deve ser informado';
 
-//--------- Participacoes -----------
+//--------- Atividades Registrada -----------
 $lang['atividadeRegistradaDeveSerInformado'] = 'Saída ou Entrada deve ser informado';
 
-//--------- Participacoes -----------
+//--------- Ponte -----------
 $lang['ponteDescricaoDeveSerInformado'] = 'Ponte deve ser informado';
+
+//--------- Paraformalidade -----------
+$lang['ParaformalidadeDescricaoDeveSerInformado'] = 'Paraformalidade deve ser informado';
+
+//--------- Grupos de Atividades -----------
+$lang['gruposDeAtividadesDescricaoDeveSerInformado'] = 'Grupos de Atividades deve ser informado';

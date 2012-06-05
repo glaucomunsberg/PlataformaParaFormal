@@ -982,8 +982,9 @@ function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.7710
     return $script;
 }
 
-function form_MapWithRoute($mapNome = 'Mapa com Rota', $PosicaoALatitude, $PosicaoALongitude, $PosicaoBLatitude, $mapTipe= 'map', $PosicaoBLongitude, $width = 250, $height = 250,  $draggableMap = true)
+function form_MapWithRoute($mapNome = 'MapaWithRoute', $PosicaoALatitude = -31.771083, $PosicaoALongitude = -52.325821, $PosicaoBLatitude = -31.771083, $PosicaoBLongitude = -52.325821, $mapTipe= 'map', $width = 250, $height = 250, $contextualizeRoute = true)
 {
+    logVar('aaaaaaaaaa');
     $mapTipe = strtoupper($mapTipe);
     switch($mapTipe)
     {
@@ -1007,10 +1008,96 @@ function form_MapWithRoute($mapNome = 'Mapa com Rota', $PosicaoALatitude, $Posic
     if($height < 250)
             $height = 250;
     
-    if($draggableMap){
-        $draggableMap = 'true';
+    if($contextualizeRoute){
+        $contextualizeRoute = 'visible';
+        $tamanhoCanvas = 90;
+        $tamanhoRoute = 9;
     }else{
-        $draggableMap = 'false';
+        $contextualizeRoute = 'hidden';
+        $tamanhoCanvas=100;
+        $tamanhoRoute = 0;
     }
+    
+    $script1 = 
+        "<style type=\"text/css\">
+            #map_canvas { height: 100% }
+        </style>";
+    
+    $script1 .= "<script type=\"text/javascript\"
+            src=\"https://maps.google.com/maps/api/js?sensor=false\">
+        </script>
+        <script type=\"text/javascript\"
+            src=\"https://maps.gstatic.com/intl/pt-BR_ALL/mapfiles/417c/maps2.api/main.js\" >
+        </script>";
+    
+    $script1 .= "<script type=\"text/javascript\">  
+        var mostrarTrajetoria =false;
+        var rendererOptions = {
+            draggable: true
+        };
+        var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        var origem = new google.maps.LatLng(".$PosicaoALatitude .", ".$PosicaoALongitude .");
+        var destino = new google.maps.LatLng(".$PosicaoBLatitude .", ".$PosicaoBLongitude .");
+        var total = 0;
+        var caminhos = \"\";
+        function init() 
+        {
+            var myOptions = {
+                zoom: 18,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: origem
+        };
+        map = new google.maps.Map(document.getElementById(\"map_canvas\"), myOptions);
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById(\"directionsPanel\"));
+        google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+            total_distancia(directionsDisplay.directions);
+            });
+            calcRoute();
+        }
+        function calcRoute() {
+            var request = {
+                origin: origem,
+                destination: destino,
+                travelMode: google.maps.TravelMode.WALKING
+        };
+        directionsService.route(request, function(response, status)
+        {
+            if (status == google.maps.DirectionsStatus.OK)
+            {
+            directionsDisplay.setDirections(response);
+            }
+        });
+        }
+        function total_distancia(result) {
+            var myroute = result.routes[0];
+            for (i = 0; i < myroute.legs.length; i++) {
+                total += myroute.legs[i].distance.value;
+
+                for(b = 0; b < myroute.legs[i].steps.length;b++ )
+                    caminhos += myroute.legs[i].steps[b].instructions+\"<br>\";     
+
+            }
+            total = total / 1000;
+            alert(total + \" km\");
+            if(typeof (window.form_MapWithRoute_position) == 'function'){          
+                form_MapWithRoute_position(inicio = new google.maps.LatLng(myroute.legs[0].start_location.lat(), myroute.legs[0].start_location.lng()), fiali = new google.maps.LatLng(myroute.legs[0].end_location.lat(),myroute.legs[0].end_location.lng()), total,caminhos );
+            }
+
+        }
+        function form_MapWithRoute_position(latitude, longitude, total, caminhos ){
+            alert( \"Inicio e fim:\" + latitude.toString() + \" - \" + longitude.toString() + \" - \" + total );
+            alert( caminhos );
+        }
+        </script>";
+    
+    $script1 .= "<div id=\"corpo_total_map\" style=\"width:". $width ."px; height:". $height ."px; float:left\">
+            <div id=\"map_canvas\" style=\"width:".$tamanhoCanvas ."%; height:100%; float:left\"></div>
+            <div id=\"directionsPanel\" style=\"float: right; width: ". $tamanhoRoute ."%; height:100%; direction: ltr; visibility:". $contextualizeRoute ." \"> </div>
+        </div>";
+    
+    return $script1;
 }
 ?>

@@ -4,7 +4,7 @@ class Paraformalidade extends Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('cadastrosBasicos/ColaboradorModel', 'colaboradorModel');
+        $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
         $this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
     }
@@ -14,45 +14,43 @@ class Paraformalidade extends Controller {
         $this->load->view('cadastros/paraformalidadeFiltroView', $data);
     }
 
-    function listaColaboradores(){
-        $this->colaboradorModel->getColaboradores($_GET);
+    function listaParaformalidades(){
+        $this->paraformalidadeModel->getParaformalidades($_GET);
     }
 
     public function salvar() {
-        if (empty($_POST['txtColaboradorId'])) {
-            $ret = $this->colaboradorModel->inserir($_POST);
+        if (empty($_POST['txtParaformalidadeId'])) {
+            $ret = $this->paraformalidadeModel->inserir($_POST);
         } else {
-            $ret = $this->colaboradorModel->alterar($_POST);
+            $ret = $this->paraformalidadeModel->alterar($_POST);
         }
         if ($ret !== FALSE) {
-            $this->ajax->addAjaxData('colaborador', $ret);
+            $this->ajax->addAjaxData('paraformalidade', $ret);
             $this->ajax->ajaxMessage('success', lang('registroGravado'));
         } else {
-            if (!$this->colaboradorModel->validate->existsErrors()) {
-                $this->colaboradorModel->validate->addError("txtColaboradorId", lang('registroNaoGravado'));
+            if (!$this->paraformalidadeModel->validate->existsErrors()) {
+                $this->paraformalidadeModel->validate->addError("txtParaformalidadeId", lang('registroNaoGravado'));
             }
-            $this->ajax->addAjaxData('error', $this->colaboradorModel->validate->getError());
+            $this->ajax->addAjaxData('error', $this->paraformalidadeModel->validate->getError());
         }
         $this->ajax->returnAjax();
     }
     
     function novo() {
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
-        $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
-	$this->load->view('cadastrosBasicos/colaboradorView', @$data);
+	$this->load->view('cadastros/paraformalidadeView', @$data);
 		
     }
     
-    function editar($colabordorId){
-	$data['colaborador'] = $this->colaboradorModel->getColaborador($colabordorId);
-        $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
-        $data['colaboradorCidade'] = $this->cidadeModel->getCidadeById( $data['colaborador']->cidade_id );
-	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['colaborador']->nome;
-	$this->load->view('cadastrosBasicos/colaboradorView', $data);
+    function editar($paraformalidadeId){
+	$data['paraformalidade'] = $this->paraformalidadeModel->getParaformalidade($paraformalidadeId);
+        $data['paraformalidadeCidade'] = $this->cidadeModel->getCidadeById( $data['paraformalidade']->cidade_id );
+	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['paraformalidades']->nome;
+	$this->load->view('cadastro/paraformalidadeView', $data);
     }
     
     function excluir(){
-	$isSUccess = $this->colaboradorModel->excluir($_POST['id']);
+	$isSUccess = $this->paraformalidadeModel->excluir($_POST['id']);
 	if($isSUccess)
 		$this->ajax->addAjaxData('success', true);
 	else

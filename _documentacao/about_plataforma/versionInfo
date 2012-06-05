@@ -46,3 +46,8 @@ Versão 0.1.9
                 Criacao do autualizarPlataforma.sh para auxiliar na atualização
                 Modificação do sistema de update, correção de execução
                 Modificação do layout do index
+Versão 0.2.0
+	Implementação
+		Criação do programa Grupo de Atividades - paraformalidade/cadastros/grupoAtividade
+		Criação do programa Paraformalidade - paraformalidade/cadastros/paraformalidade
+		Criação do helper form_MapWithRoute

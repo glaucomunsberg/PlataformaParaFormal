@@ -17,14 +17,23 @@
 
                                 <?=form_label('lblEmail', lang('colaboradorEmail'), 80);?>
 				<?=form_textField('txtColaboradorEmail', '', 250, '');?>
+                                <?=new_line();?>
+
+                                <?=form_label('lblCidade', 'Localização', 80);?>
+                                <?=form_textField('txtLatitude', '', 250, '');?>
+                                <?=form_textField('txtLongitude', '', 250, '');?>
+                                <?=new_line();?>
+                                <?//=form_MapWithMarker('marcador', '-31.771083', '-52.325821', '250', '250', 'map', true, true)?>
+                                <?=form_MapWithRoute('MapaWithRoute', '-31.771083', '-52.325821', '-31.771083', '-52.325821', 'map', '400', '400', false) ?>
+                                
                 <?=end_Tab();?>
 	<?=end_TabPanel();?>
 
-	<?=begin_JqGridPanel('gridColaboradores', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/colaborador/listaColaboradores', array('sortname'=> 'nome', 'autowidth'=> true,'multiselect'=>false ,'pager'=> true, 'caption'=>lang('colaboradorCidadeGrid')));?>
+	<?=begin_JqGridPanel('gridColaboradores', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades', array('sortname'=> 'id', 'autowidth'=> true,'multiselect'=>false ,'pager'=> true, 'caption'=>lang('colaboradorCidadeGrid')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-                <?=addJqGridColumn('nome', lang('colaboradorNome'), 60, 'left', array('sortable'=>true));?>
-                <?=addJqGridColumn('email', lang('colaboradorEmail'), 20, 'right', array('sortable'=>true));?>
-                <?=addJqGridColumn('nomecidade', lang('colaboradorCidade'), 20, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('descricao', lang('colaboradorNome'), 20, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('tipo_local_id', lang('colaboradorEmail'), 20, 'right', array('sortable'=>true));?>
+                <?=addJqGridColumn('tipo_condicao_ambiental_id', lang('colaboradorCidade'), 20, 'center', array('sortable'=>true));?>
 	<?=end_JqGridPanel();?>
 
 <script type="text/javascript">    
@@ -37,6 +46,11 @@
         gridColaboradores.addParam('txtColaboradorEmail', $('#txtColaboradorEmail').val());
         gridColaboradores.addParam('txtColaboradorCidadeId', $('#txtColaboradorCidadeId').val());
         gridColaboradores.load();
+    }
+    
+    function form_MapWithMarker_position(lat,longi){
+        $('#txtLatitude').val(lat);
+        $('#txtLongitude').val(longi);
     }
     
     function gridColaboradores_click(id){
