@@ -7,25 +7,26 @@
 
 	<?=begin_TabPanel();?>
 		<?=begin_Tab(lang('pessoaFiltro'));?>
-                                <?=form_label('lblNome', lang('colaboradorNome'), 80);?>
-				<?=form_textField('txtColaboradorNome', '', 250, '');?>
-				<?=new_line();?>
+                    <?=form_label('lblNome', lang('colaboradorNome'), 80);?>
+                    <?=form_textField('txtColaboradorNome', '', 260, '');?>
+                    <?=new_line();?>
 
-                                <?=form_label('lblCidade', lang('colaboradorCidade'), 80);?>
-                                <?= form_textFieldAutoComplete('txtColaboradorCidadeId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarCidade', '', '', 250) ?>
-                                <?=new_line();?>
+                    <?=form_label('lblCidade', lang('colaboradorCidade'), 80);?>
+                    <?= form_textFieldAutoComplete('txtColaboradorCidadeId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarCidade', '', '', 260) ?>
+                    <?=new_line();?>
 
-                                <?=form_label('lblEmail', lang('colaboradorEmail'), 80);?>
-				<?=form_textField('txtColaboradorEmail', '', 250, '');?>
-                                <?=new_line();?>
+                    <?=form_label('lblEmail', lang('colaboradorEmail'), 80);?>
+                    <?=form_textField('txtColaboradorEmail', '', 260, '');?>
+                    <?=new_line();?>
 
-                                <?=form_label('lblCidade', 'Localização', 80);?>
-                                <?=form_textField('txtLatitude', '', 250, '');?>
-                                <?=form_textField('txtLongitude', '', 250, '');?>
-                                <?=new_line();?>
-                                <?//=form_MapWithMarker('marcador', '-31.771083', '-52.325821', '250', '250', 'map', true, true)?>
-                                <?=form_MapWithRoute('MapaWithRoute', '-31.771083', '-52.325821', '-31.771083', '-52.325821', 'map', '400', '400', false) ?>
-                                
+                    <?=form_label('lblEmail', 'Localização', 80);?>
+                    <?=form_MapWithMarker('marcador', '-31.771083', '-52.325821', '260', '250', 'map', true, true)?>
+                    <?=new_line();?>
+
+                    <?=form_label('lblCidade', 'Lat e Long', 80);?>
+                    <?=form_textField('txtLatitude', '', 125, '','','',true);?>
+                    <?=form_textField('txtLongitude', '', 125, '','','', true);?>
+                    <?=new_line();?>
                 <?=end_Tab();?>
 	<?=end_TabPanel();?>
 

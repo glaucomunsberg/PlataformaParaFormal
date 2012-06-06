@@ -12,15 +12,18 @@
 
 				<?=form_label('lblDescricao', lang('ponteDescricao'), 80);?>
 				<?=form_textField('txtDescricao', @$grupo_atividade->descricao, 400, '');?>
+                                <?=new_line();?>
 
                                 <?=form_label('lblCidade', lang('colaboradorCidade'), 80);?>
                                 <?= form_textFieldAutoComplete('txtGrupoAtividadeCidadeId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarCidade', @$grupo_atividade->cidade_id, @$grupo_atividade_cidade->nome, 400) ?>
-                                <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=new_line();?>
 
+                                <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=form_label('lblDtInicio', lang('registroAtividadePeriodo'), 80);?>
                         	<?=form_dateField('Dt_Ocorrencia');?>
+                                <?=new_line();?>
 
+                                <?=form_MapWithRoute('MapaWithRoute', @$grupo_atividade_cidade->origem_lat, @$grupo_atividade_cidade->origem_lng, @$grupo_atividade_cidade->destino_lat, @$grupo_atividade_cidade->origem_lng, 'map', '400', '400', false) ?>
 			<?=end_form();?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
@@ -74,5 +77,9 @@
 				});
 		}
 	}	
-	
+        
+        function form_MapWithRoute_position(origem, destino, total, caminhos ){
+            alert( "Inicio e fim:" + origem.toString() + " - " + destino.toString() + " - " + total );
+            alert( caminhos );
+        }
 </script>
