@@ -984,7 +984,15 @@ function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.7710
 
 function form_MapWithRoute($mapNome = 'MapaWithRoute', $PosicaoALatitude = -31.771083, $PosicaoALongitude = -52.325821, $PosicaoBLatitude = -31.771083, $PosicaoBLongitude = -52.325821, $mapTipe= 'map', $width = 250, $height = 250, $contextualizeRoute = true)
 {
-    logVar('aaaaaaaaaa');
+    if($PosicaoALatitude == null)
+        $PosicaoALatitude = -31.771083;
+    if($PosicaoALongitude == null)
+        $PosicaoALongitude = -52.325821;
+    if($PosicaoBLongitude == null)
+        $PosicaoBLongitude = -52.325821;
+    if($PosicaoBLatitude == null)
+        $PosicaoBLatitude = -31.771083;
+        
     $mapTipe = strtoupper($mapTipe);
     switch($mapTipe)
     {
@@ -1081,15 +1089,10 @@ function form_MapWithRoute($mapNome = 'MapaWithRoute', $PosicaoALatitude = -31.7
 
             }
             total = total / 1000;
-            alert(total + \" km\");
             if(typeof (window.form_MapWithRoute_position) == 'function'){          
                 form_MapWithRoute_position(inicio = new google.maps.LatLng(myroute.legs[0].start_location.lat(), myroute.legs[0].start_location.lng()), fiali = new google.maps.LatLng(myroute.legs[0].end_location.lat(),myroute.legs[0].end_location.lng()), total,caminhos );
             }
 
-        }
-        function form_MapWithRoute_position(latitude, longitude, total, caminhos ){
-            alert( \"Inicio e fim:\" + latitude.toString() + \" - \" + longitude.toString() + \" - \" + total );
-            alert( caminhos );
         }
         </script>";
     

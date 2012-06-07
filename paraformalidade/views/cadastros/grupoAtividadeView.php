@@ -10,6 +10,16 @@
 			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
 				<?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
 
+                                <?=form_hidden('txtOrigemId', @$geocode_origem->id); ?>
+                                <?=form_hidden('txtLatOrigem', @$geocode_origem->lat); ?>
+                                <?=form_hidden('txtLngOrigem', @$geocode_origem->lng); ?>
+
+                                <?=form_hidden('txtDestinoId', @$geocode_destino->id); ?>
+                                <?=form_hidden('txtLatDestino', @$geocode_destino->lat); ?>
+                                <?=form_hidden('txtLngDestino', @$geocode_destino->lng); ?>
+                                
+                                
+                                
 				<?=form_label('lblDescricao', lang('ponteDescricao'), 80);?>
 				<?=form_textField('txtDescricao', @$grupo_atividade->descricao, 400, '');?>
                                 <?=new_line();?>
@@ -23,7 +33,14 @@
                         	<?=form_dateField('Dt_Ocorrencia');?>
                                 <?=new_line();?>
 
-                                <?=form_MapWithRoute('MapaWithRoute', @$grupo_atividade_cidade->origem_lat, @$grupo_atividade_cidade->origem_lng, @$grupo_atividade_cidade->destino_lat, @$grupo_atividade_cidade->origem_lng, 'map', '400', '400', false) ?>
+                                <?=form_label('lblDtInicio', 'Rota', 80);?>
+                                <?=form_MapWithRoute('MapaWithRoute', @$geocode_origem->lat, @$geocode_origem->lng, @$geocode_destino->lat, @$geocode_destino->lng,'map','250','250', false); ?>
+                                <?=new_line();?>
+
+                                <?=form_label('lblDtInicio', 'Metragem', 80);?>
+                                <?=form_textField('txtRotaEmKm', '', 35, '');?>
+                                <?=form_label('lblDtInicio', 'Km', 80);?>
+                                
 			<?=end_form();?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
@@ -79,7 +96,11 @@
 	}	
         
         function form_MapWithRoute_position(origem, destino, total, caminhos ){
-            alert( "Inicio e fim:" + origem.toString() + " - " + destino.toString() + " - " + total );
-            alert( caminhos );
+            $('#txtLatOrigem').val(origem.lat());
+            $('#txtLngOrigems').val(origem.lng());
+            $('#txtLatDestino').val(destino.lat());
+            $('#txtLngDestino').val(destino.lng());
+            $('#txtRotaEmKm').val(total);
+
         }
 </script>

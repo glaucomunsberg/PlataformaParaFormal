@@ -9,6 +9,7 @@ $lang['gerenciadorRelatorioTab1'] = 'Relatório';
 $lang['gerenciadorRelatorioModulosAcesso'] = 'Módulos com acesso';
 $lang['gerenciadorRelatorioNomeNaoInformado'] = 'Nome deve ser informado';
 $lang['gerenciadorRelatorioLinkNaoInformado'] = 'Link deve ser informado';
+$lang['gerenciadorGeoCodeNaoInformado'] = 'GeoCode deve ser informado';
 
 //--------- PessoaTipo -----------
 $lang['pessoaTipoRequerido'] = 'Você precisa informar o nome do tipo de pessoa';

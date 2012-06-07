@@ -29,6 +29,8 @@
 		function editar($grupoAtividadeID){
 			$data['grupo_atividade'] = $this->grupoAtividadeModel->getGrupoAtividade($grupoAtividadeID);
                         $data['grupo_atividade_cidade'] = $this->cidadeModel->getCidadeById( $data['grupo_atividade']->cidade_id );
+                        $data['geocode_origem'] = $this->geocodeModel->getGeoCode($data['grupo_atividade']->geocode_origem_id);
+                        $data['geocode_destino'] = $this->geocodeModel->getGeoCode($data['grupo_atividade']->geocode_destino_id);
 			$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['grupo_atividade']->descricao;
 			$this->load->view('cadastros/grupoAtividadeView', $data);
 		}
@@ -59,8 +61,10 @@
                         }
                         $this->ajax->addAjaxData('error', $this->grupoAtividadeModel->validate->getError());
                     }
+                    
                     $this->ajax->returnAjax();
 		}
+                
                 function buscarCidade(){
                     $this->ajax->addAjaxCombo(
                             $this->cidadeModel->getCidadeByNome($_GET['q'])
