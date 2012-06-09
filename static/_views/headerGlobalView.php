@@ -21,8 +21,8 @@
 	</head>
 	<?php flush();?>
 	<!--[if lt IE 7 ]> <body class="ui-widget-content ie ie6" style="border: none !important;"> <![endif]-->
-	<!--[if (gt IE 9)|!(IE)]><!--> <body class="ui-widget-content" style="border: none !important;"> <!--<![endif]-->
-		<div class="ui-layout-north ui-widget-content">
+	<!--[if (gt IE 9)|!(IE)]><!--> <body class="ui-widget-content" style="border: none !important; margin: 0px;"> <!--<![endif]-->
+		<div class="ui-layout-north ui-widget-content" style="background: url('<?=IMG;?>/head_paraformalidades.jpg')">
 			<div id="carregando" class="ui-state-active ui-widget ui-state-default ui-corner-all">
 				Carregando <img src="<?=IMG;?>/ajax-loader.gif" style="margin-right: 5px; margin-left: 2px;" width="16px" height="11px"/>
 			</div>
@@ -30,7 +30,7 @@
                             <!--img src="<?=IMG;?>/logo_plataforma_paraformal.png"/!-->
                         </div>
 			<h1 style="float: left; background:none !important; border: none !important; font-size: 21px; padding: 0px; margin-top: 15px; margin-bottom: 0px;" class="ui-widget-content">
-				<?=lang("sigla")?>
+				<?=lang("siglaWhite")?>
 			</h1>
 			<div class="ui-widget-content ui-corner-all" style="float:right; padding: 5px 0px 5px 5px; margin: 3px 5px 0px 5px; height: 60px;">
 				<!--<div class="ui-state-default ui-corner-all" style="float:left; padding: 4px 3px 2px 3px;">

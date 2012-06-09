@@ -32,13 +32,14 @@
 <script>
 	function ajuda(){
     	window.open ('<?=WIKI;?>Grupos Atividade');
-    }
+        }
+        
 	function pesquisar(){
                gridGrupoAtividade.addParam('txtDescricao', $('#txtDescricao').val());
                gridGrupoAtividade.addParam('Dt_Ocorrencia', $('#Dt_Ocorrencia').val());
                gridGrupoAtividade.addParam('txtGrupoAtividadeCidadeId', $('#txtGrupoAtividadeCidadeId').val());
                gridGrupoAtividade.load();
-     }
+        }
 	
 	function novo(){
 		location.href = BASE_URL+'paraformalidade/cadastros/grupoAtividade/novo/';

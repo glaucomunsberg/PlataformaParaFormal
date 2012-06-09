@@ -5,6 +5,7 @@ class Paraformalidade extends Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
+        $this->load->model('cadastros/GrupoAtividadeModel', 'grupoAtividadeModel');
         $this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
     }
@@ -38,12 +39,12 @@ class Paraformalidade extends Controller {
     
     function novo() {
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
+        $data['grupo_atividade'] = $this->grupoAtividadeModel->getGrupoAtividade($grupoAtividade);
 	$this->load->view('cadastros/paraformalidadeView', @$data);
 		
     }
     
-    function editar($paraformalidadeId){
-	$data['paraformalidade'] = $this->paraformalidadeModel->getParaformalidade($paraformalidadeId);
+    function editar($grupoAtividade){
         $data['paraformalidadeCidade'] = $this->cidadeModel->getCidadeById( $data['paraformalidade']->cidade_id );
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['paraformalidades']->nome;
 	$this->load->view('cadastro/paraformalidadeView', $data);
