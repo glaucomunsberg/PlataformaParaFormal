@@ -10,36 +10,39 @@
 			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
 				<?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
 
-                                <?=form_hidden('txtOrigemId', @$geocode_origem->id); ?>
-                                <?=form_hidden('txtLatOrigem', @$geocode_origem->lat); ?>
-                                <?=form_hidden('txtLngOrigem', @$geocode_origem->lng); ?>
+                                <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
+                                <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
 
-                                <?=form_hidden('txtDestinoId', @$geocode_destino->id); ?>
-                                <?=form_hidden('txtLatDestino', @$geocode_destino->lat); ?>
-                                <?=form_hidden('txtLngDestino', @$geocode_destino->lng); ?>
-                                
-                                
-                                
-				<?=form_label('lblDescricao', lang('ponteDescricao'), 80);?>
-				<?=form_textField('txtDescricao', @$grupo_atividade->descricao, 400, '');?>
-                                <?=new_line();?>
+                                <?=form_hidden('txtLatDestino', @$grupo_atividade->geocode_destino_lat); ?>
+                                <?=form_hidden('txtLngDestino', @$grupo_atividade->geocode_destino_lng); ?>
 
                                 <?=form_label('lblCidade', lang('colaboradorCidade'), 80);?>
                                 <?= form_textFieldAutoComplete('txtGrupoAtividadeCidadeId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarCidade', @$grupo_atividade->cidade_id, @$grupo_atividade_cidade->nome, 400) ?>
+                                <?=new_line();?>                               
+                                
+                                
+				<?=form_label('lblDescricao', lang('ponteDescricao'), 80);?>
+				<?=form_textArea('txtDescricao', @$grupo_atividade->descricao, 400);?>
                                 <?=new_line();?>
+
+
 
                                 <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=form_label('lblDtInicio', lang('registroAtividadePeriodo'), 80);?>
                         	<?=form_dateField('Dt_Ocorrencia');?>
                                 <?=new_line();?>
 
-                                <?=form_label('lblDtInicio', 'Rota', 80);?>
-                                <?=form_MapWithRoute('MapaWithRoute', @$geocode_origem->lat, @$geocode_origem->lng, @$geocode_destino->lat, @$geocode_destino->lng,'map','250','250', false); ?>
+                                <?=form_label('lblDtInicio', 'Metragem', 80);?>
+                                <?=form_textField('txtRotaEmKm', '', 50, '','','', true);?>
+                                <?=form_label('lblDtInicio', 'Km', 80);?>
+
                                 <?=new_line();?>
 
-                                <?=form_label('lblDtInicio', 'Metragem', 80);?>
-                                <?=form_textField('txtRotaEmKm', '', 35, '');?>
-                                <?=form_label('lblDtInicio', 'Km', 80);?>
+                                <?=form_label('lblDtInicio', 'Rota', 80);?>
+                                <?=form_MapWithRoute('MapaWithRoute', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, @$grupo_atividade->geocode_destino_lat, @$grupo_atividade->geocode_destino_lng,'map','400','250', false); ?>
+                                <?=new_line();?>
+
+
                                 
 			<?=end_form();?>
 		<?=end_Tab();?>
@@ -97,7 +100,7 @@
         
         function form_MapWithRoute_position(origem, destino, total, caminhos ){
             $('#txtLatOrigem').val(origem.lat());
-            $('#txtLngOrigems').val(origem.lng());
+            $('#txtLngOrigem').val(origem.lng());
             $('#txtLatDestino').val(destino.lat());
             $('#txtLngDestino').val(destino.lng());
             $('#txtRotaEmKm').val(total);
