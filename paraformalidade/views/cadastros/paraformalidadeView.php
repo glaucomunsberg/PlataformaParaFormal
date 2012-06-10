@@ -4,37 +4,16 @@
 
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
 	<?=end_ToolBar();?>
-        <?=warning('warning', lang('gruposDeAtividadesDevidoProblema'), false, true);?>
-	<?=begin_TabPanel('tabPonte');?>
-		<?=begin_Tab(lang('grupoAtividadeFiltro'));?>
+
+	<?=begin_TabPanel('tabParaformalidade');?>
+		<?=begin_Tab(lang('ponteFiltro'));?>
 			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
 				<?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
 
                                 <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
                                 <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
-                                <?=form_hidden('txtLatDestino', @$grupo_atividade->geocode_destino_lat); ?>
-                                <?=form_hidden('txtLngDestino', @$grupo_atividade->geocode_destino_lng); ?>
 
-                                <?=form_label('lblCidade', lang('grupoAtividadeCidade'), 80);?>
-                                <?= form_textFieldAutoComplete('txtGrupoAtividadeCidadeId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarCidade', @$grupo_atividade->cidade_id, @$grupo_atividade_cidade->nome, 400) ?>
-                                <?=new_line();?>                               
-                                
-				<?=form_label('lblDescricao', lang('grupoAtividadeDescricao'), 80);?>
-				<?=form_textArea('txtDescricao', @$grupo_atividade->descricao, 400);?>
-                                <?=new_line();?>
-
-                                <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
-                                <?=form_label('lblDtInicio', lang('grupoAtividadeData'), 80);?>
-                        	<?=form_dateField('Dt_Ocorrencia');?>
-                                <?=new_line();?>
-
-                                <?=form_label('lblDtInicio', lang('grupoAtividadeMetragem'), 80);?>
-                                <?=form_textField('txtRotaEmKm', '', 50, '','','', true);?>
-                                <?=form_label('lblDtInicio', lang('grupoAtividadeKm'), 80);?>
-                                <?=new_line();?>
-
-                                <?=form_label('lblDtInicio', lang('grupoAtividadeRota'), 80);?>
-                                <?=form_MapWithRoute('MapaWithRoute', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, @$grupo_atividade->geocode_destino_lat, @$grupo_atividade->geocode_destino_lng,'map','405','250', false); ?>
+                                <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '260', '250', 'map', true, true)?>
                                 <?=new_line();?>
                                 
 			<?=end_form();?>
@@ -72,7 +51,7 @@
 	} 
 
 	function excluir(){
-		if($('#txtGrupoAtividadeId').val() == ''){
+		if($('#txtPonteId').val() == ''){
 			messageErrorBox("<?=lang('nenhumRegistroSelecionado')?>");
 		}else{
 			messageConfirm('<?=lang('excluirRegistros')?>', excluirGrupoAtividade);
@@ -97,5 +76,6 @@
             $('#txtLatDestino').val(destino.lat());
             $('#txtLngDestino').val(destino.lng());
             $('#txtRotaEmKm').val(total);
+
         }
 </script>

@@ -1,38 +1,50 @@
 Versão 0.0
-	Configuração do Yii na máquina
-	Criação do banco de dados
-	Criação do programa Cidades
+        Implementação
+            Criação do banco de dados Beta
+            Criação do programa Cidades
+        Correção
+            System - Configuração com base no Yii
 
 Versão 0.1.0 
 	Primeira versão de fato commmitado
-Versão 0.1.1 
-	Remoção de arquivos
+
+Versão 0.1.1
+	Remoção de arquivos do sistema baseado no Yii
+
 Versão 0.1.2 
-	Inserção de novos arquivos da plataforma
-Versão 0.1.3 
-	Envio da grande maioria dos arquivos do cobalto-php
+	Inserção de novos arquivos da Plataforma baseado no Cobalto-PHP
+
+Versão 0.1.3
+	Envio ao GitHub da mais arquivos da Plataforma do Paraformal(continuação do commit 0.1.2)
+
 Versão 0.1.4
-	Correções de integração com o banco de Dados
+	Correção
+                System - Correçãode integração com o DB beta
+
 Versão 0.1.5
 	UPGRADE da base Cobalto-php
+
 Versão 0.1.6
-	Correção
-		das chamadas dos programas
 	Implementação
 	 	Criação do programa gerencidor/pessoasTipo
 		Criação do módulo paraformalidade
 		Criação do programa paraformalidade/cadastrosBasicos/Colaborador
+	Correção
+		System - Correção das chamadas dos programas
+
 Versão 0.1.7
 	Implementação
 		Criação do programa Condições Ambientais - paraformalidade/cadastrosBasicos/condicoesAmbientais
 	Correção
-		DB aurora migrado para PostgreSQL
+		Banco de Dados - DB Aurora migrado para PostgreSQL
+
 Versão 0.1.8
 	Implementação
 		Criação do programa Atividades Registradas - paraformalidade/cadastrosBasicos/atividadeRegistrada
 		Criação do programa Locais - paraformalidade/cadastrosBasicos/local
 	Correção 
-                Programa Condições Ambientais
+                Condições Ambientais - Correções gerais
+
 Versão 0.1.9
         Implementação
                 Criação do programa Elementos Situação -  paraformalidade/cadastrosBasicos/elementosSituacoes
@@ -42,12 +54,35 @@ Versão 0.1.9
                 Criação do programa Pontes - paraformalidade/equipe/ponte
                 Criação do helper form_MapWithMarker
         Correção
-                Nova cor que dá fundo ao nome do grupo
-                Criacao do autualizarPlataforma.sh para auxiliar na atualização
-                Modificação do sistema de update, correção de execução
-                Modificação do layout do index
+                System - Nova cor que dá fundo ao nome do grupo
+                System - Modificação do sistema de update, correção de execução
+                System - Modificação do layout do index
+                AuxSistem - Criacao do autualizarPlataforma.sh para auxiliar na atualização
+
 Versão 0.2.0
 	Implementação
 		Criação do programa Grupo de Atividades - paraformalidade/cadastros/grupoAtividade
 		Criação do programa Paraformalidade - paraformalidade/cadastros/paraformalidade
 		Criação do helper form_MapWithRoute
+
+Versão 0.2.1
+        Correção
+                Grupo de Atividades e Paraformalidade - Correção de campos de dados
+
+Versão 0.2.2 e 0.2.3
+        Correção
+                Banco de Dados - Novo dump do banco com novos campos
+                Form_MapWithRoute - Correção e remoção de informativos e alertas
+
+Versão 0.2.4
+        Correções
+                Banco de Dados - Nodo dump do banco com novos campos e com ajustes
+                Grupo Atividade - Correção de campos e query
+
+Versão 0.2.5
+        Correções
+            System - Novo Header para área interna do sistema
+            Grupo de Atividades - Correções de campo e lógica
+                
+                
+        

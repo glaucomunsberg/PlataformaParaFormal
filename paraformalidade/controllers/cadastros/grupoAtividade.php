@@ -22,7 +22,7 @@
 		}
 		
 		function novo(){
-			$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Novo';			
+			$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Novo';
 			$this->load->view('cadastros/grupoAtividadeView', $data);
 		}
 

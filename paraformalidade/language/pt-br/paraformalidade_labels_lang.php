@@ -66,4 +66,22 @@ $lang['ponteLista'] = 'Lista de Ponte';
 $lang['ponteDtCadastro'] = 'Dt. Cadastro';
 $lang['ponte'] = '';
 
+//--------- Grupos Atividades -----------
+$lang['grupoAtividadeFiltro'] = 'Filtro';
+$lang['grupoAtividadeCidade'] = 'Cidade';
+$lang['grupoAtividadeDescricao'] = 'Descrição';
+$lang['grupoAtividadeData'] = 'Data';
+$lang['grupoAtividadeMetragem'] = 'Metragem';
+$lang['grupoAtividadeKm'] = 'Km';
+$lang['grupoAtividadeRota'] = 'Rota';
+$lang['grupoAtividadeDtCadastro'] = 'Dt.Cadastro';
+$lang['grupoAtividadeLista'] = 'Lista de Grupos de Atividades';
 
+//--------- Paraformalidades -----------
+$lang['paraformalidadesFiltro'] = 'Filtro';
+$lang['paraformalidadesCidade'] = 'Cidade';
+$lang['paraformalidades'] = '';
+$lang['paraformalidades'] = '';
+$lang['paraformalidades'] = '';
+$lang['paraformalidades'] = '';
+$lang['paraformalidades'] = '';

@@ -6,25 +6,25 @@
 	<?=end_ToolBar();?>
 
 	<?=begin_TabPanel('tabPontes');?>
-		<?=begin_Tab(lang('ponteFiltro'));?>
-			<?=form_label('lblDescricao', lang('ponteDescricao'), 80);?>
+		<?=begin_Tab(lang('grupoAtividadeFiltro'));?>
+			<?=form_label('lblDescricao', lang('grupoAtividadeDescricao'), 80);?>
 			<?=form_textField('txtDescricao', '', 300, '');?>
                         <?=new_line();?>
 
-                        <?=form_label('lblCidade', lang('colaboradorCidade'), 80);?>
-                        <?= form_textFieldAutoComplete('txtGrupoAtividadeCidadeId', BASE_URL . 'paraformalidade/cadastros/grupoAtividade/buscarCidade', '', '', 400) ?>
+                        <?=form_label('lblCidade', lang('grupoAtividadeCidade'), 80);?>
+                        <?= form_textFieldAutoComplete('txtGrupoAtividadeCidadeId', BASE_URL . 'paraformalidade/cadastros/grupoAtividade/buscarCidade', '', '', 300) ?>
                         <?=new_line();?>
                         
-                        <?=form_label('lblDtInicio', lang('registroAtividadePeriodo'), 80);?>
+                        <?=form_label('lblDtInicio', lang('grupoAtividadeData'), 80);?>
 			<?=form_dateField('Dt_Ocorrencia');?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
 	
-	<?=begin_JqGridPanel('gridGrupoAtividade', 'auto', '', base_url().'paraformalidade/cadastros/grupoAtividade/listaGruposAtividades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('ponteLista')));?>
+	<?=begin_JqGridPanel('gridGrupoAtividade', 'auto', '', base_url().'paraformalidade/cadastros/grupoAtividade/listaGruposAtividades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('grupoAtividadeLista')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-		<?=addJqGridColumn('descricao', lang('ponteDescricao'), 70, 'left', array('sortable'=>true));?>
-                <?=addJqGridColumn('nomecidade', lang('ponteDescricao'), 20, 'left', array('sortable'=>true));?>
-		<?=addJqGridColumn('dt_ocorrencia', lang('ponteDtCadastro'), 10, 'center', array('sortable'=>true));?>
+		<?=addJqGridColumn('descricao', lang('grupoAtividadeDescricao'), 70, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('nomecidade', lang('grupoAtividadeCidade'), 20, 'left', array('sortable'=>true));?>
+		<?=addJqGridColumn('dt_ocorrencia', lang('grupoAtividadeDtCadastro'), 10, 'center', array('sortable'=>true));?>
 	<?=end_JqGridPanel();?>
 	
 <?=$this->load->view("../../static/_views/footerGlobalView");?>

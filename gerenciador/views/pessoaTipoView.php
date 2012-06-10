@@ -26,7 +26,7 @@
     
     function salvar(){
 	formPessoaTipo_submit();
-        location.href = BASE_URL+'gerenciador/pessoaTipo/colaborador/';
+        location.href = BASE_URL+'gerenciador/pessoaTipo/';
     }
     
     function listaPessoaTipo(){

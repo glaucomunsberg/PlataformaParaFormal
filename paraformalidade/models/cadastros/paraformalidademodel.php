@@ -72,21 +72,21 @@
 			return $this->db->get('paraformalidades')->row();
 		}
 		
-		function getParaformalidades($parametros){
-			$this->db->select('count(*) as quantidade');
-			$this->db->like('upper(descricao)', strtoupper(@$parametros['descricao']));
-			$total = $this->db->get('tipos_locais')->row();
-
-			$paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $total->quantidade);
-
-			$this->db->select('id, descricao, to_char(dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
-			$this->db->like('upper(descricao)', strtoupper(@$parametros['descricao']));
-			$this->db->order_by($paramsJqGrid->sortField, $paramsJqGrid->sortDirection);
-			$result = $this->db->get('paraformalidades', $paramsJqGrid->limit, $paramsJqGrid->start);
-
-			$paramsJqGrid->rows = $result->result();
-			return $paramsJqGrid;
-		}
+		    function getParaformalidades($parametros) {
+                        $this->db->select(' ', false);
+                        $this->db->from('paraformalidades as p');
+                        $this->db->join('cidades as c','p.cidade_id = c.id', 'left');
+                        if(@$parametros['txtColaboradorNome'] != null )
+                            $this->db->like('p.nome', @$parametros['txtColaboradorNome']);
+                        if(@$parametros['cmbColaboradorSexo'] != null )
+                            $this->db->where('p.sexo', @$parametros['cmbColaboradorSexo']);
+                        if(@$parametros['txtColaboradorEmail'] != null )
+                            $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
+                        if(@$parametros['txtColaboradorCidadeId'] != null )
+                            $this->db->where('p.cidade_id', @$parametros['txtColaboradorCidadeId']);
+                        $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
+                        $this->db->sendToGrid();
+                }
 
 		function validaParaformalidade($local){
 			$this->validate->setData($local);			

@@ -37,7 +37,7 @@ class Paraformalidade extends Controller {
         $this->ajax->returnAjax();
     }
     
-    function novo() {
+    function novo($grupoAtividade) {
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
         $data['grupo_atividade'] = $this->grupoAtividadeModel->getGrupoAtividade($grupoAtividade);
 	$this->load->view('cadastros/paraformalidadeView', @$data);
