@@ -4,10 +4,13 @@ class Paraformalidade extends Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
-        $this->load->model('cadastros/GrupoAtividadeModel', 'grupoAtividadeModel');
         $this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
+        $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
+        $this->load->model('cadastros/GrupoAtividadeModel', 'grupoAtividadeModel');
+        $this->load->model('cadastrosBasicos/AtividadeRegistradaModel', 'atividadeRegistradaModel');
+        $this->load->model('cadastrosBasicos/LocalModel', 'localModel');
+        $this->load->model('cadastrosBasicos/CondicaoAmbientalModel', 'condicoesAmbientaisModel');
     }
     
     function index() {
@@ -37,9 +40,12 @@ class Paraformalidade extends Controller {
         $this->ajax->returnAjax();
     }
     
-    function novo($grupoAtividade) {
+    function verParaformalidades($grupoAtividade) {
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
         $data['grupo_atividade'] = $this->grupoAtividadeModel->getGrupoAtividade($grupoAtividade);
+        $data['tipo_registros_atividades'] = $this->atividadeRegistradaModel->getAtividadesRegistradasCombo();
+        $data['tipo_local'] = $this->localModel->getLocaisCombo();
+        $data['tipo_condicoes_ambientais'] = $this->condicoesAmbientaisModel->getCondicaoAmbientalCombo();
 	$this->load->view('cadastros/paraformalidadeView', @$data);
 		
     }

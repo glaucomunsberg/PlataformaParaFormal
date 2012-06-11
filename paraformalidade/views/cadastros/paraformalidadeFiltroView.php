@@ -38,7 +38,7 @@
     }
     
     function gridGrupoAtividade_click(id){
-        location.href = BASE_URL+'paraformalidade/cadastros/paraformalidade/novo/'+id;
+        location.href = BASE_URL+'paraformalidade/cadastros/paraformalidade/verParaformalidades/'+id;
     }
     
 </script>

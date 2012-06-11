@@ -67,4 +67,11 @@ class Colaborador extends Controller {
         );
         $this->ajax->returnAjax();
     }
+    
+    function buscarColaborador(){
+        $this->ajax->addAjaxCombo(
+                $this->colaboradorModel->getColaboradorByNome($_GET['q'])
+        );
+        $this->ajax->returnAjax();
+    }
 }

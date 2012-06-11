@@ -72,19 +72,22 @@
 			return $this->db->get('paraformalidades')->row();
 		}
 		
-		    function getParaformalidades($parametros) {
-                        $this->db->select(' ', false);
+		function getParaformalidades($parametros) {
+                        $this->db->select('p.id as colaboradorId, p.id as colaboradorNome, p.descricao, pes.nome, tr.descricao as tipo_registro_atividade, tl.descricao as tipo_local, tca.descricao as tipo_condicao_ambiental, tes.descricao as tipo_elemento_descricao, tp.descricao as tipo_ponte, up.nome_original, to_char(p.dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
                         $this->db->from('paraformalidades as p');
-                        $this->db->join('cidades as c','p.cidade_id = c.id', 'left');
-                        if(@$parametros['txtColaboradorNome'] != null )
-                            $this->db->like('p.nome', @$parametros['txtColaboradorNome']);
-                        if(@$parametros['cmbColaboradorSexo'] != null )
-                            $this->db->where('p.sexo', @$parametros['cmbColaboradorSexo']);
-                        if(@$parametros['txtColaboradorEmail'] != null )
-                            $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
-                        if(@$parametros['txtColaboradorCidadeId'] != null )
-                            $this->db->where('p.cidade_id', @$parametros['txtColaboradorCidadeId']);
-                        $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
+                        $this->db->join('public.grupos_atividades as ga','p.grupo_atividade_id = ga.id', 'left');
+                        $this->db->join('public.pessoas as pes','p.colaborador_pessoa_id = pes.id', 'left');
+                        $this->db->join('public.tipos_registros_atividades as tr','p.tipo_registro_atividade_id = tr.id', 'left');
+                        $this->db->join('public.tipos_locais as tl','p.tipo_local_id = tl.id', 'left');
+                        $this->db->join('public.tipos_condicoes_ambientais as tca','p.tipo_condicao_ambiental_id = tca.id', 'left');
+                        $this->db->join('public.tipos_elementos_situacoes as tes','p.tipo_elemento_situacao_id = tes.id', 'left');
+                        $this->db->join('public.tipos_pontes as tp','p.tipo_ponte_id = tp.id', 'left');
+                        $this->db->join('public.uploads as up','p.imagem_id = up.id', 'left');
+                        if(@$parametros['txtCobaloradorId'] != null )
+                            $this->db->like('p.id', @$parametros['txtCobaloradorId']);
+                        $this->db->where('p.esta_ativo','S');
+                        if(@$parametros['txtGrupoAtividadeId'] != null )
+                            $this->db->where('ga.id',@$parametros['txtGrupoAtividadeId']);
                         $this->db->sendToGrid();
                 }
 

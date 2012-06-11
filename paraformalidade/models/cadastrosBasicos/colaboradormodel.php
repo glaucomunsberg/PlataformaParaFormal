@@ -85,6 +85,17 @@ class ColaboradorModel extends Model {
 	$this->db->where('id', $colabordorId);
 	return $this->db->get('')->row();
     }
+    
+    public function getColaboradorByNome($nome) {
+        $this->db->select('p.id, p.nome');
+        $this->db->from('pessoas as p');
+        $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
+        if($nome != '')
+            $this->db->like('upper(p.nome)', strtoupper($nome));
+        $this->db->order_by('p.nome', 'asc');
+        $this->db->limit('20');
+        return $this->db->get('')->result();
+    }
 
     function validaColaborador($data) {
         $this->validate->setData($data);

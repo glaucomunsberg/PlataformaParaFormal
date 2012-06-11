@@ -9,13 +9,45 @@
 		<?=begin_Tab(lang('ponteFiltro'));?>
 			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
 				<?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
-
                                 <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
                                 <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
 
-                                <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '260', '250', 'map', true, true)?>
+                                <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true));?>
+                                        <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
+                                        <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('nome', lang('paraformalidadesColaborador'), 10, 'left', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_registro_atividade', lang('paraformalidadesTipoRegistroAtividade'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_local', lang('paraformalidadesTipoLocal'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_condicao_ambiental', lang('paraformalidadesTipoCondicaoAmbiental'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_elemento_descricao', lang('paraformalidadesTipoElemento'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
+                                <?=end_JqGridPanel();?>
                                 <?=new_line();?>
-                                
+                                <div id="editarNovo">
+                                    <?=form_label('lblColorador', lang('paraformalidadesEnviarImagem'), 110);?>
+                                    <?=form_file('arquivoImportacao', '', '', 'png');?>
+                                    <?=new_line();?>
+
+                                    <?=form_label('lblColorador', lang('paraformalidadesColaborador'), 110);?>
+                                    <?=form_textFieldAutoComplete('txtColaboradorId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarColaborador', @$paraformalidade->colaboradorId, @$paraformalidade->colaboradorNome, 365) ?>
+                                    <?=new_line();?>
+
+                                    <?=form_label('lblTipoRegistroAtividade', lang('paraformalidadesRegistroAtividade'), 110);?>
+                                    <?=form_combo('cmbTipoRegistroAtividade', @$tipo_registros_atividades, '', 150, '');?>
+                                    <?=new_line();?>
+                                    
+                                    <?=form_label('lblTipoLocal', lang('paraformalidadesLocal'), 110);?>
+                                    <?=form_combo('cmbTipoLocal', @$tipo_local, '', 150, '');?>
+                                    <?=new_line();?>
+                                    
+                                    <?=form_label('lblTipoCondicoesAmbientais', lang('paraformalidadesCondicaoAmbiental'), 110);?>
+                                    <?=form_combo('cmbTipoCondicaoAmbiental', @$tipo_condicoes_ambientais, '', 150, '');?>
+                                    <?=new_line();?>
+                                    
+                                    <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '260', '250', 'map', true, true)?>
+                                    <?=new_line();?>
+                                </div>
 			<?=end_form();?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
@@ -24,11 +56,19 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Grupos Atividades');
+                window.open ('<?=WIKI;?>Grupos Atividades');
         }
 
 	function novo(){
-		location.href = BASE_URL+'paraformalidade/cadastros/grupoAtividade/novo/';
+		//location.href = BASE_URL+'paraformalidade/cadastros/grupoAtividade/novo/';
+                var state = document.getElementById('editarNovo').style.display;
+                if (state == 'block') {
+                    document.getElementById('editarNovo').style.display = 'none';
+                } else {
+                    document.getElementById('editarNovo').style.display = 'block';
+                }
+ 
+                //$('editarNovo').show("slow");
 	}
 
 	function listaGrupoAtividade(){
