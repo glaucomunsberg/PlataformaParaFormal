@@ -13,6 +13,10 @@
 		}
 
 		function choiceFile($objectId, $objectName, $methodReturn, $allowed_types){
+                        logVar('$objectId');
+                        logVar($objectName);
+                        logVar($methodReturn);
+                        logVar($allowed_types);
 			$data['objectId'] = $objectId;
 			$data['objectName'] = $objectName;
 			$data['methodReturn'] = $methodReturn;
@@ -28,14 +32,14 @@
 
 		function enviarArquivo(){
 			$path = array_reverse(explode('/', $_SERVER['DOCUMENT_ROOT']));
-			$pathArchive = $_SERVER['DOCUMENT_ROOT'].($path[1] != 'cobalto' ? '/cobalto/' : '/');
+			$pathArchive = $_SERVER['DOCUMENT_ROOT'].($path[1] != 'PlataformaDoParaformal' ? '/PlataformaDoParaformal/' : '/');
 			
 			$status = apc_fetch('upload_'.$_POST['APC_UPLOAD_PROGRESS']);
 			$config['upload_path'] = '../archives/';
 			if($_POST['paramUploadAllowedTypes'] != '')
 				$config['allowed_types'] = $_POST['paramUploadAllowedTypes'];
 
-			$config['max_size']  = '500000';
+			$config['max_size']	= '500000';
 			$config['max_width']  = '0';
 			$config['max_height']  = '0';
 			$config['encrypt_name'] = TRUE;
@@ -115,7 +119,7 @@
 														'type' => $upload->tipo,
 														'thumb' => '640x480'));
 						
-						unlink($_SERVER["DOCUMENT_ROOT"].'/cobalto/archives/resized_640x480/'.$upload->nome_gerado);
+						unlink($_SERVER["DOCUMENT_ROOT"].'/PlataformaDoParaformal/archives/resized_640x480/'.$upload->nome_gerado);
 						
 						$this->image_lib->clear();
 					}
@@ -136,12 +140,12 @@
 			}
 
 			$this->ajax->addAjaxData('statusUpload', $status);
-                        $this->ajax->returnAjax();
+            $this->ajax->returnAjax();
 		}
 
 		function enviarImagemWebCam(){
 			$path = array_reverse(explode('/', $_SERVER['DOCUMENT_ROOT']));
-			$pathArchive = $_SERVER['DOCUMENT_ROOT'].($path[1] != 'cobalto' ? '/cobalto' : '');
+			$pathArchive = $_SERVER['DOCUMENT_ROOT'].($path[1] != 'PlataformaDoParaformal' ? '/PlataformaDoParaformal' : '');
 			
 			$config['max_size']	= '500000';
 			$config['max_width']  = '0';

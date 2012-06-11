@@ -11,6 +11,8 @@ class Paraformalidade extends Controller {
         $this->load->model('cadastrosBasicos/AtividadeRegistradaModel', 'atividadeRegistradaModel');
         $this->load->model('cadastrosBasicos/LocalModel', 'localModel');
         $this->load->model('cadastrosBasicos/CondicaoAmbientalModel', 'condicoesAmbientaisModel');
+        $this->load->model('cadastrosBasicos/ElementoSituacaoModel', 'elementoSituacaoModel');
+        $this->load->model('cadastrosBasicos/PonteModel', 'ponteModel');
     }
     
     function index() {
@@ -46,6 +48,8 @@ class Paraformalidade extends Controller {
         $data['tipo_registros_atividades'] = $this->atividadeRegistradaModel->getAtividadesRegistradasCombo();
         $data['tipo_local'] = $this->localModel->getLocaisCombo();
         $data['tipo_condicoes_ambientais'] = $this->condicoesAmbientaisModel->getCondicaoAmbientalCombo();
+        $data['tipo_elemento_situacao'] = $this->elementoSituacaoModel->getElementosSituacoesCombo();
+        $data['tipo_ponte'] = $this->ponteModel->getPonteCombo();
 	$this->load->view('cadastros/paraformalidadeView', @$data);
 		
     }

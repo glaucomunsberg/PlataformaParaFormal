@@ -24,9 +24,19 @@
                                         <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
                                 <?=end_JqGridPanel();?>
                                 <?=new_line();?>
-                                <div id="editarNovo">
+                                <div id="editarNovo" style="display:block">
+                                    <div style="float: left;">
+                                        <?=form_label('lblColorador', lang('paraformalidadesImagemPequena'), 110);?>
+					<? if(@$grupo_atividade->imagem_id == '') {?>
+						<img id="img_foto_carteira" src="<?=IMG;?>/default_avatar.jpg" style="display: block; float: left; margin-right: 5px; width: 100px;"/>
+					<? }else{?>
+						<img id="img_foto_carteira" src="<?=BASE_URL;?>util/download/arquivo/<?=$pessoa->nome_gerado;?>/3x4" style="display: block; float: left; margin-right: 5px; width: 100px;"/>
+					<? }?>
+                                    </div>
+                                    <?=new_line();?>
+                                    
                                     <?=form_label('lblColorador', lang('paraformalidadesEnviarImagem'), 110);?>
-                                    <?=form_file('arquivoImportacao', '', '', 'png');?>
+                                    <?=form_file('arquivoImportacao', '', '', '');?>
                                     <?=new_line();?>
 
                                     <?=form_label('lblColorador', lang('paraformalidadesColaborador'), 110);?>
@@ -45,6 +55,15 @@
                                     <?=form_combo('cmbTipoCondicaoAmbiental', @$tipo_condicoes_ambientais, '', 150, '');?>
                                     <?=new_line();?>
                                     
+                                    <?=form_label('lblTipoElementoSituacao', lang('paraformalidadesElementoSituacao'), 110);?>
+                                    <?=form_combo('cmbTipoElementoSituacao', @$tipo_elemento_situacao, '', 150, '');?>
+                                    <?=new_line();?>
+                                    
+                                    <?=form_label('lblTipoPonte', lang('paraformalidadesPonte'), 110);?>
+                                    <?=form_combo('cmbTipoPonte', @$tipo_ponte, '', 150, '');?>
+                                    <?=new_line();?>
+                                    
+                                    <?=form_label('lblTipoPonte', lang('paraformalidadesLocalizacao'), 110);?>
                                     <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '260', '250', 'map', true, true)?>
                                     <?=new_line();?>
                                 </div>
@@ -55,9 +74,17 @@
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
 <script>
+        (function(){
+            //Funcao anonima e de sempre execução
+        })();
+        
 	function ajuda(){
                 window.open ('<?=WIKI;?>Grupos Atividades');
         }
+        
+        function finishUploadarquivoImportacao(){
+            console.log('arquivo enviado com sucesso');		
+	}
 
 	function novo(){
 		//location.href = BASE_URL+'paraformalidade/cadastros/grupoAtividade/novo/';

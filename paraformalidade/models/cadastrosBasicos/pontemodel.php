@@ -9,7 +9,7 @@
 			parent::__construct();
 		}
 
-		function getLocaisCombo() {
+		function getPonteCombo() {
 			$this->db->select('id, descricao', false);
 			$this->db->orderby('id', 'asc');
 			return $this->db->get('tipos_pontes')->result_array();
