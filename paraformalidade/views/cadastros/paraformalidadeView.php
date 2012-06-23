@@ -7,23 +7,18 @@
 
 	<?=begin_TabPanel('tabParaformalidade');?>
 		<?=begin_Tab(lang('ponteFiltro'));?>
-			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
-				<?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
+			<?=begin_form('paraformalidade/cadastros/paraformalidade/salvar', 'formParaformalidade');?>
+				
+                                <?=form_hidden('txtParaformalidadeId', @$paraformalidade->id);?>
+                                <?=form_hidden('txtLatParaformalidade',''); ?>
+                                <?=form_hidden('txtLngParaformalidade', ''); ?>
+                                
+                                <?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
                                 <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
                                 <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
+                                <?=form_hidden('txtLatDestino', @$grupo_atividade->geocode_origem_lat); ?>
+                                <?=form_hidden('txtLngDestino', @$grupo_atividade->geocode_origem_lng); ?>
 
-                                <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true));?>
-                                        <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-                                        <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('nome', lang('paraformalidadesColaborador'), 10, 'left', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_registro_atividade', lang('paraformalidadesTipoRegistroAtividade'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_local', lang('paraformalidadesTipoLocal'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_condicao_ambiental', lang('paraformalidadesTipoCondicaoAmbiental'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_elemento_descricao', lang('paraformalidadesTipoElemento'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
-                                <?=end_JqGridPanel();?>
-                                <?=new_line();?>
                                 <div id="editarNovo" style="display:block">
                                     <div style="float: left;">
                                         <?=form_label('lblColorador', lang('paraformalidadesImagemPequena'), 110);?>
@@ -32,16 +27,23 @@
 					<? }else{?>
 						<img id="img_foto_carteira" src="<?=BASE_URL;?>util/download/arquivo/<?=$pessoa->nome_gerado;?>/3x4" style="display: block; float: left; margin-right: 5px; width: 100px;"/>
 					<? }?>
+                                                
+
                                     </div>
                                     <?=new_line();?>
                                     
                                     <?=form_label('lblEnviarArquivo', lang('paraformalidadesEnviarImagem'), 110);?>
-                                        <?=form_file('arquivoImportacao', '', '', 'jpg');?>
+                                    <?=form_file('arquivoImportacao', '', '', 'jpg');?>
                                     <?=new_line();?>
 
                                     <?=form_label('lblColorador', lang('paraformalidadesColaborador'), 110);?>
                                     <?=form_textFieldAutoComplete('txtColaboradorId', BASE_URL . 'paraformalidade/cadastrosBasicos/colaborador/buscarColaborador', @$paraformalidade->colaboradorId, @$paraformalidade->colaboradorNome, 365) ?>
                                     <?=new_line();?>
+                                    
+                                    <?=form_label('lblDescricao', lang('grupoAtividadeDescricao'), 110);?>
+                                    <?=form_textArea('txtDescricao', '', 365);?>
+                                    <?=new_line();?>
+                                    
 
                                     <?=form_label('lblTipoRegistroAtividade', lang('paraformalidadesRegistroAtividade'), 110);?>
                                     <?=form_combo('cmbTipoRegistroAtividade', @$tipo_registros_atividades, '', 150, '');?>
@@ -67,6 +69,21 @@
                                     <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '260', '250', 'map', true, true)?>
                                     <?=new_line();?>
                                 </div>
+
+                                <?=new_line();?>
+
+                                <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
+                                        <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
+                                        <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('nome', lang('paraformalidadesColaborador'), 10, 'left', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_registro_atividade', lang('paraformalidadesTipoRegistroAtividade'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_local', lang('paraformalidadesTipoLocal'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_condicao_ambiental', lang('paraformalidadesTipoCondicaoAmbiental'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_elemento_descricao', lang('paraformalidadesTipoElemento'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
+                                <?=end_JqGridPanel();?>
+                                
 			<?=end_form();?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
@@ -75,35 +92,54 @@
 
 <script>
         (function(){
-            //Funcao anonima e de sempre execução
+            pesquisar();
         })();
         
+        function pesquisar(){
+            gridParaformalidades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
+            gridParaformalidades.load();
+        }
+        
 	function ajuda(){
-                window.open ('<?=WIKI;?>Grupos Atividades');
+                window.open ('<?=WIKI;?>Paraformalidade');
         }
         
         function finishUploadarquivoImportacao(){
-            console.log('arquivo enviado com sucesso');		
+            console.log('arquivo enviado com sucesso');
+            alert('final');
 	}
 
 	function novo(){
-		//location.href = BASE_URL+'paraformalidade/cadastros/grupoAtividade/novo/';
-                var state = document.getElementById('editarNovo').style.display;
-                if (state == 'block') {
-                    document.getElementById('editarNovo').style.display = 'none';
-                } else {
-                    document.getElementById('editarNovo').style.display = 'block';
-                }
- 
-                //$('editarNovo').show("slow");
+                    $('#txtLatParaformalidade').val('');
+                    $('#txtLngParaformalidade').val('');
+                    $('#txtDescricao').val('');
+                    //$('#arquivoImportacaoId').val('');
+                    //$('#arquivoImportacaoNome').val('');
+                    $('#txtColaboradorId').val('');
+                    $('#searchtxtColaboradorId').val('');
+                    $('#cmbTipoRegistroAtividade').val('');
+                    $('#cmbTipoLocal').val('');
+                    $('#cmbTipoCondicaoAmbiental').val('');
+                    $('#cmbTipoElementoSituacao').val('');
+                    $('#cmbTipoPonte').val('');
 	}
 
-	function listaGrupoAtividade(){
-		location.href = BASE_URL+'paraformalidade/cadastros/grupoAtividade/';
+	function listaParaformalidade(){
+		location.href = BASE_URL+'paraformalidade/cadastros/paraformalidade/';
 	}
 
 	function salvar(){
-		formGrupoAtividade_submit();
+            
+            if( $('#arquivoImportacaoId').val() != '' &&  $('#txtColaboradorId').val() != '' &&  $('#cmbTipoRegistroAtividade').val() != '' &&  $('#cmbTipoElementoSituacao').val() != '' &&  $('#cmbTipoLocal').val() != '' &&  $('#cmbTipoElementoSituacao').val() != '' &&  $('#txtLatOrigem').val() != ''){
+                formParaformalidade_submit();
+
+                gridParaformalidades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
+                gridParaformalidades.load();
+            }
+            else{
+                messageErrorBox("<?=lang('paraformalidadeCamposDevemSerInformados')?>");
+            }
+                    
 	}
 	
 	function formGrupoAtividade_callback(data){
@@ -118,31 +154,35 @@
 	} 
 
 	function excluir(){
-		if($('#txtPonteId').val() == ''){
+		if($('#txtParaformalidadeId').val() != ''){
 			messageErrorBox("<?=lang('nenhumRegistroSelecionado')?>");
 		}else{
-			messageConfirm('<?=lang('excluirRegistros')?>', excluirGrupoAtividade);
+			messageConfirm('<?=lang('paraformalidadeAtencaoExcluir')?>', excluirParaformalidade);
 		}
 	}
 
-	function excluirGrupoAtividade(confirmaExclusao){
+	function excluirParaformalidade(confirmaExclusao){
 		if(confirmaExclusao){
-			$.post(BASE_URL+'paraformalidade/cadastros/grupoAtividade/excluir/', {id: $('#txtGrupoAtividadeId').val()}, 
+			var pontes
+			var ponteGrid = getSelectedRows('gridParaformalidades');
+			for(var i = 0; i < ponteGrid.length; i++)
+				if( pontes == '')
+					 pontes = NotaTiposGrid[i];
+				else
+					 pontes += ',' + ponteGrid[i];
+
+			$.post(BASE_URL+'paraformalidade/cadastros/paraformalidade/excluir/', {id:  pontes}, 
 				function(data){
 					if(data.success)
-						messageBox("<?=lang('registroExcluido')?>", listaGrupoAtividade);
+						messageBox("<?=lang('registroExcluido')?>", pesquisar);
 					else
 						messageErrorBox("<?=lang('registroNaoExcluido')?>");
 				});
 		}
 	}	
         
-        function form_MapWithRoute_position(origem, destino, total, caminhos ){
-            $('#txtLatOrigem').val(origem.lat());
-            $('#txtLngOrigem').val(origem.lng());
-            $('#txtLatDestino').val(destino.lat());
-            $('#txtLngDestino').val(destino.lng());
-            $('#txtRotaEmKm').val(total);
-
+        function form_MapWithMarker_position(lat,longi){
+            $('#txtLatParaformalidade').val(lat);
+            $('#txtLngParaformalidade').val(longi);
         }
 </script>

@@ -707,7 +707,7 @@ ALTER SEQUENCE grupos_atividades_seq OWNED BY grupos_atividades.id;
 -- Name: grupos_atividades_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('grupos_atividades_seq', 5, true);
+SELECT pg_catalog.setval('grupos_atividades_seq', 7, true);
 
 
 --
@@ -927,16 +927,17 @@ CREATE TABLE paraformalidades (
     id integer NOT NULL,
     descricao character varying(255) DEFAULT NULL::character varying,
     imagem_id integer NOT NULL,
-    cod_panoramio_id integer NOT NULL,
     grupo_atividade_id integer NOT NULL,
-    colaborador_pessao_id integer NOT NULL,
+    colaborador_pessoa_id integer NOT NULL,
     tipo_registro_atividade_id integer NOT NULL,
     tipo_local_id integer NOT NULL,
     tipo_condicao_ambiental_id integer NOT NULL,
     tipo_elemento_situacao_id integer NOT NULL,
     tipo_ponte_id integer NOT NULL,
     esta_ativo character varying(1) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
+    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
+    geocode_lat character varying(30),
+    geocode_lng character varying(30)
 );
 
 
@@ -967,7 +968,7 @@ ALTER SEQUENCE paraformalidades_seq OWNED BY paraformalidades.id;
 -- Name: paraformalidades_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('paraformalidades_seq', 1, false);
+SELECT pg_catalog.setval('paraformalidades_seq', 16, true);
 
 
 --
@@ -1204,7 +1205,7 @@ ALTER SEQUENCE pessoas_tipos_id_seq OWNED BY pessoas_tipos.id;
 -- Name: pessoas_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('pessoas_tipos_id_seq', 1, true);
+SELECT pg_catalog.setval('pessoas_tipos_id_seq', 2, true);
 
 
 --
@@ -1833,7 +1834,7 @@ ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
 -- Name: uploads_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('uploads_id_seq', 1, false);
+SELECT pg_catalog.setval('uploads_id_seq', 20, true);
 
 
 --
@@ -2286,7 +2287,7 @@ ALTER TABLE ONLY usuarios_programas_acessos ALTER COLUMN id SET DEFAULT nextval(
 --
 
 COPY ci_sessions (session_id, ip_address, user_agent, last_activity, user_data) FROM stdin;
-2042a68bce56a55b79d3b5f082965cfd	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/536.5 (K	1339259986	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:3054:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/usuario">Usuários</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/perfil">Módulos</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/empresa">Setores</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastros/paraformalidade">Paraformalidades</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastros/grupoAtividade">Grupos de Atividade</a></span></ul></li><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/atividadeRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/colaborador">Colaboradores</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/condicaoAmbiental">Condições Ambientais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/elementoSituacao">Elementos Situação</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/local">Locais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/participacao">Participações</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/ponte">Pontes</a></span></ul></li><li class="closed"><span>Equipe</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/equipe/registroAtividade">Registros de Atividades</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/equipe/verRegistroAtividade">Ver Registros de Atividades</a></span></ul></li></ul></li>";}
+4c206176082e6dcca5e0f981fed19c1a	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/536.5 (K	1340489226	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:3054:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/usuario">Usuários</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/perfil">Módulos</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/empresa">Setores</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastros/paraformalidade">Paraformalidades</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastros/grupoAtividade">Grupos de Atividade</a></span></ul></li><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/atividadeRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/colaborador">Colaboradores</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/condicaoAmbiental">Condições Ambientais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/elementoSituacao">Elementos Situação</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/local">Locais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/participacao">Participações</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/ponte">Pontes</a></span></ul></li><li class="closed"><span>Equipe</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/equipe/registroAtividade">Registros de Atividades</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/equipe/verRegistroAtividade">Ver Registros de Atividades</a></span></ul></li></ul></li>";}
 3d104a23b4db74039884bcfbd71299e5	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (	1337214452	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:1998:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/usuario">Usuários</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/perfil">Módulos</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/empresa">Setores</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/atividadeRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/colaborador">Colaboradores</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/condicaoAmbiental">Condições Ambientais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/elementoSituacao">Elementos Situação</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/local">Locais</a></span></ul></li></ul></li>";}
 \.
 
@@ -8015,8 +8016,9 @@ COPY grupos_acessos_programas_permissoes (id, grupo_acesso_id, sys_metodo_id, dt
 --
 
 COPY grupos_atividades (id, cidade_id, descricao, dt_cadastro, dt_ocorrencia, geocode_origem_lat, geocode_origem_lng, geocode_destino_lat, geocode_destino_lng) FROM stdin;
-5	1920	Maria	2012-06-05 19:56:42.502609	2012-05-27 00:00:00	-31.77859	-52.322040000000015	-31.77025	-52.34609999999998
 4	4227	O evento foi realizado com a comunidade do bairro fragata, contando com a participação de 20 pessoas 	2012-06-05 19:22:51.419417	2012-05-27 00:00:00	-31.77502	-52.32972000000001	-31.762	-52.34036000000003
+6	3285	Curitiba, Paraná, contou com a ajuda de 200 colaboradores entre eles 100 turistas.	2012-06-09 16:38:50.805828	2012-06-20 00:00:00	-25.43325	-49.25819000000001	-25.4348	-49.25346999999999
+7	4259	Ocorreu na semana de comemoração do aniversário da Cidade de Rio Grande contando com 100 paraformalidades registras por 20 colaboradores	2012-06-09 17:16:59.184074	2012-06-30 00:00:00	-32.03196000000001	-52.102840000000015	-32.0396	-52.10086000000001
 \.
 
 
@@ -8064,7 +8066,7 @@ COPY log_tables_structures (id, table_name) FROM stdin;
 -- Data for Name: paraformalidades; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY paraformalidades (id, descricao, imagem_id, cod_panoramio_id, grupo_atividade_id, colaborador_pessao_id, tipo_registro_atividade_id, tipo_local_id, tipo_condicao_ambiental_id, tipo_elemento_situacao_id, tipo_ponte_id, esta_ativo, dt_cadastro) FROM stdin;
+COPY paraformalidades (id, descricao, imagem_id, grupo_atividade_id, colaborador_pessoa_id, tipo_registro_atividade_id, tipo_local_id, tipo_condicao_ambiental_id, tipo_elemento_situacao_id, tipo_ponte_id, esta_ativo, dt_cadastro, geocode_lat, geocode_lng) FROM stdin;
 \.
 
 
@@ -8136,6 +8138,7 @@ COPY pessoas (id, nome, cpf, rg, estado_civil_id, sexo, dt_nascimento, nome_pai,
 
 COPY pessoas_tipos (id, tipo, dt_cadastro) FROM stdin;
 1	Colaborador	2012-05-05 22:51:38.600373
+2	Integrante	2012-06-09 17:48:37.038521
 \.
 
 
@@ -8771,7 +8774,7 @@ ALTER TABLE ONLY pessoas
 --
 
 ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT colaborador_pessao_id_fkey FOREIGN KEY (colaborador_pessao_id) REFERENCES pessoas(id);
+    ADD CONSTRAINT colaborador_pessao_id_fkey FOREIGN KEY (colaborador_pessoa_id) REFERENCES pessoas(id);
 
 
 --

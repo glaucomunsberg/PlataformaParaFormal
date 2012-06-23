@@ -87,4 +87,18 @@ Versão 0.2.5
             Pessoa Tipos - Correção de exibição de data
             Grupo Atividades - Correções Finais do programa
             Paraformalidades - Inúmeros ajustes
+
+Versão 0.2.6
+        Correções
+            Paraformalidade - Query de dados
+
+Versão 0.2.7
+        Correções
+            System - Upload de Imagens com erro
+
+Versão 0.2.8
+        Correções
+            Paraformalidades - Inserção e deletar paraformalidade
+            System - Correão do Maps e de acesso a pasta util via apache
+            Banco de Dados - Inserção de novos campus e novo banco base
         

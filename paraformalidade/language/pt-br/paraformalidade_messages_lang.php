@@ -27,3 +27,7 @@ $lang['ParaformalidadeDescricaoDeveSerInformado'] = 'Paraformalidade deve ser in
 //--------- Grupos de Atividades -----------
 $lang['gruposDeAtividadesDescricaoDeveSerInformado'] = 'Grupos de Atividades deve ser informado';
 $lang['gruposDeAtividadesDevidoProblema'] = 'Devido a um problema de formatação de dados. A data não está sendo exibida, para manter a antiga basta não alterar o campo data.';
+
+//--------- Paraformalidade -----------
+$lang['paraformalidadeCamposDevemSerInformados'] = 'Certifique-se que os campos estão preenchidos';
+$lang['paraformalidadeAtencaoExcluir'] = 'ATENÇÃO! Você tem certeza que deseja remover essa paraformalidade permanentimente?!';

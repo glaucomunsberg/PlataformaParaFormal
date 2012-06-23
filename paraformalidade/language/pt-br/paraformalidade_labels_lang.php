@@ -96,4 +96,5 @@ $lang['paraformalidadesCondicaoAmbiental'] = 'Condição Ambiental';
 $lang['paraformalidadesElementoSituacao'] = 'Elemento Situação';
 $lang['paraformalidadesPonte'] = 'Ponte';
 $lang['paraformalidadesLocalizacao'] = 'Localização';
-$lang['paraformalidadesImagemPequena'] = 'Thumb';
+$lang['paraformalidadesImagemPequena'] = 'Miniatura';
+$lang['paraformalidadesAtivo'] = 'Visivel ao Público';
