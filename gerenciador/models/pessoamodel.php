@@ -81,6 +81,7 @@ class PessoaModel extends Model {
     function getPessoa($id) {
         $this->db->select('id, nome, sexo, dt_cadastro, dt_nascimento, email, rg, cpf', false);
         $this->db->where('id', $id);
+        logVar('aaaaaa');
         return $this->db->get('pessoas')->row();
     }
 

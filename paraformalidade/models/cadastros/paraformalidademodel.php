@@ -88,7 +88,16 @@
 			$this->db->where('id', $paraformalidadeID);
 			return $this->db->get('paraformalidades')->row();
 		}
-		
+                
+		function getParaformalidadeWhitImage($paraformalidadeID){
+                        $this->db->select('p.id, pe.nome as colaborador_nome, u.nome_gerado as nomeimagem, p.descricao, p.imagem_id, p.grupo_atividade_id, p.colaborador_pessoa_id as colaborador_id, p.tipo_registro_atividade_id, p.tipo_local_id, p.tipo_condicao_ambiental_id, p.tipo_elemento_situacao_id, p.tipo_ponte_id, p.esta_ativo, p.dt_cadastro, p.geocode_lat, p.geocode_lng',false);
+                        $this->db->from('paraformalidades as p');
+                        $this->db->join('public.uploads as u','p.imagem_id = u.id');
+                        $this->db->join('public.pessoas as pe','p.colaborador_pessoa_id = pe.id');
+			$this->db->where('p.id', $paraformalidadeID);
+			return $this->db->get('')->result();
+		}
+                
 		function getParaformalidades($parametros) {
                         $this->db->select('p.id, p.id as colaboradorNome, p.descricao, pes.nome, tr.descricao as tipo_registro_atividade, tl.descricao as tipo_local, tca.descricao as tipo_condicao_ambiental, tes.descricao as tipo_elemento_descricao, tp.descricao as tipo_ponte, up.nome_original, to_char(p.dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
                         $this->db->from('paraformalidades as p');

@@ -761,7 +761,9 @@ function form_buttonHit($name = '', $url = '', $titleButtonHit = 'Título button
  * @param integer $max Maximo de arquivos inseridos no componente input file
  * @param array $extra Array com opções de estilos e atributos extras
  * @return string
- */ function form_file($name = '', $valueIdUpload = '', $valueNameUpload = '', $allowed_types = '', $width = '250', $methodReturnUpload = 'finishUpload', $extra = '', $disable = false) {
+ */ 
+  function form_file($name = '', $valueIdUpload = '', $valueNameUpload = '', $allowed_types = '', $width = '250', $methodReturnUpload = 'finishUpload', $extra = '', $disable = false) {
+      logVar('dentro da função');
     $form_file = form_hidden($name . 'Id', $valueIdUpload);
     $form_file.= form_textField($name . 'Name', $valueNameUpload, $width, '', '', array('readonly' => true));
     $form_file.= '<button id="btn' . $name . '" name="btn' . $name . '" onclick="openWindow(BASE_URL+\'util/upload/choiceFile/' . $name . 'Id' . '/' . $name . 'Name/' . $methodReturnUpload . humanize($name) . '/' . $allowed_types . '\', \'' . lang('uploadChoiceFileTitle') . '\', 600, false);" style="height: 24px; margin-left:0px; margin-bottom: 5px; margin-right: 5px;" class="ui-button ui-button-text-icon-primary ui-widget ui-state-default ui-corner-all">';

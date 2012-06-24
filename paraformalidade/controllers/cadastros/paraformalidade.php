@@ -5,7 +5,9 @@ class Paraformalidade extends Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
+        $this->load->model('../../gerenciador/models/PessoaModel', 'pessoaModel');
         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
+        $this->load->model('../../util/models/UploadModel', 'uploadModel');
         $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
         $this->load->model('cadastros/GrupoAtividadeModel', 'grupoAtividadeModel');
         $this->load->model('cadastrosBasicos/AtividadeRegistradaModel', 'atividadeRegistradaModel');
@@ -54,11 +56,11 @@ class Paraformalidade extends Controller {
 		
     }
     
-    function editar($grupoAtividade){
-        $data['paraformalidadeCidade'] = $this->cidadeModel->getCidadeById( $data['paraformalidade']->cidade_id );
-	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['paraformalidades']->nome;
-	$this->load->view('cadastro/paraformalidadeView', $data);
+    function editar($paraformalidadeId){
+        $this->ajax->addAjaxData('paraformalidade', $this->paraformalidadeModel->getParaformalidadeWhitImage($paraformalidadeId) );
+	$this->ajax->returnAjax();
     }
+    
     
     function excluir(){
 	$isSUccess = $this->paraformalidadeModel->excluir($_POST['id']);
