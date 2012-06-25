@@ -4,15 +4,14 @@
 
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
 	<?=end_ToolBar();?>
-
+        <?=warning('warning', lang('paraformalidadeDevidoProblema'), false, true);?>
 	<?=begin_TabPanel('tabParaformalidade');?>
 		<?=begin_Tab(lang('ponteFiltro'));?>
 			<?=begin_form('paraformalidade/cadastros/paraformalidade/salvar', 'formParaformalidade');?>
-				
-                                <?=form_hidden('txtParaformalidadeId', '');?>
-                                <?=form_hidden('txtLatParaformalidade',''); ?>
-                                <?=form_hidden('txtLngParaformalidade', ''); ?>
-                                <?=form_hidden('enderecoBaseImagem', BASE_URL); ?>
+                                <input type="hidden" name="txtParaformalidadeId" id="txtParaformalidadeId" value="" />
+                                <input type="hidden" name="txtLatParaformalidade" id="txtLatParaformalidade" value="" />
+                                <input type="hidden" name="txtLngParaformalidade" id="txtLngParaformalidade" value="" />
+                                <input type="hidden" name="enderecoBaseImagem" id="enderecoBaseImagem" value="<?=BASE_URL;?>" />
 
                                 <?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
                                 <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
@@ -23,14 +22,10 @@
                                 <div id="editarNovo" style="display:block">
                                     <div style="float: left;">
                                         <?=form_label('lblColorador', lang('paraformalidadesImagemPequena'), 110);?>
-					<? if(@$grupo_atividade->imagem_id == '') {?>
-						<img id="imagem_visualizacao" src="<?=IMG;?>/default_avatar.jpg" style="display: block; float: left; margin-right: 5px; width: 100px;"/>
-					<? }else{?>
-						<img id="imagem_visualizacao" src="<?=IMG;?>util/download/arquivo/<?=$pessoa->nome_gerado;?>/3x4" style="display: block; float: left; margin-right: 5px; width: 100px;"/>
-					<? }?>
-                                                
-
-                                    </div>
+					<img id="imagem_visualizacao" src="<?=IMG;?>/default_avatar.jpg" style="display: block; float: left; margin-right: 5px; width: 100px;" class="ui-widget ui-state-default ui-corner-tl ui-corner-bl ui-button-icon-only"/>
+                                    </
+                                    div>
+                                    <?=new_line();?>
                                     <?=new_line();?>
                                     
                                     <?=form_label('lblEnviarArquivo', lang('paraformalidadesEnviarImagem'), 110);?>
@@ -61,6 +56,7 @@
                                     <?=form_label('lblTipoElementoSituacao', lang('paraformalidadesElementoSituacao'), 110);?>
                                     <?=form_combo('cmbTipoElementoSituacao', @$tipo_elemento_situacao, '', 150, '');?>
                                     <?=new_line();?>
+                                    
                                     
                                     <?=form_label('lblTipoPonte', lang('paraformalidadesPonte'), 110);?>
                                     <?=form_combo('cmbTipoPonte', @$tipo_ponte, '', 150, '');?>
@@ -130,26 +126,32 @@
 	}
 
 	function salvar(){
-            
-            if( $('#arquivoImportacaoId').val() != '' &&  $('#txtColaboradorId').val() != '' &&  $('#cmbTipoRegistroAtividade').val() != '' &&  $('#cmbTipoElementoSituacao').val() != '' &&  $('#cmbTipoLocal').val() != '' &&  $('#cmbTipoElementoSituacao').val() != '' &&  $('#txtLatOrigem').val() != ''){
-                formParaformalidade_submit();
+            //Se não está editando
+            if( document.getElementById('txtParaformalidadeId').value == '' ){
+                if( $('#arquivoImportacaoId').val() != '' &&  $('#txtColaboradorId').val() != '' &&  $('#cmbTipoRegistroAtividade').val() != '' &&  $('#cmbTipoElementoSituacao').val() != '' &&  $('#cmbTipoLocal').val() != '' &&  $('#cmbTipoElementoSituacao').val() != '' &&  $('#txtLatOrigem').val() != ''){
+                    formParaformalidade_submit();
 
-                gridParaformalidades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
-                gridParaformalidades.load();
+                    gridParaformalidades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
+                    gridParaformalidades.load();
+                }
+                else{
+                    messageErrorBox("<?=lang('paraformalidadeCamposDevemSerInformados')?>");
+                }
+            }//se está editando
+            else
+            {
+                formParaformalidade_submit();
             }
-            else{
-                messageErrorBox("<?=lang('paraformalidadeCamposDevemSerInformados')?>");
-            }
-                    
+            
 	}
 	
-	function formGrupoAtividade_callback(data){
+	function formParaformalidade_callback(data){
 		if(data.error != undefined){
 			messageErrorBox(data.error.message, data.error.field);
 		} else {
 			if(data.success != undefined) {
 				$('#txtGrupoAtividadeId').val(data.grupo_atividade.id);
-                        messageBox(data.success.message, listaGrupoAtividade);
+                        messageBox(data.success.message, novo);
 			}
 	    }
 	} 
@@ -183,13 +185,15 @@
 	}
 	
         function gridParaformalidades_click(id){
-            $.post(BASE_URL+'paraformalidade/cadastros/paraformalidade/editar/'+id,function(data){
+            $.post(BASE_URL+'paraformalidade/cadastros/paraformalidade/editar/'+id,{id:  id},function(data){
+                var paraformal = data.paraformalidade;
                 
-                txtParaformalidadeId.val(data.paraformalidade.id);//data.paraformalidade.id
-                txtLatParaformalidade.val(data.paraformalidade.geocode_lat);
-                txtLngParaformalidade.val(data.paraformalidade.geocode_lng);
-                txtDescricao.val(data.paraformalidade.descricao);
-                txtParaformalidadeId.val(data.paraformalidade.id);
+                document.getElementById('txtParaformalidadeId').value = paraformal.id;
+                document.getElementById('txtLatParaformalidade').value = paraformal.geocode_lat;
+                document.getElementById('txtLngParaformalidade').value = paraformal.geocode_lng;
+                //document.getElementById('txtDescricao').value = paraformal.descricao;
+
+                //txtParaformalidadeId.val(data.paraformalidade.paraformalidade_id);
                 cmbTipoRegistroAtividade.setValueCombo(data.paraformalidade.tipo_registo_atividade_id);
                 cmbTipoLocal.setValueCombo(data.paraformalidade.tipo_local_id);
                 cmbTipoCondicaoAmbiental.setValueCombo(data.paraformalidade.tipo_condicao_ambiental_id);
@@ -197,10 +201,10 @@
                 cmbTipoPonte.setValueCombo(data.paraformalidade.tipo_ponte_id);
 
                 //txtColaboradorId.val(data.paraformalidade.colaborador_id);
-                //searchtxtColaboradorId.val(data.paraformalidade.colaborador);
-                //carregarSrcDeImagem($('#enderecoBaseImagem').val()+'/archives/thumbs_48x48/'+data.paraformalidade.nomeimagem);
+                searchtxtColaboradorId.val(paraformal.nome);
+                carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'/archives/thumbs_48x48/'+paraformal.nome_gerado);
             });
-                                
+            
         }
         
         function form_MapWithMarker_position(lat,longi){
@@ -212,5 +216,4 @@
             var imagem = document.getElementById("imagem_visualizacao");
                 imagem.src = urlImagem; 
         }
-        
 </script>

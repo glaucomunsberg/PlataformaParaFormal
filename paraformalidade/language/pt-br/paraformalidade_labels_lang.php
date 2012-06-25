@@ -98,3 +98,4 @@ $lang['paraformalidadesPonte'] = 'Ponte';
 $lang['paraformalidadesLocalizacao'] = 'Localização';
 $lang['paraformalidadesImagemPequena'] = 'Miniatura';
 $lang['paraformalidadesAtivo'] = 'Visivel ao Público';
+$lang['paraformalidadeDevidoProblema'] = 'Atenção! <b>\'Editar\'</b> informações apresenta instabilidades.';

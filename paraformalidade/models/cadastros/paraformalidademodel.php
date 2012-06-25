@@ -27,12 +27,7 @@
                         $this->db->set('tipo_elemento_situacao_id', $paraformalidade['cmbTipoElementoSituacao']);
                         if($paraformalidade['cmbTipoPonte'] != '') 
                             $this->db->set('tipo_ponte_id', $paraformalidade['cmbTipoPonte']);
-                            
-                        //if($paraformalidade['is_ativo'] == true){
                         $this->db->set('esta_ativo', 'S');
-                        //}else{
-                           // $this->db->set('esta_ativo', 'S');
-                        //}
                         $this->db->set('geocode_lat', $paraformalidade['txtLatParaformalidade']);
                         $this->db->set('geocode_lng', $paraformalidade['txtLngParaformalidade']);
 			$this->db->set('dt_cadastro', 'NOW()', false);
@@ -50,7 +45,23 @@
 		function alterar($paraformalidade){
 
 			$this->db->trans_start();
-			$this->db->set('descricao', $paraformalidade['txtDescricao']);		
+                        if($paraformalidade['txtDescricao'] != '')
+                            $this->db->set('descricao', $paraformalidade['txtDescricao']);
+                        if($paraformalidade['arquivoImportacaoId'] != '') 
+                            $this->db->set('imagem_id', $paraformalidade['arquivoImportacaoId']);
+                        $this->db->set('colaborador_pessoa_id', $paraformalidade['txtColaboradorId']);
+                        $this->db->set('grupo_atividade_id', $paraformalidade['txtGrupoAtividadeId']);
+                        $this->db->set('tipo_registro_atividade_id', $paraformalidade['cmbTipoRegistroAtividade']);
+                        $this->db->set('tipo_local_id', $paraformalidade['cmbTipoLocal']);
+                        $this->db->set('tipo_condicao_ambiental_id', $paraformalidade['cmbTipoCondicaoAmbiental']);
+                        $this->db->set('tipo_elemento_situacao_id', $paraformalidade['cmbTipoElementoSituacao']);
+                        if($paraformalidade['cmbTipoPonte'] != '') 
+                            $this->db->set('tipo_ponte_id', $paraformalidade['cmbTipoPonte']);
+                        $this->db->set('esta_ativo', 'S');
+                        $this->db->set('geocode_lat', $paraformalidade['txtLatParaformalidade']);
+                        $this->db->set('geocode_lng', $paraformalidade['txtLngParaformalidade']);
+			$this->db->set('dt_cadastro', 'NOW()', false);
+                        
 			$this->db->where('id', $paraformalidade['txtParaformalidadeId']);
 			$this->db->update('paraformalidades');
 			$this->db->trans_complete();
@@ -90,12 +101,12 @@
 		}
                 
 		function getParaformalidadeWhitImage($paraformalidadeID){
-                        $this->db->select('p.id, pe.nome as colaborador_nome, u.nome_gerado as nomeimagem, p.descricao, p.imagem_id, p.grupo_atividade_id, p.colaborador_pessoa_id as colaborador_id, p.tipo_registro_atividade_id, p.tipo_local_id, p.tipo_condicao_ambiental_id, p.tipo_elemento_situacao_id, p.tipo_ponte_id, p.esta_ativo, p.dt_cadastro, p.geocode_lat, p.geocode_lng',false);
+                        $this->db->select('p.id, pe.nome, u.nome_gerado, p.descricao, p.imagem_id, p.grupo_atividade_id, p.colaborador_pessoa_id as colaborador_id, p.tipo_registro_atividade_id, p.tipo_local_id, p.tipo_condicao_ambiental_id, p.tipo_elemento_situacao_id, p.tipo_ponte_id, p.esta_ativo, p.dt_cadastro, p.geocode_lat, p.geocode_lng',false);
                         $this->db->from('paraformalidades as p');
                         $this->db->join('public.uploads as u','p.imagem_id = u.id');
                         $this->db->join('public.pessoas as pe','p.colaborador_pessoa_id = pe.id');
 			$this->db->where('p.id', $paraformalidadeID);
-			return $this->db->get('')->result();
+			return $this->db->get()->row();
 		}
                 
 		function getParaformalidades($parametros) {
