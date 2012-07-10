@@ -101,4 +101,7 @@ Versão 0.2.8
             Paraformalidades - Inserção, editar e deletar paraformalidade
             System - Correção do Maps e de acesso a pasta util via apache
             Banco de Dados - Inserção de novos campus e novo banco base
-        
+            
+Versão 0.3
+        Implementação
+            Wiki - Usando a WikiMedia para gerar suporte para o usuário       
