@@ -21,7 +21,7 @@ define('PATH_COOKIE', '/PlataformaDoParaformal');
 define('IMG', $config['base_url'].'static/_img');
 define('CSS', $config['base_url'].'static/_css');
 define('JS', $config['base_url'].'static/_js');
-define('WIKI', '');
+define('WIKI', $config['base_url'].'static/wiki/index.php/');
 define('PRODUCAO', false);
 
 /*
