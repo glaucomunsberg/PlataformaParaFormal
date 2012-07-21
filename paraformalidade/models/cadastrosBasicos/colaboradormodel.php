@@ -75,7 +75,7 @@ class ColaboradorModel extends Model {
             $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
         if(@$parametros['txtColaboradorCidadeId'] != null )
             $this->db->where('p.cidade_id', @$parametros['txtColaboradorCidadeId']);
-        $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
+        $this->db->where('p.pessoa_tipo_id = 1');
         $this->db->sendToGrid();
     }
 
@@ -89,7 +89,7 @@ class ColaboradorModel extends Model {
     public function getColaboradorByNome($nome) {
         $this->db->select('p.id, p.nome');
         $this->db->from('pessoas as p');
-        $this->db->where('p.pessoa_tipo_id = cast(fnc_get_parametro(\'PESSOA_TIPO_COLABORADOR\') as int)');
+        $this->db->where('p.pessoa_tipo_id = 1');
         if($nome != '')
             $this->db->like('upper(p.nome)', strtoupper($nome));
         $this->db->order_by('p.nome', 'asc');

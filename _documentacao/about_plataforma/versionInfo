@@ -40,18 +40,18 @@ Versão 0.1.7
 
 Versão 0.1.8
 	Implementação
-		Criação do programa Atividades Registradas - paraformalidade/cadastrosBasicos/atividadeRegistrada
-		Criação do programa Locais - paraformalidade/cadastrosBasicos/local
+		Criação do programa Atividades Registradas  - paraformalidade/cadastrosBasicos/atividadeRegistrada
+		Criação do programa Locais                  - paraformalidade/cadastrosBasicos/local
 	Correção 
                 Condições Ambientais - Correções gerais
 
 Versão 0.1.9
         Implementação
-                Criação do programa Elementos Situação -  paraformalidade/cadastrosBasicos/elementosSituacoes
-                Criação do programa Participação -  paraformalidade/cadastrosBasicos/participacao
-                Criação do programa Registro Atividade - paraformalidade/equipe/registroAtividade
-                Criação do programa Ver Registro Atividade - paraformalidade/equipe/verRegistroAtividade
-                Criação do programa Pontes - paraformalidade/equipe/ponte
+                Criação do programa Elementos Situação      -  paraformalidade/cadastrosBasicos/elementosSituacoes
+                Criação do programa Participação            -  paraformalidade/cadastrosBasicos/participacao
+                Criação do programa Registro Atividade      - paraformalidade/equipe/registroAtividade
+                Criação do programa Ver Registro Atividade  - paraformalidade/equipe/verRegistroAtividade
+                Criação do programa Pontes                  - paraformalidade/equipe/ponte
                 Criação do helper form_MapWithMarker
         Correção
                 System - Nova cor que dá fundo ao nome do grupo
@@ -62,7 +62,7 @@ Versão 0.1.9
 Versão 0.2.0
 	Implementação
 		Criação do programa Grupo de Atividades - paraformalidade/cadastros/grupoAtividade
-		Criação do programa Paraformalidade - paraformalidade/cadastros/paraformalidade
+		Criação do programa Paraformalidade     - paraformalidade/cadastros/paraformalidade
 		Criação do helper form_MapWithRoute
 
 Versão 0.2.1
@@ -71,22 +71,22 @@ Versão 0.2.1
 
 Versão 0.2.2 e 0.2.3
         Correção
-                Banco de Dados - Novo dump do banco com novos campos
-                Form_MapWithRoute - Correção e remoção de informativos e alertas
+                Banco de Dados      - Novo dump do banco com novos campos
+                Form_MapWithRoute   - Correção e remoção de informativos e alertas
 
 Versão 0.2.4
         Correções
-                Banco de Dados - Nodo dump do banco com novos campos e com ajustes
+                Banco de Dados  - Nodo dump do banco com novos campos e com ajustes
                 Grupo Atividade - Correção de campos e query
 
 Versão 0.2.5
         Correções
-            System - Novo Header para área interna do sistema
-            System - Update do Upload de arquivos que o sistema usa
+            System              - Novo Header para área interna do sistema
+            System              - Update do Upload de arquivos que o sistema usa
             Grupo de Atividades - Correções de campo e lógica
-            Pessoa Tipos - Correção de exibição de data
-            Grupo Atividades - Correções Finais do programa
-            Paraformalidades - Inúmeros ajustes
+            Pessoa Tipos        - Correção de exibição de data
+            Grupo Atividades    - Correções Finais do programa
+            Paraformalidades    - Inúmeros ajustes
 
 Versão 0.2.6
         Correções
@@ -98,10 +98,19 @@ Versão 0.2.7
 
 Versão 0.2.8
         Correções
-            Paraformalidades - Inserção, editar e deletar paraformalidade
-            System - Correção do Maps e de acesso a pasta util via apache
-            Banco de Dados - Inserção de novos campus e novo banco base
+            Paraformalidades    - Inserção, editar e deletar paraformalidade
+            System              - Correção do Maps e de acesso a pasta util via apache
+            Banco de Dados      - Inserção de novos campus e novo banco base
             
 Versão 0.3
         Implementação
-            Wiki - Usando a WikiMedia para gerar suporte para o usuário       
+            Wiki - Usando a WikiMedia para gerar suporte para o usuário   
+
+Versão 0.3.1
+        Correção
+            System - Remoção de pastas de svn
+
+Versão 0.3.2
+        Correção
+            Colaboradores   - Remoção do get_parametro()
+            Login           - Login agora conta com link para a wikipedia

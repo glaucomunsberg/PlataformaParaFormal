@@ -58,6 +58,27 @@
 						<input id="btnEntrar" name="btnEntrar" type="submit" value="<?=lang('entrar');?>" style="margin-bottom: 0px;"/>
 					<?=end_form();?>
 				<?=end_Tab();?>
+                                <?=begin_Tab(lang('longinAjuda'));?>
+                                                <div style="list-style-type: none; font-family: 'Ubuntu', sans-serif; margin: 5px; font-size: 12px; text-align: justify">
+                                                        Visite nossa <b>WikiParaformal</b> para ter maiores informações sobre:<br>
+                                                        <table style="list-style-type: none; font-family: 'Ubuntu', sans-serif; margin: 5px; font-size: 12px; text-align: justify; border:0px">
+                                                                <tr>
+                                                                    <td style="width: 16px; height: 16px; background-image: url(../static/_css/redmond/images/ui-icons_469bdd_256x240.png); background-position: -64px -144px;"></td>
+                                                                    <td><?=lang('longinAjudarComoUsarPlataforma');?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 16px; height: 16px; background-image: url(../static/_css/redmond/images/ui-icons_469bdd_256x240.png); background-position: -64px -144px;"></td>
+                                                                    <td><?=lang('longinAjudarComoColaborar');?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 16px; height: 16px; background-image: url(../static/_css/redmond/images/ui-icons_469bdd_256x240.png); background-position: -64px -144px;"></td>
+                                                                    <td><?=lang('longinAjudarComoContato');?></td>
+                                                                </tr>
+                                                        </table>
+                                                </div>
+                                                <?=form_button('btnAjudar', lang('longinAjudar'), 'ajudar()');?>
+                                <?=end_Tab();?>
+                                
 			<?=end_TabPanel();?>
 			<span style="float: right;"><!-- Versão do manager aqui --></span>
 		</div>
@@ -72,6 +93,11 @@
     function entrar(){
         $("#btnEntrar").blur();
         formLogin_submit();
+    }
+    
+    function ajudar(){
+        $("#btnAjudar").blur();
+        window.open ('<?=WIKI;?>');
     }
 
     function formLogin_callback(data){
