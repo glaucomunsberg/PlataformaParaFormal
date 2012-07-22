@@ -17,4 +17,9 @@ $lang['tipoPessoa'] = 'Tipo Pessoa';
 $lang['tipoPessoaTipo'] = 'Tipo';
 $lang['tipoPessoaGrid'] = 'Lista de tipos de pessoas';
 
-
+//--------- SystemInfo -----------
+$lang['systemInfoPhp'] = 'Configurações do PHP';
+$lang['systemInfoDB'] = 'Configurações do Banco de Dados';
+$lang['systemInfoDBInformacao'] = 'Informações gerais';
+$lang['systemInfoDBHost'] = 'Host';
+$lang['systemInfoDBNome'] = 'Banco usado';

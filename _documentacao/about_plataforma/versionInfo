@@ -114,3 +114,9 @@ Versão 0.3.2
         Correção
             Colaboradores   - Remoção do get_parametro()
             Login           - Login agora conta com link para a wikipedia
+
+Versão 0.3.3
+        Implementação
+            System Info - programa criado para visualizar as configurações gerais da PHP e do DB
+        Correções
+            Programas   - Modificado para que funcione com o db modificado do servidor, antiga área comentada
