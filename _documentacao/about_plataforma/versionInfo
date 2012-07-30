@@ -120,3 +120,4 @@ Versão 0.3.3
             System Info - programa criado para visualizar as configurações gerais da PHP e do DB
         Correções
             Programas   - Modificado para que funcione com o db modificado do servidor, antiga área comentada
+            System      - Remoção de bastas .svn
