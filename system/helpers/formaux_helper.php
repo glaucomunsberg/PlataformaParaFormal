@@ -876,11 +876,16 @@ function _style_height($height) {
 /**
  * @ignore
  * Retorna um map com um marcado de uma localização com coordenadas: Latitude e Longitude
- *  Tanto mapa como marcador estão centralizados no espaço. Para retorno de lat e long
+ *  Tanto mapa como marcador estão centralizados no espaço.
+ * Para retorno de lat e long
  *  do marcador é necessário implementar a função
  *      function form_MapWithMarker_position(lat,longi);
+ * Para mudar a posicação do marker
+ *       function form_MapWithMarker_setPosicao($latitude,$longitude) {
+ *          var latlng = new google.maps.LatLng($latitude, $longitude);
+ *          window.marker.setPosition(latlng);
+ *       } 
  * 
- *  caso não seja, executa apenas demonstrando a posição
  * 
  * @author Glauco Roberto Munsberg dos Santos
  * 
@@ -943,6 +948,7 @@ function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.7710
      */    
     
     $script .= "    <script type=\"text/javascript\">
+                    var marker;
                     function init() {
                     var latlng = new google.maps.LatLng(". $latitude ."," .$longitude .");
                     var myOptions = {
@@ -956,7 +962,7 @@ function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.7710
     
     $script .="var map = new google.maps.Map(document.getElementById(\"map_canvas\"), myOptions);
                     var latitude, logitude;
-                    var marker = new google.maps.Marker({ 
+                    marker = new google.maps.Marker({ 
                     position: latlng, 
                     map: map,
                     draggable:".$draggableMarker.",
