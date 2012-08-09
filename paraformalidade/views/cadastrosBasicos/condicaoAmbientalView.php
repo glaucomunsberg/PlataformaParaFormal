@@ -21,7 +21,7 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>condicoes ambientais');
+    	window.open ('<?=WIKI;?>Condições Ambientais');
         }
 
 	function novo(){

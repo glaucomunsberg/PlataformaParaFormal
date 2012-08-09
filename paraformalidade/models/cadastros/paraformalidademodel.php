@@ -59,6 +59,7 @@
                             $this->db->set('tipo_ponte_id', $paraformalidade['cmbTipoPonte']);
                         $this->db->set('esta_ativo', 'S');
                         $this->db->set('geocode_lat', $paraformalidade['txtLatParaformalidade']);
+                        logVar($paraformalidade['txtLatParaformalidade']);
                         $this->db->set('geocode_lng', $paraformalidade['txtLngParaformalidade']);
 			$this->db->set('dt_cadastro', 'NOW()', false);
                         

@@ -45,7 +45,7 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Grupos Atividades');
+    	window.open ('<?=WIKI;?>Grupos de Atividade');
         }
 
 	function novo(){

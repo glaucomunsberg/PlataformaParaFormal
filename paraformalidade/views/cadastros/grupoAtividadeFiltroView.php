@@ -31,7 +31,7 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Grupos Atividade');
+    	window.open ('<?=WIKI;?>Grupos de Atividade');
         }
         
 	function pesquisar(){

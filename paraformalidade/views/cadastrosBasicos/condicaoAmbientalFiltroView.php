@@ -22,7 +22,7 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Condicoes Ambientais');
+    	window.open ('<?=WIKI;?>Condições Ambientais');
     }
 	function pesquisar(){
                gridCondicaoAmbiental.addParam('descricao', $('#txtDescricao').val());

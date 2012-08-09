@@ -29,7 +29,7 @@
 	}
 
 	function ajuda(){
-    	window.open ('<?=WIKI;?>areaFiltro');
+    	window.open ('<?=WIKI;?>Registros de Atividades');
     }
 
 	function novo(){

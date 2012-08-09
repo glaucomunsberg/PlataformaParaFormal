@@ -22,7 +22,7 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Elementos Situações');
+    	window.open ('<?=WIKI;?>Elementos Situação');
     }
 	function pesquisar(){
                gridElementoSituacao.addParam('descricao', $('#txtDescricao').val());

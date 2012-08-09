@@ -20,7 +20,7 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Elementos Situações');
+    	window.open ('<?=WIKI;?>Elementos Situação');
         }
 
 	function novo(){

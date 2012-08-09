@@ -34,7 +34,7 @@
 	}
 
 	function ajuda(){
-    	window.open ('<?=WIKI;?>areaFiltro');
+    	window.open ('<?=WIKI;?>ver Atividade Registrada');
         }
         
         function pesquisar(){

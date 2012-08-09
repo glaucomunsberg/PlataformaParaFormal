@@ -24,7 +24,7 @@
 
 <script type="text/javascript">    
     function ajuda(){
-    	window.open ('<?=WIKI;?>Colaborador');
+    	window.open ('<?=WIKI;?>Paraformalidade');
     }
     
     function pesquisar(){

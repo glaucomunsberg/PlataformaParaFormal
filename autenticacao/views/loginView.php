@@ -17,10 +17,10 @@
 								Deseja saber mais sobre o Portal?!
 							</p>
 							<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px; margin-left: 20px">
-								Conheça o Projeto Plataforma do Parformal: <a href="http://glaucomunsberg.github.com/C-C/" target="_blank">Plataforma Source</a>
+								Conheça o Projeto Plataforma do Parformal: <a href="<?=WIKI;?>Plataforma_Paraformal" target="_blank">Plataforma Source</a>
 							</p>
                                                         <p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px; margin-left: 20px">
-								Conheça a Equipe Idealizadora do projeto : <a href="http://www.wix.com/contemporaneidade/faurb#!__quem-somos" target="_blank">Cidade+Contemporaneidade</a>
+								Conheça a Equipe Idealizadora do projeto : <a href="<?=WIKI;?>Equipe" target="_blank">Cidade+Contemporaneidade</a>
 							</p>
                                                         
                                                         
@@ -36,7 +36,7 @@
 					 	</li>
 					 	<li>
 					 		<h2>O que é Para-formal?!</h2>
-					 		<p style="margin: 5px; font-size: 14px; text-align: justify">O “para-formal” habita o “entre” a “formalidade” e a “informalidade” existente nos territórios da cidade. <a href="http://media.wix.com/ugd/e30259_1c9cf98a4a9aff99db5073edabbc4529.pdf?dn=OS%2BLUGARES%2BDO%2BPARA-FORMAL-CNPQsemor%C3%83%C2%A7amento.pdf" target="_blank">Veja mais</a></p>
+					 		<p style="margin: 5px; font-size: 14px; text-align: justify">O “para-formal” habita o “entre” a “formalidade” e a “informalidade” existente nos territórios da cidade. <a href="<?=WIKI;?>" target="_blank">Veja mais</a></p>
 					 	</li>
 			 		</ul>
 			 	</li>				 	

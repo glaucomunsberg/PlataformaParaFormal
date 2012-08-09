@@ -121,3 +121,13 @@ Versão 0.3.3
         Correções
             Programas   - Modificado para que funcione com o db modificado do servidor, antiga área comentada
             System      - Remoção de bastas .svn
+
+Versão 0.4
+        Correções
+            Paraformalidades    - Correção para edição de paraformalidades
+            Login               - Tela de login agora está totalmente linkada com a Wikiparaformal
+            System              - helper form_MapWithMarker corrigido
+        Wikiparaformal
+            Principal           - modificada
+            Paraformalidade     - criada
+            

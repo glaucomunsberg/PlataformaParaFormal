@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
     function ajuda(){
-    	window.open ('<?=WIKI;?>Colaborador');
+    	window.open ('<?=WIKI;?>Colaboradores');
     }
     
     function novo(){

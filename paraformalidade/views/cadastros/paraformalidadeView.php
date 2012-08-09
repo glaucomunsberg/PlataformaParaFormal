@@ -4,9 +4,8 @@
 
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
 	<?=end_ToolBar();?>
-        <?=warning('warning', lang('paraformalidadeDevidoProblema'), false, true);?>
 	<?=begin_TabPanel('tabParaformalidade');?>
-		<?=begin_Tab(lang('ponteFiltro'));?>
+		<?=begin_Tab(lang('paraformalidadesFiltro'));?>
 			<?=begin_form('paraformalidade/cadastros/paraformalidade/salvar', 'formParaformalidade');?>
                                 <input type="hidden" name="txtParaformalidadeId" id="txtParaformalidadeId" value="" />
                                 <input type="hidden" name="txtLatParaformalidade" id="txtLatParaformalidade" value="" />
@@ -23,8 +22,7 @@
                                     <div style="float: left;">
                                         <?=form_label('lblColorador', lang('paraformalidadesImagemPequena'), 110);?>
 					<img id="imagem_visualizacao" src="<?=IMG;?>/default_avatar.jpg" style="display: block; float: left; margin-right: 5px; width: 100px;" class="ui-widget ui-state-default ui-corner-tl ui-corner-bl ui-button-icon-only"/>
-                                    </
-                                    div>
+                                    </div>
                                     <?=new_line();?>
                                     <?=new_line();?>
                                     
@@ -40,6 +38,9 @@
                                     <?=form_textArea('txtDescricao', '', 365);?>
                                     <?=new_line();?>
                                     
+                                    <?=form_label('lblTipoPonte', lang('paraformalidadesLocalizacao'), 110);?>
+                                    <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '370', '250', 'map', true, true)?>
+                                    <?=new_line();?>
 
                                     <?=form_label('lblTipoRegistroAtividade', lang('paraformalidadesRegistroAtividade'), 110);?>
                                     <?=form_combo('cmbTipoRegistroAtividade', @$tipo_registros_atividades, '', 150, '');?>
@@ -56,20 +57,22 @@
                                     <?=form_label('lblTipoElementoSituacao', lang('paraformalidadesElementoSituacao'), 110);?>
                                     <?=form_combo('cmbTipoElementoSituacao', @$tipo_elemento_situacao, '', 150, '');?>
                                     <?=new_line();?>
-                                    
-                                    
+ 
                                     <?=form_label('lblTipoPonte', lang('paraformalidadesPonte'), 110);?>
                                     <?=form_combo('cmbTipoPonte', @$tipo_ponte, '', 150, '');?>
-                                    <?=new_line();?>
+
                                     
-                                    <?=form_label('lblTipoPonte', lang('paraformalidadesLocalizacao'), 110);?>
-                                    <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '260', '250', 'map', true, true)?>
-                                    <?=new_line();?>
+                                </div>                                
+			<?=end_form();?>
+		<?=end_Tab();?>
+                <?=begin_Tab(lang('paraformalidadesVerImagem'));?>
+                                <div style="float: left;">
+                                        <?=form_label('lblColorador', lang('paraformalidadesImagem'), 80);?>
+					<img id="imagem_visualizacao_640x480" src="<?=IMG;?>/default_avatar.jpg" style="display: block; float: left; margin-right: 5px; width: 100px;" class="ui-widget ui-state-default ui-corner-tl ui-corner-bl ui-button-icon-only"/>
                                 </div>
-
-                                <?=new_line();?>
-
-                                <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
+                <?=end_Tab();?>
+	<?=end_TabPanel();?>
+                               <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
                                         <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                                         <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
                                         <?=addJqGridColumn('nome', lang('paraformalidadesColaborador'), 10, 'left', array('sortable'=>true));?>
@@ -80,11 +83,6 @@
                                         <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
                                         <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
                                 <?=end_JqGridPanel();?>
-                                
-			<?=end_form();?>
-		<?=end_Tab();?>
-	<?=end_TabPanel();?>
-
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
 <script>
@@ -118,7 +116,8 @@
                     cmbTipoCondicaoAmbiental.setValueCombo('');
                     cmbTipoElementoSituacao.setValueCombo('');
                     cmbTipoPonte.setValueCombo('');
-                    carregarSrcDeImagem( $('#enderecoBaseImagem').val()+'/static/_img/default_avatar.jpg')
+                    carregarSrcDeImagem( $('#enderecoBaseImagem').val()+'/static/_img/default_avatar.jpg');
+                    gridParaformalidades.load();
 	}
 
 	function listaParaformalidade(){
@@ -191,18 +190,19 @@
                 document.getElementById('txtParaformalidadeId').value = paraformal.id;
                 document.getElementById('txtLatParaformalidade').value = paraformal.geocode_lat;
                 document.getElementById('txtLngParaformalidade').value = paraformal.geocode_lng;
-                //document.getElementById('txtDescricao').value = paraformal.descricao;
+                document.getElementById('txtDescricao').value = paraformal.descricao;
 
                 //txtParaformalidadeId.val(data.paraformalidade.paraformalidade_id);
-                cmbTipoRegistroAtividade.setValueCombo(data.paraformalidade.tipo_registo_atividade_id);
+                cmbTipoRegistroAtividade.setValueCombo(data.paraformalidade.tipo_registro_atividade_id);
                 cmbTipoLocal.setValueCombo(data.paraformalidade.tipo_local_id);
                 cmbTipoCondicaoAmbiental.setValueCombo(data.paraformalidade.tipo_condicao_ambiental_id);
                 cmbTipoElementoSituacao.setValueCombo(data.paraformalidade.tipo_elemento_situacao_id);
                 cmbTipoPonte.setValueCombo(data.paraformalidade.tipo_ponte_id);
 
-                //txtColaboradorId.val(data.paraformalidade.colaborador_id);
+                txtColaboradorId.val(data.paraformalidade.colaborador_id);
                 searchtxtColaboradorId.val(paraformal.nome);
-                carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'/archives/thumbs_48x48/'+paraformal.nome_gerado);
+                carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'/archives/resized_640x480/'+paraformal.nome_gerado);
+                form_MapWithMarker_setPosicao($('#txtLatParaformalidade').val(),$('#txtLngParaformalidade').val());
             });
             
         }
@@ -212,8 +212,17 @@
             $('#txtLngParaformalidade').val(longi);
         }
         
+        function form_MapWithMarker_setPosicao($latitude,$longitude) {
+            var latlng = new google.maps.LatLng($latitude, $longitude);
+            window.marker.setPosition(latlng);
+        }  
+
         function carregarSrcDeImagem(urlImagem){
-            var imagem = document.getElementById("imagem_visualizacao");
-                imagem.src = urlImagem; 
+                var imagemThu = document.getElementById("imagem_visualizacao");
+                    imagemThu.src = urlImagem;
+                var imagemMaior = document.getElementById("imagem_visualizacao_640x480");
+                    imagemMaior.style.height = '480px';
+                    imagemMaior.style.width = '640px';
+                    imagemMaior.src = urlImagem;
         }
 </script>

@@ -28,7 +28,7 @@
 <script>
 
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Atividade Registrada');
+    	window.open ('<?=WIKI;?>Registros de Atividades');
     }
 
 	function pesquisar(){
