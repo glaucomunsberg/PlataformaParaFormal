@@ -17,7 +17,8 @@
                                 <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
                                 <?=form_hidden('txtLatDestino', @$grupo_atividade->geocode_origem_lat); ?>
                                 <?=form_hidden('txtLngDestino', @$grupo_atividade->geocode_origem_lng); ?>
-
+                                
+                                
                                 <div id="editarNovo" style="display:block">
                                     <div style="float: left;">
                                         <?=form_label('lblColorador', lang('paraformalidadesImagemPequena'), 110);?>
@@ -60,7 +61,11 @@
  
                                     <?=form_label('lblTipoPonte', lang('paraformalidadesPonte'), 110);?>
                                     <?=form_combo('cmbTipoPonte', @$tipo_ponte, '', 150, '');?>
-
+                                    <?=new_line();?>
+                                    
+                                    <?=form_label('lblColorador', lang('paraformalidadesVisibilidade'), 110);?>
+                                    <?=form_checkbox('chkParaformalidadeAtivo', 'chkParaformalidadeAtivo', 'S', (@$grupo_atividade->esta_ativo == 'S' || @$grupo_atividade->esta_ativo == '' ? true : false));?>
+                                    <?=new_line();?>
                                     
                                 </div>                                
 			<?=end_form();?>
@@ -72,7 +77,7 @@
                                 </div>
                 <?=end_Tab();?>
 	<?=end_TabPanel();?>
-                               <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
+                               <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'nome,esta_ativo', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
                                         <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                                         <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
                                         <?=addJqGridColumn('nome', lang('paraformalidadesColaborador'), 10, 'left', array('sortable'=>true));?>
@@ -81,6 +86,7 @@
                                         <?=addJqGridColumn('tipo_condicao_ambiental', lang('paraformalidadesTipoCondicaoAmbiental'), 10, 'center', array('sortable'=>true));?>
                                         <?=addJqGridColumn('tipo_elemento_descricao', lang('paraformalidadesTipoElemento'), 10, 'center', array('sortable'=>true));?>
                                         <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
+                                        <?=addJqGridColumn('esta_ativo', lang('paraformalidadeVisibilidadeGrid'), 10, 'left', array('sortable'=>true));?>
                                         <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
                                 <?=end_JqGridPanel();?>
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
@@ -88,6 +94,7 @@
 <script>
         (function(){
             pesquisar();
+            $("#radio").buttonset();
         })();
         
         function pesquisar(){
@@ -101,7 +108,6 @@
         
         function finishUploadarquivoImportacao(){
             console.log('arquivo enviado com sucesso');
-            alert('final');
 	}
 
 	function novo(){
@@ -111,6 +117,7 @@
                     $('#txtDescricao').val('');
                     $('#txtColaboradorId').val('');
                     $('#searchtxtColaboradorId').val('');
+                    $('#chkParaformalidadeAtivo').attr('checked', false);
                     cmbTipoRegistroAtividade.setValueCombo('');
                     cmbTipoLocal.setValueCombo('');
                     cmbTipoCondicaoAmbiental.setValueCombo('');
@@ -149,8 +156,8 @@
 			messageErrorBox(data.error.message, data.error.field);
 		} else {
 			if(data.success != undefined) {
-				$('#txtGrupoAtividadeId').val(data.grupo_atividade.id);
-                        messageBox(data.success.message, novo);
+				$('#txtGrupoAtividadeId').val(data.paraformalidade.id);
+                        messageBox(data.success.message, novo());
 			}
 	    }
 	} 
@@ -201,6 +208,7 @@
 
                 txtColaboradorId.val(data.paraformalidade.colaborador_id);
                 searchtxtColaboradorId.val(paraformal.nome);
+                $('#chkParaformalidadeAtivo').attr('checked', (data.paraformalidade.esta_ativo == 'S' ? true : false));
                 carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'/archives/resized_640x480/'+paraformal.nome_gerado);
                 form_MapWithMarker_setPosicao($('#txtLatParaformalidade').val(),$('#txtLngParaformalidade').val());
             });

@@ -2,7 +2,7 @@
 
 	<?=path_bread($path_bread);?>
 
-	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
+	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar', 'excluir'));?>
 	<?=end_ToolBar();?>
         <?=warning('warning', lang('gruposDeAtividadesDevidoProblema'), false, true);?>
 	<?=begin_TabPanel('tabPonte');?>
