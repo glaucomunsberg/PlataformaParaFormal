@@ -2,7 +2,7 @@
 		</div>		
 		<div style="clear: both; margin-top: 10px;"><!----></div>
 		<div id="footer" class="ui-state-highlight ui-widget">
-			&copy;2012 Plataforma do Paraformal / <a href="javascript:;">Sobre</a> / <a href="javascript:;">Termos de serviço</a>
+			&copy;2012 Plataforma do Paraformal / <a href="#" OnClick="window.open('<?=WIKI;?>Plataforma do Para-formal','_blank');">Sobre</a> / <a href="#" OnClick="window.open('<?=WIKI;?>Termo de Serviço','_blank');">Termos de serviço</a>
 		</div>
 		<div id="dialog-message-error" style="display:none;"><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 0;"></span><label></label></p></div>
 		<div id="dialog-message-info" style="display:none;"><p><span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0;"></span><label></label></p></div>
@@ -14,7 +14,7 @@
 		</div>
 	</body>
 </html>
-<script type="text/javascript">
-	$(function(){parent.setHeightWindow($.cookie('lastWindow'), $('.content-center-popup').outerHeight());});
+<script type="text/javascript">     
+        $(function(){parent.setHeightWindow($.cookie('lastWindow'), $('.content-center-popup').outerHeight());});
 </script>
 <? } ?>
