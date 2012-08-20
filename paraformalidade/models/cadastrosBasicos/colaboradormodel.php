@@ -16,7 +16,6 @@ class ColaboradorModel extends Model {
         $this->db->set('pessoa_tipo_id', '1');
 	$this->db->insert('pessoas');
 	$this->db->trans_complete();
-        logLastSQL();
 	if($this->db->trans_status() === FALSE){
 		$this->validate->addError('txtColaboradorId', lang('registroNaoGravado'));
 	return false;
@@ -68,14 +67,14 @@ class ColaboradorModel extends Model {
         $this->db->from('pessoas as p');
         $this->db->join('cidades as c','p.cidade_id = c.id', 'left');
         if(@$parametros['txtColaboradorNome'] != null )
-            $this->db->like('p.nome', @$parametros['txtColaboradorNome']);
+            $this->db->like('upper(p.nome)', strtoupper(@$parametros['txtColaboradorNome']));
         if(@$parametros['cmbColaboradorSexo'] != null )
             $this->db->where('p.sexo', @$parametros['cmbColaboradorSexo']);
         if(@$parametros['txtColaboradorEmail'] != null )
             $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
         if(@$parametros['txtColaboradorCidadeId'] != null )
             $this->db->where('p.cidade_id', @$parametros['txtColaboradorCidadeId']);
-        $this->db->where('p.pessoa_tipo_id = 1');
+        $this->db->where('p.pessoa_tipo_id is not null');
         $this->db->sendToGrid();
     }
 

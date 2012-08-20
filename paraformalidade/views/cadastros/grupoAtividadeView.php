@@ -6,7 +6,7 @@
 	<?=end_ToolBar();?>
         <?=warning('warning', lang('gruposDeAtividadesDevidoProblema'), false, true);?>
 	<?=begin_TabPanel('tabPonte');?>
-		<?=begin_Tab(lang('grupoAtividadeFiltro'));?>
+		<?=begin_Tab(lang('grupoAtividadeFiltroLocal'));?>
 			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
 				<?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
 
@@ -39,6 +39,10 @@
                                 
 			<?=end_form();?>
 		<?=end_Tab();?>
+
+                <?= begin_Tab(lang('grupoAtividadeFiltroEquipe'), base_url() . 'paraformalidade/cadastros/grupoAtividade/loadAbaEquipe/' . @$grupo_atividade->id, TRUE, "Equipe") ?>
+                <?= end_Tab() ?>
+
 	<?=end_TabPanel();?>
 
 <?=$this->load->view("../../static/_views/footerGlobalView");?>

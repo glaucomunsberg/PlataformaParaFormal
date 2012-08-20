@@ -88,7 +88,6 @@ $lang['pessoaFiltro'] = 'Filtro';
 $lang['pessoaNome'] = 'Nome';
 $lang['pessoaDtCadastro'] = 'Dt. Cadastro';
 $lang['pessoaFiltro'] = 'Filtro';
-$lang['pessoaNome'] = 'Nome';
 $lang['pessoaNomePai'] = 'Nome do pai';
 $lang['pessoaNomeMae'] = 'Nome da mãe';
 $lang['pessoaListaPessoas'] = 'Lista de Pessoas';
@@ -97,7 +96,7 @@ $lang['pessoaRg'] = 'RG';
 $lang['pessoaSexo'] = 'Sexo';
 $lang['pessoaSexoMasc'] = 'Masculino';
 $lang['pessoaSexoFem'] = 'Feminino';
-$lang['pessoaDtCadastro'] = 'Dt. cadastro';
+$lang['pessoaDtCadastro'] = 'Dt. Cadastro';
 $lang['pessoaOrgaoEmissor'] = 'Orgão expedidor';
 $lang['pessoaUfOrgaoEmissor'] = 'UF do Orgão expedidor';
 $lang['pessoaMaoEscrita'] = 'Mão da escrita';
@@ -107,6 +106,14 @@ $lang['pessoaNacionalidade'] = 'Nacionalidade';
 $lang['pessoaEstadoCivil'] = 'Estado Cívil';
 $lang['pessoaTab1'] = 'Pessoas';
 $lang['pessoaFotoCarteira'] = 'Foto carteira';
+$lang['pessoaTipo'] = 'Tipo Pessoa';
+$lang['pessoaMais'] = 'Outras Informações';
+$lang['pessoaDtNacimento'] = 'Dt Nacimento';
+$lang['pessoaTelefone'] = 'Telefone';
+$lang['pessoaTipoRequerido'] = 'Tipo de Pessoa deve ser informado';
+$lang['pessoaSexoRequerido'] = 'Sexo da Pessoa deve ser informado';
+$lang['pessoaEmailRequerido'] = 'Email da Pessoa deve ser informado';
+
 
 //--------- Parametros ---------------
 $lang['parametroTitulo'] = 'Cadastro de Parâmetros';

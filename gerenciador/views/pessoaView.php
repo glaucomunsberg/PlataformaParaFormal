@@ -5,7 +5,7 @@
 
 	<?=begin_TabPanel(217);?>
 		<?=begin_Tab(lang('pessoaTituloTab'));?>
-			<?=begin_form('gerenciador/pessoa/salvar');?>
+			<?=begin_form('gerenciador/pessoa/salvar','formPessoas');?>
 				<?=form_label('lblCodigo', 'Código', 80);?>
 				<?=form_textField('txtCodigo', @$pessoa->id, 40, '', 4, array('readonly' => 'true', 'style' => 'text-align:right;',));?>
 				<?=new_line();?>
@@ -13,79 +13,79 @@
 				<?=form_label('lblNome', lang('pessoaNome'), 80);?>
 				<?=form_textField('txtNome', @$pessoa->nome, 300, '');?>
 				<?=new_line();?>
+                                
+                                <?=form_label('lblcmbPessoaTipo', lang('pessoaTipo'), 80);?>
+                                <?=form_combo('cmbPessoaTipo', @$cmbPessoaTipo, @$pessoa->pessoa_tipo_id, 200);?>
+				<?=new_line();?>
+
+                                <?=form_label('lblcmbPessoaSexo', lang('pessoaSexo'), 80);?>
+                                <?=form_combo('cmbSexo', @$sexo, @$pessoa->sexo, 200);?>
+				<?=new_line();?>
 
 				<?=form_label('lblDtCadastro', lang('pessoaDtCadastro'), 80);?>
 				<?=form_dateField('dtCadastro', @$pessoa->dt_cadastro, array('disabled'=>'true'));?>
 				<?=new_line();?>
+		<?=end_Tab();?>
+                <?=begin_Tab(lang('pessoaMais'));?>
 
-				<?=form_label('lblTituloGrupo', lang('pessoaGrupo'), 80, array('style' => 'font-weight: bold;',));?>
+                                <?=form_label('lblEmail', lang('usuarioEmail'), 80);?>
+				<?=form_textField('txtEmail', @$pessoa->email, 300, '');?>
 				<?=new_line();?>
 
-			<?=end_form();?>
-		<?=end_Tab();?>
+                                <?=form_label('lblAte',lang('pessoaDtNacimento'), 80);?>
+                                <?=form_dateField('txtDtNascimento', '');?>
+                                <?=new_line();?>
+
+                                <?=form_label('lblFone', lang('pessoaTelefone'), 80);?>
+				<?=form_textField('txtTelefone', @$pessoa->telefone, 300, 'telefone');?>
+				<?=new_line();?>
+                <?=end_Tab();?>
+                    			<?=end_form();?>
 	<?=end_TabPanel()?>
 
 <script type="text/javascript">
-
-    function gridGrupos_init(){
-        $j.post("<?= base_url(); ?>gerenciador/pessoa/listaGruposPessoa", {pessoaId: <?= @$pessoa->id; ?>},
-        function(data){
-            var gruposPessoa = new Array();
-            for (var i = 0 ; i < data.pessoaGrupos.length ; i++) {
-                gruposPessoa[i] = dsgridGrupos.getById(data.pessoaGrupos[i].grupo_id);
-            }
-            gridGrupos.getSelectionModel().selectRecords(gruposPessoa);
-        });
+    function ajuda(){
+    	window.open ('<?=WIKI;?>Pessoas');
     }
-
-
+    
     function novo(){
         location.href = '<?= base_url() . "gerenciador/pessoa/novo" ?>';
     }
 
     function salvar(){
-        var gruposUsuario = '';
-        var gruposUsuarioGrid = gridGrupos.getSelectionModel().getSelections();
-        for (var i = 0; i < gruposUsuarioGrid.length; i++) {
-            if (gruposUsuario == '') {
-                gruposUsuario = gruposUsuarioGrid[i].id;
-            } else {
-                gruposUsuario += ',' + gruposUsuarioGrid[i].id;
-            }
-        }
-        document.getElementById('txtGrupos').value = gruposUsuario;
-        formDefault_submit();
+        formPessoas_submit();
     }
 
-    function formDefault_callback(data){
-        if(data.error != undefined){
-            messageBox(data.error.message,293,90, data.error.field);
-        } else {
-            if (data.sucess != undefined) {
-                document.getElementById("txtCodigo").value = data.pessoa.id;
-                document.getElementById("dtCadastro").value = data.pessoa.dt_cadastro;
-                messageBox(data.sucess.message,280,90, atualizaFiltro);
-            }
+    function formPessoas_callback(data){
+         if(data.error != undefined){
+            messageErrorBox(data.error.message, data.error.field);
+        } else if(data.success != undefined) {
+            messageBox(data.success.message, 'txtCodigo');
         }
+    }
+    
+    function listaPessoas(){
+        location.href = '<?= base_url() . "gerenciador/pessoa/" ?>';
     }
 
     function excluir(){
-        if (document.getElementById("txtCodigo").value == "") {
-            messageBox("<?= lang('nenhumRegistroSelecionado') ?>", 250, 80);
-        } else {
-            messageConfirm("<?= lang('excluirRegistro') ?>", 370, 80, excluirPessoa);
-        }
+		if($('#txtCodigo').val() == ''){
+			messageErrorBox("<?=lang('nenhumRegistroSelecionado')?>");
+		}else{
+			messageConfirm('<?=lang('excluirRegistros')?>', excluirPessoa);
+		}
     }
 
     function excluirPessoa(confirmaExclusao){
-        if (confirmaExclusao) {
-            $j.post("<?= base_url(); ?>gerenciador/pessoa/excluir", {id: document.getElementById("txtCodigo").value}, atualizaFiltro);
-            messageBox("<?= lang('registroExcluido') ?>", 250, 80, novo);
-        }
-    }
-
-    function atualizaFiltro(){
-        parent.pesquisar();
+            if(confirmaExclusao){
+                    $.post(BASE_URL+'gerenciador/pessoa/excluir/', {id: $('#txtCodigo').val()}, 
+                            function(data){
+                                    if(data.success)
+                                            messageBox("<?=lang('registroExcluido')?>", listaPessoas);
+                                    else
+                                            messageErrorBox("<?=lang('registroNaoExcluido')?>");
+                            });
+            }
     }
 </script>
 

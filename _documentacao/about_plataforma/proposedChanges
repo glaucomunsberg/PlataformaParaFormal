@@ -1,0 +1,16 @@
+Veja abaixo que que é proposto para as futuras versões do sistema
+
+Versão 0.4.5
+    todas as grids usaram like em vez de where
+    Grupos de Atividade contaram com o cadastro dos membros da equipe que participou
+
+Versão 0.4.6-9
+    Gerenciador de Fotos Proposto pela jQuery
+    Maps com múltiplos LatLng
+
+Versão 0.5
+    Plataforma estável para o cadastro, edição e exclusão
+    Criação da primeira página de acesso ao público
+
+Versão 1.0
+    Totalmente estável para acesso do público

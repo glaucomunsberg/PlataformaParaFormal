@@ -7,12 +7,18 @@ class PessoaModel extends Model {
         if ($retErro) {
             return false;
         }
-
-        $dados = array('nome' => $pessoa['txtNome'],
-            'cpf' => $pessoa['txtCpf'],
-            'senha' => $pessoa['txtSenha'],
-            'dt_cadastro' => "now()");
-        $this->db->insert('pessoas', $dados);
+ 
+        $this->db->set('nome', $pessoa['txtNome']);
+        $this->db->set('pessoa_tipo_id', $pessoa['cmbPessoaTipo']);
+        $this->db->set('sexo', $pessoa['cmbSexo']);
+        $this->db->set('dt_nascimento', ($colaborador['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
+        if($pessoa['txtTelefone'] != '')
+            $this->db->set('telefone', $pessoa['txtTelefone']);
+        logVar($pessoa['txtEmail']);
+        $this->db->set('email', $pessoa['txtEmail']);
+        $this->db->set('dt_cadastro', 'NOW()', false);
+        $this->db->insert('pessoas');
+        
         $this->ajax->addAjaxData('pessoa', $this->getPessoa($this->db->insert_id()));
         return true;
     }
@@ -24,23 +30,18 @@ class PessoaModel extends Model {
         }
 
         $this->db->trans_start();
+        
+        $this->db->set('nome', $pessoa['txtNome']);
+        $this->db->set('pessoa_tipo_id', $pessoa['cmbPessoaTipo']);
+        $this->db->set('sexo', $pessoa['cmbSexo']);
+        $this->db->set('dt_nascimento', ($pessoa['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
+        if($pessoa['txtTelefone'] != '')
+            $this->db->set('telefone', $pessoa['txtTelefone']);
+        $this->db->set('email', $pessoa['txtEmail']);
 
-        $gruposUsuario = explode(",", $pessoa['txtGrupos']);
-
-        $dados = array('nome' => $pessoa['txtNome'],
-            'dt_cadastro' => "now()");
         $this->db->where('id', $pessoa['txtCodigo']);
         $this->db->update('pessoas', $dados);
         $this->ajax->addAjaxData('pessoa', $this->getPessoa($pessoa['txtCodigo']));
-
-        $this->db->where('pessoa_id', $pessoa['txtCodigo']);
-        $this->db->delete('pessoas_grupos');
-
-        for ($i = 0; $i < count($gruposUsuario); $i++) {
-            $dados = array('pessoa_id' => $pessoa['txtCodigo'],
-                'grupo_id' => $gruposUsuario[$i]);
-            $this->db->insert('pessoas_grupos', $dados);
-        }
 
         $this->db->trans_complete();
 
@@ -57,19 +58,16 @@ class PessoaModel extends Model {
         $this->db->delete('pessoas');
     }
 
-    function getPessoas($nomePessoa = '', $cpf = '', $start, $limit) {
-        $this->db->select('count(*) as quant');
-        $this->db->like('nome', $nomePessoa);
-        $this->db->like('cpf', $cpf);
-        $total = $this->db->get('pessoas')->row();
-        $dados['total'] = $total->quant;
-
-        $this->db->select('id, nome as nome, cpf, dt_cadastro', false);
-        $this->db->like('nome', $nomePessoa);
-        $this->db->like('cpf', $cpf);
-        $this->db->orderby('nome', 'asc');
-        $dados['results'] = $this->db->get('pessoas', $limit, $start)->result();
-        return $dados;
+    function getPessoas($parametros) {
+        $this->db->select('p.id, p.nome, pt.tipo, p.dt_cadastro, p.sexo',false);
+        $this->db->from('public.pessoas as p');
+        $this->db->join('public.pessoas_tipos as pt','p.pessoa_tipo_id = pt.id', 'left');
+        if(@$parametros['txtNome'] != '')
+              $this->db->like('upper(p.nome)', strtoupper(@$parametros['txtNome']));
+        if(@$parametros['cmbComboTipoPessoa'] != '')
+              $this->db->where('pt.id', @$parametros['cmbComboTipoPessoa']);
+        $this->db->where('p.pessoa_tipo_id is not null');
+        $this->db->sendToGrid();
     }
 
     function getPessoasCombo() {
@@ -79,9 +77,8 @@ class PessoaModel extends Model {
     }
 
     function getPessoa($id) {
-        $this->db->select('id, nome, sexo, dt_cadastro, dt_nascimento, email, rg, cpf', false);
+        $this->db->select('id, nome, sexo, dt_cadastro, dt_nascimento, email, telefone, pessoa_tipo_id', false);
         $this->db->where('id', $id);
-        logVar('aaaaaa');
         return $this->db->get('pessoas')->row();
     }
 
@@ -103,6 +100,9 @@ class PessoaModel extends Model {
     function validaPessoa($data) {
         $this->validate->setData($data);
         $this->validate->validateField('txtNome', array('required'), lang('pessoaNomeRequerido'));
+        $this->validate->validateField('cmbPessoaTipo', array('required'), lang('pessoaTipoRequerido'));
+        $this->validate->validateField('cmbSexo', array('required'), lang('pessoaSexoRequerido'));
+        $this->validate->validateField('txtEmail', array('required'), lang('pessoaEmailRequerido'));
         return $this->validate->existsErrors();
     }
 

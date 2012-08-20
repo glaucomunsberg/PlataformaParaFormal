@@ -69,5 +69,20 @@
                     );
                     $this->ajax->returnAjax();
                 }
+                
+                public function loadAbaGeral($projetoId = NULL) {
+                    $this->load->model('programasModel');
+
+                    $data = array();
+                    if (!empty($projetoId)) {
+                        $data['projeto'] = $this->projetoModel->getProjetoDadosGerais($projetoId);
+                    }
+                    $data['programas'] = $this->programasModel->getAllProgramas(FALSE);
+                    $data['areas_ufpel'] = $this->areaUfpelModel->getAreaUfpelCombo();
+                    $data['areas_cnpq'] = $this->areaCnpqModel->getAreaCnpqCombo();
+                    $data['areas_tematicas'] = $this->areaTematicaModel->getAreaTematicaCombo();
+
+                    $this->load->view('coordenacao/projetoAbas/projetoGeralView', $data);
+                }
 		
 	}	

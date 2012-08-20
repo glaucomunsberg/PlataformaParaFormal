@@ -145,3 +145,10 @@ Versão 0.4.3
         Correções
             System - Footer agora conta com links para a wikiParaformal
             System - Novo logo do sistema
+
+Versão 0.4.4
+        Implementação
+            Pessoas         - Agora faz cadastro de pessoas com proposito geral de cadastrar na plataforma
+        Correção
+            Colaboradores   - Correção no nome da grid e na filtragem
+            

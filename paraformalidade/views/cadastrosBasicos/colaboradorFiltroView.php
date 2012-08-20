@@ -24,7 +24,7 @@
                 <?=end_Tab();?>
 	<?=end_TabPanel();?>
 
-	<?=begin_JqGridPanel('gridColaboradores', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/colaborador/listaColaboradores', array('sortname'=> 'nome', 'autowidth'=> true, 'pager'=> false, 'caption'=>lang('colaboradorCidadeGrid')));?>
+	<?=begin_JqGridPanel('gridColaboradores', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/colaborador/listaColaboradores', array('sortname'=> 'nome', 'autowidth'=> true, 'pager'=> false, 'caption'=>lang('colaboradorPessoaGrid')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                 <?=addJqGridColumn('nome', lang('colaboradorNome'), 60, 'left', array('sortable'=>true));?>
                 <?=addJqGridColumn('email', lang('colaboradorEmail'), 40, 'left', array('sortable'=>true));?>

@@ -51,8 +51,8 @@ class PessoaTipoModel extends Model {
     function getPessoasTipos($parametros) {
         $this->db->select('id, tipo, to_char(dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
         $this->db->from('pessoas_tipos');
-        if(@$parametros['txtPessoaTipo'] != null )
-            $this->db->where('tipo', @$parametros['txtPessoaTipo']);
+        if(@$parametros['tipo'] != '' )
+            $this->db->like('upper(tipo)', strtoupper(@$parametros['tipo']));
         $this->db->sendToGrid();
     }
 

@@ -11,7 +11,7 @@ $lang['colaboradorSexoMasculino'] = 'Masculino';
 $lang['colaboradorSexoFeminino'] = 'Feminino';
 $lang['colaboradorGrid'] = 'Lista de Colaboradores';
 $lang['colaboradorCidade'] = 'Cidade';
-$lang['colaboradorCidadeGrid'] = 'Lista de Colaboradores';
+$lang['colaboradorPessoaGrid'] = 'Lista de Pessoas';
 
 //--------- Condições Ambientais -----------
 $lang['condicoesAmbientaisFiltro'] = 'Filtro';
@@ -67,7 +67,8 @@ $lang['ponteDtCadastro'] = 'Dt. Cadastro';
 $lang['ponte'] = '';
 
 //--------- Grupos Atividades -----------
-$lang['grupoAtividadeFiltro'] = 'Filtro';
+$lang['grupoAtividadeFiltroLocal'] = 'Local';
+$lang['grupoAtividadeFiltroEquipe'] = 'Equipe';
 $lang['grupoAtividadeCidade'] = 'Cidade';
 $lang['grupoAtividadeDescricao'] = 'Descrição';
 $lang['grupoAtividadeData'] = 'Data';
