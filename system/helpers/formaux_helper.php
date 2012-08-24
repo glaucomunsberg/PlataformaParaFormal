@@ -1111,4 +1111,190 @@ function form_MapWithRoute($mapNome = 'MapaWithRoute', $PosicaoALatitude = -31.7
     
     return $script1;
 }
+
+/**
+ * Gerador de galeria de imagens com jQuery Ui
+ * 
+ * @param string $nome - nome da galeria
+ * @param type $options - Cmb{ array{ nome=>'nome gerado', titulo => 'nome original da imagem'
+ * 
+ * @return string 
+ */
+function form_gallery($nome ='nome',$options = array()){
+    $retorno = '<style>
+	#gallery { float: left; width: 65%; min-height: 12em; } * html #gallery { height: 12em; } /* IE6 */
+	.gallery.custom-state-active { background: #eee; }
+	.gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+	.gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+	.gallery li a { float: right; }
+	.gallery li a.ui-icon-zoomin { float: left; }
+	.gallery li img { width: 100%; cursor: move; }
+
+	#trash { float: right; width: 32%; min-height: 18em; padding: 1%;} * html #trash { height: 18em; } /* IE6 */
+	#trash h4 { line-height: 16px; margin: 0 0 0.4em; }
+	#trash h4 .ui-icon { float: left; }
+	#trash .gallery h5 { display: none; }
+	</style>
+	<script>
+	$(function() {
+		// theres the gallery and the trash
+		var $gallery = $( "#gallery" ),
+			$trash = $( "#trash" );
+
+		// let the gallery items be draggable
+		$( "li", $gallery ).draggable({
+			cancel: "a.ui-icon", // clicking an icon won\'t initiate dragging
+			revert: "invalid", // when not dropped, the item will revert back to its initial position
+			containment: $( "#demo-frame" ).length ? "#demo-frame" : "document", // stick to demo-frame if present
+			helper: "clone",
+			cursor: "move"
+		});
+
+		// let the trash be droppable, accepting the gallery items
+		$trash.droppable({
+			accept: "#gallery > li",
+			activeClass: "ui-state-highlight",
+			drop: function( event, ui ) {
+				deleteImage( ui.draggable );
+			}
+		});
+
+		// let the gallery be droppable as well, accepting items from the trash
+		$gallery.droppable({
+			accept: "#trash li",
+			activeClass: "custom-state-active",
+			drop: function( event, ui ) {
+				recycleImage( ui.draggable );
+			}
+		});
+
+		// image deletion function
+		var recycle_icon = "<a href=\'link/to/recycle/script/when/we/have/js/off\' title=\'Recycle this image\' class=\'ui-icon ui-icon-refresh\'>Recycle image</a>";
+		function deleteImage( $item ) {
+			$item.fadeOut(function() {
+				var $list = $( "ul", $trash ).length ?
+					$( "ul", $trash ) :
+					$( "<ul class=\'gallery ui-helper-reset\'/>" ).appendTo( $trash );
+
+				$item.find( "a.ui-icon-circle-check" ).remove();
+				$item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
+					$item
+						.animate({ width: "48px" })
+						.find( "img" )
+							.animate({ height: "36px" });
+				});
+			});
+		}
+
+		// image recycle function
+		var trash_icon = "<a href=\'link/to/trash/script/when/we/have/js/off\' title=\'Delete this image\' class=\'ui-icon ui-icon-circle-check\'>Delete image</a>";
+		function recycleImage( $item ) {
+			$item.fadeOut(function() {
+				$item
+					.find( "a.ui-icon-refresh" )
+						.remove()
+					.end()
+					.css( "width", "96px")
+					.append( trash_icon )
+					.find( "img" )
+						.css( "height", "72px" )
+					.end()
+					.appendTo( $gallery )
+					.fadeIn();
+			});
+		}
+
+		// image preview function, demonstrating the ui.dialog used as a modal window
+		function viewLargerImage( $link ) {
+			var src = $link.attr( "href" ),
+				title = $link.siblings( "img" ).attr( "alt" ),
+				$modal = $( "img[src$=\'" + src + "\']" );
+
+			if ( $modal.length ) {
+				$modal.dialog( "open" );
+			} else {
+				var img = $( "<img alt=\'" + title + "\' width=\'640\' height=\'480\' style=\'display: none; padding: 8px;\' />" )
+					.attr( "src", src ).appendTo( "body" );
+				setTimeout(function() {
+					img.dialog({
+						title: title,
+						width: 640,
+						modal: true
+					});
+				}, 1 );
+			}
+		}
+
+		// resolve the icons behavior with event delegation
+		$( "ul.gallery > li" ).click(function( event ) {
+			var $item = $( this ),
+				$target = $( event.target );
+
+			if ( $target.is( "a.ui-icon-circle-check" ) ) {
+				deleteImage( $item );
+			} else if ( $target.is( "a.ui-icon-zoomin" ) ) {
+				viewLargerImage( $target );
+			} else if ( $target.is( "a.ui-icon-refresh" ) ) {
+				recycleImage( $item );
+			}
+
+			return false;
+		});
+	});
+	</script>
+
+
+
+<div class="demo ui-widget ui-helper-clearfix">
+
+<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+	';
+         
+        
+        if (count($options) > 0 && !empty($options)){
+            $imagem = lang('imagem');
+            $excluir = lang('toolbar_excluir');
+            $excluirEstaImagem = lang('deletarEssaImagem');
+            logVar($options);
+            foreach ($options as $arrayObject) {
+             $retorno = $retorno.'<li class="ui-widget-content ui-corner-tr">
+                                    <h5 class="ui-widget-header">'.$imagem.'</h5>';
+             $i = 0;
+             $nome ='';
+                     $endereco='';
+             foreach($arrayObject as $theObject =>$value){
+                     
+                     
+                     if($theObject === 'nome'){
+                         $endereco = $value;
+                     }
+                     if($theObject === 'titulo'){
+                        $nome = $value;
+                     }
+                     logVar($theObject);
+                }
+                //logVar($endereco);
+                //logVar($nome);
+                $retorno = $retorno.'<img src="'.BASE_URL.'archives/thumbs_80x80/'.$endereco  .'"  alt="'. $nome .'" width="80" height="80" //>';
+                $retorno = $retorno.'<a href="'.BASE_URL.'archives/resized_640x480/'. $endereco .'" title="'. $nome .'" class="ui-icon ui-icon-zoomin">View larger</a>';
+                $retorno = $retorno.'<a href="link/to/trash/script/when/we/have/js/off" title="'.$excluirEstaImagem.'" class="ui-icon ui-icon-circle-check">'.$excluir.'</a>';
+                $retorno = $retorno.'</li>';
+            }
+            
+            
+        }
+       
+        
+    
+        $retorno = $retorno.'
+</ul>
+
+<div id="trash" class="ui-widget-content ui-state-default">
+	<h4 class="ui-widget-header"><span class="ui-icon ui-icon-circle-check">'.lang('uploadTitulo').'</span>'.lang('uploadTitulo').'</h4>
+</div>
+
+</div>';
+        return $retorno;
+
+}
 ?>

@@ -21,6 +21,8 @@ $lang['uploadEnviar'] = 'enviar';
 $lang['arquivo_enviado'] = 'Arquivo enviado com sucesso.';
 $lang['codigo'] = 'Código';
 $lang['as'] = 'às';
+$lang['imagem'] = 'Imagem';
+$lang['deletarEssaImagem'] = 'Deletar essa imagem';
 
 //-------- Login --------
 $lang['acessoSistema'] = 'Acesso ao sistema';

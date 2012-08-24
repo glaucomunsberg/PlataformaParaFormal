@@ -151,4 +151,8 @@ Versão 0.4.4
             Pessoas         - Agora faz cadastro de pessoas com proposito geral de cadastrar na plataforma
         Correção
             Colaboradores   - Correção no nome da grid e na filtragem
-            
+
+Versão 0.4.5
+        Implementação
+            System                      - form_gallery gera uma galeria de imagens para serem manipuladas
+            Galeria de Paraformalidades - Cria uma galeria de imagem com base no que há de imagens no sistema

@@ -67,6 +67,7 @@ $lang['ponteDtCadastro'] = 'Dt. Cadastro';
 $lang['ponte'] = '';
 
 //--------- Grupos Atividades -----------
+$lang['grupoAtividadeFiltro'] = 'Filtro';
 $lang['grupoAtividadeFiltroLocal'] = 'Local';
 $lang['grupoAtividadeFiltroEquipe'] = 'Equipe';
 $lang['grupoAtividadeCidade'] = 'Cidade';
@@ -103,3 +104,6 @@ $lang['paraformalidadeDevidoProblema'] = 'Atenção! <b>\'Editar\'</b> informaç
 $lang['paraformalidadesVerImagem'] = 'Ver Imagem';
 $lang['paraformalidadesImagem'] = 'Imagem';
 $lang['paraformalidadeVisibilidadeGrid'] = 'Visibilidade';
+
+
+$lang['galeriaDoParaformalSee'] = 'Todas as imagens';

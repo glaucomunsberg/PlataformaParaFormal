@@ -14,6 +14,16 @@
 			$this->db->orderby('id', 'asc');
 			return $this->db->get('paraformalidades')->result_array();
 		}
+                
+                
+                function getImageCombo($grupoAtividade){
+                    $this->db->select('u.nome_gerado as nome, u.nome_original as titulo',false);
+                    $this->db->from('public.paraformalidades as p');
+                    $this->db->join('public.uploads as u',' u.id = p.imagem_id');
+                    $this->db->where('p.grupo_atividade_id',$grupoAtividade);
+                    $this->db->orderby('u.id','asc');
+                    return $this->db->get()->result_array();
+                }
 
 		function inserir($paraformalidade){
 			$this->db->trans_start();

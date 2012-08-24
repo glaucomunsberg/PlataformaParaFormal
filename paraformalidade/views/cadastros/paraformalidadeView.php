@@ -74,7 +74,7 @@
                                 <div style="float: left;">
                                         <?=form_label('lblColorador', lang('paraformalidadesImagem'), 80);?>
 					<img id="imagem_visualizacao_640x480" src="<?=IMG;?>/default_avatar.jpg" style="display: block; float: left; margin-right: 5px; width: 100px;" class="ui-widget ui-state-default ui-corner-tl ui-corner-bl ui-button-icon-only"/>
-                                </div>
+                                </div>                           
                 <?=end_Tab();?>
 	<?=end_TabPanel();?>
                                <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'nome,esta_ativo', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
