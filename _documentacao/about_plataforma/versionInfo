@@ -156,3 +156,7 @@ Versão 0.4.5
         Implementação
             System                      - form_gallery gera uma galeria de imagens para serem manipuladas
             Galeria de Paraformalidades - Cria uma galeria de imagem com base no que há de imagens no sistema
+
+Versão 0.4.6
+        Correção
+            System  - form_gallery passou pro inúmeras modificações para suportar outros tipos de arquivos

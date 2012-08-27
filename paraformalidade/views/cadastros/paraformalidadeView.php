@@ -28,7 +28,7 @@
                                     <?=new_line();?>
                                     
                                     <?=form_label('lblEnviarArquivo', lang('paraformalidadesEnviarImagem'), 110);?>
-                                    <?=form_file('arquivoImportacao', '', '', 'jpg');?>
+                                    <?=form_file('arquivoImportacao', '', '', 'doc');?>
                                     <?=new_line();?>
 
                                     <?=form_label('lblColorador', lang('paraformalidadesColaborador'), 110);?>

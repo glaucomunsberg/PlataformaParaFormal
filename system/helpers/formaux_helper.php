@@ -1120,14 +1120,34 @@ function form_MapWithRoute($mapNome = 'MapaWithRoute', $PosicaoALatitude = -31.7
  * 
  * @return string 
  */
-function form_gallery($nome ='nome',$options = array()){
+function form_gallery($nome ='nome' ,$options = array(), $dowload=true){
+    $imagem = lang('galleryImagem');
+    $selecionar = lang('gallerySelecionar');
+    $selecionarEste = lang('gallerySelecionarEste');
+    $deselecionar = lang('galleryRemoverSelecao');
+    $selecionados = lang('gallerySelecionados');
+    $imagemVer = lang('galleryImagemVer');
+    $documentoVer = lang('galleryDocumentoVer');
+    $pdfVer = lang('galleryPdfVer');
+    $arquivoVer = lang('galleryArquivo');
+    $musicaVer= lang('galleryMusica');
+    $compactadoVer = lang('galleryCompactado');
+    $dataCadastro = lang('galleryDtCadastro');
+    $tamanhoDo = lang('galleryTamanho');
+    $nomeDo = lang('galleryNome');
     $retorno = '<style>
 	#gallery { float: left; width: 65%; min-height: 12em; } * html #gallery { height: 12em; } /* IE6 */
 	.gallery.custom-state-active { background: #eee; }
 	.gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
 	.gallery li h5 { margin: 0 0 0.4em; cursor: move; }
 	.gallery li a { float: right; }
-	.gallery li a.ui-icon-zoomin { float: left; }
+
+	.gallery li a.ui-icon-image { float: left; }
+        .gallery li a.ui-icon-document { float: left; }
+        .gallery li a.ui-icon-video { float: left; }
+        .gallery li a.ui-icon-disk { float: left; }
+        .gallery li a.ui-icon-circle-arrow-s { float: left; }
+        .gallery li a.ui-icon-play { float: left; }
 	.gallery li img { width: 100%; cursor: move; }
 
 	#trash { float: right; width: 32%; min-height: 18em; padding: 1%;} * html #trash { height: 18em; } /* IE6 */
@@ -1137,10 +1157,9 @@ function form_gallery($nome ='nome',$options = array()){
 	</style>
 	<script>
 	$(function() {
-		// theres the gallery and the trash
+		// Aqui está a galeria e o selecionador (trash)
 		var $gallery = $( "#gallery" ),
-			$trash = $( "#trash" );
-
+                    $trash = $( "#trash" );
 		// let the gallery items be draggable
 		$( "li", $gallery ).draggable({
 			cancel: "a.ui-icon", // clicking an icon won\'t initiate dragging
@@ -1166,10 +1185,10 @@ function form_gallery($nome ='nome',$options = array()){
 			drop: function( event, ui ) {
 				recycleImage( ui.draggable );
 			}
+                
 		});
-
 		// image deletion function
-		var recycle_icon = "<a href=\'link/to/recycle/script/when/we/have/js/off\' title=\'Recycle this image\' class=\'ui-icon ui-icon-refresh\'>Recycle image</a>";
+		var recycle_icon = "<a href=\'link/to/recycle/script/when/we/have/js/off\' title=\''.$deselecionar.'\' class=\'ui-icon ui-icon-refresh\'>Recycle image</a>";
 		function deleteImage( $item ) {
 			$item.fadeOut(function() {
 				var $list = $( "ul", $trash ).length ?
@@ -1197,7 +1216,7 @@ function form_gallery($nome ='nome',$options = array()){
 					.css( "width", "96px")
 					.append( trash_icon )
 					.find( "img" )
-						.css( "height", "72px" )
+						.css( "height", "80px" )
 					.end()
 					.appendTo( $gallery )
 					.fadeIn();
@@ -1225,6 +1244,11 @@ function form_gallery($nome ='nome',$options = array()){
 			}
 		}
 
+                function viewDocument( $link){
+                        var dialogo = "#dialog";
+                        dialogo += $link.attr( "id" );
+                        $( dialogo ).dialog( "open" );
+                }
 		// resolve the icons behavior with event delegation
 		$( "ul.gallery > li" ).click(function( event ) {
 			var $item = $( this ),
@@ -1232,12 +1256,13 @@ function form_gallery($nome ='nome',$options = array()){
 
 			if ( $target.is( "a.ui-icon-circle-check" ) ) {
 				deleteImage( $item );
-			} else if ( $target.is( "a.ui-icon-zoomin" ) ) {
+			} else if ( $target.is( "a.ui-icon-image" ) ) {
 				viewLargerImage( $target );
 			} else if ( $target.is( "a.ui-icon-refresh" ) ) {
 				recycleImage( $item );
-			}
-
+			} else {
+                            viewDocument( $item );
+                        }
 			return false;
 		});
 	});
@@ -1252,33 +1277,175 @@ function form_gallery($nome ='nome',$options = array()){
          
         
         if (count($options) > 0 && !empty($options)){
-            $imagem = lang('imagem');
-            $excluir = lang('toolbar_excluir');
-            $excluirEstaImagem = lang('deletarEssaImagem');
+
             logVar($options);
             foreach ($options as $arrayObject) {
-             $retorno = $retorno.'<li class="ui-widget-content ui-corner-tr">
-                                    <h5 class="ui-widget-header">'.$imagem.'</h5>';
              $i = 0;
              $nome ='';
-                     $endereco='';
+             $endereco='';
+             $id = '';
+             $dt_cadastro='';
+             $tamanho = '';
+             $rest = '';
              foreach($arrayObject as $theObject =>$value){
                      
                      
-                     if($theObject === 'nome'){
+                     if($theObject == 'nome_gerado'){
                          $endereco = $value;
-                     }
-                     if($theObject === 'titulo'){
+                     }else if($theObject == 'nome_original'){
                         $nome = $value;
-                     }
+                     }else if($theObject == 'id'){
+                         $id = $value;
+                     }else if($theObject == 'dt_cadastro'){
+                         $dt_cadastro = $value;
+                     }else if($theObject == 'tamanho')
+                         $tamanho = $value;
                      logVar($theObject);
                 }
-                //logVar($endereco);
-                //logVar($nome);
-                $retorno = $retorno.'<img src="'.BASE_URL.'archives/thumbs_80x80/'.$endereco  .'"  alt="'. $nome .'" width="80" height="80" //>';
-                $retorno = $retorno.'<a href="'.BASE_URL.'archives/resized_640x480/'. $endereco .'" title="'. $nome .'" class="ui-icon ui-icon-zoomin">View larger</a>';
-                $retorno = $retorno.'<a href="link/to/trash/script/when/we/have/js/off" title="'.$excluirEstaImagem.'" class="ui-icon ui-icon-circle-check">'.$excluir.'</a>';
+                $retorno = $retorno.'<li id="'.$id.'" tamanho="'.$tamanho.'" dt_cadastro="'.$dt_cadastro.'" class="ui-widget-content ui-corner-tr">
+                                    <h5 class="ui-widget-header">'.$nome.'</h5>';
+                
+                
+                //Segundo cada tipo de arquivo então gerará um tipo visualização
+                $rest = substr($nome, -3);
+                $rest = strtolower($rest);
+                switch($rest){
+                    case 'png':
+                    case 'jpg':
+                    case 'gif':
+                    case 'peg':
+                        $retorno = $retorno.'<img src="'.BASE_URL.'archives/thumbs_80x80/'.$endereco  .'"  alt="'. $nome .'" width="80" height="80" //>';
+                        $retorno = $retorno.'<a href="'.BASE_URL.'archives/resized_640x480/'. $endereco .'" title="'. $imagemVer .'" class="ui-icon ui-icon-image">View larger</a>';
+                        break;
+                    case 'doc':
+                    case 'ocx':
+                    case 'ppt':
+                    case 'ptx':
+                    case 'lsx':
+                    case 'xls':
+                    case 'odt':
+                        $retorno = $retorno.'<img  src="'.BASE_URL.'static/_img/gallery/80x80_document.png"  alt="'. $nome .'" width="80" height="80" //>';
+                        $retorno = $retorno.'<a href="'.BASE_URL.'archives/'. $endereco .'" title="'. $documentoVer .'" class="ui-icon ui-icon-document">View larger</a>';
+                        $retorno = $retorno.'<div id="dialog'.$id.'" title="'. $nome .'">
+                                <p>
+                                    ';
+                        if($dowload){
+                            $retorno = $retorno.'
+                                    <a href="'.BASE_URL.'archives/'. $endereco .'" alt="download" target="_blank">
+                                    <img  src="'.BASE_URL.'static/_img/gallery/80x80_document.png" width="80" height="80" //>
+                                    </a>';
+                        }else{
+                            $retorno = $retorno.'
+                                    <img  src="'.BASE_URL.'static/_img/gallery/80x80_document.png" width="80" height="80" //>';
+                        }
+
+                        $retorno = $retorno.'
+                                    <div>'.$nomeDo.':&nbsp;'.$nome.'
+                                    </div>
+                                    <div>'.$tamanhoDo.': '.$tamanho.'&nbsp;Kb
+                                    </div>
+                                    <div>'.$dataCadastro.':&nbsp;'.$dt_cadastro.'
+                                    </div>
+                                </p>
+                                </div>
+                                <script>  $(function() {
+                                $( "#dialog'.$id.'" ).dialog({ autoOpen: false, resizable: "false" });
+                                }); </script>';   
+                        break;
+                    case 'mp3':
+                        $retorno = $retorno.'<img src="'.BASE_URL.'static/_img/gallery/80x80_mp3.png"  alt="'. $nome .'" width="80" height="80" //>';
+                        $retorno = $retorno.'<a href="'.BASE_URL.'archives/'. $endereco .'" title="'. $musicaVer .'" class="ui-icon ui-icon-play">View larger</a>';
+                        break;
+                    case 'zip':
+                    case 'rar':
+                        $retorno = $retorno.'<img src="'.BASE_URL.'static/_img/gallery/80x80_zip.png"  alt="'. $nome .'" width="80" height="80" //>';
+                        $retorno = $retorno.'<a href="'.BASE_URL.'archives/'. $endereco .'" title="'. $compactadoVer .'" class="ui-icon ui-icon-disk">View larger</a>';
+                        $retorno = $retorno.'<div id="dialog'.$id.'" title="'. $nome .'">
+                            <p>';
+                                    if($dowload){
+                                        $retorno = $retorno.'
+                                                <a href="'.BASE_URL.'archives/'. $endereco .'" alt="download" target="_blank">
+                                                <img  src="'.BASE_URL.'static/_img/gallery/80x80_zip.png" width="80" height="80" //>
+                                                </a>';
+                                    }else{
+                                        $retorno = $retorno.'
+                                                <img  src="'.BASE_URL.'static/_img/gallery/80x80_zip.png" width="80" height="80" //>';
+                                    }
+
+                        $retorno = $retorno.'
+                                    <div>'.$nomeDo.':&nbsp;'.$nome.'
+                                    </div>
+                                    <div>'.$tamanhoDo.': '.$tamanho.'&nbsp;Kb
+                                    </div>
+                                    <div>'.$dataCadastro.':&nbsp;'.$dt_cadastro.'
+                                    </div>
+                                </p>
+                                </div>
+                                <script>  $(function() {
+                                $( "#dialog'.$id.'" ).dialog({ autoOpen: false, resizable: "false" });
+                                }); </script>';  
+                        break;
+                        
+                        break;
+                    case 'pdf':
+                        $retorno = $retorno.'<img src="'.BASE_URL.'static/_img/gallery/80x80_pdf.png"  alt="'. $nome .'" width="80" height="80" //>';
+                        $retorno = $retorno.'<a href="'.BASE_URL.'archives/'. $endereco .'" title="'. $pdfVer .'" class="ui-icon ui-icon-document">View larger</a>';
+                        $retorno = $retorno.'<div id="dialog'.$id.'" title="'. $nome .'">
+                                <p>';
+                                    if($dowload){
+                                        $retorno = $retorno.'
+                                                <a href="'.BASE_URL.'archives/'. $endereco .'" alt="download" target="_blank">
+                                                <img  src="'.BASE_URL.'static/_img/gallery/80x80_pdf.png" width="80" height="80" //>
+                                                </a>';
+                                    }else{
+                                        $retorno = $retorno.'
+                                                <img  src="'.BASE_URL.'static/_img/gallery/80x80_pdf.png" width="80" height="80" //>';
+                                    }
+
+                        $retorno = $retorno.'
+                                    <div>'.$nomeDo.':&nbsp;'.$nome.'
+                                    </div>
+                                    <div>'.$tamanhoDo.': '.$tamanho.'&nbsp;Kb
+                                    </div>
+                                    <div>'.$dataCadastro.':&nbsp;'.$dt_cadastro.'
+                                    </div>
+                                </p>
+                                </div>
+                                <script>  $(function() {
+                                $( "#dialog'.$id.'" ).dialog({ autoOpen: false, resizable: "false" });
+                                }); </script>';  
+                        break;
+                    default:
+                        $retorno = $retorno.'<img src="'.BASE_URL.'static/_img/gallery/80x80_outros.png"  alt="'. $nome .'" width="80" height="80" //>';
+                        $retorno = $retorno.'<a href="'.BASE_URL.'archives/'. $endereco .'" title="'. $arquivoVer .'" class="ui-icon ui-icon-circle-arrow-s">View larger</a>';
+                        $retorno = $retorno.'<div id="dialog'.$id.'" title="'. $nome .'">
+                                <p>';
+                                    if($dowload){
+                                        $retorno = $retorno.'
+                                                <a href="'.BASE_URL.'archives/'. $endereco .'" alt="download" target="_blank">
+                                                <img  src="'.BASE_URL.'static/_img/gallery/80x80_outros.png" width="80" height="80" //>
+                                                </a>';
+                                    }else{
+                                        $retorno = $retorno.'
+                                                <img  src="'.BASE_URL.'static/_img/gallery/80x80_outros.png" width="80" height="80" //>';
+                                    }
+                        $retorno = $retorno.'
+                                    <div>'.$nomeDo.':&nbsp;'.$nome.'
+                                    </div>
+                                    <div>'.$tamanhoDo.': '.$tamanho.'&nbsp;Kb
+                                    </div>
+                                    <div>'.$dataCadastro.':&nbsp;'.$dt_cadastro.'
+                                    </div>
+                                </p>
+                                </div>
+                                <script>  $(function() {
+                                $( "#dialog'.$id.'" ).dialog({ autoOpen: false, resizable: "false" });
+                                }); </script>'; 
+                }
+                
+                $retorno = $retorno.'<a href="'.BASE_URL.'archives/resized_640x480/'. $endereco .'" title="'.$selecionarEste.'" class="ui-icon ui-icon-circle-check">'.$selecionar.'</a>';
                 $retorno = $retorno.'</li>';
+
             }
             
             
@@ -1290,7 +1457,7 @@ function form_gallery($nome ='nome',$options = array()){
 </ul>
 
 <div id="trash" class="ui-widget-content ui-state-default">
-	<h4 class="ui-widget-header"><span class="ui-icon ui-icon-circle-check">'.lang('uploadTitulo').'</span>'.lang('uploadTitulo').'</h4>
+	<h4 class="ui-widget-header"><span class="ui-icon ui-icon-circle-check">'.$selecionados.'</span>'.$selecionados.'</h4>
 </div>
 
 </div>';

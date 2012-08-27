@@ -21,8 +21,7 @@ $lang['uploadEnviar'] = 'enviar';
 $lang['arquivo_enviado'] = 'Arquivo enviado com sucesso.';
 $lang['codigo'] = 'Código';
 $lang['as'] = 'às';
-$lang['imagem'] = 'Imagem';
-$lang['deletarEssaImagem'] = 'Deletar essa imagem';
+
 
 //-------- Login --------
 $lang['acessoSistema'] = 'Acesso ao sistema';
@@ -170,4 +169,23 @@ $lang['perfilSubPrograma'] = 'Sub Programa';
 $lang['perfilNomeRequerido'] = 'Nome deve ser informado';
 $lang['perfilProgramaRequerido'] = 'Programa deve ser informado';
 
+//----------Gallary------------------------
+$lang['galleryImagem'] = 'Imagem';
+$lang['gallerySelecionar'] = 'Selecionar';
+$lang['gallerySelecionarEste'] = 'Selecionar este';
+$lang['galleryRemoverSelecao'] = 'Remover da Seleção';
+$lang['gallerySelecionados'] = 'Selecionados';
+$lang['galleryImagemVer'] = 'Ampliar Imagem';
+$lang['galleryDocumentoVer'] = 'Ver documento';
+$lang['galleryMusicaVer'] = 'Ver música';
+$lang['galleryVideoVer'] = 'Ver Vídeo';
+$lang['galleryZipVer'] = 'Ver arquivo Zip';
+$lang['galleryOutros'] = 'Ver arquivo';
+$lang['galleryPdfVer'] = 'Ver PDF';
+$lang['galleryArquivo'] = 'Ver arquivo';
+$lang['galleryCompactado'] = 'Ver arquivo Compactado';
+$lang['deletarEssaImagem'] = 'Deletar essa imagem';
+$lang['galleryTamanho'] = 'Tamanho';
+$lang['galleryNome'] = 'Nome';
+$lang['galleryDtCadastro'] = 'Cadastro';
 ?>

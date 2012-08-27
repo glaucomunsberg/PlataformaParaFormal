@@ -17,7 +17,7 @@
                 
                 
                 function getImageCombo($grupoAtividade){
-                    $this->db->select('u.nome_gerado as nome, u.nome_original as titulo',false);
+                    $this->db->select('u.id, u.nome_gerado, u.nome_original, u.tamanho, to_char(u.dt_cadastro, \'dd/mm/yyyy\') as dt_cadastro',false);
                     $this->db->from('public.paraformalidades as p');
                     $this->db->join('public.uploads as u',' u.id = p.imagem_id');
                     $this->db->where('p.grupo_atividade_id',$grupoAtividade);
