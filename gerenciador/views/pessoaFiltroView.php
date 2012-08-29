@@ -2,7 +2,7 @@
 
 	<?=path_bread($path_bread);?>
 
-	<?=begin_ToolBar(array('salvar', 'abrir', 'imprimir', 'ajuda', 'excluir'));?>
+	<?=begin_ToolBar(array('salvar', 'abrir', 'imprimir', 'excluir'));?>
 	<?=end_ToolBar();?>
 
 	<?=begin_TabPanel(45);?>

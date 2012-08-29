@@ -40,9 +40,6 @@
 			<?=end_form();?>
 		<?=end_Tab();?>
 
-                <?= begin_Tab(lang('grupoAtividadeFiltroEquipe'), base_url() . 'paraformalidade/cadastros/grupoAtividade/loadAbaEquipe/' . @$grupo_atividade->id, TRUE, "Equipe") ?>
-                <?= end_Tab() ?>
-
 	<?=end_TabPanel();?>
 
 <?=$this->load->view("../../static/_views/footerGlobalView");?>

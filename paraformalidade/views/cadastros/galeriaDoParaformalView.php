@@ -7,7 +7,7 @@
 
 	<?=begin_TabPanel('tabPontes');?>
 		<?=begin_Tab(lang('galeriaDoParaformalSee'));?>
-			<?=form_gallery('nome',@$cmbImagens);?>
+			<?=form_gallery('nome',@$cmbImagens, true, true,'Área de Seleção');?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
 	

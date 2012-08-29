@@ -160,3 +160,12 @@ Versão 0.4.5
 Versão 0.4.6
         Correção
             System  - form_gallery passou pro inúmeras modificações para suportar outros tipos de arquivos
+
+Versão 0.4.7
+        Implementação
+            Equipe Grupo Atividade  - contaram com o cadastro dos membros da equipe que participou
+        Correção
+            System                  - Usuário agora troca a própria senha
+            System                  - form_gallery aprimorada
+        Wikiparaformal
+            Criação do helper para o Eq. Grup. Ativ. e ajustes nos helpers da wiki

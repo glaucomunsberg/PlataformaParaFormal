@@ -70,19 +70,17 @@
                     $this->ajax->returnAjax();
                 }
                 
-                public function loadAbaGeral($projetoId = NULL) {
+                public function loadAbaGeral($grupoAtividadeID = NULL) {
                     $this->load->model('programasModel');
 
                     $data = array();
-                    if (!empty($projetoId)) {
+                    if (!empty($grupoAtividadeID)) {
                         $data['projeto'] = $this->projetoModel->getProjetoDadosGerais($projetoId);
                     }
-                    $data['programas'] = $this->programasModel->getAllProgramas(FALSE);
-                    $data['areas_ufpel'] = $this->areaUfpelModel->getAreaUfpelCombo();
-                    $data['areas_cnpq'] = $this->areaCnpqModel->getAreaCnpqCombo();
-                    $data['areas_tematicas'] = $this->areaTematicaModel->getAreaTematicaCombo();
-
-                    $this->load->view('coordenacao/projetoAbas/projetoGeralView', $data);
+                    $data['cmbResponsavel'] = array (array ("S", lang('equipeGrupoAtividadeSim')), array ("N", lang('equipeGrupoAtividadeNao')));
+                    $data['grupo_atividade'] = $this->grupoAtividadeModel->getGrupoAtividade($grupoAtividadeID);
+                    $data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['grupo_atividade']->descricao;
+                    $this->load->view('cadastros/equipeGrupoAtividadeView', $data);
                 }
 		
 	}	

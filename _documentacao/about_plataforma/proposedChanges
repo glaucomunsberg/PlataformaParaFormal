@@ -1,11 +1,10 @@
 Veja abaixo que que é proposto para as futuras versões do sistema
 
-Versão 0.4.7
-    Grupos de Atividade contaram com o cadastro dos membros da equipe que participou
-
 Versão 0.4.8-9
     Gerenciador de Fotos Proposto pela jQuery melhorado
+    Documentacao doprograma pessoas e pessoas tipos
     Maps com múltiplos LatLng
+    Cidades podem ser cadastras e adicionada a sua geolocalização
 
 Versão 0.5
     Plataforma estável para o cadastro, edição e exclusão

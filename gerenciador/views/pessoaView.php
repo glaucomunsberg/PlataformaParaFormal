@@ -1,6 +1,6 @@
 <?=$this->load->view("../../static/_views/headerGlobalView");?>
 
-	<?=begin_ToolBar(array('imprimir', 'abrir', 'ajuda', 'pesquisar'));?>
+	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
 	<?=end_ToolBar();?>
 
 	<?=begin_TabPanel(217);?>

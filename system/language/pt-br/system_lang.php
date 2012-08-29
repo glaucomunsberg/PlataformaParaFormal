@@ -174,7 +174,6 @@ $lang['galleryImagem'] = 'Imagem';
 $lang['gallerySelecionar'] = 'Selecionar';
 $lang['gallerySelecionarEste'] = 'Selecionar este';
 $lang['galleryRemoverSelecao'] = 'Remover da Seleção';
-$lang['gallerySelecionados'] = 'Selecionados';
 $lang['galleryImagemVer'] = 'Ampliar Imagem';
 $lang['galleryDocumentoVer'] = 'Ver documento';
 $lang['galleryMusicaVer'] = 'Ver música';
@@ -188,4 +187,5 @@ $lang['deletarEssaImagem'] = 'Deletar essa imagem';
 $lang['galleryTamanho'] = 'Tamanho';
 $lang['galleryNome'] = 'Nome';
 $lang['galleryDtCadastro'] = 'Cadastro';
+$lang['gallaryNaoSuportaFormato'] = 'Seu navegador não suporta esse formato'
 ?>

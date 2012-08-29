@@ -104,6 +104,14 @@ $lang['paraformalidadeDevidoProblema'] = 'Atenção! <b>\'Editar\'</b> informaç
 $lang['paraformalidadesVerImagem'] = 'Ver Imagem';
 $lang['paraformalidadesImagem'] = 'Imagem';
 $lang['paraformalidadeVisibilidadeGrid'] = 'Visibilidade';
+$lang['galeriaDoParaformalSee'] = 'Arquivos';
 
-
-$lang['galeriaDoParaformalSee'] = 'Todas as imagens';
+//--------- Grupos Atividades Equipe -----------
+$lang['equipeGrupoAtividadeFiltro'] = 'Filtro';
+$lang['equipeGrupoAtividadeParticipante'] = 'Participante';
+$lang['equipeGrupoAtividadeNome'] = 'Nome';
+$lang['equipeGrupoAtividadeResponsavel'] = 'Responsável';
+$lang['equipeGrupoAtividadeEquipe'] = 'Equipe';
+$lang['equipeGrupoAtividadeResponsavelGeral'] = 'Responsável geral';
+$lang['equipeGrupoAtividadeSim'] = 'Sim';
+$lang['equipeGrupoAtividadeNao'] = 'Não';

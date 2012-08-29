@@ -49,7 +49,7 @@
 <script type="text/javascript">
 
     function init(){
-        $("#tab").tabs({disabled: [1]});
+        //$("#tab").tabs({disabled: [1]});
     }
 
     function salvar(){
