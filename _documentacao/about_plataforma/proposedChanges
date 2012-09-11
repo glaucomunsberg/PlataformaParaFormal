@@ -1,14 +1,12 @@
-Veja abaixo que que é proposto para as futuras versões do sistema
+Veja abaixo o que é proposto para as futuras versões do sistema
 
-Versão 0.4.8-9
-    Gerenciador de Fotos Proposto pela jQuery melhorado
-    Documentacao doprograma pessoas e pessoas tipos
-    Maps com múltiplos LatLng
-    Cidades podem ser cadastras e adicionada a sua geolocalização
+Versão 0.4.9
+    Criação da primeira página de acesso ao público
+    Plataforma confirmada estável para o cadastro, edição e exclusão
 
 Versão 0.5
-    Plataforma estável para o cadastro, edição e exclusão
-    Criação da primeira página de acesso ao público
+    Maps com múltiplos LatLng
+    Liberação da primeira página ao público
 
 Versão 1.0
-    Totalmente estável para acesso do público
+    Totalmente estável para disponibilização ao público

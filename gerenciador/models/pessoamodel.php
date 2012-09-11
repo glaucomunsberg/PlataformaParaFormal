@@ -7,20 +7,25 @@ class PessoaModel extends Model {
         if ($retErro) {
             return false;
         }
- 
+        $this->db->trans_start();
         $this->db->set('nome', $pessoa['txtNome']);
         $this->db->set('pessoa_tipo_id', $pessoa['cmbPessoaTipo']);
         $this->db->set('sexo', $pessoa['cmbSexo']);
-        $this->db->set('dt_nascimento', ($colaborador['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
+        $this->db->set('dt_nascimento', ($pessoa['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$pessoa['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
         if($pessoa['txtTelefone'] != '')
             $this->db->set('telefone', $pessoa['txtTelefone']);
-        logVar($pessoa['txtEmail']);
         $this->db->set('email', $pessoa['txtEmail']);
         $this->db->set('dt_cadastro', 'NOW()', false);
         $this->db->insert('pessoas');
+	$this->db->trans_complete();
         
-        $this->ajax->addAjaxData('pessoa', $this->getPessoa($this->db->insert_id()));
-        return true;
+	if($this->db->trans_status() === FALSE){
+		$this->validate->addError('txtCodigo', lang('registroNaoGravado'));
+	return false;
+	}
+
+        $this->ajax->addAjaxData('pessoa', $this->getPessoa($this->db->insert_id('pessoas', 'id')));
+	return true;
     }
 
     function alterar($pessoa) {
@@ -34,28 +39,29 @@ class PessoaModel extends Model {
         $this->db->set('nome', $pessoa['txtNome']);
         $this->db->set('pessoa_tipo_id', $pessoa['cmbPessoaTipo']);
         $this->db->set('sexo', $pessoa['cmbSexo']);
-        $this->db->set('dt_nascimento', ($pessoa['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
+        $this->db->set('dt_nascimento', ($pessoa['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$pessoa['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
         if($pessoa['txtTelefone'] != '')
             $this->db->set('telefone', $pessoa['txtTelefone']);
         $this->db->set('email', $pessoa['txtEmail']);
 
         $this->db->where('id', $pessoa['txtCodigo']);
-        $this->db->update('pessoas', $dados);
+        $this->db->update('pessoas');
         $this->ajax->addAjaxData('pessoa', $this->getPessoa($pessoa['txtCodigo']));
 
-        $this->db->trans_complete();
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->validate->addError('tab', lang('registroNaoGravado'));
-            return FALSE;
-        }
-
-        return TRUE;
+	$this->db->trans_complete();
+        
+	if($this->db->trans_status() === FALSE){
+            $this->validate->addError('txtCodigo', lang('registroNaoGravado'));
+	return false;
+	}
+	$this->ajax->addAjaxData('pessoa', $this->getPessoa($pessoa['txtCodigo']));
+            return true;
     }
 
     function excluir($id) {
         $this->db->where('id', $id);
         $this->db->delete('pessoas');
+        return true;
     }
 
     function getPessoas($parametros) {

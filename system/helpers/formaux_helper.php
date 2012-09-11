@@ -899,7 +899,7 @@ function _style_height($height) {
  * @param Boolean|String $draggableMarker referente ao arraste do marcador. Padrão: false
  * @return Retorna o style, script e a div com id "map_canvas"
  */
-function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.771083, $longitude = -52.325821, $width = 250, $height = 250, $mapTipe= 'map', $draggableMap = true, $draggableMarker = false){
+function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -15.876809064146757, $longitude = -47.900390625, $width = 250, $height = 250, $mapTipe= 'map', $draggableMap = true, $draggableMarker = false, $zoom=15){
     $mapTipe = strtoupper($mapTipe);
     switch($mapTipe)
     {
@@ -910,6 +910,11 @@ function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.7710
             break;
         default: $mapTipe = 'ROADMAP';  
     }
+    
+    if($latitude == null)
+        $latitude =-15.876809064146757;
+    if($longitude == null)
+        $longitude =-47.900390625;
     
     if($draggableMap){
         $draggableMap = 'true';
@@ -952,7 +957,7 @@ function form_MapWithMarker($nameMarker = 'MarcadorNoMapa', $latitude = -31.7710
                     function init() {
                     var latlng = new google.maps.LatLng(". $latitude ."," .$longitude .");
                     var myOptions = {
-                    zoom: 15,
+                    zoom: ". $zoom .",
                     center: latlng,
                     draggable:". $draggableMap .",
                     zoomControl:true,

@@ -23,3 +23,15 @@ $lang['systemInfoDB'] = 'Configurações do Banco de Dados';
 $lang['systemInfoDBInformacao'] = 'Informações gerais';
 $lang['systemInfoDBHost'] = 'Host';
 $lang['systemInfoDBNome'] = 'Banco usado';
+
+
+//--------- Cidade -----------
+$lang['cidadeFiltro'] = 'Filtro';
+$lang['cidadeNome'] = 'Nome';
+$lang['cidadeEstado'] = 'Estado/País';
+$lang['cidadeDtCadastro'] = 'Dt. Cadastro';
+$lang['cidadeLista'] = 'Lista de Cidades';
+$lang['cidadeLocalizacao'] = 'Geo Localização';
+$lang['cidadeCidade'] = 'Cidade';
+$lang['cidade'] = '';
+$lang['cidade'] = '';

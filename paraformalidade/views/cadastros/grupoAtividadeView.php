@@ -4,7 +4,7 @@
 
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar', 'excluir'));?>
 	<?=end_ToolBar();?>
-        <?=warning('warning', lang('gruposDeAtividadesDevidoProblema'), false, true);?>
+        <?=warning('warning', lang('gruposDeAtividadesDevidoProblema'), true, true);?>
 	<?=begin_TabPanel('tabPonte');?>
 		<?=begin_Tab(lang('grupoAtividadeFiltroLocal'));?>
 			<?=begin_form('paraformalidade/cadastros/grupoAtividade/salvar', 'formGrupoAtividade');?>
@@ -45,8 +45,11 @@
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
 <script>
-	function ajuda(){
-    	window.open ('<?=WIKI;?>Grupos de Atividade');
+        //Como modificar o mapa
+        //map.setCenter(new google.maps.LatLng("-31.77100828977147","-52.32594865889552", true));
+        
+        function ajuda(){
+                window.open ('<?=WIKI;?>Grupos de Atividade');
         }
 
 	function novo(){
@@ -99,4 +102,11 @@
             $('#txtLngDestino').val(destino.lng());
             $('#txtRotaEmKm').val(total);
         }
+        
+        if( $('#txtLatOrigem').val() != '' ){
+            warning.showMessageWarning();
+        }else{
+            warning.hideMessageWarning();
+        }
+        
 </script>

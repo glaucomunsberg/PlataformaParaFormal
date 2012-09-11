@@ -169,3 +169,13 @@ Versão 0.4.7
             System                  - form_gallery aprimorada
         Wikiparaformal
             Criação do helper para o Eq. Grup. Ativ. e ajustes nos helpers da wiki
+
+Versão 0.4.8
+        Implementação
+            Cidades             - Criação do programa para cadastrar cidades e a geolocalização das cidades
+        Correções
+            System              - form_MapWithMarker agora pode ser setado o zoom
+            Grupos de Atividade - Mensagem agora carrega só pois
+            Pessoas             - Correção do salvar pessoa
+        Wikiparaformal
+            Criação dos helpers para Cidades, Pessoas e Galeria

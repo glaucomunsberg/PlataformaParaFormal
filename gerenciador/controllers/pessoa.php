@@ -21,17 +21,21 @@ class Pessoa extends Controller {
     }
 
     function salvar() {
-        if ($_POST['txtCodigo'] == '') {
-            $ret = $this->pessoaModel->inserir($_POST);
-        } else {
-            $ret = $this->pessoaModel->alterar($_POST);
-        }
-        if ($ret) {
-            $this->ajax->ajaxMessage('sucess', lang('registroGravado'));
-        } else {
-            $this->ajax->addAjaxData('error', $this->pessoaModel->validate->getError());
-        }
-        $this->ajax->returnAjax();
+        if (empty($_POST['txtCodigo'])) {
+                $ret = $this->pessoaModel->inserir($_POST);
+            } else {
+                $ret = $this->pessoaModel->alterar($_POST);
+            }
+            if ($ret !== FALSE) {
+                $this->ajax->addAjaxData('pessoa', $ret);
+                $this->ajax->ajaxMessage('success', lang('registroGravado'));
+            } else {
+                if (!$this->pessoaModel->validate->existsErrors()) {
+                    $this->pessoaModel->validate->addError("txtCodigo", lang('registroNaoGravado'));
+                }
+                $this->ajax->addAjaxData('error', $this->txtCodigo->validate->getError());
+            }
+            $this->ajax->returnAjax();
     }
 
     function novo() {
@@ -53,7 +57,12 @@ class Pessoa extends Controller {
     }
 
     function excluir() {
-        $this->pessoaModel->excluir($_POST['id']);
+        $isSUccess = $this->pessoaModel->excluir($_POST['id']);
+        if($isSUccess)
+		$this->ajax->addAjaxData('success', true);
+	else
+		$this->ajax->addAjaxData('success', false);
+	$this->ajax->returnAjax();
     }
 
     function listaGrupos() {
