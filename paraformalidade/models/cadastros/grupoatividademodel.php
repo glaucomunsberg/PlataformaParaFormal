@@ -10,9 +10,11 @@
 		}
 
 		function getGrupoAtividadeCombo() {
-			$this->db->select('id, descricao', false);
+			$this->db->select('ga.id, c.nome || \'-\' || uf.sigla as descricao', false);
+                        $this->db->join('cidades as c', 'ga.cidade_id = c.id');
+                        $this->db->join('unidades_federativas as uf', 'c.unidade_federativa_id = uf.id');
 			$this->db->orderby('id', 'asc');
-			return $this->db->get('grupos_atividades')->result_array();
+			return $this->db->get('grupos_atividades as ga')->result_array();
 		}
 
 		function inserir($grupoAtividade){
@@ -98,7 +100,6 @@
                                 $this->db->where('ga.cidade_id', @$parametros['txtGrupoAtividadeCidadeId']);
                         if (@$parametros['Dt_Ocorrencia'])
 				$this->db->where('date(ga.dt_ocorrencia) between to_date(\''. $parametros['Dt_Ocorrencia'] .'\', \'dd/mm/yyyy\') and to_date(\''.$parametros['Dt_Ocorrencia'].'\', \'dd/mm/yyyy\')');
-                        logSQL();
 			$this->db->sendToGrid();
 		}
 

@@ -105,6 +105,8 @@ $lang['paraformalidadesVerImagem'] = 'Ver Imagem';
 $lang['paraformalidadesImagem'] = 'Imagem';
 $lang['paraformalidadeVisibilidadeGrid'] = 'Visibilidade';
 $lang['galeriaDoParaformalSee'] = 'Arquivos';
+$lang['paraformalidadeParaformalidade'] = 'Paraformalidade';
+$lang['paraformalidadeDadosAuxiliares'] = 'Dados Auxiliares';
 
 //--------- Grupos Atividades Equipe -----------
 $lang['equipeGrupoAtividadeFiltro'] = 'Filtro';

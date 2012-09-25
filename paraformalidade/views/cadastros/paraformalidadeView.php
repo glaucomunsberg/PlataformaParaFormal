@@ -5,7 +5,7 @@
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar'));?>
 	<?=end_ToolBar();?>
 	<?=begin_TabPanel('tabParaformalidade');?>
-		<?=begin_Tab(lang('paraformalidadesFiltro'));?>
+		<?=begin_Tab(lang('paraformalidadeParaformalidade'));?>
 			<?=begin_form('paraformalidade/cadastros/paraformalidade/salvar', 'formParaformalidade');?>
                                 <input type="hidden" name="txtParaformalidadeId" id="txtParaformalidadeId" value="" />
                                 <input type="hidden" name="txtLatParaformalidade" id="txtLatParaformalidade" value="" />
@@ -42,34 +42,36 @@
                                     <?=form_label('lblTipoPonte', lang('paraformalidadesLocalizacao'), 110);?>
                                     <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_lat, @$grupo_atividade->geocode_origem_lng, '370', '250', 'map', true, true)?>
                                     <?=new_line();?>
-
-                                    <?=form_label('lblTipoRegistroAtividade', lang('paraformalidadesRegistroAtividade'), 110);?>
-                                    <?=form_combo('cmbTipoRegistroAtividade', @$tipo_registros_atividades, '', 150, '');?>
-                                    <?=new_line();?>
-                                    
-                                    <?=form_label('lblTipoLocal', lang('paraformalidadesLocal'), 110);?>
-                                    <?=form_combo('cmbTipoLocal', @$tipo_local, '', 150, '');?>
-                                    <?=new_line();?>
-                                    
-                                    <?=form_label('lblTipoCondicoesAmbientais', lang('paraformalidadesCondicaoAmbiental'), 110);?>
-                                    <?=form_combo('cmbTipoCondicaoAmbiental', @$tipo_condicoes_ambientais, '', 150, '');?>
-                                    <?=new_line();?>
-                                    
-                                    <?=form_label('lblTipoElementoSituacao', lang('paraformalidadesElementoSituacao'), 110);?>
-                                    <?=form_combo('cmbTipoElementoSituacao', @$tipo_elemento_situacao, '', 150, '');?>
-                                    <?=new_line();?>
- 
-                                    <?=form_label('lblTipoPonte', lang('paraformalidadesPonte'), 110);?>
-                                    <?=form_combo('cmbTipoPonte', @$tipo_ponte, '', 150, '');?>
-                                    <?=new_line();?>
-                                    
+       
                                     <?=form_label('lblColorador', lang('paraformalidadesVisibilidade'), 110);?>
                                     <?=form_checkbox('chkParaformalidadeAtivo', 'chkParaformalidadeAtivo', 'S', (@$grupo_atividade->esta_ativo == 'S' || @$grupo_atividade->esta_ativo == '' ? true : false));?>
                                     <?=new_line();?>
                                     
                                 </div>                                
-			<?=end_form();?>
+			
 		<?=end_Tab();?>
+                <?=begin_Tab(lang('paraformalidadeDadosAuxiliares'));?>
+                        <?=form_label('lblTipoRegistroAtividade', lang('paraformalidadesRegistroAtividade'), 110);?>
+                        <?=form_combo('cmbTipoRegistroAtividade', @$tipo_registros_atividades, '', 150, '');?>
+                        <?=new_line();?>
+
+                        <?=form_label('lblTipoLocal', lang('paraformalidadesLocal'), 110);?>
+                        <?=form_combo('cmbTipoLocal', @$tipo_local, '', 150, '');?>
+                        <?=new_line();?>
+
+                        <?=form_label('lblTipoCondicoesAmbientais', lang('paraformalidadesCondicaoAmbiental'), 110);?>
+                        <?=form_combo('cmbTipoCondicaoAmbiental', @$tipo_condicoes_ambientais, '', 150, '');?>
+                        <?=new_line();?>
+
+                        <?=form_label('lblTipoElementoSituacao', lang('paraformalidadesElementoSituacao'), 110);?>
+                        <?=form_combo('cmbTipoElementoSituacao', @$tipo_elemento_situacao, '', 150, '');?>
+                        <?=new_line();?>
+
+                        <?=form_label('lblTipoPonte', lang('paraformalidadesPonte'), 110);?>
+                        <?=form_combo('cmbTipoPonte', @$tipo_ponte, '', 150, '');?>
+                        <?=new_line();?>
+                   <?=end_form();?>
+                <?=end_Tab();?>   
                 <?=begin_Tab(lang('paraformalidadesVerImagem'));?>
                                 <div style="float: left;">
                                         <?=form_label('lblColorador', lang('paraformalidadesImagem'), 80);?>

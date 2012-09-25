@@ -1,0 +1,78 @@
+.escolhaMensagem { 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    margin-top: 100px;
+    margin-left: 20px;
+    width: 40%;
+}
+.escolhaCmb{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin-top: 200px;
+    margin-left: 45%;
+}
+.conteudo{
+    position: absolute;
+    z-index: 999;
+    width: 40%;
+    height: auto;
+    margin-right: 0px;
+    margin-top: 28px;
+    margin-left: 59%;
+    background-color:#FFF;
+}
+
+
+.conteudoParaformalidadeINFO{
+    background-color:#FFF;
+    z-index: 999;
+    padding-left: 20px;
+    padding-right: 2px;
+    padding-top: 40px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-family:'Open Sans', sans-serif;
+    font-size: 14px;
+    text-align: justify;
+    text-indent: 30px;
+    -moz-hyphens:auto;
+    -ms-hyphens:auto;
+    -webkit-hyphens:auto;
+    hyphens:auto;
+    word-wrap:break-word;
+
+}
+.compartilhar{
+    z-index: 999;
+    width: 100%;
+    height: auto;
+}
+.compartilharIconfacebook{
+    margin-left: 10px;
+    z-index: 999;
+    width: 26px;
+    height: 26px;
+    position:relative;
+    background: url("../_img/social-networks.jpg") -70px -75px no-repeat;
+    background-repeat: no-repeat; 
+}
+.compartilharIconTwitter{
+    margin-left: 10px;
+    z-index: 999;
+    width: 26px;
+    height: 26px;
+    position:relative;
+    background: url("../_img/social-networks.jpg") -295px -241px no-repeat no-repeat;
+    background-repeat: no-repeat; 
+}
+
+.compartilharIconEmail{
+    z-index: 999;
+    margin-left: 10px;
+    z-index: 999;
+    width: 26px;
+    height: 26px;
+    position:relative;
+    background: url("../_img/social-networks.jpg") -347px -17px no-repeat;
+    background-repeat: no-repeat; 
+}

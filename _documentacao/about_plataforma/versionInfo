@@ -180,3 +180,12 @@ Versão 0.4.8
         Wikiparaformal
             Criação dos helpers para Cidades, Pessoas e Galeria
             Upado o novo Aurora_wiki.sql
+
+Versão 0.4.9
+        Implementação
+            Public  - Módulo para o acesso público
+            System  - form_MapForParaformal criado para dar suporte a plataforma
+            System  - public.css especial para a área pública
+            System  - footerPublicView e headerPublicView para acesso públic diferenciado
+        Correções
+            Paraformalidade - correção na disposição da informação

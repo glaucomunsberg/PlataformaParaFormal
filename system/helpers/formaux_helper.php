@@ -1118,6 +1118,128 @@ function form_MapWithRoute($mapNome = 'MapaWithRoute', $PosicaoALatitude = -31.7
 }
 
 /**
+ * @ignore
+ * Retorna um map com um marcado de uma localização com coordenadas: Latitude e Longitude
+ *  Tanto mapa como marcador estão centralizados no espaço.
+ * Para retorno de lat e long
+ *  do marcador é necessário implementar a função
+ *      function form_MapWithMarker_position(lat,longi);
+ * Para mudar a posicação do marker
+ *       function form_MapWithMarker_setPosicao($latitude,$longitude) {
+ *          var latlng = new google.maps.LatLng($latitude, $longitude);
+ *          window.marker.setPosition(latlng);
+ *       } 
+ * 
+ * 
+ * @author Glauco Roberto Munsberg dos Santos
+ * 
+ * @param String $nameMarker Nome que o marcador receberá
+ * @param integer|String $latitude varia entre -90º e 90º 
+ * @param integer|String $longitude varia entre -180 e 180º
+ * @param String $mapTipe tipos de mapas suportados{HYBRID, ROADMAP, SATELLITE, TERRAIN}, default: ROADMAP
+ * @param Boolean|String $draggableMap referente ao arraste do map. Padrão: true
+ * @param Boolean|String $draggableMarker referente ao arraste do marcador. Padrão: false
+ * @return Retorna o style, script e a div com id "map_canvas"
+ */
+function form_MapForParaformal($nameMarker = 'MarcadorNoMapa',$latitude =-15.876809064146757,$longitude =-47.900390625,$positions = '', $mapTipe= 'map', $draggableMap = true, $draggableMarker = false, $zoom=15){
+    $mapTipe = strtoupper($mapTipe);
+    switch($mapTipe)
+    {
+        case 'HYBRID':
+        case 'ROADMAP':
+        case 'SATELLITE':
+        case 'TERRAIN':
+            break;
+        default: $mapTipe = 'ROADMAP';  
+    }
+    
+    if($latitude == null)
+        $latitude =-15.876809064146757;
+    if($longitude == null)
+        $longitude =-47.900390625;
+    
+    if($draggableMap){
+        $draggableMap = 'true';
+    }else{
+        $draggableMap = 'false';
+    }
+    
+    if($draggableMarker){
+        $draggableMarker = 'true';
+    }else{
+        $draggableMarker = 'false';
+    }
+    
+    
+    $script = '<script src="http://maps.google.com/maps/api/js?sensor=false" 
+                    type="text/javascript">
+               </script>
+               <div id="map" style="width: 100%; height: 600px;"></div>
+               
+                <script type="text/javascript">
+
+                    var locations = [';
+    
+    /*
+     * Certifica que os tipos são válido
+     */
+    if (count($positions) > 0 && !empty($positions)){
+            foreach ($positions as $arrayObject) {
+             $lat ='';
+             $lng='';
+             $id = '';
+             foreach($arrayObject as $theObject =>$value){
+
+                     if($theObject == 'geocode_lat'){
+                         $lat = $value;
+                     }else if($theObject == 'geocode_lng'){
+                        $lng = $value;
+                     }else if($theObject == 'id'){
+                         $id = $value;
+                     }
+                }
+                $script = $script. '[\''.$lat.'\',\''.$lng.'\',\''.$id.'\'],
+                    ';
+            }
+
+    }   
+              $script = $script. '];
+                ';  
+    $script = $script.'
+      var myOptions = {
+                zoom: '.$zoom.',
+                mapTypeId: google.maps.MapTypeId.'.$mapTipe.',
+                center: new google.maps.LatLng('.$latitude.','.$longitude.')
+        };  
+
+      var map = new google.maps.Map(document.getElementById(\'map\'), myOptions );
+    ';
+    
+    $script = $script.' var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, \'click\', (function(marker, i) {
+        return function() {
+          getIdFromMaps(locations[i][2]);
+        }
+      })(marker, i));
+    }
+  </script>';
+    return $script;
+}
+
+
+
+
+
+/**
  * Form_gallery retorna uma galeria de arquivos que foram selecionados
  *  Com isso pode-se obter a visualização dos arquivos, informações
  *  a respeito deles e fazer o download até.
@@ -1285,7 +1407,6 @@ function form_gallery($nomeLabel ='nome' , $options = array(), $dowload=true, $S
                          $dt_cadastro = $value;
                      }else if($theObject == 'tamanho')
                          $tamanho = $value;
-                     logVar($theObject);
                 }
                 $retorno = $retorno.'<li id="'.$id.'" tamanho="'.$tamanho.'" dt_cadastro="'.$dt_cadastro.'" class="ui-widget-content ui-corner-tr">
                                     <h5 class="ui-widget-header">'.$nome.'</h5>';

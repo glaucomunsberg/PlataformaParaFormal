@@ -112,8 +112,9 @@
 		}
                 
 		function getParaformalidadeWhitImage($paraformalidadeID){
-                        $this->db->select('p.id, pe.nome, u.nome_gerado, p.descricao, p.imagem_id, p.grupo_atividade_id, p.colaborador_pessoa_id as colaborador_id, p.tipo_registro_atividade_id, p.tipo_local_id, p.tipo_condicao_ambiental_id, p.tipo_elemento_situacao_id, p.tipo_ponte_id, p.esta_ativo, p.dt_cadastro, p.geocode_lat, p.geocode_lng',false);
+                        $this->db->select('p.id, pe.nome, u.nome_gerado, p.descricao, p.imagem_id, p.grupo_atividade_id, p.colaborador_pessoa_id as colaborador_id, p.tipo_registro_atividade_id, p.tipo_local_id, p.tipo_condicao_ambiental_id, p.tipo_elemento_situacao_id, p.tipo_ponte_id, p.esta_ativo, p.dt_cadastro, p.geocode_lat, p.geocode_lng, to_char(ga.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia',false);
                         $this->db->from('paraformalidades as p');
+                        $this->db->join('grupos_atividades as ga', 'p.grupo_atividade_id = ga.id');
                         $this->db->join('public.uploads as u','p.imagem_id = u.id');
                         $this->db->join('public.pessoas as pe','p.colaborador_pessoa_id = pe.id');
 			$this->db->where('p.id', $paraformalidadeID);
@@ -143,7 +144,13 @@
                             $this->db->where('ga.id',@$parametros['txtGrupoAtividadeId']);
                         $this->db->sendToGrid();
                 }
-
+                
+                function getParaformalidadeToMaps($grupoAtividadeID){
+                    $this->db->select('p.geocode_lat, p.geocode_lng, p.id', false);
+                    $this->db->where('p.grupo_atividade_id', $grupoAtividadeID);
+                    $this->db->where('p.esta_ativo', 'S');
+                    return $this->db->get('paraformalidades as p')->result_array();
+                }
 		function validaParaformalidade($local){
 			$this->validate->setData($local);			
 				
