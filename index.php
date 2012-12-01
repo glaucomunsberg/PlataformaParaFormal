@@ -40,7 +40,7 @@
 | NO TRAILING SLASH!
 |
 */
-	$application_folder = "autenticacao";
+	$application_folder = "public";
 
 /*
 |===============================================================

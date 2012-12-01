@@ -17,7 +17,7 @@
 		}
 		
 		function listaCondicoesAmbientais(){
-			$this->ajax->returnJqGrid($this->condicaoAmbientalModel->getCondicoesAmbientais($_GET));
+			$this->condicaoAmbientalModel->getCondicoesAmbientais($_GET);
 		}
 		
 		function novo(){

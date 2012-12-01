@@ -17,7 +17,7 @@
 		}
 		
 		function listaPontes(){
-			$this->ajax->returnJqGrid($this->ponteModel->getPontes($_GET));
+			$this->ponteModel->getPontes($_GET);
 		}
 		
 		function novo(){

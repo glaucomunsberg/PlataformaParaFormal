@@ -17,7 +17,7 @@
 		}
 		
 		function listaAtividadesRegistradas(){
-			$this->ajax->returnJqGrid($this->atividadeRegistradaModel->getAtividadesRegistradas($_GET));
+			$this->atividadeRegistradaModel->getAtividadesRegistradas($_GET);
 		}
 		
 		function novo(){

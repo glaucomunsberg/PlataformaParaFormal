@@ -11,13 +11,14 @@
 |	http://example.com/
 |
 */
+date_default_timezone_set('America/Sao_Paulo');
 $protocolo = "http".((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 
-$config['base_url']	= $protocolo.$server.'/PlataformaDoParaformal/';
+$config['base_url']	= $protocolo.$server.'/PlataformaParaFormal/';
 
 define('BASE_URL', $config['base_url']);
-define('PATH_COOKIE', '/PlataformaDoParaformal');
+define('PATH_COOKIE', '/PlataformaParaFormal');
 define('IMG', $config['base_url'].'static/_img');
 define('CSS', $config['base_url'].'static/_css');
 define('JS', $config['base_url'].'static/_js');

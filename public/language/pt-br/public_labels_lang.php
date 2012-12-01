@@ -4,7 +4,7 @@
  *  Programa escolha
  */
 
-$lang['escolhaMensagem'] ='O que é paraformalidade e seus objetivo.';
+$lang['escolhaMensagem'] ='Paraformalidade é toda atividdade (comerciais, culturais, moradia, etc.) encontradas no espaço público da cidade que não faz parte do seu  DESENHO URBANO (GEHL, 2010).';
 $lang['escolhaDescubra'] ='Descubra:';
 $lang[''] ='';
 $lang[''] ='';

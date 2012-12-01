@@ -200,19 +200,13 @@ class PerfilModel extends Model {
     }
 
     function getPerfilProgramas($parametros, $idProgramaPai) {
-        $paramsJqGrid = $this->ajax->setParametersJqGrid($parametros);
-
         $this->db->select('perfis_programas.id||\'chr\'||programas.id as id, nome_programa as nome', false);
         $this->db->from('perfis_programas');
         $this->db->join('programas', 'programas.id = perfis_programas.programa_id');
         $this->db->where('perfil_id', $parametros['idPerfil']);
-        $this->db->where('programa_pai', $idProgramaPai);
-        $this->db->orderby('ordem', 'asc');
-        $result = $this->db->get();
 
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $result->num_rows());
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+        $this->db->where('programa_pai', $idProgramaPai);
+        $this->db->sendToGrid();
     }
 
     function alterarProgramas($idPerfil, $idPai, $ids, $idsProgramas) {

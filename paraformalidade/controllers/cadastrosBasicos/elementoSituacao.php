@@ -17,7 +17,7 @@
 		}
 		
 		function listaElementosSituacoes(){
-			$this->ajax->returnJqGrid($this->elementoSituacaoModel->getElementosSituacoes($_GET));
+			$this->elementoSituacaoModel->getElementosSituacoes($_GET);
 		}
 		
 		function novo(){

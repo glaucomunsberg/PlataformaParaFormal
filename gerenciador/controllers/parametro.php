@@ -50,7 +50,7 @@ class Parametro extends Controller {
     }
 
     function listaParametros() {
-        $this->ajax->returnJqGrid($this->parametroModel->getParametros($_GET));
+        $this->parametroModel->getParametros($_GET);
     }
 
 }

@@ -183,9 +183,30 @@ Versão 0.4.8
 
 Versão 0.4.9
         Implementação
-            Public  - Módulo para o acesso público
-            System  - form_MapForParaformal criado para dar suporte a plataforma
-            System  - public.css especial para a área pública
-            System  - footerPublicView e headerPublicView para acesso públic diferenciado
+            Public          - Módulo para o acesso público
+            System          - form_MapForParaformal criado para dar suporte a plataforma
+            System          - public.css especial para a área pública
+            System          - footerPublicView e headerPublicView para acesso públic diferenciado
         Correções
             Paraformalidade - correção na disposição da informação
+
+Versão 0.5
+        Correções
+            System              - agora carrega área pública como padrão
+            System              - cabelhaço agora possúi nova imagem
+            login               - permite o usuário voltar a área pública
+            empresa             - correção da grid 
+            grupoAcesso         - correção da grid 
+            parametro           - correção da grid
+            perfil              - correção da grid
+            programa            - correção da grid 
+            usuario             - correção da grid 
+            paraformalidade     - correção da grid 
+            atividadeRegistrada - correção da grid 
+            condicaoAmbiental   - correção da grid
+            elementoSituacao    - correção da grid 
+            participacao        - correção da grid
+            ponte               - correção da grid 
+            paraformalidade     - correção na forma de salvar
+            
+            

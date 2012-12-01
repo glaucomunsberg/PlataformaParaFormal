@@ -73,19 +73,11 @@
 		}
 		
 		function getLocais($parametros){
-			$this->db->select('count(*) as quantidade');
-			$this->db->like('upper(descricao)', strtoupper(@$parametros['descricao']));
-			$total = $this->db->get('tipos_locais')->row();
-
-			$paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $total->quantidade);
-
 			$this->db->select('id, descricao, to_char(dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
-			$this->db->like('upper(descricao)', strtoupper(@$parametros['descricao']));
-			$this->db->order_by($paramsJqGrid->sortField, $paramsJqGrid->sortDirection);
-			$result = $this->db->get('tipos_locais', $paramsJqGrid->limit, $paramsJqGrid->start);
-
-			$paramsJqGrid->rows = $result->result();
-			return $paramsJqGrid;
+			$this->db->from('tipos_locais');
+                        if(@$parametros['descricao'] != '')
+                            $this->db->like('upper(descricao)', strtoupper(@$parametros['descricao']));
+                        $this->db->sendToGrid();
 		}
 
 		function validaLocal($local){

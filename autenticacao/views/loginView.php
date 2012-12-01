@@ -8,10 +8,10 @@
 			 		<ul style="padding-left: 0px;">
 			 			<li style="list-style-type: none;">						 		
 					 		<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">					 			
-					 			Seja bem-vindo ao portal de gerenciamento de paraformalidades, venha fazer parte você também do Paraformal
+					 			Seja bem-vindo ao portal de gerenciamento de paraformalidades, venha fazer parte você também do Paraformal.
 							</p>					 			
 							<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">
-								A Plataforma do Paraformal se destina cadastrar e gerenciar as paraformalidades registradas através de eventos com a comunidade. Possibilitando uma comunicação com o público e permitindo que uma equipe se integre com a comunidade 
+								A Plataforma do Paraformal se destina cadastrar e gerenciar as paraformalidades registradas através de eventos com a comunidade. Possibilitando uma comunicação com o público e permitindo que uma equipe se integre com a comunidade. 
 							</p>
 							<p style="margin: 5px; font-size: 14px; text-align: justify; text-indent: 20px;">
 								Deseja saber mais sobre o Portal?!
@@ -27,6 +27,15 @@
 					 	</li>						 	
 			 		</ul>				 		
 			 	</li>
+                                <li>
+			 	<h2>Experimente como funciona</h2>
+			 		<ul>
+					 	<li>
+					 		<p style="margin: 5px; font-size: 14px; text-align: justify"> Visite a área pública </p>
+                                                        <?=form_button('btnAcessar', lang('longinAjudar'), 'areaPublica()');?>
+					 	</li>
+			 		</ul>
+			 	</li>
 			 	<li>
 			 		<h2><?=lang("sigla")?></h2>
 			 		<ul>
@@ -39,7 +48,7 @@
 					 		<p style="margin: 5px; font-size: 14px; text-align: justify">O “para-formal” habita o “entre” a “formalidade” e a “informalidade” existente nos territórios da cidade. <a href="<?=WIKI;?>" target="_blank">Veja mais</a></p>
 					 	</li>
 			 		</ul>
-			 	</li>				 	
+			 	</li>	
 			 </ul>
 			<?=new_line();?>
 			<div style="height: 200px; float: left;"><!--class="description-cobalto" --></div>
@@ -98,6 +107,10 @@
     function ajudar(){
         $("#btnAjudar").blur();
         window.open ('<?=WIKI;?>');
+    }
+    function areaPublica(){
+        $("#btnAcessar").blur();
+        location.href = BASE_URL;
     }
 
     function formLogin_callback(data){

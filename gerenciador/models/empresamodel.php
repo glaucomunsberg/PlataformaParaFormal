@@ -84,16 +84,10 @@ class EmpresaModel extends Model {
     }
 
     function getEmpresas($parametros) {
-        $paramsJqGrid = $this->ajax->setParametersJqGrid($parametros);
-
         $this->db->select('id, nome, dt_cadastro', false);
         $this->db->like('upper(nome)', strtoupper(@$parametros['nomeEmpresa']));
-        $this->db->order_by($paramsJqGrid->sortField, $paramsJqGrid->sortDirection);
-        $result = $this->db->get('empresas');
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $result->num_rows());
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+        $this->db->from('empresas');
+        $this->db->sendToGrid();
     }
 
     function getEmpresa($id) {
@@ -118,11 +112,7 @@ class EmpresaModel extends Model {
         $this->db->from('empresas_perfis as e');
         $this->db->join('perfis as p', 'p.id = e.perfil_id');
         $this->db->where('e.empresa_id', $parametros['empresaId']);
-        $result = $this->db->get();
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $result->num_rows());
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+        $this->db->sendToGrid();
     }
 
     function validaEmpresa($data) {

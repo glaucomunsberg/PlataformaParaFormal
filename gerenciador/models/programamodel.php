@@ -78,31 +78,18 @@ class ProgramaModel extends Model {
     }
 
     function getProgramas($parametros) {
-        $this->db->select('count(*) as quantidade');
-        $this->db->like('upper(nome_programa)', strtoupper(@$parametros['nome']));
-        $total = $this->db->get('programas')->row();
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $total->quantidade);
-
         $this->db->select('id, nome_programa as nome, link, dt_cadastro', false);
-        $this->db->like('upper(nome_programa)', strtoupper(@$parametros['nome']));
-        $this->db->order_by($paramsJqGrid->sortField, $paramsJqGrid->sortDirection);
-        $result = $this->db->get('programas', $paramsJqGrid->limit, $paramsJqGrid->start);
-
-        $paramsJqGrid->rows = $result->result();
-        
-        return $paramsJqGrid;
+        if(@$parametros['nome'] != '')
+            $this->db->like('upper(nome_programa)', strtoupper(@$parametros['nome']));
+        $this->db->from('programas');
+        $this->db->sendToGrid();
     }
 
     function getParametrosProgramas($parametros) {
-        $paramsJqGrid = $this->ajax->setParametersJqGrid($parametros);
+        $this->db->select('*');
         $this->db->where('programa_id', $parametros['programaId']);
-        $this->db->order_by($paramsJqGrid->sortField, $paramsJqGrid->sortDirection);
-        $result = $this->db->get('programas_parametros');
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $result->num_rows());
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+        $this->db->from('programas_parametros');
+        $this->db->sendToGrid();
     }
 
     function getProgramasRelatorio() {

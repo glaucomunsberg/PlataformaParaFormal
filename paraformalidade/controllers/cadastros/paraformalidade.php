@@ -33,7 +33,7 @@ class Paraformalidade extends Controller {
             $ret = $this->paraformalidadeModel->alterar($_POST);
         }
         if ($ret !== FALSE) {
-            $this->ajax->addAjaxData('paraformalidade', $ret);
+            $this->ajax->addAjaxData('paraformalidade', $this->paraformalidadeModel->getParaformalidade($_POST['txtParaformalidadeId']));
             $this->ajax->ajaxMessage('success', lang('registroGravado'));
         } else {
             if (!$this->paraformalidadeModel->validate->existsErrors()) {

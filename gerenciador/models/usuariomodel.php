@@ -276,17 +276,12 @@ class UsuarioModel extends Model {
      * @param $usuarioId integer
      */
     function getEmpresasUsuario($parametros) {
-        $sql = 'select ue.usuario_id||\'chr\'||ue.empresa_id as id, e.nome, case when ue.empresa_boot = \'S\' then \'Sim\' else \'Não\' end as empresa_boot
-						from usuarios_empresas as ue
-						join empresas as e
-							on ue.empresa_id = e.id
- 					  where ue.usuario_id = ' . $parametros['usuarioId'] . '
-					  	order by e.nome asc';
-        $result = $this->db->query($sql);
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $result->num_rows());
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+       $this->db->select("select ue.usuario_id||\'chr\'||ue.empresa_id as id, e.nome, case when ue.empresa_boot = \'S\' then \'Sim\' else \'Não\' end as empresa_boot", false);
+       $this->db->from('usuarios_empresas as ue');
+       $this->db->join('empresas as e','ue.empresa_id = e.id');
+       if(@$parametros['usuarioId'] != '')
+           $this->db->where('ue.usuario_id',$parametros['usuarioId']);
+        $this->db->sendToGrid();
     }
 
     /**

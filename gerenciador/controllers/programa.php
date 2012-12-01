@@ -13,11 +13,11 @@ class Programa extends Controller {
     }
 
     function listaProgramas() {
-        $this->ajax->returnJqGrid($this->programaModel->getProgramas($_GET));
+        $this->programaModel->getProgramas($_GET);
     }
 
     function listaParametrosProgramas() {
-        $this->ajax->returnJqGrid($this->programaModel->getParametrosProgramas($_GET));
+        $this->programaModel->getParametrosProgramas($_GET);
     }
 
     function salvar() {

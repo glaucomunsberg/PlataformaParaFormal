@@ -14,7 +14,7 @@
 |
 */
  
-$filter['auth'] = array('exclude', array('/', 'autenticacao/login/*', '/controlreport/engine/*'));
+$filter['auth'] = array('exclude', array('/', 'autenticacao/login/*', '/controlreport/engine/*','escolha/*'));
 //$filter['perfmon'] = array('include', array('*'), array('warning_time' => 0.001));
 //$filter['test'] = array('include', array('*'), array());
 ?>

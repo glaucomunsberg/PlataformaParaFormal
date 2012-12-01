@@ -114,7 +114,7 @@ class Usuario extends Controller {
     }
 
     function listaEmpresas() {
-        $this->ajax->returnJqGrid($this->usuarioModel->getEmpresasUsuario($_GET));
+        $this->usuarioModel->getEmpresasUsuario($_GET);
     }
 
     function listaPerfisUsuario() {

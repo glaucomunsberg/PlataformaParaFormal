@@ -14,7 +14,7 @@ class Participacao extends Controller {
     }
 
     function listaParticipacoes(){
-            $this->ajax->returnJqGrid($this->participacaoModel->getParticipacoes($_GET));
+            $this->participacaoModel->getParticipacoes($_GET);
     }
 
     public function salvar() {

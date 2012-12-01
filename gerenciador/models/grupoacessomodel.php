@@ -53,15 +53,10 @@ class GrupoAcessoModel extends Model {
     }
 
     function getGruposAcessos($parametros, $pagination = true) {
-        $this->db->select('count(*) as total_grupos_acesso', false);
-        $this->db->like('upper(nome)', @$parametros['txtNome']);
-        $total = $this->db->get('grupos_acessos')->row();
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $total->total_grupos_acesso);
-
         $this->db->select('id, nome, dt_cadastro', false);
         $this->db->from('grupos_acessos');
-        $this->db->like('upper(nome)', @$parametros['txtNome']);
+        if(@$parametros['txtNome'] != '')
+            $this->db->like('upper(nome)', @$parametros['txtNome']);
         $this->db->sendToGrid();
     }
 
@@ -70,12 +65,7 @@ class GrupoAcessoModel extends Model {
         $this->db->from('grupos_acessos_empresas as gae');
         $this->db->join('empresas as e', 'gae.empresa_id = e.id');
         $this->db->where('gae.grupo_acesso_id', $parametros['grupo_acesso_id']);
-        $this->db->order_by('e.nome', 'asc');
-        $result = $this->db->get();
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $result->num_rows());
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+        $this->db->sendToGrid();
     }
 
     function salvarGrupoAcessoEmpresa($empresa) {

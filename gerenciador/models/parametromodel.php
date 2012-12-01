@@ -70,17 +70,9 @@ class ParametroModel extends Model {
     }
 
     function getParametros($parametros) {
-        $this->db->select('count(*) as quantidade');
-        $total = $this->db->get('parametros')->row();
-
-        $paramsJqGrid = $this->ajax->setStartLimitJqGrid($parametros, $total->quantidade);
-
         $this->db->select('id, nome, descricao, valor, dt_cadastro', false);
-        $this->db->orderby('nome', 'asc');
-        $result = $this->db->get('parametros', $paramsJqGrid->limit, $paramsJqGrid->start);
-
-        $paramsJqGrid->rows = $result->result();
-        return $paramsJqGrid;
+        $this->db->from('parametros');
+        $this->db->sendToGrid();
     }
 
     function validaParametro($parametro) {

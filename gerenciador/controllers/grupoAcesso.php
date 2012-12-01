@@ -48,7 +48,7 @@ class GrupoAcesso extends Controller {
     }
 
     function listaEmpresas() {
-        $this->ajax->returnJqGrid($this->grupoAcessoModel->getEmpresasGrupoAcesso($_GET));
+        $this->grupoAcessoModel->getEmpresasGrupoAcesso($_GET);
     }
 
     function salvarGrupoAcessoEmpresa() {

@@ -2,7 +2,7 @@
 		</div>		
 		<div style="clear: both; margin-top: 10px;"><!----></div>
 		<div id="footer" class="ui-state-highlight ui-widget">
-			<a style="float: left" href="#" OnClick="window.open('<?=BASE_URL;?>','_self');">Área Administrativa</a>  <a href="#" OnClick="window.open('<?=WIKI;?>Plataforma do Para-formal','_blank');">Plataforma do Paraformal</a> <a style="float: right; margin-right: 10px;" href="#" OnClick="window.open('<?=WIKI;?>','_blank');">WikiParaformal</a>
+			<a style="float: left" href="#" OnClick="window.open('<?=BASE_URL;?>autenticacao/login','_self');">Área Administrativa</a>  <a href="#" OnClick="window.open('<?=WIKI;?>Plataforma do Para-formal','_blank');">Plataforma do Paraformal</a> <a style="float: right; margin-right: 10px;" href="#" OnClick="window.open('<?=WIKI;?>','_blank');">WikiParaformal</a>
 		</div>
 		<div id="dialog-message-error" style="display:none;"><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 0;"></span><label></label></p></div>
 		<div id="dialog-message-info" style="display:none;"><p><span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0;"></span><label></label></p></div>

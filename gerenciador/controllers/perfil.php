@@ -138,11 +138,11 @@ class Perfil extends Controller {
     }
 
     function listaProgramasPai() {
-        $this->ajax->returnJqGrid($this->perfilModel->getPerfilProgramas($_GET, 0));
+        $this->perfilModel->getPerfilProgramas($_GET, 0);
     }
 
     function listaProgramas() {
-        $this->ajax->returnJqGrid($this->perfilModel->getPerfilProgramas($_GET, $_GET['programa_pai']));
+        $this->perfilModel->getPerfilProgramas($_GET, $_GET['programa_pai']);
     }
 
 }

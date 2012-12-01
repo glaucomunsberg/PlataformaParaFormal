@@ -7,11 +7,12 @@
 	<?=begin_TabPanel('tabParaformalidade');?>
 		<?=begin_Tab(lang('paraformalidadeParaformalidade'));?>
 			<?=begin_form('paraformalidade/cadastros/paraformalidade/salvar', 'formParaformalidade');?>
-                                <input type="hidden" name="txtParaformalidadeId" id="txtParaformalidadeId" value="" />
-                                <input type="hidden" name="txtLatParaformalidade" id="txtLatParaformalidade" value="" />
-                                <input type="hidden" name="txtLngParaformalidade" id="txtLngParaformalidade" value="" />
-                                <input type="hidden" name="enderecoBaseImagem" id="enderecoBaseImagem" value="<?=BASE_URL;?>" />
 
+                                <?=form_hidden('txtParaformalidadeId', ''); ?>
+                                <?=form_hidden('txtLatParaformalidade', ''); ?>
+                                <?=form_hidden('txtLngParaformalidade', ''); ?>
+                                <?=form_hidden('enderecoBaseImagem', BASE_URL) ?>
+                                
                                 <?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
                                 <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
                                 <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
@@ -158,7 +159,7 @@
 			messageErrorBox(data.error.message, data.error.field);
 		} else {
 			if(data.success != undefined) {
-				$('#txtGrupoAtividadeId').val(data.paraformalidade.id);
+				$('#txtGrupoAtividadeId').val(data.paraformalidade.grupo_atividade_id);
                         messageBox(data.success.message, novo());
 			}
 	    }
@@ -211,7 +212,7 @@
                 txtColaboradorId.val(data.paraformalidade.colaborador_id);
                 searchtxtColaboradorId.val(paraformal.nome);
                 $('#chkParaformalidadeAtivo').attr('checked', (data.paraformalidade.esta_ativo == 'S' ? true : false));
-                carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'/archives/resized_640x480/'+paraformal.nome_gerado);
+                carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'archives/resized_640x480/'+paraformal.nome_gerado);
                 form_MapWithMarker_setPosicao($('#txtLatParaformalidade').val(),$('#txtLngParaformalidade').val());
             });
             

@@ -15,7 +15,7 @@ class Empresa extends Controller {
     }
 
     function listaEmpresas() {
-        $this->ajax->returnJqGrid($this->empresaModel->getEmpresas($_GET));
+        $this->empresaModel->getEmpresas($_GET);
     }
 
     function salvar() {
@@ -60,7 +60,7 @@ class Empresa extends Controller {
     }
 
     function listaPerfisEmpresaGrid() {
-        $this->ajax->returnJqGrid($this->empresaModel->getPerfisEmpresaGrid($_GET));
+        $this->empresaModel->getPerfisEmpresaGrid($_GET);
     }
 
 }
