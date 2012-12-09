@@ -48,7 +48,6 @@ function begin_Tab($titulo, $url = '', $navigable = FALSE, $hash = FALSE) {
         $url = "#$hash";
     }
     if ($navigable) {
-        //
         $url .= "\" onclick=\"if(! $(this).parent().hasClass('ui-state-disabled') ){ location.hash='$hash'; }";
     }
     $tab = "<div id=\"$hash\" class=\"ui-widget $tabName $tabName-$id $hash\">";

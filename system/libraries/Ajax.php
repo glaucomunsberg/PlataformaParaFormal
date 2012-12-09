@@ -124,6 +124,7 @@ class Ajax {
      * @return jqGridData Parâmetros da grid, com as informações de paginação, conforme os dados recebidos
      */
     public function setStartLimitJqGrid($parametersJqGrid, $count, $noPagination = false) {
+    	$this->_parametersJqGrid = new stdClass();
         $page = $parametersJqGrid['page'];
         if ($noPagination)
             $parametersJqGrid['rows'] = $count;
@@ -171,6 +172,7 @@ class Ajax {
      * @return jqGridData Parâmetros de configuração para a grid
      */
     function setParametersJqGrid($parametersJqGrid) {
+    	$this->_parametersJqGrid = new stdClass();
         $this->_parametersJqGrid->page = $parametersJqGrid['page'];
         $this->_parametersJqGrid->sortField = $parametersJqGrid['sidx'];
         $this->_parametersJqGrid->sortDirection = $parametersJqGrid['sord'];

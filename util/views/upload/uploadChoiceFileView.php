@@ -1,13 +1,13 @@
 <?=begin_TabPanel('tabUpload');?>
 	<?=begin_Tab(lang('uploadTab1'));?>
 		<?=begin_form('util/upload/enviarArquivo', 'formUploadFile', array('enctype' => 'multipart/form-data',));?>
-			<?=form_hidden('paramUploadAllowedTypes', $allowed_types);?>
+			<?=form_hidden('paramUploadAllowedTypes', @$allowed_types);?>
 			<input type="hidden" name="APC_UPLOAD_PROGRESS" id="progress_key" value="<?php echo uniqid();?>"/>
 			<input type="file" name="userfile" id="userfile" size="32" style="display: block; float: left; margin-bottom: 5px; margin-right: 5px;"/>
 		<?=end_form();?>
 		<?=new_line();?>		
-		<?=form_hidden('paramUploadId', $objectId);?>
-		<?=form_hidden('paramUploadName', $objectName);?>
+		<?=form_hidden('paramUploadId', @$objectId);?>
+		<?=form_hidden('paramUploadName', @$objectName);?>
 		<div id="progressbar" style="display: none; margin-bottom: 5px; margin-right: 5px; width: 480px; float: left;"></div>
 		<?=form_label('lblProgressText', '0 %', 40, array('style' => 'display: none;'));?>
 	<?=end_Tab();?>

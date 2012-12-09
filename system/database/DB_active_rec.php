@@ -1823,11 +1823,18 @@ class CI_DB_active_record extends CI_DB_driver {
      */
     function sendToGrid() {
         $ar_select = $this->ar_select;
-        $this->ar_select = explode(" ", $this->ar_select[0]);
-        $this->ar_select = array("count(" . $this->ar_select[0] . ") as qtd");
+        $ar_groupby = $this->ar_groupby;
 
-        $counter = $this->_compile_select();
-        $qtd = $this->query($counter);
+        if(count($ar_groupby) > 0){
+            $counter = $this->_compile_select();
+            $qtd = $this->query($counter);
+        }else{
+            $this->ar_select = explode(" ", $this->ar_select[0]);
+            $this->ar_select = array("count(" . $this->ar_select[0] . ") as qtd");
+
+            $counter = $this->_compile_select();
+            $qtd = $this->query($counter);
+        }
 
         if ($qtd === FALSE) {
             log_message('error', "sendToGridERROR on step1, while counting entries");
@@ -1835,7 +1842,17 @@ class CI_DB_active_record extends CI_DB_driver {
             $this->_reset_select();
             return FALSE;
         }
-        $qtd = $qtd->row()->qtd;
+
+
+        if ($qtd->num_rows > 0) {
+        	if(count($ar_groupby) > 0){
+        		$qtd = $qtd->num_rows;
+        	}else{
+        		$qtd = $qtd->row()->qtd;
+        	}
+        } else {
+            $qtd = 0;
+        }
 
         $paramsJqGrid = new stdClass();
         $paramsJqGrid->sortField = $_GET['sidx'];
@@ -1851,10 +1868,12 @@ class CI_DB_active_record extends CI_DB_driver {
         }
 
         if ($qtd > 0) {
-            !empty($paramsJqGrid->sortField) &&
+            if (!empty($paramsJqGrid->sortField)) {
                 $this->order_by($paramsJqGrid->sortField, $paramsJqGrid->sortDirection);
-            $paramsJqGrid->limit >= 0 &&
+            }
+            if ($paramsJqGrid->limit >= 0) {
                 $this->limit($paramsJqGrid->limit, $paramsJqGrid->start);
+            }
 
             $this->ar_select = $ar_select;
 
@@ -1894,12 +1913,12 @@ class CI_DB_active_record extends CI_DB_driver {
         if (is_array($field)) {
             $f2 = array();
             foreach ($field as $key => $value) {
-                $f2["retira_acento(lower($field))"] = retira_acentos(strtolower($match));
+                $f2["retira_acento(lower($field))"] = strtolower(retira_acentos($match));
             }
             $field = $f2;
         } else {
             $field = "retira_acento(lower($field))";
-            $match = retira_acentos(strtolower($match));
+            $match = strtolower(retira_acentos($match));
         }
         return $this->like($field, $match, $side);
     }
@@ -1909,7 +1928,10 @@ class CI_DB_active_record extends CI_DB_driver {
      * @since 30/03/2012
      * Seta uma data no formato '31/01/2010' para '2010-01-31'
      * @param string $field Campo da tabela. Opcionalmente pode ser passado um array com pares de campo=>valor
-     * @param string $date Data vinda do formulário. Valor do campo no formato '31/01/2010'
+     * @param string $date Data vinda do formulário.
+     *  Valor do campo no formato '31/01/2010'.
+     *  Quando vazio será substituido por NULL, a menos que $escape seja FALSE.
+     *  Nos casos omissos, o valor original do campo será conservado
      * @param boolean $escape FALSE para não proteger os campos no SQL
      * @return CI_DB_active_record set()
      */
@@ -1920,13 +1942,20 @@ class CI_DB_active_record extends CI_DB_driver {
             }
             return $this;
         }
-        return $this->set($field, implode("-", array_reverse(explode("/", $date))), $escape);
+        if (preg_match('#^[0-3][0-9]/(0[1-9]|1[0-2])/[0-9][0-9][0-9][0-9]$#', $date)) {
+            $date = implode("-", array_reverse(explode("/", $date)));
+        } else if ($escape && empty($date)) {
+            $date = NULL;
+        }
+        return $this->set($field, $date, $escape);
     }
 
     /**
      * @author Carlos Eduardo Alves
      * @since 20/04/2012
-     * @param string|array $field Campo(s) da tabela
+     * @param string|array $field Campo(s) da tabela.
+     * Utilize um array quando vários campos devem satisfazer a igualdade.
+     * Utilize uma string "CAMPO1||' '||CAMPO2" quando ambos os campos devem satisfazer a igualdade.
      * @param string $search Termo para buscar. Este campo será explodido por espaços
      * @param string $side Onde o curinga será aplicado. 'before', 'after' ou 'both'
      * @return CI_DB_active_record
@@ -1937,6 +1966,105 @@ class CI_DB_active_record extends CI_DB_driver {
             $this->likeSemAcento($field, $part, $side);
         }
         return $this;
+    }
+
+    function selectSQL() {
+        $sql = $this->_compile_select();
+        $this->_reset_select();
+        return $sql;
+    }
+
+    function insertSQL($table = '', $set = NULL) {
+        if (!is_null($set)) {
+            $this->set($set);
+        }
+        if (count($this->ar_set) == 0) {
+            if ($this->db_debug) {
+                return $this->display_error('db_must_use_set');
+            }
+            return FALSE;
+        }
+        if ($table == '') {
+            if (!isset($this->ar_from[0])) {
+                if ($this->db_debug) {
+                    return $this->display_error('db_must_set_table');
+                }
+                return FALSE;
+            }
+            $table = $this->ar_from[0];
+        }
+        $sql = $this->_insert($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
+        $this->_reset_write();
+        return $sql;
+    }
+
+    function updateSQL($table = '', $set = NULL, $where = NULL, $limit = NULL) {
+        $this->_merge_cache();
+        if (!is_null($set)) {
+            $this->set($set);
+        }
+        if (count($this->ar_set) == 0) {
+            if ($this->db_debug) {
+                return $this->display_error('db_must_use_set');
+            }
+            return FALSE;
+        }
+        if ($table == '') {
+            if (!isset($this->ar_from[0])) {
+                if ($this->db_debug) {
+                    return $this->display_error('db_must_set_table');
+                }
+                return FALSE;
+            }
+            $table = $this->ar_from[0];
+        }
+        if ($where != NULL) {
+            $this->where($where);
+        }
+        if ($limit != NULL) {
+            $this->limit($limit);
+        }
+        $sql = $this->_update($this->_protect_identifiers($table, TRUE, NULL, FALSE), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
+        $this->_reset_write();
+        return $sql;
+    }
+
+    function deleteSQL($table = '', $where = '', $limit = NULL, $reset_data = TRUE) {
+        $this->_merge_cache();
+        if ($table == '') {
+            if (!isset($this->ar_from[0])) {
+                if ($this->db_debug) {
+                    return $this->display_error('db_must_set_table');
+                }
+                return FALSE;
+            }
+            $table = $this->ar_from[0];
+        } elseif (is_array($table)) {
+            foreach ($table as $single_table) {
+                $this->delete($single_table, $where, $limit, FALSE);
+            }
+            $this->_reset_write();
+            return;
+        } else {
+            $table = $this->_protect_identifiers($table, TRUE, NULL, FALSE);
+        }
+        if ($where != '') {
+            $this->where($where);
+        }
+        if ($limit != NULL) {
+            $this->limit($limit);
+        }
+        if (count($this->ar_where) == 0 && count($this->ar_wherein) == 0 && count($this->ar_like) == 0) {
+            if ($this->db_debug) {
+                return $this->display_error('db_del_must_use_where');
+            }
+            return FALSE;
+        }
+        $sql = $this->_delete($table, $this->ar_where, $this->ar_like, $this->ar_limit);
+        if ($reset_data) {
+            $this->_reset_write();
+        }
+        return $sql;
     }
 
 }

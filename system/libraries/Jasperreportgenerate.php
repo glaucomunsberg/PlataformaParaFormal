@@ -1,14 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * librarie responsavel por manipular diversos componentes form do sistema
  * @package libraries
  * @subpackage jasper
  */
-
 class Jasperreportgenerate {
-	
-	public function pdf_create($nameReportJasper, $nameReport='', $params='', $format='PDF', $stream=true, $codeValidator=false){
+
+	/**
+	 * Gera relatório utilizando a biblioteca java.
+	 * @param string nome do arquivo .jasper montado pelo iReport
+	 * @param string nome do arquivo ao fazer download
+	 * @param array parâmetros a ser passado para o relatório .jasper
+	 * @param boolean caso informado true faz o stream do relatório, caso informado false realiza o download do relatório
+	 * @param boolean caso true é enviado para o relatório o código de validação
+	 * @param string tipo de banco de dados a ser utilizado no relatório. 
+	 */
+	public function pdf_create($nameReportJasper, $nameReport='', $params='', $format='PDF', $stream=true, $codeValidator=false, $database='cobalto'){
 		$path = array_reverse(explode('/', $_SERVER['DOCUMENT_ROOT']));
 		$pathArchive = $_SERVER['DOCUMENT_ROOT'].($path[1] != 'cobalto' ? '/cobalto/' : '');
 		
@@ -46,7 +53,8 @@ class Jasperreportgenerate {
 				
 		exec('pwd', $pathReport);
 		$params['SUBREPORT_DIR'] = $this->_getsubReportDir($pathReport[0].'/reports/'.$nameReportJasper);
-		exec('java -jar ../static/jasper_report_generate/JasperReportGenerate.jar '.$pathReport[0].'/reports/'.$nameReportJasper.' '.($params == '' ? 'null' : '"'.str_replace('"', '\"', json_encode($params)).'"').' '.$formatReport, $outputJasperReportGenerate);
+		$params['DATABASE'] = $database;
+		exec('java -jar ../static/jasper_report_generate/JasperReportGenerate.jar '.$pathReport[0].'/reports/'.$nameReportJasper.' '.($params == '' ? 'null' : '"'.str_replace('"', '\"', json_encode($params)).'"').' '.$formatReport.' '.FILE_SETTINGS_JASPER, $outputJasperReportGenerate);
 
 		if($codeValidator){
 			$CI =& get_instance();
@@ -78,7 +86,12 @@ class Jasperreportgenerate {
 			force_download($nameReport.'.pdf', file_get_contents('../archives/reports/'.$outputJasperReportGenerate[0]));
 		}
 	}
-	
+
+	/**
+	 * Retorna o caminho para a ser utilizado com subreport
+	 * @param string caminho do relatório principal
+	 * @return string caminho do diretório para subrelatório
+	 */	
 	private function _getsubReportDir($pathReport){
 		$stringPathSubReport = '';
 		foreach(explode('/', $pathReport) as $pathSubReport)

@@ -35,7 +35,7 @@ class Validate {
             if ($valid == false) {
                 $this->addError($field, $message);
             }
-        } else if ($typeValidator == 'required' || @in_array('required', $typeValidator)) {
+        } else if ($typeValidator == 'required' || (is_array($typeValidator) && in_array('required', $typeValidator))) {
             $this->addError($field, $message);
         }
     }
@@ -52,13 +52,13 @@ class Validate {
     }
 
     /**
-     * 
-     * @param type $field
-     * @param type $message 
-     * @todo IMPLEMENTAR!!!
+     * @param string $field the field of error
+     * @return mixed the value of removed item
      */
-    public function removeError($field, $message) {
-        ;
+    public function removeError($field) {
+        $r = $this->_errors[$field];
+        unset($this->_errors[$field]);
+        return $r;
     }
 
     /**
@@ -66,11 +66,7 @@ class Validate {
      * @return boolean
      */
     public function existsErrors() {
-        if (count($this->_errors) == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return (count($this->_errors) > 0);
     }
 
     /**
@@ -80,9 +76,11 @@ class Validate {
         $errors = array();
         foreach ($this->_errors as $field => $message) {
             array_push($errors, array(
-                "printErrorForm" => array("message" => $message,
+                "printErrorForm" => array(
+                    "message" => $message,
                     "field" => $field
-                    )));
+                )
+            ));
         }
         return $errors;
     }
@@ -123,7 +121,7 @@ class Validate {
      * @internal Caso o parâmetro não seja array, loga uma mensagem de erro e retorna FALSE
      * @see execValidate()
      */
-    private function validationNotArray($regex) {
+    private function validationArray($regex) {
         if (!is_array($regex)) {
             logVar("ERRO\n\$typeValidator em validateField(\$field, \$typeValidator, \$message) deve ser um array para este tipo de validação.");
             return false;
@@ -147,22 +145,22 @@ class Validate {
 
         switch (strtolower($regexExpression)) {
             case 'min_length':
-                if ($this->validationNotArray($regex)) {
+                if (!$this->validationArray($regex)) {
                     return false;
                 }
                 return $this->validate_min_length($data, $regex[1]);
             case 'max_length':
-                if ($this->validationNotArray($regex)) {
+                if (!$this->validationArray($regex)) {
                     return false;
                 }
                 return $this->validate_max_length($data, $regex[1]);
             case 'between':
-                if ($this->validationNotArray($regex)) {
+                if (!$this->validationArray($regex)) {
                     return false;
                 }
                 return $this->validate_between($data, $regex[1], $regex[2]);
             case 'any':
-                if ($this->validationNotArray($regex)) {
+                if (!$this->validationArray($regex)) {
                     return false;
                 }
                 array_shift($regex);

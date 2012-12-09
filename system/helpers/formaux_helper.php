@@ -206,11 +206,11 @@ function recaptcha() {
  * <?= form_dateField('dtCadastro'); ?>
  * </code>
  * @param string $name Nome do campo
- * @param string $value Valor do campo
+ * @param string $value Valor do campo.
+ *  Formatos aceitos: "dd/mm/yyyy", "yyyy-mm-dd", "yyyy-mm-dd HH:MM:SS.MILI*"
  * @param array $attributes Array com opções de estilos e atributos extras
  * @param boolean $disabled TRUE para desabilitar a edição do campo
  * @return string
- * @todo caso a data esteja no formato "cru" do banco de dados, deve ser corrigida para o formato ideal
  */
 function form_dateField($name, $value = '', $attributes = '', $disabled = false) {
     if (!is_array($attributes)) {
@@ -227,13 +227,26 @@ function form_dateField($name, $value = '', $attributes = '', $disabled = false)
         $attributes['disabled'] = "disabled";
     }
 
-    $defaults = array('type' => 'text', 'name' => $name, 'id' => $name, 'value' => $value, 'maxlength' => 10, 'class' => 'ui-state-default ui-corner-all datepicker');
+    if ($value != '') {
+        $Y="[0-9][0-9][0-9][0-9]";
+        $m="(0[1-9]|1[0-2])";
+        $d="(0[1-9]|[1-2][0-9]|3[0-1])";
+        if (preg_match("#^$Y-$m-$d#", $value)) {
+            $value = explode(" ", $value);
+            $value = implode("/", array_reverse(explode("-", $value[0])));
+        }
+        if (!preg_match("#^$d/$m/$Y$#", $value)){
+            logVar("BAD DATE FORMATE ON '$value'", "form_dateField ERROR");
+        }
+    }
+
+    $defaults = array('type' => 'text', 'name' => $name, 'id' => $name, 'value' => $value, 'maxlength' => 10, 'class' => 'ui-state-default ui-corner-all');
+    if (!$disabled) {
+        $defaults['class'] .= ' datepicker';
+    }
 
     $jsDatePicker = "<script type='text/javascript'>";
     $jsDatePicker .= "var $name = $('#$name');";
-    if ($disabled) {
-        $jsDatePicker .= "\$(document).ready(function(){ $name.datepicker('disable'); });";
-    }
     $jsDatePicker .= "</script>";
 
     return "<input " . _parse_form_attributes($attributes, $defaults) . "/>\n" . $jsDatePicker;
@@ -544,6 +557,8 @@ function form_hidden($name, $value = '', $recursing = FALSE) {
  * @param string $mask Classe CSS, utilizada para aplicação de mascaramento no campo
  * @param integer $maxlength Quantidade máxima de caracteres no campo
  * @param array $attributes Array com opções de estilos e atributos extras, no formato array(atributo => valor)
+ *              O atributo especial "parentElement" é suportado, indicando o id
+ *              de um elemento a ser passado via GET junto com a consulta
  * @param boolean $disabled Desabilita a edição do campo
  * @return string O código HTML para gerar o campo
  */
@@ -560,6 +575,12 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
         $disabled = ' disabled';
     }
 
+    $ajax_data = "{autocomplete: true, q: request.term";
+    if (!empty($attributes['parentElement'])) {
+        $ajax_data.= ", {$attributes['parentElement']}: $('#{$attributes['parentElement']}').val()";
+        unset($attributes['parentElement']);
+    }
+    $ajax_data.= "}";
     $search = "search$name";
 
     $formAutoCompleteScript =
@@ -570,10 +591,11 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
         $('#$search').autocomplete({
             minLength: 3,
             source: function(request, response) {
+                $('#$name').val('');
                 $.ajax({
                     url: '$url',
                     dataType: 'json',
-                    data: {autocomplete: true, q: request.term},
+                    data: $ajax_data,
                     success: function( data ) {
                         response($.map(data.combo, function( item ) {
                             return {label: item.optionName, value: item.optionName, valueHidden: item.value}
@@ -641,7 +663,8 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
  * @param integer $height Altura do camponente fieldSet HTML
  * @return string O código HTML para gerar o fieldset
  * @see end_fieldset
- */ function begin_fieldset($name, $width = '', $height = '', $marginLeft = '') {
+ */
+function begin_fieldset($name = "", $width = '', $height = '', $marginLeft = '') {
     $style = "";
 
     if (!empty($width)) {
@@ -654,8 +677,10 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
         $style .= "margin-left:" . $marginLeft . "px; ";
     }
     $html = "<fieldset class=\"ui-widget ui-widget-content ui-corner-all\" style=\"$style background: none; padding: 5px;\">";
+    if (!empty($name)) {
     $html .= "<legend class=\"legend\">$name</legend>";
 
+    }
     return $html;
 }
 
@@ -735,7 +760,7 @@ function form_buttonHit($name = '', $url = '', $titleButtonHit = 'Título button
     $form_buttonHit = form_hidden($btHId, $id);
     $form_buttonHit.= form_textField($btHCd, $codigo, 100, '', '', array('style' => 'text-align: right;', 'onblur' => "openInputTextHit('$url/returnButtonHit$hName', returnButtonHit$hName, '$btHId', '$btHCd', '$btHDs');"));
     $form_buttonHit.= '<button id="' . $name . 'Button" onclick="openButtonHit(\'' . $url . '/parent.returnButtonHit' . $hName . '\', \'' . $titleButtonHit . '\', ' . $widthWindow . ');" style="margin: 0px 1px 0px -4px; height: 24px; display: block; float: left;" class="button-hit">Pesquisar</button>';
-    $form_buttonHit.= form_textField($btHDs, $descricao, 400, '', '', array('style' => 'text-align: left;', 'readonly' => true));
+    $form_buttonHit.= form_textField($btHDs, $descricao, 400, '', '', array('style' => 'text-align: left;', 'readonly' => 'readonly', 'tabindex' => '-1'));
     $form_buttonHit.=
             "<script>
             var $btHId = $('#$btHId');
@@ -749,24 +774,37 @@ function form_buttonHit($name = '', $url = '', $titleButtonHit = 'Título button
 /**
  * Retorna um componente input file HTML.<br>
  * Abaixo um exemplo de como usar nas views:
- * <code>
- * <?=form_file('userfile', '', 414, '', '', '', 1, array('id'=>'userfile'));?>
- * </code>
- * @param string $name Nome do componente input file
- * @param string $value Valor do componente input file
- * @param integer $width Largura do componente input file
- * @param string $mask Marcara do componente input file
- * @param integer $maxlength Maximo de caracteres permitido no componente input file
- * @param string $accept Tipo de arquivos permitidos no componente input file
- * @param integer $max Maximo de arquivos inseridos no componente input file
- * @param array $extra Array com opções de estilos e atributos extras
+ * <code><pre>
+ * <?=form_file('userFile', '', '', '*', '250', '');?>
+ * <script type="text/javascript">
+ *      function finishUploadUserFile(){
+ *          $("#userFileId").val( $("#paramUploadId").val() );
+ *          $("#userFileName").val( $("#paramUploadName").val() );
+ *      }
+ * </script>
+ * <?=form_file('documento', '', '', 'odt|pdf|rtf|doc|docx|txt', '250', 'documentoEnviado');?>
+ * <script type="text/javascript">
+ *      function documentoEnviado(){
+ *          $("#documentoId").val( $("#paramUploadId").val() );
+ *          $("#documentoName").val( $("#paramUploadName").val() );
+ *      }
+ * </script>
+ * </pre></code>
+ * @param string $name Nome do campo
+ * @param string $valueIdUpload Id do item selecionado (valor predefinido)
+ * @param string $valueNameUpload Nome do item selecionado (valor predefinido)
+ * @param string $allowed_types Extensões de arquivo, separadas por pipe "|"
+ * @param integer $width largura
+ * @param string $methodReturnUpload Callback. Nome da função javascript a ser executada após upload na janela suspensa
  * @return string
  */ 
-  function form_file($name = '', $valueIdUpload = '', $valueNameUpload = '', $allowed_types = '', $width = '250', $methodReturnUpload = 'finishUpload', $extra = '', $disable = false) {
-      logVar('dentro da função');
+function form_file($name, $valueIdUpload = '', $valueNameUpload = '', $allowed_types = '', $width = '250', $methodReturnUpload = '') {
+    if (empty($methodReturnUpload)) {
+        $methodReturnUpload = 'finishUpload' . ucfirst($name);
+    }
     $form_file = form_hidden($name . 'Id', $valueIdUpload);
     $form_file.= form_textField($name . 'Name', $valueNameUpload, $width, '', '', array('readonly' => true));
-    $form_file.= '<button id="btn' . $name . '" name="btn' . $name . '" onclick="openWindow(BASE_URL+\'util/upload/choiceFile/' . $name . 'Id' . '/' . $name . 'Name/' . $methodReturnUpload . humanize($name) . '/' . $allowed_types . '\', \'' . lang('uploadChoiceFileTitle') . '\', 600, false);" style="height: 24px; margin-left:0px; margin-bottom: 5px; margin-right: 5px;" class="ui-button ui-button-text-icon-primary ui-widget ui-state-default ui-corner-all">';
+    $form_file.= '<button id="btn' . $name . '" name="btn' . $name . '" onclick="openWindow(BASE_URL+\'util/upload/choiceFile/' . $name . 'Id' . '/' . $name . 'Name/' . $methodReturnUpload . '/' . $allowed_types . '\', \'' . lang('uploadChoiceFileTitle') . '\', 600, false);" style="height: 24px; margin-left:0px; margin-bottom: 5px; margin-right: 5px;" class="ui-button ui-button-text-icon-primary ui-widget ui-state-default ui-corner-all">';
     $form_file.= '<span class="ui-button-icon-primary ui-icon ui-icon-newwin" style="float: left;"></span>Fazer upload';
     $form_file.= '</button>';
     return $form_file;
@@ -816,8 +854,9 @@ function form_image_webcam($name = '', $valueIdUpload = '', $valueNameUpload = '
     if ($disabled) {
         $disabled = ' disabled';
     }
-    return "<textarea " . _parse_form_attributes($defaults, $extra) . $disabled . ">$value</textarea>\n" .
-            "<script type='text/javascript'>var $name = $('$name'); $.extend($name, {val: function(){return $('#$name').val();}});</script>";
+    $nameComponentJavaScript = "<script>var $name = $('#$name');</script>";
+
+    return "<textarea " . _parse_form_attributes($defaults, $extra) . $disabled . ">$value</textarea>\n$nameComponentJavaScript\n";
 }
 
 /**

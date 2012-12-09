@@ -208,5 +208,16 @@ Versão 0.5
             participacao        - correção da grid
             ponte               - correção da grid 
             paraformalidade     - correção na forma de salvar
+
+Versão 0.5.LTS
+        Correções
+            System          - upload de arquivos agora recebe todo tipo de arquivo
+            System          - Erro do Ajax corrigido
+            System          - correçoes gerais em helpers
+            System          - correção de causava o deslogar do sistema
+            paraformalidade - correção para carregar todo tipo de arquivo
+            documentacao    - organizada a correção
+        Nota
+            Essa é a versão com apoio para se usar. Todos os bugs foram corrigidos e a plataforma está operante.
             
             

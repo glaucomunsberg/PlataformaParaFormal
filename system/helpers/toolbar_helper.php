@@ -64,24 +64,48 @@
 
 	/**
 	 * Adicionar botoes na toolbar
-	 * @access public
-	 * @author rafael
-	 * @param string name
-	 * @param string metodo javascript a ser chamado quando o botao for clicado
-	 * @param string estilo que deseja colocar no botao
+ * @param string $label texto
+ * @param string $jsAction metodo javascript a ser chamado quando o botao for clicado
+ * @param string $btnName identificador do elemento
+ * @param string $icon classe de ícone que deseja colocar no botao
+ * @param array $attributes Array com opções de estilos e atributos extras, no formato array(atributo => valor)
+ * @return string
 	 */
-	function addButtonToolBar($name, $jsAction, $btnName = '', $className = ''){
-		$buttonToolBar = '<button id="'.$btnName.'" name="'.$btnName.'" style="float: left;">'.$name.'</button>';
-		$buttonToolBar.= "<script type='text/javascript'>";
-		$buttonToolBar.= '	$(document).ready(function(){';
-		$buttonToolBar.= '		$(\'#'.$btnName.'\').button("destroy");';
-		$buttonToolBar.= '		$(\'#'.$btnName.'\').button({text: true, '.($className != '' ? 'icons: {primary: \''.$className.'\'}' : '').'}).click(function(){';
-		$buttonToolBar.= '			$(\'#'.$btnName.'\').blur();';
-		$buttonToolBar.= '			try{'.$jsAction.';}catch(err){messageErrorBox(\'Erro ao executar o método excluir() \' + err);}';
-		$buttonToolBar.= '		});';
-		$buttonToolBar.= '	});';
-		$buttonToolBar.= "</script>";
-		return $buttonToolBar;
+function addButtonToolBar($label, $jsAction, $btnName = '', $icon = '', $attributes = array()) {
+    $defaults = array(
+        "id" => $btnName,
+        "name" => $btnName,
+        "style" => "float: left;"
+    );
+    # if doesn't have float style set ;)
+    if (isset($attributes['style']) && !preg_match("/float:/", $attributes['style'])) {
+        $attributes['style'] = "float: left; " . $attributes['style'];
+    }
+
+    $conf = "{text: true";
+    if (!empty($icon)) {
+        $conf.= ", icons: {primary: '$icon'}";
+    }
+    $conf.= "}";
+
+    $buttonToolbar = "<button " . _parse_form_attributes($attributes, $defaults) . ">$label</button>";
+
+    return <<<EOF
+    $buttonToolbar
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#$btnName').button('destroy');
+            $('#$btnName').button($conf).click(function(){
+                $('#$btnName').blur();
+                try{
+                    $jsAction;
+                }catch(err){
+                    messageErrorBox('Erro ao executar o método $jsAction ' + err);
+                }
+            });
+        });
+    </script>
+EOF;
 	}
 
 	/**

@@ -49,12 +49,14 @@ function path_bread($path) {
 function warning($name = 'warning', $message = '', $closeContent = true, $info = false) {
     if ($info || preg_match("/^info/", $name)) {
         $state = 'ui-state-highlight';
+        $icon = 'ui-icon-info';
     } else {
         $state = 'ui-state-error';
+        $icon = 'ui-icon-alert';
     }
     $warning = '<div id="' . $name . '" class="ui-widget" style="margin-bottom: 5px; display: none;">';
     $warning.= '	<div class="' . $state . ' ui-corner-all" style="padding: 1px;">';
-    $warning.= '		<span class="ui-icon ui-icon-info" style="display: block; float: left; margin: 5px;"></span>';
+    $warning.= '		<span class="ui-icon '.$icon.'" style="display: block; float: left; margin: 5px;"></span>';
     $warning.= '		<p style="margin: 6px 5px 5px 0px;">' . $message . '</p>';
     $warning.= '	</div>';
     $warning.= '</div>';
@@ -70,22 +72,43 @@ function warning($name = 'warning', $message = '', $closeContent = true, $info =
 }
 
 /**
- * Coleta dados do usuário armazenados na sessão
- * @return object
+ * Coleta dados do usuário armazenados na sessão.<br/>
+ * @return object Objeto contendo id, pessoa_id, login, senha, nome_pessoa, email, avatar_id, nome_gerado, nome_original, servidor_id, tema
  * @see getSessionCobalto()
  */
 function getUsuarioSession() {
-    return getSessionCobalto('usuario');
+    $return = getSessionCobalto('usuario');
+    if (is_null($return)) {
+        $return = array(
+            'id' => '0',
+            'pessoa_id' => '0',
+            'login' => false,
+            'senha' => '',
+            'nome_pessoa' => '',
+            'email' => '',
+            'avatar_id' => '',
+            'nome_gerado' => '',
+            'nome_original' => '',
+            'servidor_id' => '',
+            'tema' => 'redmond'
+        );
+    }
+
+    return (object) $return;
 }
 
 /**
  * Coleta dados armazenados na sessão
- * @param string $session_name Nome do item a ser selecionado da sessão
- * @return mixed
+ * @param string $name Nome do item a ser selecionado da sessão
+ * @return mixed O item, ou FALSE caso não exista (@link Session::userdata), ou NULL caso não haja sessão
  */
-function getSessionCobalto($session_name) {
+function getSessionCobalto($name) {
     $CI = & get_instance();
-    return json_decode($CI->session->userdata($session_name));
+    if (isset($CI->session)) {
+        return json_decode($CI->session->userdata($name));
+    } else {
+        return NULL;
+    }
 }
 
 /**
@@ -248,4 +271,58 @@ function retira_acentos($txt) {
         '/Ç/u' => 'C'
     );
     return preg_replace(array_keys($a), array_values($a), $txt);
+}
+
+/**
+ * Carrega o cabeçalho padrão da página.<br/>
+ * Exemplo de uso (no início da página):<br/>
+ * <code>
+ *  <?=headerView()?>
+ * </code>
+ * @return view A view de cabeçalho carregada
+ */
+function headerView() {
+    return loadView("headerGlobalView");
+}
+
+/**
+ * Carrega o rodapé padrão da página.<br/>
+ * Exemplo de uso (no final da página):<br/>
+ * <code>
+ *  <?=footerView()?>
+ * </code>
+ * @return view A view de rodapé carregada
+ */
+function footerView() {
+    return loadView("footerGlobalView");
+}
+
+/**
+ * Carrega um trecho de uma view.
+ * @param string $view O nome da view.
+ *  Opcionalmente pode-se utilizar o caminho completo à view desejada
+ *  (relativo à pasta "views" do projeto atual)
+ * @return view A view solicitada carregada, ou uma página de erro caso esta não seja encontrada
+ * @see headerView()
+ * @see footerView()
+ */
+function loadView($view) {
+    $base = APPPATH . "/views";
+    $folder = "../../static/_views";
+
+    if (file_exists("$base/$folder/$view" . EXT)) {
+        $load = "$folder/$view";
+    } else if (file_exists("$base/$view" . EXT)) {
+        $load = "$view";
+    } else {
+        logVar("FAIL to load view \"$view\"");
+        return show_error("FAIL to load view", 500);
+    }
+
+    if (isset($this) && isset($this->load)) {
+        return $this->load->view("$load");
+    } else {
+        $CI = & get_instance();
+        return $CI->load->view("$load");
+    }
 }

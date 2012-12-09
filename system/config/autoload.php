@@ -50,7 +50,7 @@ $autoload['libraries'] = array('database', 'ajax', 'encrypt', 'validate', 'tabpa
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'lang', 'formaux', 'form', 'util', 'toolbar', 'tabpanel', 'gridpanel', 'jqgridpanel', 'editorgridpanel', 'download', 'inflector', 'string');
+$autoload['helper'] = array('url', 'lang', 'formaux', 'form', 'util', 'toolbar', 'tabpanel', 'gridpanel', 'jqgridpanel', 'editorgridpanel', 'download', 'inflector', 'string', 'file');
 
 /*
 | -------------------------------------------------------------------

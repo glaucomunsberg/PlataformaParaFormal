@@ -22,18 +22,23 @@ if (!defined('BASEPATH'))
  * <li><i>string</i> caption: o título da grade</li>
  * <li><i>boolean</i> pager: se a grid terá paginação</li>
  * <li><i>boolean</i> multiselect: se a grid aceitará seleção de múltiplas linhas</li>
- * <li><i>boolean</i> autowidth: se a grid ajustará automaticamente sua largura</li>
  * </ul>
  * @see end_JqGridPanel
  */
 function begin_JqGridPanel($id = 'grid', $height = '', $width = 0, $url = '', $parameters = array()) {
     $jqGridPanel = '<table id="' . $id . '"></table>';
-    $jqGridPanel .= '<div id="' . $id . 'Pager"></div>';
+    $jqGridPanel .= '<div id="' . $id . 'Pager" style="margin-bottom: 5px"></div>';
     $CI = & get_instance();
     $CI->jqgridpanel->setId($id);
 
     $parameters['height'] = ($height == '' ? 300 : $height);
     $parameters['jsonReader'] = array('repeatitems' => false, 'id' => 0);
+    if (isset($parameters['selectRow'])) {
+        if (!$parameters['selectRow']) {
+            $functionBeforSelectRow = "##function(rowid, e){return false;}##";
+            $parameters['beforeSelectRow'] = $functionBeforSelectRow;
+        }
+    }
     $functionOnSelectRow = "##function(rowid){";
     $functionOnSelectRow.= "try{" . $id . "_onSelectRow(rowid);";
     $functionOnSelectRow.= "}catch(err){}";
@@ -41,8 +46,13 @@ function begin_JqGridPanel($id = 'grid', $height = '', $width = 0, $url = '', $p
     $parameters['onSelectRow'] = $functionOnSelectRow;
     $functionCellSelect = "##function(rowid, iRow, iCol, e){";
     $functionCellSelect.= "if(iRow != 0){";
-    $functionCellSelect.= '$("#' . $id . '").resetSelection();';
-    $functionCellSelect.= '$("#' . $id . '").setSelection(rowid);';
+    if (isset($parameters['resetSelectionOnClick'])) {
+        if ($parameters['resetSelectionOnClick']) {
+            $functionCellSelect.= '$("#' . $id . '").resetSelection();';
+        }
+    } else {
+        $functionCellSelect.= '$("#' . $id . '").resetSelection();';
+    }
     $functionCellSelect.= "try{" . $id . "_click(rowid);";
     $functionCellSelect.= "}catch(err){}}";
     $functionCellSelect.= "}##";
@@ -56,8 +66,13 @@ function begin_JqGridPanel($id = 'grid', $height = '', $width = 0, $url = '', $p
 
     $functionDblClick = "##function(rowid, iRow, iCol, e){";
     $functionDblClick.= "if(iRow != 0){";
-    $functionDblClick.= '$("#' . $id . '").resetSelection();';
-    $functionDblClick.= '$("#' . $id . '").setSelection(rowid);';
+    if (isset($parameters['resetSelectionOnClick'])) {
+        if ($parameters['resetSelectionOnClick']) {
+            $functionDblClick.= '$("#' . $id . '").resetSelection();';
+        }
+    } else {
+        $functionDblClick.= '$("#' . $id . '").resetSelection();';
+    }
     $functionDblClick.= "try{" . $id . "_dblClick(rowid);";
     $functionDblClick.= "}catch(err){}}";
     $functionDblClick.= "}##";
@@ -94,20 +109,46 @@ function begin_JqGridPanel($id = 'grid', $height = '', $width = 0, $url = '', $p
     $parameters['gridComplete'] = $functionGridComplete;
     $functionLoadError = "##function(xhr,st,err) {";
     $functionLoadError.= 'var url = $("#' . $id . '").jqGrid(\'getGridParam\',\'url\');';
+    $functionLoadError.= "if(!$.cookie('logout'))";
+    $functionLoadError.= 'if(xhr.status==200 && st=="parsererror"){';
+    $functionLoadError.= "messageErrorBox(\"Grid: $id; URL: \"+url+\"; Type: \"+st+\"; Response: "
+            . lang("O resultado não está no formato esperado") . "\");";
+    $functionLoadError.= '}else{';
     $functionLoadError.= "messageErrorBox(\"Grid: $id; URL: \"+url+\"; Type: \"+st+\"; Response: \"+ xhr.status + \" \"+xhr.statusText);";
+    $functionLoadError.= '}';
     $functionLoadError.= "}##";
     $parameters['loadError'] = $functionLoadError;
     $parameters['url'] = $url;
     $parameters['altRows'] = true;
     $parameters['altclass'] = 'ui-state-default jqgrow-alt';
 
+    if ($width == 'auto') {
+        $parameters['autowidth'] = true;
+    }
+
     if (is_array($parameters)) {
+        if (isParameterJqGrid('group_column', $parameters)) {
+            if (!empty($parameters['group_column'])) {
+                $parameters['grouping'] = true;
+                if (is_array($parameters['group_column'])) {
+                    $parameters['group_column'] = implode("', '", $parameters['group_column']);
+                }
+                $parameters['groupingView'] = '##{'
+                        . "groupField:['{$parameters['group_column']}'], "
+                        . "groupColumnShow:[false], groupSummary:[false], groupDataSorted:true, showSummaryOnHide:false, "
+                        . "groupText: ['<b style=\"display: block; float: left; margin: 2px;\">{0}</b>']"
+                        . '}##';
+            }
+            unset($parameters['group_column']);
+        }
         if (isParameterJqGrid('pager', $parameters)) {
-        	if($parameters['pager']){
+            if ($parameters['pager']) {
         		$parameters['pager'] = '#' . $id . 'Pager';
 	            if (!isParameterJqGrid('rowNum', $parameters)) {
 	                $parameters['rowNum'] = 10;
 	            }
+            } else {
+                $parameters['rowNum'] = -1;
         	}
         } else {
             $parameters['rowNum'] = -1;
@@ -156,28 +197,45 @@ function begin_JqGridPanel($id = 'grid', $height = '', $width = 0, $url = '', $p
 function end_JqGridPanel() {
     $CI = & get_instance();
     $parameters = $CI->jqgridpanel->getGridParameters();
-    $jqGridPanel = '';
-    $jqGridPanel.= '<script>';
-    $jqGridPanel.='var ' . $CI->jqgridpanel->getId() . ' =  \'' . $CI->jqgridpanel->getId() . '\';';
-    $jqGridPanel.= '$(document).ready(function (){';
-    $jqGridPanel.= '	$("#' . $CI->jqgridpanel->getId() . '").jqGrid(';
+    $jqGridPanel = "";
+    $jqGridPanel.= "<script>";
+    $jqGridId = $CI->jqgridpanel->getId();
+    $jqGridPanel.= "var $jqGridId =  '$jqGridId';";
+    $jqGridPanel.= "$(document).ready(function (){";
+    $jqGridPanel.= "$('#$jqGridId').jqGrid(";
     $jqGridPanel.= removeCharacteresIlegals(json_encode($parameters));
-    $jqGridPanel.= '	);';
-    $jqGridPanel.= '	$("#' . $CI->jqgridpanel->getId() . '").setGridParam({datatype: \'json\'});';
-    $jqGridPanel.= '	$("#' . $CI->jqgridpanel->getId() . '").setGridParam({autoload: true});';
+    $jqGridPanel.= ");";
+    $jqGridPanel.= "$('#$jqGridId').setGridParam({datatype: 'json'});";
+    $jqGridPanel.= "$('#$jqGridId').setGridParam({autoload: true});";
 
     if (isParameterJqGrid('search', $parameters)) {
         if ($parameters['search']) {
             if (isParameterJqGrid('toppager', $parameters)) {
                 if ($parameters['toppager']) {
-                    $jqGridPanel.= '	$("#' . $CI->jqgridpanel->getId() . '").jqGrid(\'navGrid\', \'#' . $CI->jqgridpanel->getId() . '_toppager\', {del:false,add:false,edit:false}, {}, {}, {}, {sopt:[\'cn\']});';
+                    $jqGridPanel.= "$('#$jqGridId').jqGrid('navGrid', '#{$jqGridId}_toppager', {del:false,add:false,edit:false}, {}, {}, {}, {sopt:['cn']});";
                 }
             }
-            $jqGridPanel.= '	$("#' . $CI->jqgridpanel->getId() . '").jqGrid(\'navGrid\', \'#' . $CI->jqgridpanel->getId() . 'Pager\', {del:false,add:false,edit:false}, {}, {}, {}, {sopt:[\'cn\']});';
+            $jqGridPanel.= "$('#$jqGridId').jqGrid('navGrid', '#{$jqGridId}Pager', {del:false,add:false,edit:false}, {}, {}, {}, {sopt:['cn']});";
         }
     }
-    $jqGridPanel.= '});';
-    $jqGridPanel.= '</script>';
+    $jqGridPanel.= "});";
+
+    if (isParameterJqGrid('autowidth', $parameters)) {
+        if ($parameters['autowidth']) {
+            $resizer = $jqGridId . '_resize';
+            $jqGridPanel.= "function $resizer() {" .
+                    "$('#gbox_$jqGridId').width('auto');" .
+                    "$('#$jqGridId').setGridWidth($('#gbox_$jqGridId').width());" .
+                    "};";
+            $tabId = $CI->tabpanel->getTabName();
+            $jqGridPanel.= "$(window).bind('resize', $resizer);";
+            if (!empty($tabId)) {
+                $jqGridPanel.= "$('#$tabId').bind('tabsshow', $resizer);";
+            }
+        }
+    }
+
+    $jqGridPanel.= "</script>";
 
     $CI->jqgridpanel->clearParametersGrid();
     return $jqGridPanel;
@@ -195,6 +253,7 @@ function removeCharacteresIlegals($parametersJqGrid) {
         ']"' => ']',
         '"##' => '',
         '##"' => '',
+        '##\"' => '',
         'u00e0' => 'à',
         'u00e1' => 'á',
         'u00e2' => 'â',

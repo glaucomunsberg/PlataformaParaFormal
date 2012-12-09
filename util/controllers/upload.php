@@ -12,7 +12,7 @@ class Upload extends Controller {
         $this->load->view('upload/uploadChoiceFileView');
     }
 
-    function choiceFile($objectId, $objectName, $methodReturn, $allowed_types) {
+    function choiceFile($objectId, $objectName, $methodReturn, $allowed_types = "") {
         $data['objectId'] = $objectId;
         $data['objectName'] = $objectName;
         $data['methodReturn'] = $methodReturn;
