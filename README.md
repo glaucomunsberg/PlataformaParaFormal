@@ -38,7 +38,7 @@ banco de dados.
  
 ### Qual versão eu posso fazer DOWNLOAD?!
   Existe inúmeras versões, apenas algumas são consideradas "estáveis" para que você possa usar sem encontrar bugs. Veja abaixo alguma dos LTS que disponibilizamos para o uso:
-  Versão_0.5 LTS https://github.com/glaucomunsberg/PlataformaParaFormal/tree/38d744e8e9de49525179bbf83337a049496c882a
+  ## Versão_0.5 LTS https://github.com/glaucomunsberg/PlataformaParaFormal/tree/38d744e8e9de49525179bbf83337a049496c882a
   
 ### Autores e Contribuintes  
  O projeto Plataforma do Para-Formal teve início em Março de 2012 com o acadêmico e desenvolvedor @glaucomunsberg sobre a coordenação do Prof. Dr. Eduardo Rocha, ambos vinculados a UFPel.
