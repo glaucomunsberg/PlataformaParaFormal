@@ -17,31 +17,19 @@ Como a plataforma se propõem a atender não somente as necessidades deste grupo
 
 ### Tecnologias utilizadas
 A aplicação Cidade+Contemporaniedade contará com várias tecnologias, sendo sua grande base o FrameWork CodeIgniter (PHP), Banco de dados PostgreSQL, Google Maps API, Panoramio API, Facebook API, Gerenciamento de Conteúdo WordPress e JasperReports iReport³ entre outros.Abaixo está um melhor olhar sobre como cada uma destas ferramentas auxiliarão no projeto:
-
-
 	I. FrameWork CodeIgniter Uma das grandes ferramentas que há hoje para a 
 programação ágil em PHP que segue o modelo MVC permitindo também uma menor codificação para manter o foco no projeto.	
-
-
 	II. PostgreSQL - Banco de dados que conterá todas as para-formalidades e informações 
 que foram obtidas juntamente com elas. Assim como informações relativo ao 
 projeto e a relação das informações com o público.
-
-
 	III. Google Maps API - Tendo o PHP para a criação das páginas e o Banco de Dados para 
 armazenar as para-formalidades a API desenvolvida pelo Google Maps possibilita 
 a contextualização das informações no espaço representando a cidade da qual foi capturada. Essa será uma primeira camada de informação trazendo informações sobre ruas,pespectiva, localização e demais informações da cidade.
-
-
 	IV. Facebook API - O Facebook possibilita, através de sua API, a utilização de plug-ins 
 sociais. Destes será usado o plug-n comentário que é feito no site e publicado automaticamente no mural do indivíduo que comenta. Isso faz com que cada para-formalidade trazida pelo Panoramio, contextualizado no google Maps seja passível de gerar nela discussões e integração entre aqueles que desejam compatilhá-la.	
-
-
 	V.WordPress - Será utilizado no módulo “C+C Blog” para a comunicação do projeto em 
 sí com o público em geral. A aplicação de contéudo WordPress possibilita a 
 criação e gerenciamento ágil das informações relativas ao cotidiano do projeto. 
-
-
 	VI.iReport - Poderoso gerador de relatórios que será integrado com o framework para 		servir de apoio as pesquisas desenvolvidas com as informações manipuladas no 
 banco de dados.
 
