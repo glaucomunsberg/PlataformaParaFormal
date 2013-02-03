@@ -21,7 +21,7 @@
 			$this->db->set('remote_addr',$_SERVER['REMOTE_ADDR']);
 			//$this->db->set('x_forward',$_SERVER['HTTP_X_FORWARDED_FOR']);
 
-			$this->db->insert('equipe_atividades_registros');
+			$this->db->insert('paraformal.equipe_registros_atividades');
 			$this->db->trans_complete();
 
 			if($this->db->trans_status() === FALSE){
@@ -29,14 +29,14 @@
 				return false;
 			}
 
-			$this->ajax->addAjaxData('atividade', $this->getBolsista($this->db->insert_id('bolsistas_registros', 'id')));
+			$this->ajax->addAjaxData('atividade', $this->getAtividade($this->db->insert_id('paraformal.equipe_registros_atividades', 'id')));
 			return true;
 		}
 
 
 		function getAtividadesRegistros($parametros, $pessoaId, $noPagination=false){
 			$this->db->select('br.id, br.entrada_saida, br.atividade, br.dt_cadastro');
-			$this->db->from('equipe_atividades_registros as br');
+			$this->db->from('paraformal.equipe_registros_atividades as br');
 			$this->db->join('pessoas as p', 'br.pessoa_id = p.id');
 			$this->db->where('pessoa_id',$pessoaId);
 			if (@$parametros['dt_inicio'] && $parametros['dt_fim'] != '') {
@@ -49,7 +49,7 @@
                 
                 function getAtividadesRegistrosPorPessoa($parametros, $noPagination=false){
 			$this->db->select('br.id, br.entrada_saida, br.atividade, br.dt_cadastro');
-			$this->db->from('equipe_atividades_registros as br');
+			$this->db->from('paraformal.equipe_registros_atividades as br');
 			$this->db->join('pessoas as p', 'br.pessoa_id = p.id');
                         if (@$parametros['pessoaId'] != '')
                             $this->db->where('p.id',$parametros['pessoaId']);
@@ -63,7 +63,7 @@
 		}
                 function getEquipeComAtividades($parametros, $noPagination=false){
                         $this->db->select('p.id, p.nome');
-                        $this->db->from('equipe_atividades_registros as ear');
+                        $this->db->from('paraformal.equipe_registros_atividades as ear');
                         $this->db->join('pessoas as p', 'ear.pessoa_id = p.id');
                         if (@$parametros['nome'] != '')
                             $this->db->like('upper(p.nome)', $parametros['nome']);
@@ -73,7 +73,7 @@
 
 		function getAtividade($bolsistaId){
 			$this->db->select('br.id, br.entrada_saida, br.atividade, to_char(br.dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
-			$this->db->from('equipe_atividades_registros as br');
+			$this->db->from('paraformal.equipe_registros_atividades as br');
 			$this->db->join('pessoas as p', 'br.pessoa_id = p.id');
 			$this->db->where('br.id', $bolsistaId);
 			return $this->db->get()->row();

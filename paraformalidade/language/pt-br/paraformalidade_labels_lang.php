@@ -19,31 +19,11 @@ $lang['condicoesAmbientaisDescricao'] = 'Descrição';
 $lang['condicoesAmbientaisDtCadastro'] = 'Dt. Cadastro';
 $lang['condicoesAmbientaisLista'] = 'Lista de Condições Ambientais';
 
-
-//--------- Locais -----------
-$lang['locaisFiltro'] = 'Filtro';
-$lang['locaisDescricao'] = 'Descrição';
-$lang['locaisDtCadastro'] = 'Dt. Cadastro';
-$lang['locaisLista'] = 'Lista de Locais';
-
 //--------- Atividades Registradas -----------
 $lang['atividadesRegistradasFiltro'] = 'Filtro';
 $lang['atividadesRegistradasDescricao'] = 'Descrição';
 $lang['atividadesRegistradasDtCadastro'] = 'Dt. Cadastro';
 $lang['atividadesRegistradasLista'] = 'Lista de Atividades Registradas';
-
-//--------- Elementos Situações -----------
-$lang['elementosSituacoesFiltro'] = 'Filtro';
-$lang['elementosSituacoesDescricao'] = 'Descrição';
-$lang['elementosSituacoesDtCadastro'] = 'Dt. Cadastro';
-$lang['elementosSituacoesLista'] = 'Lista de Situações Elementos';
-
-//--------- Elementos Situações -----------
-$lang['particupacaoFiltro'] = 'Filtro';
-$lang['particupacaoDescricao'] = 'Descrição';
-$lang['particupacaoDtCadastro'] = 'Dt. Cadastro';
-$lang['particupacaoLista'] = 'Lista de Participações';
-
 
 //--------- Atividades Registradas -----------
 $lang['registroAtividadePeriodo'] = 'Período';
@@ -59,12 +39,57 @@ $lang['verRegistroAtividadeListaEquipe'] = 'Lista de membros da Equipe';
 $lang['verRegistroAtividadePessoa'] = 'Pessoa';
 $lang['verRegistroAtividadeMembroDaEquipe'] = 'Membros da Equipe';
 
-//--------- Pontes -----------
-$lang['ponteFiltro'] = 'Filtro';
-$lang['ponteDescricao'] = 'Descrição';
-$lang['ponteLista'] = 'Lista de Ponte';
-$lang['ponteDtCadastro'] = 'Dt. Cadastro';
-$lang['ponte'] = '';
+//--------- Equipamento Instalacoes -----------
+$lang['equipamentoInstalacoesFiltro'] = 'Filtro';
+$lang['equipamentoInstalacoesDescricao'] = 'Descrição';
+$lang['equipamentoInstalacoesLista'] = 'Lista de Instalações de Equipamento';
+$lang['equipamentoInstalacoesDtCadastro'] = 'Dt. Cadastro';
+$lang['equipamentoInstalacoes'] = '';
+
+//--------- Equipamento Portes -----------
+$lang['equipamentoPortesFiltro'] = 'Filtro';
+$lang['equipamentoPortesDescricao'] = 'Descrição';
+$lang['equipamentoPortesLista'] = 'Lista de Portes de Equipamento';
+$lang['equipamentoPortesDtCadastro'] = 'Dt. Cadastro';
+
+//--------- Equipamento Mobilidade -----------
+$lang['equipamentoMobilidadesFiltro'] = 'Filtro';
+$lang['equipamentoMobilidadesDescricao'] = 'Descrição';
+$lang['equipamentoMobilidadesLista'] = 'Lista de Portes de Equipamento';
+$lang['equipamentoMobilidadesDtCadastro'] = 'Dt. Cadastro';
+
+//--------- Corpo Numeros -----------
+$lang['corpoNumerosFiltro'] = 'Filtro';
+$lang['corpoNumerosDescricao'] = 'Descrição';
+$lang['corpoNumerosLista'] = 'Lista de Numeros de Corpos';
+$lang['corpoNumerosDtCadastro'] = 'Dt. Cadastro';
+
+//--------- Corpo Posicoes -----------
+$lang['corpoPosicoesFiltro'] = 'Filtro';
+$lang['corpoPosicoesDescricao'] = 'Descrição';
+$lang['corpoPosicoesLista'] = 'Lista de Posições de Corpos';
+$lang['corpoPosicoesDtCadastro'] = 'Dt. Cadastro';
+
+//--------- Espaço Localização -----------
+$lang['espacoLocalizacoesFiltro'] = 'Filtro';
+$lang['espacoLocalizacoesDescricao'] = 'Descrição';
+$lang['espacoLocalizacoesLista'] = 'Lista de Posições de Corpos';
+$lang['espacoLocalizacoesDtCadastro'] = 'Dt. Cadastro';
+
+//--------- Turnos ocorrencia -----------
+$lang['turnosOcorrenciaFiltro'] = 'Filtro';
+$lang['turnosOcorrenciaDescricao'] = 'Descrição';
+$lang['turnosOcorrenciaLista'] = 'Lista de Turnos';
+$lang['turnosOcorrenciaDtCadastro'] = 'Dt. Cadastro';
+
+//--------- Turnos ocorrencia -----------
+$lang['equipeGrupoAtividadePessoa'] = 'Pessoa';
+$lang['equipeGrupoAtividadeDtCadastro'] = 'Dt.Cadastro';
+$lang['equipeGrupoAtividadeLista'] = 'Equipe';
+$lang['equipeGrupoAtividadeCoordenador'] = 'Coordenador';
+$lang['equipeGrupoAtividadeCoordenadorSim'] = 'Sim';
+$lang['equipeGrupoAtividadeCoordenadorNao'] = 'Não';
+
 
 //--------- Grupos Atividades -----------
 $lang['grupoAtividadeFiltro'] = 'Filtro';

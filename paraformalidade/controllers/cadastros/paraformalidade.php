@@ -9,7 +9,7 @@ class Paraformalidade extends Controller {
         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
         $this->load->model('../../util/models/UploadModel', 'uploadModel');
         $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
-        $this->load->model('cadastros/GrupoAtividadeModel', 'grupoAtividadeModel');
+        $this->load->model('cadastros/GruposAtividadesModel', 'grupoAtividadeModel');
         $this->load->model('cadastrosBasicos/AtividadeRegistradaModel', 'atividadeRegistradaModel');
         $this->load->model('cadastrosBasicos/LocalModel', 'localModel');
         $this->load->model('cadastrosBasicos/CondicaoAmbientalModel', 'condicoesAmbientaisModel');

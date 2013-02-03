@@ -9,12 +9,6 @@ $lang['locaisDescricaoDeveSerInformado'] = 'Local deve ser informado';
 //--------- Atividades Registradas -----------
 $lang['AtividadesRegistradasDescricaoDeveSerInformado'] = 'Atividade Registrada deve ser informado';
 
-//--------- Elementos Situções -----------
-$lang['elementosSituacoesDescricaoDeveSerInformado'] = 'Elemento Situação deve ser informado';
-
-//--------- Participacoes -----------
-$lang['participacaoDescricaoDeveSerInformado'] = 'Tipo de Participação deve ser informado';
-
 //--------- Atividades Registrada -----------
 $lang['atividadeRegistradaDeveSerInformado'] = 'Saída ou Entrada deve ser informado';
 

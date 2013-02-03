@@ -8,7 +8,7 @@
 		function __construct(){
 			parent::__construct();
 			$this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
-                        $this->load->model('cadastros/GrupoAtividadeModel','grupoAtividadeModel');
+                        $this->load->model('cadastros/GruposAtividadesModel','grupoAtividadeModel');
                         $this->load->model('cadastros/ParaformalidadeModel', 'paraformalidadeModel');
                         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
 		}

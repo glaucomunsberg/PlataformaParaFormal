@@ -1,3 +1,99 @@
+Versões do Sistema
+   ↘ Versão 0.6             - Novo banco de dados, remodelagem de todos os programas
+   ↘ Versão 0.0 a 0.5 LTS   - Final do Arquivo
+
+Detalhes de Versão:
+Versão 0.6
+    ≃ paraformalidade/controllers/cadastrosBasicos/colaborador.php ➜ paraformalidade/controllers/cadastros/colaboradores.php
+    ✎ paraformalidade/controllers/cadastros/equipeGrupoAtividade.php
+    ✔ paraformalidade/controllers/cadastros/equipesGruposAtividades.php
+    ✎ paraformalidade/controllers/cadastros/galeriaDaParaformalidade.php
+    ≃ paraformalidade/controllers/cadastros/grupoAtividade.php ➜ paraformalidade/controllers/cadastros/gruposAtividades.php
+    ✎ paraformalidade/controllers/cadastros/paraformalidade.php
+    ≃ paraformalidade/controllers/cadastrosBasicos/atividadeRegistrada.php ➜ paraformalidade/controllers/cadastrosBasicos/atividadesRegistrada.php
+    ≃ paraformalidade/controllers/cadastrosBasicos/condicaoAmbiental.php ➜ paraformalidade/controllers/cadastrosBasicos/condicoesAmbiental.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/corpoNumeros.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/corpoPosicoes.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/elementoSituacao.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/equipamentoInstalacoes.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/equipamentoMobilidades.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/equipamentoPortes.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/espacoLocalizacoes.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/local.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/participacao.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/ponte.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/quantidadesRegistrada.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/turnosOcorrencia.php
+    ✎ paraformalidade/language/pt-br/paraformalidade_labels_lang.php
+    ✎ paraformalidade/language/pt-br/paraformalidade_messages_lang.php
+    ≃ paraformalidade/models/cadastrosBasicos/colaboradormodel.php ➜ paraformalidade/models/cadastros/colaboradoresmodel.php
+    ✘ paraformalidade/models/cadastros/equipegrupoatividademodel.php
+    ✔ paraformalidade/models/cadastros/equipesgruposatividadesmodel.php
+    ≃ paraformalidade/models/cadastros/grupoatividademodel.php ➜ paraformalidade/models/cadastros/gruposatividadesmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/atividaderegistradamodel.php ➜ paraformalidade/models/cadastrosBasicos/atividadesregistradamodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/condicaoambientalmodel.php ➜ paraformalidade/models/cadastrosBasicos/condicoesambientalmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/pontemodel.php ➜ paraformalidade/models/cadastrosBasicos/corponumerosmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/localmodel.php ➜ paraformalidade/models/cadastrosBasicos/corpoposicoesmodel.php
+    ✘ paraformalidade/models/cadastrosBasicos/elementosituacaomodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/equipamentoinstalacoesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/equipamentomobilidadesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/equipamentoportesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/espacolocalizacoesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/pessoaprocedenciasmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/quantidadesregistradamodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/sentidosmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/participacaomodel.php ➜ paraformalidade/models/cadastrosBasicos/turnosocorrenciamodel.php
+    ✎ paraformalidade/models/equipe/registroatividademodel.php
+    ≃ paraformalidade/views/cadastrosBasicos/colaboradorFiltroView.php ➜ paraformalidade/views/cadastros/colaboradoresFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/colaboradorView.php ➜ paraformalidade/views/cadastros/colaboradoresView.php
+    ✔ paraformalidade/views/cadastros/equipeGruposAtividadesFiltroView.php
+    ✔ paraformalidade/views/cadastros/equipeGruposAtividadesView.php
+    ≃ paraformalidade/views/cadastros/grupoAtividadeFiltroView.php ➜ paraformalidade/views/cadastros/gruposAtividadesFiltroView.php
+    ≃ paraformalidade/views/cadastros/grupoAtividadeView.php ➜ paraformalidade/views/cadastros/gruposAtividadesView.php
+    ≃ paraformalidade/views/cadastrosBasicos/atividadeRegistradaFiltroView.php ➜ paraformalidade/views/cadastrosBasicos/atividadesRegistradaFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/atividadeRegistradaView.php ➜ paraformalidade/views/cadastrosBasicos/atividadesRegistradaView.php
+    ≃ paraformalidade/views/cadastrosBasicos/condicaoAmbientalFiltroView.php ➜ paraformalidade/views/cadastrosBasicos/condicoesAmbientalFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/condicaoAmbientalView.php ➜ paraformalidade/views/cadastrosBasicos/condicoesAmbientalView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoNumerosFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoNumerosView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoPosicoesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoPosicoesView.php
+    ✘ paraformalidade/views/cadastrosBasicos/elementoSituacaoFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/elementoSituacaoView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoInstalacoesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoInstalacoesView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoMobilidadesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoMobilidadesView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoPortesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoPortesView.php
+    ✔ paraformalidade/views/cadastrosBasicos/espacoLocalizacoesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/espacoLocalizacoesView.php
+    ✘ paraformalidade/views/cadastrosBasicos/localFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/localView.php
+    ✘ paraformalidade/views/cadastrosBasicos/participacaoFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/participacaoView.php
+    ✘ paraformalidade/views/cadastrosBasicos/ponteFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/ponteView.php
+    ✔ paraformalidade/views/cadastrosBasicos/quantidadesRegistradaFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/quantidadesRegistradaView.php
+    ✔ paraformalidade/views/cadastrosBasicos/turnosOcorrenciaFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/turnosOcorrenciaView.php
+    ✎ public/controllers/escolha.php
+    ✎ system/config/database.php
+    ✔ system/language/pt-br/db_lang.php
+
+    ◬ Banco de Dados         : ATENÇÃO banco de dados REMODELADO!
+    ◬ modulo paraformalidade : Modificação TOTAL dos programas, para atender a realidade da nova modelagem do BD
+
+Legenda:
+
+[estable version].[change in their behavior].[version of the struct]
+    class manipulated
+        modifications {[↘:"description", ✔:"created", ✎:"edited", ✘:"removed", ⌛="problem to solve", ◬ ="Atention", ≃ ="Renamed: to ➜ from" ]}
+
+=======================================================================================================
+Versões Antigas
+
 Versão 0.0
         Implementação
             Criação do banco de dados Beta
@@ -219,5 +315,3 @@ Versão 0.5.LTS
             documentacao    - organizada a correção
         Nota
             Essa é a versão com apoio para se usar. Todos os bugs foram corrigidos e a plataforma está operante.
-            
-            

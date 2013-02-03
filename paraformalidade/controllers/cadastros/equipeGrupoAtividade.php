@@ -9,7 +9,7 @@
 			parent::__construct();
 			$this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
                         $this->load->model('../../gerenciador/models/PessoaModel', 'pessoaModel');
-                        $this->load->model('cadastros/GrupoAtividadeModel', 'grupoAtividadeModel');
+                        $this->load->model('cadastros/GruposAtividadesModel', 'grupoAtividadeModel');
                         $this->load->model('cadastros/EquipeGrupoAtividadeModel', 'equipeGrupoAtividadeModel');
 		}
 		

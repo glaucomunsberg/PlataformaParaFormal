@@ -102,7 +102,16 @@ class PessoaModel extends Model {
         $this->db->where('pessoa_id', $idPessoa);
         return $this->db->get('pessoas_grupos')->result();
     }
-
+    
+    public function getPessoaByNome($nome) {
+        $this->db->select('p.id, p.nome');
+        $this->db->from('pessoas as p');
+        if($nome != '')
+            $this->db->like('upper(p.nome)', strtoupper($nome));
+        $this->db->order_by('p.nome', 'asc');
+        $this->db->limit('20');
+        return $this->db->get('')->result();
+    }
     function validaPessoa($data) {
         $this->validate->setData($data);
         $this->validate->validateField('txtNome', array('required'), lang('pessoaNomeRequerido'));

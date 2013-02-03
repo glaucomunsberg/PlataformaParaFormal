@@ -20,7 +20,7 @@ class Cidade extends Controller {
     function listaCidades(){
         $this->cidadeModel->getCidades($_GET);
     }
-
+    
     function novo(){
         $data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Novo';			
         $data['estados'] = $this->cidadeModel->getEstadosCombo();

@@ -3,7 +3,7 @@
 class Escolha extends Controller{
     function __construct(){
         parent::__construct();
-        $this->load->model('../../paraformalidade/models/cadastros/grupoAtividadeModel', 'grupoAtividadeModel');
+        $this->load->model('../../paraformalidade/models/cadastros/gruposAtividadesModel', 'grupoAtividadeModel');
         $this->load->model('../../paraformalidade/models/cadastros/paraformalidadeModel', 'paraformalidadeModel');
     }
     
