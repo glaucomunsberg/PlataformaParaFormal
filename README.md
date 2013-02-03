@@ -34,7 +34,7 @@ criação e gerenciamento ágil das informações relativas ao cotidiano do proj
 banco de dados.
 
 ### Quero EXPERIMENTAR, onde faço isso?!
-  Só entrar no link http://plataformaparformal.glaucomunsberg.com
+  Só entrar no link http://plataformaparaformal.glaucomunsberg.com/
 
 ### Autores e Contribuintes  
  O projeto Plataforma do Para-Formal teve início em Março de 2012 com o acadêmico e desenvolvedor @glaucomunsberg sobre a coordenação do Prof. Dr. Eduardo Rocha, ambos vinculados a UFPel.
