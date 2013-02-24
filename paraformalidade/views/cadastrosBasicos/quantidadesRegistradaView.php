@@ -6,12 +6,12 @@
 	<?=end_ToolBar();?>
 
 	<?=begin_TabPanel('tabQuantidadesRegistrada');?>
-		<?=begin_Tab(lang('quantidadessRegistradasFiltro'));?>
+		<?=begin_Tab(lang('quantidadesRegistradasFiltro'));?>
 			<?=begin_form('paraformalidade/cadastrosBasicos/quantidadesRegistrada/salvar', 'formQuantidadesRegistrada');?>
-				<?=form_hidden('txtQuantidadesRegistradaId', @$quantidadess_registradas->id);?>
+				<?=form_hidden('txtQuantidadesRegistradaId', @$quantidades_registradas->id);?>
 
-				<?=form_label('lblDescricao', lang('quantidadessRegistradasDescricao'), 80);?>
-				<?=form_textField('txtDescricao', @$quantidadess_registradas->descricao, 400, '');?>
+				<?=form_label('lblDescricao', lang('quantidadesRegistradasDescricao'), 80);?>
+				<?=form_textField('txtDescricao', @$quantidades_registradas->descricao, 400, '');?>
 			<?=end_form();?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
@@ -20,14 +20,14 @@
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Quantidadess Registradas');
+    	window.open ('<?=WIKI;?>Quantidades Registradas');
         }
 
 	function novo(){
 		location.href = BASE_URL+'paraformalidade/cadastrosBasicos/quantidadesRegistrada/novo/';
 	}
 
-	function listaQuantidadessRegistradas(){
+	function listaQuantidadesRegistradas(){
 		location.href = BASE_URL+'paraformalidade/cadastrosBasicos/quantidadesRegistrada/';
 	}
 
@@ -40,8 +40,8 @@
 			messageErrorBox(data.error.message, data.error.field);
 		} else {
 			if(data.success != undefined) {
-				$('#txtQuantidadesRegistradaId').val(data.quantidadess_registradas.id);
-                        messageBox(data.success.message, listaQuantidadessRegistradas);
+				$('#txtQuantidadesRegistradaId').val(data.quantidades_registradas.id);
+                        messageBox(data.success.message, listaQuantidadesRegistradas);
 			}
 	    }
 	} 

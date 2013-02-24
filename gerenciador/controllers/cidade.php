@@ -33,6 +33,13 @@ class Cidade extends Controller {
         $data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']) . " / Editar / " . @$data['cidade']->nome;
         $this->load->view('cidadeView', $data);
     }
+    
+    function buscarCidade(){
+        $this->ajax->addAjaxCombo(
+                $this->cidadeModel->getCidadeByNome($_GET['q'])
+        );
+        $this->ajax->returnAjax();
+    }
 		
     function salvar(){
         if(empty($_POST['txtCidadeId'])){

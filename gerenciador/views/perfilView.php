@@ -31,7 +31,7 @@
 				<?=new_line();?>
 
 				<?=begin_JqGridPanel('gridProgramasPai', 150, '', base_url().'gerenciador/perfil/listaProgramasPai/',
-					array('autoload'=> false, 'sortname'=> 'nome', 'autowidth'=> true, 'multiselect' => false, 'moveRows' => true, 'caption'=> 'Lista de Programas'));?>
+					array('autoload'=> false, 'sortname'=> 'nome', 'autowidth'=> true, 'multiselect' => true, 'moveRows' => true, 'caption'=> 'Lista de Programas'));?>
 					<?=addJqGridColumn('id', 'ID', 0, 'right', array('hidden'=> true));?>
 					<?=addJqGridColumn('nome', lang('perfilPrograma'), 510, 'left');?>
 				<?=end_JqGridPanel();?>

@@ -16,8 +16,8 @@
 			$this->load->view('cadastrosBasicos/quantidadesRegistradaFiltroView', $data);
 		}
 		
-		function listaQuantidadessRegistradas(){
-			$this->quantidadesRegistradaModel->getQuantidadessRegistradas($_GET);
+		function listaQuantidadesRegistradas(){
+			$this->quantidadesRegistradaModel->getQuantidadesRegistradas($_GET);
 		}
 		
 		function novo(){
@@ -27,7 +27,7 @@
 
 		function editar($QuantidadesRegistradaId){
 			$data['quantidadess_registradas'] = $this->quantidadesRegistradaModel->getQuantidadesRegistrada($QuantidadesRegistradaId);
-			$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['quantidadess_registradas']->descricao;
+			$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['quantidades_registradas']->descricao;
 			$this->load->view('cadastrosBasicos/quantidadesRegistradaView', $data);
 		}
 		
@@ -49,7 +49,7 @@
                         $ret = $this->quantidadesRegistradaModel->alterar($_POST);
                     }
                     if ($ret !== FALSE) {
-                        $this->ajax->addAjaxData('quantidadess_registradas', $ret);
+                        $this->ajax->addAjaxData('quantidades_registradas', $ret);
                         $this->ajax->ajaxMessage('success', lang('registroGravado'));
                     } else {
                         if (!$this->quantidadesRegistradaModel->validate->existsErrors()) {

@@ -14,10 +14,10 @@ $lang['colaboradorCidade'] = 'Cidade';
 $lang['colaboradorPessoaGrid'] = 'Lista de Pessoas';
 
 //--------- Condições Ambientais -----------
-$lang['condicoesAmbientaisFiltro'] = 'Filtro';
-$lang['condicoesAmbientaisDescricao'] = 'Descrição';
-$lang['condicoesAmbientaisDtCadastro'] = 'Dt. Cadastro';
-$lang['condicoesAmbientaisLista'] = 'Lista de Condições Ambientais';
+$lang['condicionantesAmbientaisFiltro'] = 'Filtro';
+$lang['condicionantesAmbientaisDescricao'] = 'Descrição';
+$lang['condicionantesAmbientaisDtCadastro'] = 'Dt. Cadastro';
+$lang['condicionantesAmbientaisLista'] = 'Lista de Condicionantes Ambientais';
 
 //--------- Atividades Registradas -----------
 $lang['atividadesRegistradasFiltro'] = 'Filtro';
@@ -73,7 +73,7 @@ $lang['corpoPosicoesDtCadastro'] = 'Dt. Cadastro';
 //--------- Espaço Localização -----------
 $lang['espacoLocalizacoesFiltro'] = 'Filtro';
 $lang['espacoLocalizacoesDescricao'] = 'Descrição';
-$lang['espacoLocalizacoesLista'] = 'Lista de Posições de Corpos';
+$lang['espacoLocalizacoesLista'] = 'Lista de Localizações espaciais';
 $lang['espacoLocalizacoesDtCadastro'] = 'Dt. Cadastro';
 
 //--------- Turnos ocorrencia -----------
@@ -90,6 +90,11 @@ $lang['equipeGrupoAtividadeCoordenador'] = 'Coordenador';
 $lang['equipeGrupoAtividadeCoordenadorSim'] = 'Sim';
 $lang['equipeGrupoAtividadeCoordenadorNao'] = 'Não';
 
+//--------- Quantidades Registradas -----------
+$lang['quantidadesRegistradasFiltro'] = 'Filtro';
+$lang['quantidadesRegistradasDescricao'] = 'Descrição';
+$lang['quantidadesRegistradasLista'] = 'Lista de Quantidades de Registros';
+$lang['quantidadesRegistradasDtCadastro'] = 'Dt. Cadastro';
 
 //--------- Grupos Atividades -----------
 $lang['grupoAtividadeFiltro'] = 'Filtro';
@@ -142,3 +147,13 @@ $lang['equipeGrupoAtividadeEquipe'] = 'Equipe';
 $lang['equipeGrupoAtividadeResponsavelGeral'] = 'Responsável geral';
 $lang['equipeGrupoAtividadeSim'] = 'Sim';
 $lang['equipeGrupoAtividadeNao'] = 'Não';
+
+//--------- Cenas -----------
+$lang['cenasCenas'] = 'Cenas';
+$lang['cenasNome'] = 'Nome';
+$lang['cenasDescricao'] = 'Descricao';
+$lang['cenasEstaAtivo'] = 'Ativo';
+$lang['cenasDtOcorrencia'] = 'Dt. Ocorrência';
+$lang['cenasSalvar'] = 'Salvar';
+$lang['cenasExcluir'] = 'Excluir';
+$lang['cenasNovo'] = 'Novo';

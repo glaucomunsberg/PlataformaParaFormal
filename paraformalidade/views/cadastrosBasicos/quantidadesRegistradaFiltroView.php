@@ -5,24 +5,24 @@
 	<?=begin_ToolBar(array('abrir', 'salvar', 'imprimir' ));?>
 	<?=end_ToolBar();?>
 
-	<?=begin_TabPanel('tabQuantidadessRegistradas');?>
-		<?=begin_Tab(lang('quantidadessRegistradasFiltro'));?>
-			<?=form_label('lblDescricao', lang('quantidadessRegistradasDescricao'), 80);?>
+	<?=begin_TabPanel('tabQuantidadesRegistradas');?>
+		<?=begin_Tab(lang('quantidadesRegistradasFiltro'));?>
+			<?=form_label('lblDescricao', lang('quantidadesRegistradasDescricao'), 80);?>
 			<?=form_textField('txtDescricao', '', 300, '');?>
 		<?=end_Tab();?>
 	<?=end_TabPanel();?>
 	
-	<?=begin_JqGridPanel('gridQuantidadesRegistrada', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/quantidadesRegistrada/listaQuantidadessRegistradas/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('quantidadessRegistradasLista')));?>
+	<?=begin_JqGridPanel('gridQuantidadesRegistrada', 'auto', '', base_url().'paraformalidade/cadastrosBasicos/quantidadesRegistrada/listaQuantidadesRegistradas/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('quantidadesRegistradasLista')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-		<?=addJqGridColumn('descricao', lang('quantidadessRegistradasDescricao'), 300, 'left', array('sortable'=>true));?>
-		<?=addJqGridColumn('dt_cadastro', lang('quantidadessRegistradasDtCadastro'), 70, 'center', array('sortable'=>true));?>
+		<?=addJqGridColumn('descricao', lang('quantidadesRegistradasDescricao'), 300, 'left', array('sortable'=>true));?>
+		<?=addJqGridColumn('dt_cadastro', lang('quantidadesRegistradasDtCadastro'), 70, 'center', array('sortable'=>true));?>
 	<?=end_JqGridPanel();?>
 	
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
 <script>
 	function ajuda(){
-    	window.open ('<?=WIKI;?>Quantidadess Registradas');
+    	window.open ('<?=WIKI;?>Quantidades Registradas');
     }
 	function pesquisar(){
                gridQuantidadesRegistrada.addParam('descricao', $('#txtDescricao').val());

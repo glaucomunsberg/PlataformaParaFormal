@@ -25,3 +25,6 @@ $lang['gruposDeAtividadesDevidoProblema'] = 'Devido a um problema de formataçã
 //--------- Paraformalidade -----------
 $lang['paraformalidadeCamposDevemSerInformados'] = 'Certifique-se que os campos estão preenchidos';
 $lang['paraformalidadeAtencaoExcluir'] = 'ATENÇÃO! Você tem certeza que deseja remover essa paraformalidade permanentimente?!';
+
+//--------- Cenas -----------
+$lang['cenasCamposDevemSerInformados'] = 'Certifique-se que os campos estão preenchidos';

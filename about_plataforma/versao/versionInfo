@@ -1,0 +1,371 @@
+Versões do Sistema
+   ↘ Versão 0.7             - Programas mais estáveis e funcionais, dump do novo banco incorporado
+   ↘ Versão 0.6             - Novo banco de dados, remodelagem de todos os programas
+   ↘ Versão 0.0 a 0.5 LTS   - Final do Arquivo
+
+Detalhes de Versão:
+Versão 0.7
+    ✘ _documentacao/.htaccess
+    ✘ _documentacao/Cobalto-PHP_core/cobalto-php.tar.gz
+    ✘ _documentacao/index.html
+    ≃ _documentacao/about_plataforma/modelagemBD/Aurora.sql -> about_plataforma/dataBase/Aurora.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/AuroraWiki.sql -> about_plataforma/dataBase/AuroraWiki.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/atividades_registradas.sql -> about_plataforma/dataBase/paraformal/atividades_registradas.sql
+    ✔ about_plataforma/dataBase/paraformal/cenas.sql
+    ✔ about_plataforma/dataBase/paraformal/climas.sql
+    ✔ about_plataforma/dataBase/paraformal/climas_paraformalidade.sql
+    ✔ about_plataforma/dataBase/paraformal/condicionantes_ambientais.sql
+    ✔ about_plataforma/dataBase/paraformal/condicionantes_ambientais_paraformalidade.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/condicoes_ambientais.sql -> about_plataforma/dataBase/paraformal/condicoes_ambientais.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/corpo_numeros.sql -> about_plataforma/dataBase/paraformal/corpo_numeros.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/corpo_posicoes.sql -> about_plataforma/dataBase/paraformal/corpo_posicoes.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/equipamento_instalacoes.sql -> about_plataforma/dataBase/paraformal/equipamento_instalacoes.sql
+    ✔ about_plataforma/dataBase/paraformal/equipamento_instalacoes_paraformalidade.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/equipamento_mobilidades.sql -> about_plataforma/dataBase/paraformal/equipamento_mobilidades.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/equipamento_portes.sql -> about_plataforma/dataBase/paraformal/equipamento_portes.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/equipe_grupos_atividade.sql -> about_plataforma/dataBase/paraformal/equipe_grupos_atividade.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/equipe_registros_atividades.sql -> about_plataforma/dataBase/paraformal/equipe_registros_atividades.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/espaco_localizacoes.sql -> about_plataforma/dataBase/paraformal/espaco_localizacoes.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/grupos_atividades.sql -> about_plataforma/dataBase/paraformal/grupos_atividades.sql
+    ✔ about_plataforma/dataBase/paraformal/imagens_paraformalidades.sql
+    ✔ about_plataforma/dataBase/paraformal/participacoes_equipe.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/pessoa_procedencias.sql -> about_plataforma/dataBase/paraformal/pessoa_procedencias.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/quantidades_registrada.sql -> about_plataforma/dataBase/paraformal/quantidades_registrada.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/sentidos.sql -> about_plataforma/dataBase/paraformal/sentidos.sql
+    ✔ about_plataforma/dataBase/paraformal/sentidos_paraformalidade.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformal/turnos_ocorrencia.sql -> about_plataforma/dataBase/paraformal/turnos_ocorrencia.sql
+    ≃ _documentacao/about_plataforma/modelagemBD/paraformalidade.clay -> about_plataforma/dataBase/paraformalidade.clay
+    ≃ _documentacao/about_plataforma/tools/atualizarPlataforma.sh -> about_plataforma/tools/atualizarPlataforma.sh
+    ≃ _documentacao/about_plataforma/tools/atualizarPlataforma.sh~ -> about_plataforma/tools/atualizarPlataforma.sh~
+    ≃ _documentacao/about_plataforma/tools/langs_needed.sh -> about_plataforma/tools/langs_needed.sh
+    ≃ _documentacao/about_plataforma/tools/langs_used.sh -> about_plataforma/tools/langs_used.sh
+    ≃ _documentacao/about_plataforma/versao/proposedChanges -> about_plataforma/versao/proposedChanges
+    ≃ _documentacao/about_plataforma/versao/versionInfo -> about_plataforma/versao/versionInfo
+    ✎ gerenciador/controllers/cidade.php
+    ✎ gerenciador/views/perfilView.php
+    ✔ paraformalidade/controllers/cadastros/cenas.php
+    ≃ paraformalidade/controllers/cadastrosBasicos/condicoesAmbiental.php -> paraformalidade/controllers/cadastrosBasicos/condicionantesAmbiental.php
+    ✎ paraformalidade/controllers/cadastrosBasicos/quantidadesRegistrada.php
+    ✎ paraformalidade/language/pt-br/paraformalidade_labels_lang.php
+    ✎ paraformalidade/language/pt-br/paraformalidade_messages_lang.php
+    ✔ paraformalidade/models/cadastros/cenasmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/condicoesambientalmodel.php -> paraformalidade/models/cadastrosBasicos/condicionantesambientalmodel.php
+    ✎ paraformalidade/models/cadastrosBasicos/quantidadesregistradamodel.php
+    ✎ paraformalidade/views/cadastros/gruposAtividadesView.php
+    ≃ paraformalidade/views/cadastrosBasicos/condicoesAmbientalFiltroView.php -> paraformalidade/views/cadastrosBasicos/condicionantesAmbientalFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/condicoesAmbientalView.php -> paraformalidade/views/cadastrosBasicos/condicionantesAmbientalView.php
+    ✎ paraformalidade/views/cadastrosBasicos/quantidadesRegistradaFiltroView.php
+    ✎ paraformalidade/views/cadastrosBasicos/quantidadesRegistradaView.php
+
+Versão 0.6
+    ≃ paraformalidade/controllers/cadastrosBasicos/colaborador.php ➜ paraformalidade/controllers/cadastros/colaboradores.php
+    ✎ paraformalidade/controllers/cadastros/equipeGrupoAtividade.php
+    ✔ paraformalidade/controllers/cadastros/equipesGruposAtividades.php
+    ✎ paraformalidade/controllers/cadastros/galeriaDaParaformalidade.php
+    ≃ paraformalidade/controllers/cadastros/grupoAtividade.php ➜ paraformalidade/controllers/cadastros/gruposAtividades.php
+    ✎ paraformalidade/controllers/cadastros/paraformalidade.php
+    ≃ paraformalidade/controllers/cadastrosBasicos/atividadeRegistrada.php ➜ paraformalidade/controllers/cadastrosBasicos/atividadesRegistrada.php
+    ≃ paraformalidade/controllers/cadastrosBasicos/condicaoAmbiental.php ➜ paraformalidade/controllers/cadastrosBasicos/condicoesAmbiental.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/corpoNumeros.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/corpoPosicoes.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/elementoSituacao.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/equipamentoInstalacoes.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/equipamentoMobilidades.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/equipamentoPortes.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/espacoLocalizacoes.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/local.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/participacao.php
+    ✘ paraformalidade/controllers/cadastrosBasicos/ponte.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/quantidadesRegistrada.php
+    ✔ paraformalidade/controllers/cadastrosBasicos/turnosOcorrencia.php
+    ✎ paraformalidade/language/pt-br/paraformalidade_labels_lang.php
+    ✎ paraformalidade/language/pt-br/paraformalidade_messages_lang.php
+    ≃ paraformalidade/models/cadastrosBasicos/colaboradormodel.php ➜ paraformalidade/models/cadastros/colaboradoresmodel.php
+    ✘ paraformalidade/models/cadastros/equipegrupoatividademodel.php
+    ✔ paraformalidade/models/cadastros/equipesgruposatividadesmodel.php
+    ≃ paraformalidade/models/cadastros/grupoatividademodel.php ➜ paraformalidade/models/cadastros/gruposatividadesmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/atividaderegistradamodel.php ➜ paraformalidade/models/cadastrosBasicos/atividadesregistradamodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/condicaoambientalmodel.php ➜ paraformalidade/models/cadastrosBasicos/condicoesambientalmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/pontemodel.php ➜ paraformalidade/models/cadastrosBasicos/corponumerosmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/localmodel.php ➜ paraformalidade/models/cadastrosBasicos/corpoposicoesmodel.php
+    ✘ paraformalidade/models/cadastrosBasicos/elementosituacaomodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/equipamentoinstalacoesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/equipamentomobilidadesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/equipamentoportesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/espacolocalizacoesmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/pessoaprocedenciasmodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/quantidadesregistradamodel.php
+    ✔ paraformalidade/models/cadastrosBasicos/sentidosmodel.php
+    ≃ paraformalidade/models/cadastrosBasicos/participacaomodel.php ➜ paraformalidade/models/cadastrosBasicos/turnosocorrenciamodel.php
+    ✎ paraformalidade/models/equipe/registroatividademodel.php
+    ≃ paraformalidade/views/cadastrosBasicos/colaboradorFiltroView.php ➜ paraformalidade/views/cadastros/colaboradoresFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/colaboradorView.php ➜ paraformalidade/views/cadastros/colaboradoresView.php
+    ✔ paraformalidade/views/cadastros/equipeGruposAtividadesFiltroView.php
+    ✔ paraformalidade/views/cadastros/equipeGruposAtividadesView.php
+    ≃ paraformalidade/views/cadastros/grupoAtividadeFiltroView.php ➜ paraformalidade/views/cadastros/gruposAtividadesFiltroView.php
+    ≃ paraformalidade/views/cadastros/grupoAtividadeView.php ➜ paraformalidade/views/cadastros/gruposAtividadesView.php
+    ≃ paraformalidade/views/cadastrosBasicos/atividadeRegistradaFiltroView.php ➜ paraformalidade/views/cadastrosBasicos/atividadesRegistradaFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/atividadeRegistradaView.php ➜ paraformalidade/views/cadastrosBasicos/atividadesRegistradaView.php
+    ≃ paraformalidade/views/cadastrosBasicos/condicaoAmbientalFiltroView.php ➜ paraformalidade/views/cadastrosBasicos/condicoesAmbientalFiltroView.php
+    ≃ paraformalidade/views/cadastrosBasicos/condicaoAmbientalView.php ➜ paraformalidade/views/cadastrosBasicos/condicoesAmbientalView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoNumerosFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoNumerosView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoPosicoesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/corpoPosicoesView.php
+    ✘ paraformalidade/views/cadastrosBasicos/elementoSituacaoFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/elementoSituacaoView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoInstalacoesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoInstalacoesView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoMobilidadesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoMobilidadesView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoPortesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/equipamentoPortesView.php
+    ✔ paraformalidade/views/cadastrosBasicos/espacoLocalizacoesFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/espacoLocalizacoesView.php
+    ✘ paraformalidade/views/cadastrosBasicos/localFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/localView.php
+    ✘ paraformalidade/views/cadastrosBasicos/participacaoFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/participacaoView.php
+    ✘ paraformalidade/views/cadastrosBasicos/ponteFiltroView.php
+    ✘ paraformalidade/views/cadastrosBasicos/ponteView.php
+    ✔ paraformalidade/views/cadastrosBasicos/quantidadesRegistradaFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/quantidadesRegistradaView.php
+    ✔ paraformalidade/views/cadastrosBasicos/turnosOcorrenciaFiltroView.php
+    ✔ paraformalidade/views/cadastrosBasicos/turnosOcorrenciaView.php
+    ✎ public/controllers/escolha.php
+    ✎ system/config/database.php
+    ✔ system/language/pt-br/db_lang.php
+
+    ◬ Banco de Dados         : ATENÇÃO banco de dados REMODELADO!
+    ◬ modulo paraformalidade : Modificação TOTAL dos programas, para atender a realidade da nova modelagem do BD
+
+Legenda:
+
+[estable version].[change in their behavior].[version of the struct]
+    class manipulated
+        modifications {[↘:"description", ✔:"created", ✎:"edited", ✘:"removed", ⌛="problem to solve", ◬ ="Atention", ≃ ="Renamed: to ➜ from" ]}
+
+=======================================================================================================
+Versões Antigas
+
+Versão 0.0
+        Implementação
+            Criação do banco de dados Beta
+            Criação do programa Cidades
+        Correção
+            System - Configuração com base no Yii
+
+Versão 0.1.0 
+	Primeira versão de fato commmitado
+
+Versão 0.1.1
+	Remoção de arquivos do sistema baseado no Yii
+
+Versão 0.1.2 
+	Inserção de novos arquivos da Plataforma baseado no Cobalto-PHP
+
+Versão 0.1.3
+	Envio ao GitHub da mais arquivos da Plataforma do Paraformal(continuação do commit 0.1.2)
+
+Versão 0.1.4
+	Correção
+                System - Correçãode integração com o DB beta
+
+Versão 0.1.5
+	UPGRADE da base Cobalto-php
+
+Versão 0.1.6
+	Implementação
+	 	Criação do programa gerencidor/pessoasTipo
+		Criação do módulo paraformalidade
+		Criação do programa paraformalidade/cadastrosBasicos/Colaborador
+	Correção
+		System - Correção das chamadas dos programas
+
+Versão 0.1.7
+	Implementação
+		Criação do programa Condições Ambientais - paraformalidade/cadastrosBasicos/condicoesAmbientais
+	Correção
+		Banco de Dados - DB Aurora migrado para PostgreSQL
+
+Versão 0.1.8
+	Implementação
+		Criação do programa Atividades Registradas  - paraformalidade/cadastrosBasicos/atividadeRegistrada
+		Criação do programa Locais                  - paraformalidade/cadastrosBasicos/local
+	Correção 
+                Condições Ambientais - Correções gerais
+
+Versão 0.1.9
+        Implementação
+                Criação do programa Elementos Situação      -  paraformalidade/cadastrosBasicos/elementosSituacoes
+                Criação do programa Participação            -  paraformalidade/cadastrosBasicos/participacao
+                Criação do programa Registro Atividade      - paraformalidade/equipe/registroAtividade
+                Criação do programa Ver Registro Atividade  - paraformalidade/equipe/verRegistroAtividade
+                Criação do programa Pontes                  - paraformalidade/equipe/ponte
+                Criação do helper form_MapWithMarker
+        Correção
+                System - Nova cor que dá fundo ao nome do grupo
+                System - Modificação do sistema de update, correção de execução
+                System - Modificação do layout do index
+                AuxSistem - Criacao do autualizarPlataforma.sh para auxiliar na atualização
+
+Versão 0.2.0
+	Implementação
+		Criação do programa Grupo de Atividades - paraformalidade/cadastros/grupoAtividade
+		Criação do programa Paraformalidade     - paraformalidade/cadastros/paraformalidade
+		Criação do helper form_MapWithRoute
+
+Versão 0.2.1
+        Correção
+                Grupo de Atividades e Paraformalidade - Correção de campos de dados
+
+Versão 0.2.2 e 0.2.3
+        Correção
+                Banco de Dados      - Novo dump do banco com novos campos
+                Form_MapWithRoute   - Correção e remoção de informativos e alertas
+
+Versão 0.2.4
+        Correções
+                Banco de Dados  - Nodo dump do banco com novos campos e com ajustes
+                Grupo Atividade - Correção de campos e query
+
+Versão 0.2.5
+        Correções
+            System              - Novo Header para área interna do sistema
+            System              - Update do Upload de arquivos que o sistema usa
+            Grupo de Atividades - Correções de campo e lógica
+            Pessoa Tipos        - Correção de exibição de data
+            Grupo Atividades    - Correções Finais do programa
+            Paraformalidades    - Inúmeros ajustes
+
+Versão 0.2.6
+        Correções
+            Paraformalidade - Query de dados
+
+Versão 0.2.7
+        Correções
+            System - Upload de Imagens com erro
+
+Versão 0.2.8
+        Correções
+            Paraformalidades    - Inserção, editar e deletar paraformalidade
+            System              - Correção do Maps e de acesso a pasta util via apache
+            Banco de Dados      - Inserção de novos campus e novo banco base
+            
+Versão 0.3
+        Implementação
+            Wiki - Usando a WikiMedia para gerar suporte para o usuário   
+
+Versão 0.3.1
+        Correção
+            System - Remoção de pastas de svn
+
+Versão 0.3.2
+        Correção
+            Colaboradores   - Remoção do get_parametro()
+            Login           - Login agora conta com link para a wikipedia
+
+Versão 0.3.3
+        Implementação
+            System Info - programa criado para visualizar as configurações gerais da PHP e do DB
+        Correções
+            Programas   - Modificado para que funcione com o db modificado do servidor, antiga área comentada
+            System      - Remoção de bastas .svn
+
+Versão 0.4
+        Correções
+            Paraformalidades    - Correção para edição de paraformalidades
+            Login               - Tela de login agora está totalmente linkada com a Wikiparaformal
+            System              - helper form_MapWithMarker corrigido
+        Wikiparaformal
+            Principal           - modificada
+            Paraformalidade     - criada
+
+Versão 0.4.1
+        Wikiparaformal
+            criação de um .sql versionado
+
+Versão 0.4.2
+        Correções
+            Paraformalidade -  Correção no salvar e no tornar público
+        Wikiparaformal
+            Conta com as principais ajudas de programas
+
+Versão 0.4.3
+        Correções
+            System - Footer agora conta com links para a wikiParaformal
+            System - Novo logo do sistema
+
+Versão 0.4.4
+        Implementação
+            Pessoas         - Agora faz cadastro de pessoas com proposito geral de cadastrar na plataforma
+        Correção
+            Colaboradores   - Correção no nome da grid e na filtragem
+
+Versão 0.4.5
+        Implementação
+            System                      - form_gallery gera uma galeria de imagens para serem manipuladas
+            Galeria de Paraformalidades - Cria uma galeria de imagem com base no que há de imagens no sistema
+
+Versão 0.4.6
+        Correção
+            System  - form_gallery passou pro inúmeras modificações para suportar outros tipos de arquivos
+
+Versão 0.4.7
+        Implementação
+            Equipe Grupo Atividade  - contaram com o cadastro dos membros da equipe que participou
+        Correção
+            System                  - Usuário agora troca a própria senha
+            System                  - form_gallery aprimorada
+        Wikiparaformal
+            Criação do helper para o Eq. Grup. Ativ. e ajustes nos helpers da wiki
+
+Versão 0.4.8
+        Implementação
+            Cidades             - Criação do programa para cadastrar cidades e a geolocalização das cidades
+        Correções
+            System              - form_MapWithMarker agora pode ser setado o zoom
+            Grupos de Atividade - Mensagem agora carrega só pois
+            Pessoas             - Correção do salvar pessoa
+        Wikiparaformal
+            Criação dos helpers para Cidades, Pessoas e Galeria
+            Upado o novo Aurora_wiki.sql
+
+Versão 0.4.9
+        Implementação
+            Public          - Módulo para o acesso público
+            System          - form_MapForParaformal criado para dar suporte a plataforma
+            System          - public.css especial para a área pública
+            System          - footerPublicView e headerPublicView para acesso públic diferenciado
+        Correções
+            Paraformalidade - correção na disposição da informação
+
+Versão 0.5
+        Correções
+            System              - agora carrega área pública como padrão
+            System              - cabelhaço agora possúi nova imagem
+            login               - permite o usuário voltar a área pública
+            empresa             - correção da grid 
+            grupoAcesso         - correção da grid 
+            parametro           - correção da grid
+            perfil              - correção da grid
+            programa            - correção da grid 
+            usuario             - correção da grid 
+            paraformalidade     - correção da grid 
+            atividadeRegistrada - correção da grid 
+            condicaoAmbiental   - correção da grid
+            elementoSituacao    - correção da grid 
+            participacao        - correção da grid
+            ponte               - correção da grid 
+            paraformalidade     - correção na forma de salvar
+
+Versão 0.5.LTS
+        Correções
+            System          - upload de arquivos agora recebe todo tipo de arquivo
+            System          - Erro do Ajax corrigido
+            System          - correçoes gerais em helpers
+            System          - correção de causava o deslogar do sistema
+            paraformalidade - correção para carregar todo tipo de arquivo
+            documentacao    - organizada a correção
+        Nota
+            Essa é a versão com apoio para se usar. Todos os bugs foram corrigidos e a plataforma está operante.
