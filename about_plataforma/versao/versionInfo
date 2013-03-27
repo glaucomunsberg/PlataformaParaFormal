@@ -1,9 +1,9 @@
 Versões do Sistema
+   ↘ Versão 0.7.1           - Programas corrigidos e excluidos segundo o não uso.
    ↘ Versão 0.7             - Programas mais estáveis e funcionais, dump do novo banco incorporado
    ↘ Versão 0.6             - Novo banco de dados, remodelagem de todos os programas
    ↘ Versão 0.0 a 0.5 LTS   - Final do Arquivo
 
-Detalhes de Versão:
 Versão 0.7
     ✘ _documentacao/.htaccess
     ✘ _documentacao/Cobalto-PHP_core/cobalto-php.tar.gz

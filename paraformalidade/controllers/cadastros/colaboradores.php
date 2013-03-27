@@ -7,6 +7,7 @@ class Colaboradores extends Controller {
         $this->load->model('cadastros/ColaboradoresModel', 'colaboradoresModel');
         $this->load->model('../../gerenciador/models/ProgramaModel', 'programaModel');
         $this->load->model('../../gerenciador/models/CidadeModel', 'cidadeModel');
+        $this->load->model('../../gerenciador/models/PessoaTipoModel', 'pessoaTipoModel');
     }
     
     function index() {
@@ -39,13 +40,15 @@ class Colaboradores extends Controller {
     
     function novo() {
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
+        $data['tipo_pessoa'] = $this->pessoaTipoModel->getPessoasTiposCombo();
         $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
-	$this->load->view('cadastros/colaboradorView', @$data);
+	$this->load->view('cadastros/colaboradoresView', @$data);
 		
     }
     
     function editar($colabordorId){
 	$data['colaborador'] = $this->colaboradoresModel->getColaborador($colabordorId);
+        $data['tipo_pessoa'] = $this->pessoaTipoModel->getPessoasTiposCombo();
         $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
         $data['colaboradorCidade'] = $this->cidadeModel->getCidadeById( $data['colaborador']->cidade_id );
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['colaborador']->nome;

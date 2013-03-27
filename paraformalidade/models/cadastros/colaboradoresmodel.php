@@ -13,7 +13,7 @@ class ColaboradoresModel extends Model {
             $this->db->set('profissao', $colaborador['txtColaboradorProfissao']);
         $this->db->set('dt_nascimento', ($colaborador['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
         $this->db->set('dt_cadastro', 'NOW()', false);
-        $this->db->set('pessoa_tipo_id', '1');
+        $this->db->set('pessoa_tipo_id', $colaborador['cmbTipoPessoa']);
 	$this->db->insert('pessoas');
 	$this->db->trans_complete();
 	if($this->db->trans_status() === FALSE){
@@ -29,6 +29,7 @@ class ColaboradoresModel extends Model {
 	$this->db->trans_start();
 	$this->db->set('nome', $colaborador['txtColaboradorNome']);
         $this->db->set('email', $colaborador['txtColaboradorEmail']);
+        $this->db->set('pessoa_tipo_id', $colaborador['cmbTipoPessoa']);
         if($colaborador['txtColaboradorCidadeId'] != '')
             $this->db->set('cidade_id', $colaborador['txtColaboradorCidadeId']);
         if($colaborador['txtColaboradorProfissao'] != '')
@@ -79,7 +80,7 @@ class ColaboradoresModel extends Model {
     }
 
     function getColaborador($colabordorId){
-        $this->db->select('p.id, p.nome, p.cidade_id, p.sexo, p.profissao, p.email, to_char(p.dt_nascimento, \'dd/mm/yyyy hh24:mi:ss\') as dt_nascimento',false);
+        $this->db->select('p.id, p.nome, p.cidade_id, p.sexo, p.pessoa_tipo_id, p.profissao, p.email, to_char(p.dt_nascimento, \'dd/mm/yyyy hh24:mi:ss\') as dt_nascimento',false);
         $this->db->from('pessoas as p');
 	$this->db->where('id', $colabordorId);
 	return $this->db->get('')->row();

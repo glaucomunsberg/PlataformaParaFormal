@@ -2,7 +2,7 @@
 
 	<?=path_bread($path_bread);?>
 
-	<?=begin_ToolBar(array('abrir', 'salvar', 'imprimir', 'excluir' ));?>
+	<?=begin_ToolBar(array('abrir', 'salvar', 'imprimir', 'excluir','novo' ));?>
 	<?=end_ToolBar();?>
 
 	<?=begin_TabPanel('tabPontes');?>
@@ -41,11 +41,6 @@
                gridGrupoAtividade.addParam('txtGrupoAtividadeCidadeId', $('#txtGrupoAtividadeCidadeId').val());
                gridGrupoAtividade.load();
         }
-	
-	function novo(){
-		location.href = BASE_URL+'paraformalidade/cadastros/gruposAtividades/novo/';
-	}
- 
 	
 	function gridGrupoAtividade_click(id){
 		location.href = BASE_URL+'paraformalidade/cadastros/equipesGruposAtividades/editar/'+id;

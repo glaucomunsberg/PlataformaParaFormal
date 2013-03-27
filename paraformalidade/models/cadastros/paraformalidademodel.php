@@ -122,26 +122,27 @@
 		}
                 
 		function getParaformalidades($parametros) {
+                        $this->db->select('ip.id, ip.cena_id,c.descricao as cena,up.nome_gerado, ip.geo_latitude, ip.geo_longitude, ip.link, ip.estaativa, tuo.descricao as turno_ocorrencia, ar.descricao as atividade_registrada, qr.descricao as quantidade_registrada, el.descricao as espaco_localizacao, cn.descricao as corpo_numero, cp.descricao as corpo_posicao, qp.descricao as equipamento_porte, qm.descricao as equipamento_mobilidade, ip.dt_cadastro,to_char(ip.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia',false);
                         $this->db->select('p.id, p.id as colaboradorNome, 
                             case
-                            when esta_ativo = \'S\' then \'Publico\'
-                         when esta_ativo != \'S\' then \'Privado\'
+                            when estaativo = \'S\' then \'Publico\'
+                         when estaativo != \'S\' then \'Privado\'
                         end as esta_ativo,
 
                         p.descricao, pes.nome, tr.descricao as tipo_registro_atividade, tl.descricao as tipo_local, tca.descricao as tipo_condicao_ambiental, tes.descricao as tipo_elemento_descricao, tp.descricao as tipo_ponte, up.nome_original, to_char(p.dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro', false);
-                        $this->db->from('paraformalidades as p');
-                        $this->db->join('public.grupos_atividades as ga','p.grupo_atividade_id = ga.id', 'left');
-                        $this->db->join('public.pessoas as pes','p.colaborador_pessoa_id = pes.id', 'left');
-                        $this->db->join('public.tipos_registros_atividades as tr','p.tipo_registro_atividade_id = tr.id', 'left');
-                        $this->db->join('public.tipos_locais as tl','p.tipo_local_id = tl.id', 'left');
-                        $this->db->join('public.tipos_condicoes_ambientais as tca','p.tipo_condicao_ambiental_id = tca.id', 'left');
-                        $this->db->join('public.tipos_elementos_situacoes as tes','p.tipo_elemento_situacao_id = tes.id', 'left');
-                        $this->db->join('public.tipos_pontes as tp','p.tipo_ponte_id = tp.id', 'left');
-                        $this->db->join('public.uploads as up','p.imagem_id = up.id', 'left');
-                        if(@$parametros['txtCobaloradorId'] != '' )
-                            $this->db->like('p.id', @$parametros['txtCobaloradorId']);
-                        if(@$parametros['txtGrupoAtividadeId'] != '' )
-                            $this->db->where('ga.id',@$parametros['txtGrupoAtividadeId']);
+                        $this->db->from('paraformal.imagens_paraformalidades as ip');
+                        $this->db->join('paraformal.cenas as c', 'c.id = ip.cena_id');
+                        $this->db->join('paraformal.atividades_registradas as ar','ar.id = ip.atividade_registrada_id');
+                        $this->db->join('paraformal.turnos_ocorrencia as tuo','tuo.id = ip.turno_ocorrencia_id');
+                        $this->db->join('paraformal.quantidades_registrada as qr','qr.id = ip.quantidade_registrada_id');
+                        $this->db->join('paraformal.espaco_localizacoes as el','el.id = ip.espaco_localizacao_id');
+                        $this->db->join('paraformal.corpo_numeros as cn','cn.id = ip.corpo_numero_id');
+                        $this->db->join('paraformal.corpo_posicoes as cp','cp.id = ip.corpo_posicao_id');
+                        $this->db->join('paraformal.equipamento_portes as qp','qp.id = ip.equipamento_porte_id');
+                        $this->db->join('paraformal.equipamento_mobilidades as qm','qm.id = ip.equipamento_mobilidade_id');
+                        $this->db->join('public.uploads as up','ip.upload_id = up.id');
+                        if(@$parametros['txtCenaId'] != '' )
+                            $this->db->where('c.id',@$parametros['txtCenaId']);
                         $this->db->sendToGrid();
                 }
                 

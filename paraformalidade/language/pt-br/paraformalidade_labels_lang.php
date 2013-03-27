@@ -11,6 +11,7 @@ $lang['colaboradorSexoMasculino'] = 'Masculino';
 $lang['colaboradorSexoFeminino'] = 'Feminino';
 $lang['colaboradorGrid'] = 'Lista de Colaboradores';
 $lang['colaboradorCidade'] = 'Cidade';
+$lang['colaboradorTipoPessoa'] = 'Tipo Pessoa';
 $lang['colaboradorPessoaGrid'] = 'Lista de Pessoas';
 
 //--------- Condições Ambientais -----------
@@ -86,9 +87,7 @@ $lang['turnosOcorrenciaDtCadastro'] = 'Dt. Cadastro';
 $lang['equipeGrupoAtividadePessoa'] = 'Pessoa';
 $lang['equipeGrupoAtividadeDtCadastro'] = 'Dt.Cadastro';
 $lang['equipeGrupoAtividadeLista'] = 'Equipe';
-$lang['equipeGrupoAtividadeCoordenador'] = 'Coordenador';
-$lang['equipeGrupoAtividadeCoordenadorSim'] = 'Sim';
-$lang['equipeGrupoAtividadeCoordenadorNao'] = 'Não';
+$lang['equipeGrupoAtividadeTipoParticipacao'] = 'Participação';
 
 //--------- Quantidades Registradas -----------
 $lang['quantidadesRegistradasFiltro'] = 'Filtro';
@@ -98,6 +97,7 @@ $lang['quantidadesRegistradasDtCadastro'] = 'Dt. Cadastro';
 
 //--------- Grupos Atividades -----------
 $lang['grupoAtividadeFiltro'] = 'Filtro';
+$lang['grupoAtividadeGrup'] = 'Grupo de Atividade';
 $lang['grupoAtividadeFiltroLocal'] = 'Local';
 $lang['grupoAtividadeFiltroEquipe'] = 'Equipe';
 $lang['grupoAtividadeCidade'] = 'Cidade';
@@ -137,6 +137,7 @@ $lang['paraformalidadeVisibilidadeGrid'] = 'Visibilidade';
 $lang['galeriaDoParaformalSee'] = 'Arquivos';
 $lang['paraformalidadeParaformalidade'] = 'Paraformalidade';
 $lang['paraformalidadeDadosAuxiliares'] = 'Dados Auxiliares';
+$lang['paraformalidadePorCena'] = 'Paraformalidades por Cena';
 
 //--------- Grupos Atividades Equipe -----------
 $lang['equipeGrupoAtividadeFiltro'] = 'Filtro';
@@ -151,9 +152,21 @@ $lang['equipeGrupoAtividadeNao'] = 'Não';
 //--------- Cenas -----------
 $lang['cenasCenas'] = 'Cenas';
 $lang['cenasNome'] = 'Nome';
+$lang['cenasCena'] = 'Cena';
 $lang['cenasDescricao'] = 'Descricao';
 $lang['cenasEstaAtivo'] = 'Ativo';
 $lang['cenasDtOcorrencia'] = 'Dt. Ocorrência';
 $lang['cenasSalvar'] = 'Salvar';
 $lang['cenasExcluir'] = 'Excluir';
 $lang['cenasNovo'] = 'Novo';
+$lang['cenasCenasporGA'] = 'Cenas por Grupos de Atividade';
+
+/**
+ * Equipe
+ */
+$lang['equipeEquipe'] = 'Equipe';
+$lang['equipePessoa'] = 'Pessoa';
+
+$lang['cenasCenas'] = 'Cenas';
+$lang['cenasCenas'] = 'Cenas';
+$lang['cenasCenas'] = 'Cenas';

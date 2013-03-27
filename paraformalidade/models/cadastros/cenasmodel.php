@@ -85,10 +85,13 @@
 		}
 		
 		function getCenas($parametros){
-			$this->db->select('*', false);
+			$this->db->select('c.id, c.descricao, c.dt_ocorrencia, c.estaativo, c.dt_cadastro, ga.descricao as grupo_atividade, c.grupo_atividade_id', false);
                         $this->db->from('paraformal.cenas as c');
-                        if(@$parametros['txtGrupoAtividadeId'] != null )
-                                $this->db->where('c.grupo_atividade_id', @$parametros['txtGrupoAtividadeId']);
+                        $this->db->join('paraformal.grupos_atividades as ga','ga.id = c.grupo_atividade_id');
+                        if(@$parametros['txtGrupoAtividadeCidadeId'] != null )
+                                $this->db->where('ga.cidade_id', @$parametros['txtGrupoAtividadeCidadeId']);
+                        if(@$parametros['txtAtividadeNome'] != null )
+                                $this->db->like('upper(ga.descricao)', strtoupper(@$parametros['txtAtividadeNome']));
 			$this->db->sendToGrid();
 		}
 

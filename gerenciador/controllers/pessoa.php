@@ -73,5 +73,11 @@ class Pessoa extends Controller {
         $this->ajax->addAjaxData('pessoaGrupos', $this->pessoaModel->getGruposPessoa($_POST['pessoaId']));
         $this->ajax->returnAjax();
     }
-
+    
+    function buscarPessoa(){
+        $this->ajax->addAjaxCombo(
+                $this->pessoaModel->getPessoaByNome($_GET['q'])
+        );
+        $this->ajax->returnAjax();
+    }
 }

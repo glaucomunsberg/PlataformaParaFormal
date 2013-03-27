@@ -39,6 +39,7 @@
                                 
 			<?=end_form();?>
 		<?=end_Tab();?>
+
                 <?=begin_Tab(lang('cenasCenas'));?>
                     <?=begin_form('paraformalidade/cadastros/cenas/salvar', 'formCenas');?>
                         <?=form_hidden('txtGrupoAtividadeid', @$grupo_atividade->id);?>
@@ -79,7 +80,7 @@
         function reloadGrid(){
             limparCena();
             gridCenas.addParam('txtGrupoAtividadeId',$('#txtGrupoAtividadeId').val());
-            gridCenas.load();
+            gridCenas.load();  
         }
 
         function ajuda(){
@@ -99,18 +100,18 @@
 	}
 	
 	function formGruposAtividades_callback(data){
-		if(data.error != undefined){
+		if(data.error !== undefined){
 			messageErrorBox(data.error.message, data.error.field);
 		} else {
-			if(data.success != undefined) {
+			if(data.success !== undefined) {
 				$('#txtGrupoAtividadeId').val(data.grupo_atividade.id);
-                        messageBox(data.success.message, listaGruposAtividades);
+                                messageBox(data.success.message);
 			}
 	    }
 	} 
 
 	function excluir(){
-		if($('#txtGrupoAtividadeId').val() == ''){
+		if($('#txtGrupoAtividadeId').val() === ''){
 			messageErrorBox("<?=lang('nenhumRegistroSelecionado')?>");
 		}else{
 			messageConfirm('<?=lang('excluirRegistros')?>', excluirGrupoAtividade);

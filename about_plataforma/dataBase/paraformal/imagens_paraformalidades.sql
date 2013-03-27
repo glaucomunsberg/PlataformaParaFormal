@@ -2,15 +2,14 @@ CREATE TABLE paraformal.imagens_paraformalidades (
        id SERIAL NOT NULL
      , cena_id INTEGER
      , upload_id INTEGER
+     , descricao VARCHAR(255)
      , geo_latitude VARCHAR(30)
      , geo_longitude VARCHAR(30)
      , link VARCHAR(255)
-     , estaAtivo CHAR(1) DEFAULT 'S'
      , turno_ocorrencia_id INTEGER
      , atividade_registrada_id INTEGER
      , quantidade_registrada_id INTEGER
-     , localizacao_id INTEGER
-     , condicao_ambiental_id INTEGER
+     , espaco_localizacao_id INTEGER
      , corpo_numero_id INTEGER
      , corpo_posicao_id INTEGER
      , equipamento_porte_id INTEGER
@@ -21,8 +20,6 @@ CREATE TABLE paraformal.imagens_paraformalidades (
      , PRIMARY KEY (id)
      , CONSTRAINT FK_imagens_paraformalidades_4 FOREIGN KEY (atividade_registrada_id)
                   REFERENCES paraformal.atividades_registradas (id)
-     , CONSTRAINT FK_imagens_paraformalidades_5 FOREIGN KEY (condicao_ambiental_id)
-                  REFERENCES paraformal.condicoes_ambientais (id)
      , CONSTRAINT FK_imagens_paraformalidades_6 FOREIGN KEY (equipamento_porte_id)
                   REFERENCES paraformal.equipamento_portes (id)
      , CONSTRAINT FK_imagens_paraformalidades_7 FOREIGN KEY (equipamento_mobilidade_id)
@@ -37,7 +34,9 @@ CREATE TABLE paraformal.imagens_paraformalidades (
                   REFERENCES public.uploads (id)
      , CONSTRAINT FK_imagens_paraformalidades_12 FOREIGN KEY (turno_ocorrencia_id)
                   REFERENCES paraformal.turnos_ocorrencia (id)
-     , CONSTRAINT FK_imagens_paraformalidades_11 FOREIGN KEY (id)
+     , CONSTRAINT FK_imagens_paraformalidades_11 FOREIGN KEY (cena_id)
                   REFERENCES paraformal.cenas (id)
+     , CONSTRAINT FK_imagens_paraformalidades_13 FOREIGN KEY (espaco_localizacao_id)
+                  REFERENCES paraformal.espaco_localizacoes (id)
 );
 

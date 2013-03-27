@@ -13,7 +13,7 @@
                                 <?=form_hidden('txtLngParaformalidade', ''); ?>
                                 <?=form_hidden('enderecoBaseImagem', BASE_URL) ?>
                                 
-                                <?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id);?>
+                                <?=form_hidden('txtCenaId', @$Cena->id);?>
                                 <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_lat); ?>
                                 <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_lng); ?>
                                 <?=form_hidden('txtLatDestino', @$grupo_atividade->geocode_origem_lat); ?>
@@ -80,18 +80,17 @@
                                 </div>                           
                 <?=end_Tab();?>
 	<?=end_TabPanel();?>
-                               <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'nome,esta_ativo', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
-                                        <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-                                        <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('nome', lang('paraformalidadesColaborador'), 10, 'left', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_registro_atividade', lang('paraformalidadesTipoRegistroAtividade'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_local', lang('paraformalidadesTipoLocal'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_condicao_ambiental', lang('paraformalidadesTipoCondicaoAmbiental'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_elemento_descricao', lang('paraformalidadesTipoElemento'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('esta_ativo', lang('paraformalidadeVisibilidadeGrid'), 10, 'left', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
-                                <?=end_JqGridPanel();?>
+       <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'nome,esta_ativo', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false));?>
+                <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
+                <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 15, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('registro_atividade', lang('paraformalidadesTipoRegistroAtividade'), 10, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('tipo_local', lang('paraformalidadesTipoLocal'), 10, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('tipo_condicao_ambiental', lang('paraformalidadesTipoCondicaoAmbiental'), 10, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('tipo_elemento_descricao', lang('paraformalidadesTipoElemento'), 10, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('tipo_ponte', lang('paraformalidadesTipoPonte'), 10, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('esta_ativo', lang('paraformalidadeVisibilidadeGrid'), 10, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 5, 'center', array('sortable'=>true));?>      
+        <?=end_JqGridPanel();?>
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
 <script>
@@ -101,7 +100,7 @@
         })();
         
         function pesquisar(){
-            gridParaformalidades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
+            gridParaformalidades.addParam('txtCenaId', $('#txtCenaId').val());
             gridParaformalidades.load();
         }
         
