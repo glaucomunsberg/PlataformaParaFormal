@@ -50,7 +50,7 @@
     }
     
     function gridCenas_click(id){
-        location.href = BASE_URL+'paraformalidade/cadastros/paraformalidade/verParaformalidades/'+id;
+        location.href = BASE_URL+'paraformalidade/cadastros/paraformalidade/paraformalidadesDaCena/'+id;
     }
     
 </script>

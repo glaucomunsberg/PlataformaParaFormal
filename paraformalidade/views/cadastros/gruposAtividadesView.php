@@ -76,7 +76,7 @@
 
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
-<script>
+<script> 
         function reloadGrid(){
             limparCena();
             gridCenas.addParam('txtGrupoAtividadeId',$('#txtGrupoAtividadeId').val());

@@ -34,60 +34,6 @@
 <primary-key-column name="id"/>
 </primary-key>
 </table>
-<table id="180808f:13d0c3bd515:-7fa8" name="climas_paraformalidade">
-<column-list>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fa6" mandatory="true" name="id">
-<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fa5" mandatory="false" name="clima_id">
-<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fa4" mandatory="false" name="imagem_paraformalidade_id">
-<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="180808f:13d0c3bd515:-7fa3" mandatory="false" name="dt_cadastro">
-<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
-</column>
-</column-list>
-<primary-key id="180808f:13d0c3bd515:-7fa2" name="PK_CLIMAS_PARAFORMALIDADE">
-<primary-key-column name="id"/>
-</primary-key>
-<foreign-key-list>
-<foreign-key id="71be31:13d0c5f1165:-7e72" name="FK_climas_paraformalidade_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_CLIMAS" referenced-table="climas" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="clima_id" referenced-key-column-name="id"/>
-</foreign-key>
-<foreign-key id="71be31:13d0c5f1165:-7cdc" name="FK_climas_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_IMAGENS_PARAFORMALIDADES" referenced-table="imagens_paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="imagem_paraformalidade_id" referenced-key-column-name="id"/>
-</foreign-key>
-</foreign-key-list>
-</table>
-<table id="71be31:13d0c5f1165:-7fbd" name="equipamento_instalacoes_paraformalidade">
-<column-list>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="71be31:13d0c5f1165:-7fbb" mandatory="true" name="id">
-<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="71be31:13d0c5f1165:-7fba" mandatory="false" name="equipamento_instalacao_id">
-<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="71be31:13d0c5f1165:-7fb9" mandatory="false" name="imagem_paraformalidade_id">
-<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="71be31:13d0c5f1165:-7fb8" mandatory="false" name="dt_cadastro">
-<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
-</column>
-</column-list>
-<primary-key id="71be31:13d0c5f1165:-7fb7" name="PK_EQUIPAMENTO_INSTALACOES_PARAFORMALIDADE">
-<primary-key-column name="id"/>
-</primary-key>
-<foreign-key-list>
-<foreign-key id="71be31:13d0c5f1165:-7e0b" name="FK_equipamento_instalacoes_paraformalidade_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_EQUIPAMENTO_INSTALACOES" referenced-table="equipamento_instalacoes" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="equipamento_instalacao_id" referenced-key-column-name="id"/>
-</foreign-key>
-<foreign-key id="71be31:13d0c5f1165:-7dd5" name="FK_equipamento_instalacoes_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_IMAGENS_PARAFORMALIDADES" referenced-table="imagens_paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="imagem_paraformalidade_id" referenced-key-column-name="id"/>
-</foreign-key>
-</foreign-key-list>
-</table>
 </table-list>
 </schema>
 <schema id="aba910:13c97ee044a:-7fde" name="paraformal">
@@ -162,7 +108,7 @@
 </foreign-key>
 </foreign-key-list>
 </table>
-<table id="aba910:13c97ee044a:-7fc0" name="imagens_paraformalidades">
+<table id="aba910:13c97ee044a:-7fc0" name="paraformalidades">
 <table-description>Imagens_paraformais são todas as de uma mesma "cena"</table-description>
 <column-list>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fbc" mandatory="true" name="id">
@@ -220,7 +166,7 @@
 <data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
 </column>
 </column-list>
-<primary-key id="aba910:13c97ee044a:-7fbf" name="PK_IMAGENS_PARAFORMALIDADES">
+<primary-key id="aba910:13c97ee044a:-7fbf" name="PK_PARAFORMALIDADES">
 <primary-key-column name="id"/>
 </primary-key>
 <foreign-key-list>
@@ -256,26 +202,6 @@
 </foreign-key>
 </foreign-key-list>
 </table>
-<table id="aba910:13c97ee044a:-7f97" name="condicoes_ambientais">
-<table-description>Condições Climáticas em que as paraformalidades podem ser capturadas
-	Sol
-	Chuva
-	Nublado</table-description>
-<column-list>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f93" mandatory="true" name="id">
-<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
-</column>
-<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f92" mandatory="false" name="descricao">
-<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7f91" mandatory="false" name="dt_cadastro">
-<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
-</column>
-</column-list>
-<primary-key id="aba910:13c97ee044a:-7f96" name="PK_CONDICOES_AMBIENTAIS">
-<primary-key-column name="id"/>
-</primary-key>
-</table>
 <table id="aba910:13c97ee044a:-7fa9" name="colaboradores_paraformalidades">
 <table-description>cada imagem tem um ou mais colaboradores(pessoas)</table-description>
 <column-list>
@@ -285,7 +211,7 @@
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fa3" mandatory="false" name="pessoa_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fa4" mandatory="false" name="imagem_paraformal_id">
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fa4" mandatory="false" name="paraformalidade_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7fa2" mandatory="false" name="dt_cadastro">
@@ -299,8 +225,8 @@
 <foreign-key id="8cf25e:13c9fdacb89:-7cbe" name="FK_colaboradores_paraformalidades_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PESSOAS" referenced-table="pessoas" referenced-table-schema="public" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
 <foreign-key-column column-name="pessoa_id" referenced-key-column-name="id"/>
 </foreign-key>
-<foreign-key id="18990b:13da8e15eb3:-7f8c" name="FK_colaboradores_paraformalidades_3" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_IMAGENS_PARAFORMALIDADES" referenced-table="imagens_paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="imagem_paraformal_id" referenced-key-column-name="id"/>
+<foreign-key id="18990b:13da8e15eb3:-7f8c" name="FK_colaboradores_paraformalidades_3" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PARAFORMALIDADES" referenced-table="paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="paraformalidade_id" referenced-key-column-name="id"/>
 </foreign-key>
 </foreign-key-list>
 </table>
@@ -369,22 +295,6 @@
 <primary-key-column name="id"/>
 </primary-key>
 </table>
-<table id="aba910:13c97ee044a:-7f42" name="espaco_condicionantes_ambientais">
-<column-list>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f3c" mandatory="true" name="id">
-<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
-</column>
-<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f3b" mandatory="false" name="descricao">
-<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7f3a" mandatory="false" name="dt_cadastro">
-<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
-</column>
-</column-list>
-<primary-key id="aba910:13c97ee044a:-7f41" name="PK_ESPACO_CONDICIONANTES_AMBIENTAIS">
-<primary-key-column name="id"/>
-</primary-key>
-</table>
 <table id="aba910:13c97ee044a:-7f29" name="corpo_numeros">
 <table-description>Números de corpos ligados a cada paraformalidade</table-description>
 <column-list>
@@ -417,33 +327,6 @@
 <primary-key id="aba910:13c97ee044a:-7f1f" name="PK_CORPO_POSICOES">
 <primary-key-column name="id"/>
 </primary-key>
-</table>
-<table id="aba910:13c97ee044a:-7f37" name="espaco_condicionantes_ambientais_paraformalidades">
-<column-list>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f33" mandatory="true" name="id">
-<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f32" mandatory="false" name="imagem_paraformal_id">
-<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7f31" mandatory="false" name="condicionamento_ambiental_id">
-<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
-</column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7f30" mandatory="false" name="dt_cadastro">
-<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
-</column>
-</column-list>
-<primary-key id="aba910:13c97ee044a:-7f36" name="PK_ESPACO_CONDICIONANTES_AMBIENTAIS_PARAFORMALIDADES">
-<primary-key-column name="id"/>
-</primary-key>
-<foreign-key-list>
-<foreign-key id="71be31:13d0c5f1165:-7ef3" name="FK_condicionantes_ambientais_paraformalidades_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_ESPACO_CONDICIONANTES_AMBIENTAIS" referenced-table="espaco_condicionantes_ambientais" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="condicionamento_ambiental_id" referenced-key-column-name="id"/>
-</foreign-key>
-<foreign-key id="71be31:13d0c5f1165:-7eba" name="FK_condicionantes_ambientais_paraformalidades_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_IMAGENS_PARAFORMALIDADES" referenced-table="imagens_paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="imagem_paraformal_id" referenced-key-column-name="id"/>
-</foreign-key>
-</foreign-key-list>
 </table>
 <table id="aba910:13c97ee044a:-7f0d" name="equipamento_portes">
 <table-description>O porte do equipamento usado</table-description>
@@ -505,7 +388,7 @@
 <column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7ef8" mandatory="false" name="descricao">
 <data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
 </column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7ef7" mandatory="false" name="dt_cadastro">
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7ef7" mandatory="false" name="dt_cadastro">
 <data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
 </column>
 </column-list>
@@ -552,7 +435,7 @@
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-773b" mandatory="false" name="sentido_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-773a" mandatory="false" name="imagem_paraformalidade_id">
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-773a" mandatory="false" name="paraformalidade_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7739" mandatory="false" name="dt_cadastro">
@@ -566,8 +449,8 @@
 <foreign-key id="8cf25e:13c9fdacb89:-7c10" name="FK_sentidos_paraformalidades_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SENTIDOS" referenced-table="sentidos" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
 <foreign-key-column column-name="sentido_id" referenced-key-column-name="id"/>
 </foreign-key>
-<foreign-key id="71be31:13d0c5f1165:-7f6c" name="FK_sentidos_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_IMAGENS_PARAFORMALIDADES" referenced-table="imagens_paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="imagem_paraformalidade_id" referenced-key-column-name="id"/>
+<foreign-key id="71be31:13d0c5f1165:-7f6c" name="FK_sentidos_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PARAFORMALIDADES" referenced-table="paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="paraformalidade_id" referenced-key-column-name="id"/>
 </foreign-key>
 </foreign-key-list>
 </table>
@@ -647,7 +530,7 @@
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fb6" mandatory="false" name="condicionante_ambiental_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fb5" mandatory="false" name="imagem_paraformalidade_id">
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fb5" mandatory="false" name="paraformalidade_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="180808f:13d0c3bd515:-7fb4" mandatory="false" name="dt_cadastro">
@@ -661,8 +544,8 @@
 <foreign-key id="71be31:13d0c5f1165:-7db0" name="FK_condicionantes_ambientais_paraformalidade_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_CONDICIONANTES_AMBIENTAIS" referenced-table="condicionantes_ambientais" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
 <foreign-key-column column-name="condicionante_ambiental_id" referenced-key-column-name="id"/>
 </foreign-key>
-<foreign-key id="71be31:13d0c5f1165:-7d21" name="FK_condicionantes_ambientais_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_IMAGENS_PARAFORMALIDADES" referenced-table="imagens_paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="imagem_paraformalidade_id" referenced-key-column-name="id"/>
+<foreign-key id="71be31:13d0c5f1165:-7d21" name="FK_condicionantes_ambientais_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PARAFORMALIDADES" referenced-table="paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="paraformalidade_id" referenced-key-column-name="id"/>
 </foreign-key>
 </foreign-key-list>
 </table>
@@ -682,6 +565,60 @@
 <primary-key-column name="id"/>
 </primary-key>
 </table>
+<table id="71be31:13d0c5f1165:-7fbd" name="equipamento_instalacoes_paraformalidade">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="71be31:13d0c5f1165:-7fbb" mandatory="true" name="id">
+<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="71be31:13d0c5f1165:-7fba" mandatory="false" name="equipamento_instalacao_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="71be31:13d0c5f1165:-7fb9" mandatory="false" name="paraformalidade_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="71be31:13d0c5f1165:-7fb8" mandatory="false" name="dt_cadastro">
+<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
+</column>
+</column-list>
+<primary-key id="71be31:13d0c5f1165:-7fb7" name="PK_EQUIPAMENTO_INSTALACOES_PARAFORMALIDADE">
+<primary-key-column name="id"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="14e4a17:13dc6a40e3f:-7f7d" name="FK_equipamento_instalacoes_paraformalidade_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_EQUIPAMENTO_INSTALACOES" referenced-table="equipamento_instalacoes" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="equipamento_instalacao_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key id="14e4a17:13dc6a40e3f:-7f3f" name="FK_equipamento_instalacoes_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PARAFORMALIDADES" referenced-table="paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="paraformalidade_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="180808f:13d0c3bd515:-7fa8" name="climas_paraformalidade">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fa6" mandatory="true" name="id">
+<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fa5" mandatory="false" name="clima_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="180808f:13d0c3bd515:-7fa4" mandatory="false" name="paraformalidade_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="180808f:13d0c3bd515:-7fa3" mandatory="false" name="dt_cadastro">
+<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
+</column>
+</column-list>
+<primary-key id="180808f:13d0c3bd515:-7fa2" name="PK_CLIMAS_PARAFORMALIDADE">
+<primary-key-column name="id"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="849b63:13dc70d366e:-7f7a" name="FK_climas_paraformalidade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PARAFORMALIDADES" referenced-table="paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="paraformalidade_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key id="849b63:13dc70d366e:-7f93" name="FK_climas_paraformalidade_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_CLIMAS" referenced-table="climas" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="clima_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+</table>
 </table-list>
 </schema>
 </schema-list>
@@ -690,31 +627,28 @@
 <table-figure refid="aba910:13c97ee044a:-7fea" x="447" y="516"/>
 <table-figure refid="aba910:13c97ee044a:-7fd4" x="19" y="197"/>
 <table-figure refid="aba910:13c97ee044a:-7fb7" x="1717" y="4"/>
-<table-figure refid="180808f:13d0c3bd515:-7fa8" x="1867" y="521"/>
-<table-figure refid="71be31:13d0c5f1165:-7fbd" x="1928" y="263"/>
-<table-figure refid="aba910:13c97ee044a:-7fe2" x="604" y="17"/>
+<table-figure refid="aba910:13c97ee044a:-7fe2" x="575" y="17"/>
 <table-figure refid="aba910:13c97ee044a:-7fcd" x="181" y="15"/>
 <table-figure refid="aba910:13c97ee044a:-7fc0" x="1268" y="17"/>
-<table-figure refid="aba910:13c97ee044a:-7f97" x="1062" y="635"/>
-<table-figure refid="aba910:13c97ee044a:-7fa9" x="580" y="235"/>
-<table-figure refid="aba910:13c97ee044a:-7f70" x="851" y="643"/>
-<table-figure refid="aba910:13c97ee044a:-7f51" x="2308" y="47"/>
-<table-figure refid="aba910:13c97ee044a:-7f58" x="1064" y="400"/>
-<table-figure refid="aba910:13c97ee044a:-7f66" x="885" y="517"/>
-<table-figure refid="aba910:13c97ee044a:-7f42" x="2428" y="149"/>
-<table-figure refid="aba910:13c97ee044a:-7f29" x="1381" y="492"/>
-<table-figure refid="aba910:13c97ee044a:-7f20" x="1319" y="601"/>
-<table-figure refid="aba910:13c97ee044a:-7f37" x="1924" y="145"/>
-<table-figure refid="aba910:13c97ee044a:-7f0d" x="1518" y="566"/>
-<table-figure refid="aba910:13c97ee044a:-7eea" x="1186" y="510"/>
-<table-figure refid="aba910:13c97ee044a:-7f06" x="2429" y="272"/>
-<table-figure refid="aba910:13c97ee044a:-7efd" x="1628" y="489"/>
+<table-figure refid="aba910:13c97ee044a:-7fa9" x="592" y="158"/>
+<table-figure refid="aba910:13c97ee044a:-7f70" x="591" y="635"/>
+<table-figure refid="aba910:13c97ee044a:-7f51" x="2413" y="16"/>
+<table-figure refid="aba910:13c97ee044a:-7f58" x="922" y="636"/>
+<table-figure refid="aba910:13c97ee044a:-7f66" x="762" y="633"/>
+<table-figure refid="aba910:13c97ee044a:-7f29" x="1396" y="640"/>
+<table-figure refid="aba910:13c97ee044a:-7f20" x="1234" y="638"/>
+<table-figure refid="aba910:13c97ee044a:-7f0d" x="1559" y="637"/>
+<table-figure refid="aba910:13c97ee044a:-7eea" x="1078" y="638"/>
+<table-figure refid="aba910:13c97ee044a:-7f06" x="2444" y="222"/>
+<table-figure refid="aba910:13c97ee044a:-7efd" x="1722" y="640"/>
 <table-figure refid="aba910:13c97ee044a:-7c90" x="293" y="258"/>
-<table-figure refid="aba910:13c97ee044a:-7747" x="1922" y="47"/>
+<table-figure refid="aba910:13c97ee044a:-7747" x="1912" y="40"/>
 <table-figure refid="18afde8:13ca1df81b9:-7fc9" x="17" y="677"/>
 <table-figure refid="1c7602f:13d07ccc2bb:-7fc6" x="26" y="457"/>
-<table-figure refid="180808f:13d0c3bd515:-7fc3" x="2413" y="396"/>
-<table-figure refid="180808f:13d0c3bd515:-7fb9" x="1931" y="389"/>
-<table-figure refid="180808f:13d0c3bd515:-7fb0" x="2418" y="488"/>
+<table-figure refid="180808f:13d0c3bd515:-7fc3" x="2409" y="129"/>
+<table-figure refid="180808f:13d0c3bd515:-7fb9" x="1915" y="141"/>
+<table-figure refid="180808f:13d0c3bd515:-7fb0" x="2442" y="375"/>
+<table-figure refid="71be31:13d0c5f1165:-7fbd" x="1933" y="260"/>
+<table-figure height="83" refid="180808f:13d0c3bd515:-7fa8" width="179" x="1915" y="405"/>
 </diagram>
 </clay-model>

@@ -13,15 +13,15 @@
                             <?=form_hidden('txtCidadeLng', @$cidade->lng);?>
 
                             <?=form_label('lblNome', lang('cidadeCidade'), 80);?>
-                            <?=form_textField('txtCidade', @$cidade->nome, 300, '');?>
+                            <?=form_textField('txtCidade', @$cidade->nome, 300, '','255','',true);?>
                             <?=new_line();?>
 
                             <?=form_label('lblCmbEstado', lang('cidadeEstado'), 80);?>
-                            <?=form_combo('cmbEstado', @$estados, @$cidade->unidade_federativa_id, 150);?>
+                            <?=form_combo('cmbEstado', @$estados, @$cidade->unidade_federativa_id, 150,'',true);?>
                             <?=new_line();?>
 
                             <?=form_label('lblTipoPonte', lang('cidadeLocalizacao'), 80);?>
-                            <?=form_MapWithMarker('marcador', @$cidade->lat, @$cidade->lng, '370', '250', 'map', true, true, '4')?>
+                            <?=form_MapWithMarker('marcador', @$cidade->geo_latitude, @$cidade->geo_longitude, '370', '250', 'map', true, true, '4')?>
                             <?=new_line();?>
 
 			<?=end_form();?>

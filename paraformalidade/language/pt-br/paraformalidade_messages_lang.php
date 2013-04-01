@@ -17,6 +17,7 @@ $lang['ponteDescricaoDeveSerInformado'] = 'Ponte deve ser informado';
 
 //--------- Paraformalidade -----------
 $lang['ParaformalidadeDescricaoDeveSerInformado'] = 'Paraformalidade deve ser informado';
+$lang['ParaformalidadeArquivoInserido'] = 'Arquivo Inserido, feche a janela de carregamento de continue';
 
 //--------- Grupos de Atividades -----------
 $lang['gruposDeAtividadesDescricaoDeveSerInformado'] = 'Grupos de Atividades deve ser informado';

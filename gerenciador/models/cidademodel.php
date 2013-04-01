@@ -13,8 +13,8 @@ class CidadeModel extends Model {
 	$this->db->trans_start();
         $this->db->set('nome', $cidade['txtCidade']);
         $this->db->set('unidade_federativa_id', $cidade['cmbEstado']);
-        $this->db->set('lat', $cidade['txtCidadeLat']);
-        $this->db->set('lng', $cidade['txtCidadeLng']);
+        $this->db->set('geo_latitude', $cidade['txtCidadeLat']);
+        $this->db->set('geo_longitude', $cidade['txtCidadeLng']);
         $this->db->set('dt_cadastro', 'NOW()', false);
 	$this->db->insert('cidades');
 	$this->db->trans_complete();
@@ -32,8 +32,8 @@ class CidadeModel extends Model {
 	$this->db->trans_start();
 	$this->db->set('nome', $cidade['txtCidade']);
         $this->db->set('unidade_federativa_id', $cidade['cmbEstado']);
-        $this->db->set('lat', $cidade['txtCidadeLat']);
-        $this->db->set('lng', $cidade['txtCidadeLng']);		
+        $this->db->set('geo_latitude', $cidade['txtCidadeLat']);
+        $this->db->set('geo_longitude', $cidade['txtCidadeLng']);		
 	$this->db->where('id', $cidade['txtCidadeId']);
 	$this->db->update('cidades');
 	$this->db->trans_complete();

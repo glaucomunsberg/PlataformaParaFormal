@@ -1,4 +1,4 @@
-CREATE TABLE paraformal.imagens_paraformalidades (
+CREATE TABLE paraformal.paraformalidades (
        id SERIAL NOT NULL
      , cena_id INTEGER
      , upload_id INTEGER
