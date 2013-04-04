@@ -1,7 +1,8 @@
 <? if(!isset($buttonHit)){?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<?
@@ -47,4 +48,30 @@
 		<div id="content-center" class="ui-layout-center ui-widget-content content-center-popup" style="border-left: none !important; margin-left: 0px; background: none !important; overflow: hidden !important">
 <?	} ?>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="<?=CSS;?>/public.css">
+
+<link rel="stylesheet" href="<?=CSS;?>/metro-boostrap/metro-bootstrap.css">
+<!--script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery-1.8.2.js"></script>-->
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-alert.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-button.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-carousel.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-collapse.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-modal.js"></script>
+<!--<script type="text/javascript" src="<JS>/metro-boostrap/bootstrap-popover.js"></script> -->
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-scrollspy.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-transition.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-typeahead.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery.validate.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery.unobtrusive-ajax.js"></script>
+<script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?=$this->config->item('app_fb_id')?>";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

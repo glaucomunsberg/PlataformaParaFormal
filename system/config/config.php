@@ -25,6 +25,11 @@ define('JS', $config['base_url'].'static/_js');
 define('WIKI', $config['base_url'].'static/wiki/index.php/');
 define('PRODUCAO', false);
 
+/**
+ * Configuracao
+ */
+$config['app_fb_id'] = '';
+
 /*
 |--------------------------------------------------------------------------
 | Index File

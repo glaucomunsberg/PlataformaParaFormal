@@ -146,8 +146,8 @@ $lang['paraformalidadesContidionantesAmbientais'] = 'Condicionantes Ambientais';
 $lang['paraformalidadesContidionanteAmbiental'] = 'Condicionante Ambiental';
 $lang['paraformalidadesInstalacoes'] = 'Equipamento Instalações';
 $lang['paraformalidadesInstalacao'] = 'Equipamento Instalação';
-$lang['paraformalidadesClimas'] = 'Climas';
-$lang['paraformalidadesClima'] = 'Clima';
+$lang['paraformalidadesClimas'] = 'Clima/Tempo';
+$lang['paraformalidadesClima'] = 'Clima Local';
 $lang['paraformalidades'] = '';
 
 $lang['paraformalidadesImagemPequena'] = 'Miniatura';

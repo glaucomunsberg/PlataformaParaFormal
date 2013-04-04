@@ -8,7 +8,7 @@ class Escolha extends Controller{
     }
     
     function index(){
-        $data['cmbCidades'] = $this->grupoAtividadeModel->getGrupoAtividadeCombo();
+        $data['cidades_atividades'] = $this->grupoAtividadeModel->getGrupoAtividadeCombo();
         $this->load->view('escolhaFiltroView', $data);
     }
     
@@ -18,8 +18,33 @@ class Escolha extends Controller{
         $this->load->view('escolhaView', $data);
     }
     
-    function exibirParaformalidade($paraformalidadeId){
-        $this->ajax->addAjaxData('paraformalidade', $this->paraformalidadeModel->getParaformalidadeWhitImage($paraformalidadeId) );
+    function exibirCena(){
+        $this->ajax->addAjaxData('paraformalidade', $this->paraformalidadeModel->getCenaParaExibir($_POST['id']) );
+	$this->ajax->returnAjax();
+    }
+    function exibirCenaGet($id){
+        $this->ajax->addAjaxData('paraformalidade', $this->paraformalidadeModel->getCenaParaExibir($id) );
+	$this->ajax->returnAjax();
+    }
+    
+    function carregaColaboradores(){
+        $this->ajax->addAjaxData('colaboradores', $this->paraformalidadeModel->getColaboradorParaExibir($_POST['id']) );
+	$this->ajax->returnAjax();
+    }
+    function carregaSentidos(){
+        $this->ajax->addAjaxData('sentidos', $this->paraformalidadeModel->getSentidosParaExibir($_POST['id']) );
+	$this->ajax->returnAjax();
+    }
+    function carregaClimas(){
+        $this->ajax->addAjaxData('climas', $this->paraformalidadeModel->getClimasParaExibir($_POST['id']) );
+	$this->ajax->returnAjax();
+    }
+    function carregaInstalacoes(){
+        $this->ajax->addAjaxData('instalacoes', $this->paraformalidadeModel->getInstalacoesParaExibir($_POST['id']) );
+	$this->ajax->returnAjax();
+    }
+    function carregarParaformalides(){
+        $this->ajax->addAjaxData('paraformalidades', $this->paraformalidadeModel->getParaformalidadesParaPaginar($_POST['id']) );
 	$this->ajax->returnAjax();
     }
 }

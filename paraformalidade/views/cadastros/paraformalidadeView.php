@@ -13,15 +13,8 @@
                                 
                                 <?=form_hidden('txtCenaId', @$cena->id);?>
                                 <?=form_hidden('txtCenaOcorrencia', @$cena->dt_ocorrencia);?>
-                                <?
-                                    if( @$paraformalidade->geocode_origem_lat != ''){
-                                        echo form_hidden('txtLatOrigem', @$paraformalidade->geo_latitude);
-                                        echo form_hidden('txtLngOrigem', @$paraformalidade->geo_longitude);
-                                    }else{
-                                        echo form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_latitude);
-                                        echo form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_longitude);
-                                    }
-                                ?>
+                                <?=form_hidden('txtLatOrigem', @$grupo_atividade->geocode_origem_latitude)?>
+                                <?=form_hidden('txtLngOrigem', @$grupo_atividade->geocode_origem_longitude)?>
                                 
                                 <?=form_label('lblIsLink', lang('paraformalidadesIsLink'), 110);?>
                                 <?=form_checkbox('chkParaformalidadeLink', 'chkParaformalidadeLink', '',false);?>
@@ -50,13 +43,7 @@
                                     <?=new_line();?>
                                     
                                     <?=form_label('lblParaformlaidadeLocalizacao', lang('paraformalidadesLocalizacao'), 110);?>
-                                    <?
-                                        if( @$paraformalidade->geocode_origem_lat != ''){
-                                            echo form_MapWithMarker('marcador', @$paraformalidade->geo_latitude, @$paraformalidade->geo_longitude, '370', '250', 'map', true, true);
-                                        }else{
-                                            echo form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_latitude, @$grupo_atividade->geocode_origem_longitude, '370', '250', 'map', true, true);
-                                        }
-                                     ?>
+                                    <?=form_MapWithMarker('marcador', @$grupo_atividade->geocode_origem_latitude, @$grupo_atividade->geocode_origem_longitude, '370', '250', 'map', true, true)?>
                                     <?=new_line();?>
        
                                     <?=form_label('lblAtivo', lang('paraformalidadesVisibilidade'), 110);?>
@@ -67,7 +54,7 @@
                                         <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 45, 'left', array('sortable'=>true));?>
                                         <?=addJqGridColumn('nome_original', lang('paraformalidadesNomeArquivo'), 25, 'center', array('sortable'=>true));?>
                                         <?=addJqGridColumn('estaativa', lang('paraformalidadeVisibilidadeGrid'), 15, 'left', array('sortable'=>true));?>
-                                        <?=addJqGridColumn('dt_cadastro', lang('grupoAtividadeDtCadastro'), 15, 'center', array('sortable'=>true));?>      
+                                        <?=addJqGridColumn('dt_ocorrencia', lang('cenasDtOcorrencia'), 15, 'center', array('sortable'=>true));?>
                                     <?=end_JqGridPanel();?>
                 <?=end_Tab();?>
                 <?=begin_Tab(lang('paraformalidadeDadosAuxiliares'));?>
@@ -122,6 +109,7 @@
                         <?=new_line();?>
                         <?=new_line();?>
                         <?=new_line();?>
+                        
                         <!-- SENTIDOS-->
                         <b><?=form_label('lblSentidos', lang('paraformalidadesSentidos'), 150);?></b>
                         <?=new_line();?>
@@ -259,7 +247,7 @@
             cmbEquipamentoPorte.setValueCombo('');
             cmbEquipamentoMobilidade.setValueCombo('');
             carregarSrcDeImagem( $('#enderecoBaseImagem').val()+'/static/_img/default_avatar.jpg');
-            $("#tabParaformalidade").tabs("option", {'disabled': 2});
+            $("#tabParaformalidade").tabs("option", {"disabled": [2]});
             gridParaformalidades.addParam('txtCenaId', $('#txtCenaId').val());
             gridParaformalidades.load($('#txtParaformalidadeId').val());
             loadGrids("0");
@@ -271,7 +259,7 @@
 
 	function salvar(){
             //Se não está editando
-            if( document.getElementById('txtParaformalidadeId').value === '' ){
+            if( document.getElementById('txtParaformalidadeId').value == '' ){
                 if( $('#txtLngOrigem').val() !== '' && $('#txtLatOrigem').val() !== '' && $('#cmbEquipamentoMobilidade').val() !== '' && $('#cmbEquipamentoPorte').val() !== '' && $('#arquivoImportacaoId').val() !== '' &&  $('#cmbTurnoOcorrencia').val() !== '' &&  $('#cmbAtividadeRegistrada').val() !== '' &&  $('#cmbQuantidadeRegistrada').val() !== '' &&  $('#cmbEspacoLocalizacao').val() != '' &&  $('#cmbCorpoPosicao').val() !== '' &&  $('#cmbCorposNumero').val() !== ''){
                     formParaformalidade_submit();
 
@@ -286,6 +274,7 @@
             {
                 formParaformalidade_submit();
             }
+            novo();
            
             
 	}
@@ -301,21 +290,11 @@
 	} 
 
 	function excluir(){
-            if($('#txtParaformalidadeId').val() === ''){
-                if(getSelectedRows('gridParaformalidades').length == 0){
+            if( getSelectedRows('gridParaformalidades').length == 0){
                     messageErrorBox('<?=lang('nenhumRegistroSelecionado')?>');
                 }else{
                     messageConfirm('<?=lang('excluirRegistros')?>', excluirParaformalidade);
-                }	
-            }else{
-                $.post(BASE_URL+'paraformalidade/cadastros/paraformalidade/excluir/', {id:  $('#txtParaformalidadeId').val()}, 
-                    function(data){
-                        if(data.success)
-                            messageBox("<?=lang('registroExcluido')?>", pesquisar);
-                        else
-                            messageErrorBox("<?=lang('registroNaoExcluido')?>");
-                    });
-            }
+                }
 	}
 
 	function excluirParaformalidade(confirmaExclusao){
@@ -323,7 +302,7 @@
                 var pontes;
                 var ponteGrid = getSelectedRows('gridParaformalidades');
                 for(var i = 0; i < ponteGrid.length; i++)
-                    if( pontes === '')
+                    if( pontes == '')
                          pontes = NotaTiposGrid[i];
                     else
                          pontes += ',' + ponteGrid[i];
@@ -341,12 +320,13 @@
         function gridParaformalidades_click(id){
             $.post(BASE_URL+'paraformalidade/cadastros/paraformalidade/editar/'+id,{id:  id},function(data){
                 var paraformal = data.paraformalidade;
-                
+               
                 document.getElementById('txtParaformalidadeId').value = paraformal.id;
                 document.getElementById('txtLatOrigem').value = paraformal.geo_latitude;
                 document.getElementById('txtLngOrigem').value = paraformal.geo_longitude;
                 document.getElementById('txtDescricao').value = paraformal.descricao;
-
+                document.getElementById('txtLink').value = paraformal.link_para;
+                
                 cmbTurnoOcorrencia.setValueCombo(paraformal.turno_ocorrencia_id);
                 cmbAtividadeRegistrada.setValueCombo(paraformal.atividade_registrada_id);
                 cmbQuantidadeRegistrada.setValueCombo(paraformal.qunatidade_registrada_id);
@@ -355,27 +335,21 @@
                 cmbCorposNumero.setValueCombo(paraformal.corpo_numero_id);
                 cmbEquipamentoPorte.setValueCombo(paraformal.equipamento_porte_id);
                 cmbEquipamentoMobilidade.setValueCombo(paraformal.equipamento_mobilidade_id);
-                $('#chkParaformalidadeAtivo').attr('checked', paraformal.estaativo);
-                if(paraformal.link !== ''){
-                    $('#txtArquivoImportacaoName').val(paraformal.nome_original);
+
+                $('#txtLink').attr('checked', paraformal.estaativo);
+                
+                if( $("#link").val() != 'em_branco'){
+                    document.getElementById('txtArquivoImportacaoId').value = paraformal.upload_id;
+                    document.getElementById('txtArquivoImportacaoName').value = paraformal.nome_original;
                     carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'archives/resized_640x480/'+paraformal.nome_gerado);
-                     $('#txtLink').val(paraformal.link);
+                    $('#txtLink').val(paraformal.link_para);
+                    $("#imagem").show("clip");
+                    $("#link").hide("blind");                    
                 }else{
                     carregarSrcDeImagem( $('#enderecoBaseImagem').val()+'/static/_img/default_avatar.jpg');
                     $('#chkParaformalidadeLink').attr('checked', true);
-                    $('#txtLink').val(paraformal.link);
-                }
-                if($('#txtLink').val() != ''){
-                    $("#imagem").hide("clip");
-                    $("#link").show("blind");
-                    $("#tabParaformalidade").tabs("option", {'disabled': 2});
-                    $('#chkParaformalidadeLink').attr('checked', true);
-                }
-                else{
-                    $("#imagem").show("blind");
-                    $("#link").hide("clip");
-                    $("#tabParaformalidade").tabs('enable',2);
-                    $('#chkParaformalidadeLink').attr('checked', false);
+                    $("#imagem").hide("blind");
+                    $("#link").show("clip");                    
                 }
                 form_MapWithMarker_setPosicao($('#txtLatOrigem').val(),$('#txtLngOrigem').val());
                 $("#tabParaformalidade").tabs('enable',2);
@@ -405,10 +379,11 @@
         
         function loadGrids(id){
             $('#txtColaboradorId').val('');
-            $('#txtColaboradorNome').val('');
+            $('#searchtxtColaboradorId').val('');
             cmbSentidos.setValueCombo('');
             cmbCondicionantes.setValueCombo('');
             cmbInstalacoes.setValueCombo('');
+            cmbClimas.setValueCombo('');
             gridColaboradores.addParam('txtParaformalidadeId',id);
             gridColaboradores.load();
             gridSentidos.addParam('txtParaformalidadeId',id);
@@ -419,7 +394,6 @@
             gridInstalacoes.load();
             gridClimas.addParam('txtParaformalidadeId',id);
             gridClimas.load();
-            
         }
         
         function inserirColaborador(){
@@ -446,16 +420,16 @@
             if(confirmaExclusao){
                 var pontes;
                 var ponteGrid = getSelectedRows('gridColaboradores');
+               
                 for(var i = 0; i < ponteGrid.length; i++)
-                    if( pontes === '')
+                    if( pontes == '')
                          pontes = NotaTiposGrid[i];
                     else
                          pontes += ',' + ponteGrid[i];
-
                 $.post(BASE_URL+'paraformalidade/cadastros/paraformalidade/excluirColaborador/', {id:  pontes}, 
                     function(data){
                         if(data.success)
-                            messageBox("<?=lang('registroExcluido')?>", loadGrids($('#txtParaformalidadeId').val()));
+                            messageBox("<?=lang('registroExcluido')?>", gridColaboradores.load('txtParaformalidadeId',$('#txtParaformalidadeId').val()));
                         else
                             messageErrorBox("<?=lang('registroNaoExcluido')?>");
                 });
@@ -487,7 +461,7 @@
                 var pontes;
                 var ponteGrid = getSelectedRows('gridSentidos');
                 for(var i = 0; i < ponteGrid.length; i++)
-                    if( pontes === '')
+                    if( pontes == '')
                          pontes = NotaTiposGrid[i];
                     else
                          pontes += ',' + ponteGrid[i];
@@ -527,7 +501,7 @@
                 var pontes;
                 var ponteGrid = getSelectedRows('gridCondicionantes');
                 for(var i = 0; i < ponteGrid.length; i++)
-                    if( pontes === '')
+                    if( pontes == '')
                          pontes = NotaTiposGrid[i];
                     else
                          pontes += ',' + ponteGrid[i];
@@ -567,7 +541,7 @@
                 var pontes;
                 var ponteGrid = getSelectedRows('gridInstalacoes');
                 for(var i = 0; i < ponteGrid.length; i++)
-                    if( pontes === '')
+                    if( pontes == '')
                          pontes = NotaTiposGrid[i];
                     else
                          pontes += ',' + ponteGrid[i];
@@ -607,7 +581,7 @@
                 var pontes;
                 var ponteGrid = getSelectedRows('gridClimas');
                 for(var i = 0; i < ponteGrid.length; i++)
-                    if( pontes === '')
+                    if( pontes == '')
                          pontes = NotaTiposGrid[i];
                     else
                          pontes += ',' + ponteGrid[i];

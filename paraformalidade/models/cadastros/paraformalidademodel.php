@@ -33,6 +33,7 @@
                                 $this->db->set('link', $paraformalidade['txtLink']);
                             }else{
                                 $this->db->set('upload_id', $paraformalidade['txtArquivoImportacaoId']);
+                                $this->db->set('link', '');
                             }
                             $this->db->set('descricao', $paraformalidade['txtDescricao']);
                             $this->db->set('geo_latitude', $paraformalidade['txtLatOrigem']);
@@ -68,6 +69,7 @@
                                 $this->db->set('link', $paraformalidade['txtLink']);
                             }else{
                                 $this->db->set('upload_id', $paraformalidade['txtArquivoImportacaoId']);
+                                $this->db->set('link', '');
                             }
                             $this->db->set('descricao', $paraformalidade['txtDescricao']);
                             $this->db->set('geo_latitude', $paraformalidade['txtLatOrigem']);
@@ -130,34 +132,96 @@
 			return $this->db->get()->row();
 		}
                 
+                function getParaformalidadesParaPaginar($cena_id){
+                        $this->db->select('p.id, p.descricao, ar.descricao as atividade_registrada, em.descricao as equipamento_mobilidade, el.descricao as equipamento_localizacao, tu.descricao as turno_ocorrencia,to_char(p.dt_ocorrencia, \'dd/mm/yyyy\') as dt_ocorrencia, up.nome_gerado',false);
+                        $this->db->from('paraformal.paraformalidades as p');
+                        $this->db->join('public.uploads as up', 'up.id = p.upload_id');
+                        $this->db->join('paraformal.turnos_ocorrencia as tu', 'tu.id = p.turno_ocorrencia_id');
+                        $this->db->join('paraformal.atividades_registradas as ar','ar.id = p.atividade_registrada_id');
+                        $this->db->join('paraformal.espaco_localizacoes as el', 'el.id = p.espaco_localizacao_id');
+                        $this->db->join('paraformal.equipamento_mobilidades as em','em.id = p.equipamento_mobilidade_id');
+			$this->db->where('p.estaativa', 'S');
+                        $this->db->where('p.cena_id', $cena_id);
+                        $this->db->order_by('p.dt_ocorrencia','DESC');
+                        return $this->db->get()->result();
+                }
+                
+                function getCenaParaExibir($cena_id){
+                    $this->db->select('c.id, c.descricao as cena_descricao, ga.descricao as grupo_descricao,p.descricao as para_descricao, up.nome_gerado, (select count(ptemp.id) from paraformal.paraformalidades as ptemp where ptemp.cena_id = c.id and ptemp.estaativa = \'S\') as num_paraformalidades, p.id as para_id, p."link", to_char(p.dt_cadastro, \'dd/mm/yyyy \') as dt_cadastro, to_char(p.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia, ar.descricao as atividade_registrada, em.descricao as equipamento_mobilidade, tu.descricao as turno_ocorrencia, el.descricao as espaco_localizacao',false);
+                    $this->db->from('paraformal.cenas as c');
+                    $this->db->join('paraformal.grupos_atividades as ga', 'ga.id = c.grupo_atividade_id');
+                    $this->db->join('paraformal.paraformalidades as p', 'p.id = (select para.id from paraformal.paraformalidades as para where para.cena_id = c.id and para.estaativa = \'S\' order by dt_ocorrencia DESC limit 1)');
+                    $this->db->join('public.uploads as up', 'up.id = p.upload_id');
+                    $this->db->join('paraformal.atividades_registradas as ar', 'ar.id = p.atividade_registrada_id');
+                    $this->db->join('paraformal.equipamento_mobilidades as em', 'em.id = p.equipamento_mobilidade_id');
+                    $this->db->join('paraformal.turnos_ocorrencia as tu', 'tu.id = p.turno_ocorrencia_id');
+                    $this->db->join('paraformal.espaco_localizacoes as el', 'el.id = p.espaco_localizacao_id');
+                    $this->db->where('c.id', $cena_id);
+                    $this->db->where('c.estaativo', 'S');
+                    return $this->db->get()->row();
+                }
+                
+                function getColaboradorParaExibir($paraformalidade_id){
+                     $this->db->select('p.nome',false);
+                     $this->db->from('paraformal.colaboradores_paraformalidades as cp');
+                     $this->db->join('paraformal.paraformalidades as par', 'par.id = cp.paraformalidade_id');
+                     $this->db->join('pessoas as p', 'p.id = cp.pessoa_id');
+                     $this->db->where('par.id', $paraformalidade_id);
+                     $this->db->where('par.estaativa', 'S');
+                     return $this->db->get()->result();
+                 }
+                 
+                 function getSentidosParaExibir($paraformalidade_id){
+                     $this->db->select('s.descricao',false);
+                     $this->db->from('paraformal.sentidos_paraformalidade as sp');
+                     $this->db->join('paraformal.paraformalidades as par', 'par.id = sp.paraformalidade_id');
+                     $this->db->join('paraformal.sentidos as s', 's.id = sp.sentido_id');
+                     $this->db->where('par.id', $paraformalidade_id);
+                     $this->db->where('par.estaativa', 'S');
+                     return $this->db->get()->result();
+                 }
+                 function getClimasParaExibir($paraformalidade_id){
+                     $this->db->select('c.descricao',false);
+                     $this->db->from('paraformal.climas_paraformalidade as cp');
+                     $this->db->join('paraformal.paraformalidades as par', 'par.id = cp.paraformalidade_id');
+                     $this->db->join('paraformal.climas as c', 'c.id = cp.clima_id');
+                     $this->db->where('par.id', $paraformalidade_id);
+                     $this->db->where('par.estaativa', 'S');
+                     return $this->db->get()->result();
+                 }
+                 
+                 function getInstalacoesParaExibir($paraformalidade_id){
+                     $this->db->select('i.descricao',false);
+                     $this->db->from('paraformal.equipamento_instalacoes_paraformalidade as ip');
+                     $this->db->join('paraformal.paraformalidades as par', 'par.id = ip.paraformalidade_id');
+                     $this->db->join('paraformal.equipamento_instalacoes as i', 'i.id = ip.equipamento_instalacao_id');
+                     $this->db->where('par.id', $paraformalidade_id);
+                     $this->db->where('par.estaativa', 'S');
+                     return $this->db->get()->result();
+                 }
+               
 		function getParaformalidades($parametros) {
-                        $this->db->select('ip.id, ip.cena_id, ip.descricao, up.nome_gerado,up.nome_original, ip.geo_latitude, ip.geo_longitude, ip.link, case when estaativa = \'S\' then \'Publico\' when estaativo != \'S\' then \'Privado\' end as estaativa, tuo.descricao as turno_ocorrencia, ar.descricao as atividade_registrada, qr.descricao as quantidade_registrada, el.descricao as espaco_localizacao, cn.descricao as corpo_numero, cp.descricao as corpo_posicao, qp.descricao as equipamento_porte, qm.descricao as equipamento_mobilidade, ip.dt_cadastro,to_char(ip.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia',false);
+                        $this->db->select('ip.id, ip.cena_id, ip.descricao, up.nome_gerado, up.nome_original, ip.upload_id, ip.link as link_para, case when estaativa = \'S\' then \'Publico\' when estaativo != \'S\' then \'Privado\' end as estaativa, to_char(ip.dt_ocorrencia, \'dd/mm/yyyy\') as dt_ocorrencia',false);
                         $this->db->from('paraformal.paraformalidades as ip');
                         $this->db->join('paraformal.cenas as c', 'c.id = ip.cena_id');
-                        $this->db->join('paraformal.atividades_registradas as ar','ar.id = ip.atividade_registrada_id');
-                        $this->db->join('paraformal.turnos_ocorrencia as tuo','tuo.id = ip.turno_ocorrencia_id');
-                        $this->db->join('paraformal.quantidades_registrada as qr','qr.id = ip.quantidade_registrada_id');
-                        $this->db->join('paraformal.espaco_localizacoes as el','el.id = ip.espaco_localizacao_id');
-                        $this->db->join('paraformal.corpo_numeros as cn','cn.id = ip.corpo_numero_id');
-                        $this->db->join('paraformal.corpo_posicoes as cp','cp.id = ip.corpo_posicao_id');
-                        $this->db->join('paraformal.equipamento_portes as qp','qp.id = ip.equipamento_porte_id');
-                        $this->db->join('paraformal.equipamento_mobilidades as qm','qm.id = ip.equipamento_mobilidade_id');
                         $this->db->join('public.uploads as up','ip.upload_id = up.id');
-                        if(@$parametros['txtCenaId'] != '' )
-                            $this->db->where('c.id',@$parametros['txtCenaId']);
+                        if($parametros['txtCenaId'] != '' )
+                            $this->db->where('c.id',$parametros['txtCenaId']);
                         $this->db->sendToGrid();
                 }
                 
                 function getParaformalidadeToMaps($grupoAtividadeID){
-                    $this->db->select('p.geocode_lat, p.geocode_lng, p.id', false);
-                    $this->db->where('p.grupo_atividade_id', $grupoAtividadeID);
-                    $this->db->where('p.esta_ativo', 'S');
-                    return $this->db->get('paraformal.paraformalidades as p')->result_array();
+                    $this->db->select('c.id, p.geo_latitude as geocode_lat,p.geo_longitude as geocode_lng', false);
+                    $this->db->from('paraformal.cenas as c');
+                    $this->db->join('paraformal.paraformalidades as p','p.id = (select para.id from paraformal.paraformalidades as para where para.cena_id = c.id order by dt_ocorrencia DESC limit 1) ');
+                    $this->db->where('c.estaativo', 'S');
+                    $this->db->where('c.grupo_atividade_id', $grupoAtividadeID);
+                    return $this->db->get()->result_array();
                 }
                 
                 
                 function getColaboradores($parametros){
-                    $this->db->select('p.nome',false);
+                    $this->db->select('cp.id, p.nome',false);
                         $this->db->from('paraformal.colaboradores_paraformalidades as cp');
                         $this->db->join('pessoas as p','p.id = cp.pessoa_id');
                         if(@$parametros['txtParaformalidadeId'] != '' )
@@ -185,14 +249,12 @@
 			return true;
 		}
                 function excluirColaborador($id){
-			
 			$this->db->trans_start();
 				$aLocais = explode(',', $id);
 				$aExcluirLocais = array();
 				for($i = 0; $i < count($aLocais); $i++)
 					if($aLocais[$i] != 'undefined')
 						array_push($aExcluirLocais, $aLocais[$i]);
-
 				$this->db->where_in('id', $aExcluirLocais);
 				$this->db->delete('paraformal.colaboradores_paraformalidades');
 
@@ -205,7 +267,7 @@
 		}
                 
                 function getSentidos($parametros){
-                    $this->db->select('s.descricao',false);
+                    $this->db->select('sp.id, s.descricao',false);
                         $this->db->from('paraformal.sentidos_paraformalidade as sp');
                         $this->db->join('paraformal.sentidos as s','s.id = sp.sentido_id');
                         if(@$parametros['txtParaformalidadeId'] != '' )
@@ -246,7 +308,7 @@
 			return true;
 		}
                 function getCondicionantes($parametros){
-                    $this->db->select('c.descricao',false);
+                    $this->db->select('ca.id, c.descricao',false);
                         $this->db->from('paraformal.condicionantes_ambientais_paraformalidade as ca');
                         $this->db->join('paraformal.condicionantes_ambientais as c','c.id = ca.condicionante_ambiental_id');
                         if(@$parametros['txtParaformalidadeId'] != '' )
@@ -287,7 +349,7 @@
 		}
                 
                 function getInstalacoes($parametros){
-                    $this->db->select('e.descricao',false);
+                    $this->db->select('ei.id, e.descricao',false);
                         $this->db->from('paraformal.equipamento_instalacoes_paraformalidade as ei');
                         $this->db->join('paraformal.equipamento_instalacoes as e','e.id = ei.equipamento_instalacao_id');
                         if(@$parametros['txtParaformalidadeId'] != '' )
@@ -330,7 +392,7 @@
                 
                 
                 function getClimas($parametros){
-                    $this->db->select('c.descricao',false);
+                    $this->db->select('cp.id, c.descricao',false);
                         $this->db->from('paraformal.climas_paraformalidade as cp');
                         $this->db->join('paraformal.climas as c','c.id = cp.clima_id');
                         if(@$parametros['txtParaformalidadeId'] != '' )
