@@ -15,10 +15,6 @@
                                 <?= form_combo("cmbColaboradorSexo", $sexo, @$colaborador->sexo, 90) ?>
                                 <?=new_line();?>
 
-                                <?=form_label('lblTipo', lang('colaboradorTipoPessoa'), 80);?>
-                                <?=form_combo("cmbTipoPessoa", @$tipo_pessoa, @$colaborador->pessoa_tipo_id, 200) ?>
-                                <?=new_line();?>
-
                                 <?=form_label('lblCidade', lang('colaboradorCidade'), 80);?>
                                 <?= form_textFieldAutoComplete('txtColaboradorCidadeId', BASE_URL . 'paraformalidade/cadastros/colaboradores/buscarCidade', @$colaborador->cidade_id, @$colaboradorCidade->nome, 400) ?>
                                 <?=form_hidden('txtCidadeNome', @$colaboradorCidade->nome);?>

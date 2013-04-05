@@ -40,7 +40,6 @@ class Colaboradores extends Controller {
     
     function novo() {
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']);
-        $data['tipo_pessoa'] = $this->pessoaTipoModel->getPessoasTiposCombo();
         $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
 	$this->load->view('cadastros/colaboradoresView', @$data);
 		
@@ -48,7 +47,6 @@ class Colaboradores extends Controller {
     
     function editar($colabordorId){
 	$data['colaborador'] = $this->colaboradoresModel->getColaborador($colabordorId);
-        $data['tipo_pessoa'] = $this->pessoaTipoModel->getPessoasTiposCombo();
         $data['sexo'] = array (array ("M", lang('colaboradorSexoMasculino')), array ("F", lang('colaboradorSexoFeminino')));
         $data['colaboradorCidade'] = $this->cidadeModel->getCidadeById( $data['colaborador']->cidade_id );
 	$data['path_bread'] = $this->programaModel->pathBread($_SERVER['REQUEST_URI']).' / Editar / '.@$data['colaborador']->nome;

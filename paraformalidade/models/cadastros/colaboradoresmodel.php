@@ -13,7 +13,6 @@ class ColaboradoresModel extends Model {
             $this->db->set('profissao', $colaborador['txtColaboradorProfissao']);
         $this->db->set('dt_nascimento', ($colaborador['txtDtNascimento'] == '' ? 'NULL' : 'to_date(\''.$colaborador['txtDtNascimento'].'\', \'dd/mm/yyyy\')'), false);
         $this->db->set('dt_cadastro', 'NOW()', false);
-        $this->db->set('pessoa_tipo_id', $colaborador['cmbTipoPessoa']);
 	$this->db->insert('pessoas');
 	$this->db->trans_complete();
 	if($this->db->trans_status() === FALSE){
@@ -21,7 +20,7 @@ class ColaboradoresModel extends Model {
 	return false;
 	}
 
-        $this->ajax->addAjaxData('pessoa', $this->getPessoaTipo($this->db->insert_id('pessoas', 'id')));
+        $this->ajax->addAjaxData('pessoa', $this->getColaborador($this->db->insert_id('pessoas', 'id')));
 	return true;
     }
 
@@ -75,7 +74,7 @@ class ColaboradoresModel extends Model {
             $this->db->like('p.email', @$parametros['txtColaboradorEmail']);
         if(@$parametros['txtColaboradorCidadeId'] != null )
             $this->db->where('p.cidade_id', @$parametros['txtColaboradorCidadeId']);
-        $this->db->where('p.pessoa_tipo_id is not null');
+        $this->db->where('p.id != 1');
         $this->db->sendToGrid();
     }
 

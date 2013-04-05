@@ -9,6 +9,15 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
+-- Name: paraformal; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA paraformal;
+
+
+ALTER SCHEMA paraformal OWNER TO postgres;
+
+--
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -98,9 +107,795 @@ $_$;
 
 ALTER FUNCTION public.serialize_array(text[], separador character varying) OWNER TO postgres;
 
+SET search_path = paraformal, pg_catalog;
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: atividades_registradas; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividades_registradas (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.atividades_registradas OWNER TO postgres;
+
+--
+-- Name: atividades_registradas_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE atividades_registradas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.atividades_registradas_id_seq OWNER TO postgres;
+
+--
+-- Name: atividades_registradas_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE atividades_registradas_id_seq OWNED BY atividades_registradas.id;
+
+
+--
+-- Name: cenas; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cenas (
+    id integer NOT NULL,
+    descricao character varying(255),
+    grupo_atividade_id integer,
+    dt_ocorrencia date DEFAULT now(),
+    estaativo character(1) DEFAULT 'S'::bpchar,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.cenas OWNER TO postgres;
+
+--
+-- Name: cenas_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE cenas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.cenas_id_seq OWNER TO postgres;
+
+--
+-- Name: cenas_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE cenas_id_seq OWNED BY cenas.id;
+
+
+--
+-- Name: climas; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE climas (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.climas OWNER TO postgres;
+
+--
+-- Name: climas_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE climas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.climas_id_seq OWNER TO postgres;
+
+--
+-- Name: climas_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE climas_id_seq OWNED BY climas.id;
+
+
+--
+-- Name: condicionantes_ambientais; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE condicionantes_ambientais (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.condicionantes_ambientais OWNER TO postgres;
+
+--
+-- Name: condicionantes_ambientais_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE condicionantes_ambientais_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.condicionantes_ambientais_id_seq OWNER TO postgres;
+
+--
+-- Name: condicionantes_ambientais_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE condicionantes_ambientais_id_seq OWNED BY condicionantes_ambientais.id;
+
+
+--
+-- Name: condicionantes_ambientais_paraformalidade; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE condicionantes_ambientais_paraformalidade (
+    id integer NOT NULL,
+    condicionante_ambiental_id integer,
+    imagem_paraformalidade_id integer,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.condicionantes_ambientais_paraformalidade OWNER TO postgres;
+
+--
+-- Name: condicionantes_ambientais_paraformalidade_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE condicionantes_ambientais_paraformalidade_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.condicionantes_ambientais_paraformalidade_id_seq OWNER TO postgres;
+
+--
+-- Name: condicionantes_ambientais_paraformalidade_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE condicionantes_ambientais_paraformalidade_id_seq OWNED BY condicionantes_ambientais_paraformalidade.id;
+
+
+--
+-- Name: condicoes_ambientais; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE condicoes_ambientais (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.condicoes_ambientais OWNER TO postgres;
+
+--
+-- Name: condicoes_ambientais_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE condicoes_ambientais_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.condicoes_ambientais_id_seq OWNER TO postgres;
+
+--
+-- Name: condicoes_ambientais_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE condicoes_ambientais_id_seq OWNED BY condicoes_ambientais.id;
+
+
+--
+-- Name: corpo_numeros; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE corpo_numeros (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.corpo_numeros OWNER TO postgres;
+
+--
+-- Name: corpo_numeros_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE corpo_numeros_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.corpo_numeros_id_seq OWNER TO postgres;
+
+--
+-- Name: corpo_numeros_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE corpo_numeros_id_seq OWNED BY corpo_numeros.id;
+
+
+--
+-- Name: corpo_posicoes; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE corpo_posicoes (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.corpo_posicoes OWNER TO postgres;
+
+--
+-- Name: corpo_posicoes_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE corpo_posicoes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.corpo_posicoes_id_seq OWNER TO postgres;
+
+--
+-- Name: corpo_posicoes_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE corpo_posicoes_id_seq OWNED BY corpo_posicoes.id;
+
+
+--
+-- Name: equipamento_instalacoes; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE equipamento_instalacoes (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.equipamento_instalacoes OWNER TO postgres;
+
+--
+-- Name: equipamento_instalacoes_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE equipamento_instalacoes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.equipamento_instalacoes_id_seq OWNER TO postgres;
+
+--
+-- Name: equipamento_instalacoes_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE equipamento_instalacoes_id_seq OWNED BY equipamento_instalacoes.id;
+
+
+--
+-- Name: equipamento_mobilidades; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE equipamento_mobilidades (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone
+);
+
+
+ALTER TABLE paraformal.equipamento_mobilidades OWNER TO postgres;
+
+--
+-- Name: equipamento_mobilidades_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE equipamento_mobilidades_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.equipamento_mobilidades_id_seq OWNER TO postgres;
+
+--
+-- Name: equipamento_mobilidades_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE equipamento_mobilidades_id_seq OWNED BY equipamento_mobilidades.id;
+
+
+--
+-- Name: equipamento_portes; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE equipamento_portes (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.equipamento_portes OWNER TO postgres;
+
+--
+-- Name: equipamento_portes_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE equipamento_portes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.equipamento_portes_id_seq OWNER TO postgres;
+
+--
+-- Name: equipamento_portes_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE equipamento_portes_id_seq OWNED BY equipamento_portes.id;
+
+
+--
+-- Name: equipe_grupos_atividade; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE equipe_grupos_atividade (
+    id integer NOT NULL,
+    pessoa_id integer,
+    grupo_atividade_id integer,
+    participacao_equipe_id integer,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.equipe_grupos_atividade OWNER TO postgres;
+
+--
+-- Name: equipe_grupos_atividade_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE equipe_grupos_atividade_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.equipe_grupos_atividade_id_seq OWNER TO postgres;
+
+--
+-- Name: equipe_grupos_atividade_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE equipe_grupos_atividade_id_seq OWNED BY equipe_grupos_atividade.id;
+
+
+--
+-- Name: equipe_registros_atividades; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE equipe_registros_atividades (
+    id integer NOT NULL,
+    pessoa_id integer,
+    entrada_saida character(1),
+    data_hora timestamp without time zone DEFAULT now(),
+    atividade text,
+    remote_addr cidr,
+    x_forwoard cidr,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.equipe_registros_atividades OWNER TO postgres;
+
+--
+-- Name: equipe_registros_atividades_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE equipe_registros_atividades_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.equipe_registros_atividades_id_seq OWNER TO postgres;
+
+--
+-- Name: equipe_registros_atividades_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE equipe_registros_atividades_id_seq OWNED BY equipe_registros_atividades.id;
+
+
+--
+-- Name: espaco_localizacoes; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE espaco_localizacoes (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.espaco_localizacoes OWNER TO postgres;
+
+--
+-- Name: espaco_localizacoes_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE espaco_localizacoes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.espaco_localizacoes_id_seq OWNER TO postgres;
+
+--
+-- Name: espaco_localizacoes_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE espaco_localizacoes_id_seq OWNED BY espaco_localizacoes.id;
+
+
+--
+-- Name: grupos_atividades; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE grupos_atividades (
+    id integer NOT NULL,
+    cidade_id integer,
+    descricao character varying(400),
+    geocode_origem_latitude character varying(30),
+    geocode_origem_longitude character varying(30),
+    geocode_destino_latitude character varying(30),
+    geocode_destino_longitude character varying(30),
+    dt_ocorrencia date,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.grupos_atividades OWNER TO postgres;
+
+--
+-- Name: grupos_atividades_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE grupos_atividades_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.grupos_atividades_id_seq OWNER TO postgres;
+
+--
+-- Name: grupos_atividades_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE grupos_atividades_id_seq OWNED BY grupos_atividades.id;
+
+
+--
+-- Name: imagens_paraformalidades; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE imagens_paraformalidades (
+    id integer NOT NULL,
+    cena_id integer,
+    upload_id integer,
+    geo_latitude character varying(30),
+    geo_longitude character varying(30),
+    link character varying(255),
+    estaativo character(1) DEFAULT 'S'::bpchar,
+    turno_ocorrencia_id integer,
+    atividade_registrada_id integer,
+    quantidade_registrada_id integer,
+    localizacao_id integer,
+    condicao_ambiental_id integer,
+    corpo_numero_id integer,
+    corpo_posicao_id integer,
+    equipamento_porte_id integer,
+    equipamento_mobilidade_id integer,
+    dt_ocorrencia date,
+    estaativa character(1) DEFAULT 'S'::bpchar,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.imagens_paraformalidades OWNER TO postgres;
+
+--
+-- Name: imagens_paraformalidades_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE imagens_paraformalidades_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.imagens_paraformalidades_id_seq OWNER TO postgres;
+
+--
+-- Name: imagens_paraformalidades_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE imagens_paraformalidades_id_seq OWNED BY imagens_paraformalidades.id;
+
+
+--
+-- Name: participacoes_equipe; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE participacoes_equipe (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.participacoes_equipe OWNER TO postgres;
+
+--
+-- Name: participacoes_equipe_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE participacoes_equipe_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.participacoes_equipe_id_seq OWNER TO postgres;
+
+--
+-- Name: participacoes_equipe_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE participacoes_equipe_id_seq OWNED BY participacoes_equipe.id;
+
+
+--
+-- Name: pessoa_procedencias; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa_procedencias (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.pessoa_procedencias OWNER TO postgres;
+
+--
+-- Name: pessoa_procedencias_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE pessoa_procedencias_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.pessoa_procedencias_id_seq OWNER TO postgres;
+
+--
+-- Name: pessoa_procedencias_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE pessoa_procedencias_id_seq OWNED BY pessoa_procedencias.id;
+
+
+--
+-- Name: quantidades_registrada; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE quantidades_registrada (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.quantidades_registrada OWNER TO postgres;
+
+--
+-- Name: quantidades_registrada_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE quantidades_registrada_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.quantidades_registrada_id_seq OWNER TO postgres;
+
+--
+-- Name: quantidades_registrada_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE quantidades_registrada_id_seq OWNED BY quantidades_registrada.id;
+
+
+--
+-- Name: sentidos; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sentidos (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone
+);
+
+
+ALTER TABLE paraformal.sentidos OWNER TO postgres;
+
+--
+-- Name: sentidos_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE sentidos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.sentidos_id_seq OWNER TO postgres;
+
+--
+-- Name: sentidos_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE sentidos_id_seq OWNED BY sentidos.id;
+
+
+--
+-- Name: sentidos_paraformalidade; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sentidos_paraformalidade (
+    id integer NOT NULL,
+    sentido_id integer,
+    imagem_paraformalidade_id integer,
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.sentidos_paraformalidade OWNER TO postgres;
+
+--
+-- Name: sentidos_paraformalidade_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE sentidos_paraformalidade_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.sentidos_paraformalidade_id_seq OWNER TO postgres;
+
+--
+-- Name: sentidos_paraformalidade_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE sentidos_paraformalidade_id_seq OWNED BY sentidos_paraformalidade.id;
+
+
+--
+-- Name: turnos_ocorrencia; Type: TABLE; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE turnos_ocorrencia (
+    id integer NOT NULL,
+    descricao character varying(255),
+    dt_cadastro timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE paraformal.turnos_ocorrencia OWNER TO postgres;
+
+--
+-- Name: turnos_ocorrencia_id_seq; Type: SEQUENCE; Schema: paraformal; Owner: postgres
+--
+
+CREATE SEQUENCE turnos_ocorrencia_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE paraformal.turnos_ocorrencia_id_seq OWNER TO postgres;
+
+--
+-- Name: turnos_ocorrencia_id_seq; Type: SEQUENCE OWNED BY; Schema: paraformal; Owner: postgres
+--
+
+ALTER SEQUENCE turnos_ocorrencia_id_seq OWNED BY turnos_ocorrencia.id;
+
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: ci_sessions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -154,13 +949,6 @@ ALTER SEQUENCE cidades_id_seq OWNED BY cidades.id;
 
 
 --
--- Name: cidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('cidades_id_seq', 5565, true);
-
-
---
 -- Name: empresas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -193,13 +981,6 @@ ALTER TABLE public.empresas_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE empresas_id_seq OWNED BY empresas.id;
-
-
---
--- Name: empresas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('empresas_id_seq', 3, true);
 
 
 --
@@ -256,13 +1037,6 @@ ALTER SEQUENCE enderecos_id_seq OWNED BY enderecos.id;
 
 
 --
--- Name: enderecos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('enderecos_id_seq', 1, false);
-
-
---
 -- Name: enderecos_tipos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -295,59 +1069,6 @@ ALTER TABLE public.enderecos_tipos_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE enderecos_tipos_id_seq OWNED BY enderecos_tipos.id;
-
-
---
--- Name: enderecos_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('enderecos_tipos_id_seq', 1, false);
-
-
---
--- Name: equipe_atividades_registros; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE equipe_atividades_registros (
-    id integer NOT NULL,
-    pessoa_id integer,
-    entrada_saida character(1),
-    data_hora timestamp without time zone,
-    atividade text,
-    remote_addr cidr,
-    x_forward cidr,
-    dt_cadastro timestamp without time zone DEFAULT now()
-);
-
-
-ALTER TABLE public.equipe_atividades_registros OWNER TO postgres;
-
---
--- Name: equipe_atividades_registros_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE equipe_atividades_registros_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.equipe_atividades_registros_id_seq OWNER TO postgres;
-
---
--- Name: equipe_atividades_registros_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE equipe_atividades_registros_id_seq OWNED BY equipe_atividades_registros.id;
-
-
---
--- Name: equipe_atividades_registros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('equipe_atividades_registros_id_seq', 6, true);
 
 
 --
@@ -384,11 +1105,18 @@ ALTER SEQUENCE estados_civis_id_seq OWNED BY estados_civis.id;
 
 
 --
--- Name: estados_civis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: geocode_cache_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('estados_civis_id_seq', 13, true);
+CREATE SEQUENCE geocode_cache_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
+
+ALTER TABLE public.geocode_cache_seq OWNER TO postgres;
 
 --
 -- Name: geocode_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -409,48 +1137,6 @@ ALTER TABLE public.geocode_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE geocode_id_seq OWNED BY cidades.id;
-
-
---
--- Name: geocode_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('geocode_id_seq', 2, true);
-
-
---
--- Name: geocode; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE geocode (
-    id integer DEFAULT nextval('geocode_id_seq'::regclass) NOT NULL,
-    lat character varying(50) DEFAULT NULL::character varying,
-    lng character varying(50) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.geocode OWNER TO postgres;
-
---
--- Name: geocode_cache_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE geocode_cache_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.geocode_cache_seq OWNER TO postgres;
-
---
--- Name: geocode_cache_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('geocode_cache_seq', 1, false);
 
 
 --
@@ -501,13 +1187,6 @@ ALTER SEQUENCE grupos_acessos_empresas_id_seq OWNED BY grupos_acessos_empresas.i
 
 
 --
--- Name: grupos_acessos_empresas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('grupos_acessos_empresas_id_seq', 3, true);
-
-
---
 -- Name: grupos_acessos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -526,13 +1205,6 @@ ALTER TABLE public.grupos_acessos_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE grupos_acessos_id_seq OWNED BY grupos_acessos.id;
-
-
---
--- Name: grupos_acessos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('grupos_acessos_id_seq', 2, true);
 
 
 --
@@ -568,13 +1240,6 @@ ALTER TABLE public.grupos_acessos_perfis_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE grupos_acessos_perfis_id_seq OWNED BY grupos_acessos_perfis.id;
-
-
---
--- Name: grupos_acessos_perfis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('grupos_acessos_perfis_id_seq', 9, true);
 
 
 --
@@ -615,13 +1280,6 @@ ALTER SEQUENCE grupos_acessos_programas_id_seq OWNED BY grupos_acessos_programas
 
 
 --
--- Name: grupos_acessos_programas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('grupos_acessos_programas_id_seq', 39, true);
-
-
---
 -- Name: grupos_acessos_programas_permissoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -654,102 +1312,6 @@ ALTER TABLE public.grupos_acessos_programas_permissoes_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE grupos_acessos_programas_permissoes_id_seq OWNED BY grupos_acessos_programas_permissoes.id;
-
-
---
--- Name: grupos_acessos_programas_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('grupos_acessos_programas_permissoes_id_seq', 6, true);
-
-
---
--- Name: grupos_atividades; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE grupos_atividades (
-    id integer NOT NULL,
-    cidade_id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
-    dt_ocorrencia timestamp without time zone DEFAULT now(),
-    geocode_origem_lat character varying(30),
-    geocode_origem_lng character varying(30),
-    geocode_destino_lat character varying(30),
-    geocode_destino_lng character varying(30)
-);
-
-
-ALTER TABLE public.grupos_atividades OWNER TO postgres;
-
---
--- Name: grupos_atividades_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE grupos_atividades_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.grupos_atividades_seq OWNER TO postgres;
-
---
--- Name: grupos_atividades_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE grupos_atividades_seq OWNED BY grupos_atividades.id;
-
-
---
--- Name: grupos_atividades_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('grupos_atividades_seq', 7, true);
-
-
---
--- Name: imagens_paraformais; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE imagens_paraformais (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    figura lo,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.imagens_paraformais OWNER TO postgres;
-
---
--- Name: imagens_paraformais_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE imagens_paraformais_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.imagens_paraformais_seq OWNER TO postgres;
-
---
--- Name: imagens_paraformais_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE imagens_paraformais_seq OWNED BY imagens_paraformais.id;
-
-
---
--- Name: imagens_paraformais_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('imagens_paraformais_seq', 1, false);
 
 
 --
@@ -789,13 +1351,6 @@ ALTER SEQUENCE log_fields_id_seq OWNED BY log_fields.id;
 
 
 --
--- Name: log_fields_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('log_fields_id_seq', 1, false);
-
-
---
 -- Name: log_fields_structures; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -827,13 +1382,6 @@ ALTER TABLE public.log_fields_structures_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE log_fields_structures_id_seq OWNED BY log_fields_structures.id;
-
-
---
--- Name: log_fields_structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('log_fields_structures_id_seq', 1, false);
 
 
 --
@@ -873,13 +1421,6 @@ ALTER SEQUENCE log_tables_id_seq OWNED BY log_tables.id;
 
 
 --
--- Name: log_tables_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('log_tables_id_seq', 1, false);
-
-
---
 -- Name: log_tables_structures; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -910,65 +1451,6 @@ ALTER TABLE public.log_tables_structures_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE log_tables_structures_id_seq OWNED BY log_tables_structures.id;
-
-
---
--- Name: log_tables_structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('log_tables_structures_id_seq', 1, false);
-
-
---
--- Name: paraformalidades; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE paraformalidades (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    imagem_id integer NOT NULL,
-    grupo_atividade_id integer NOT NULL,
-    colaborador_pessoa_id integer NOT NULL,
-    tipo_registro_atividade_id integer NOT NULL,
-    tipo_local_id integer NOT NULL,
-    tipo_condicao_ambiental_id integer NOT NULL,
-    tipo_elemento_situacao_id integer NOT NULL,
-    tipo_ponte_id integer NOT NULL,
-    esta_ativo character varying(1) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL,
-    geocode_lat character varying(30),
-    geocode_lng character varying(30)
-);
-
-
-ALTER TABLE public.paraformalidades OWNER TO postgres;
-
---
--- Name: paraformalidades_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE paraformalidades_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.paraformalidades_seq OWNER TO postgres;
-
---
--- Name: paraformalidades_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE paraformalidades_seq OWNED BY paraformalidades.id;
-
-
---
--- Name: paraformalidades_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('paraformalidades_seq', 16, true);
 
 
 --
@@ -1008,13 +1490,6 @@ ALTER SEQUENCE parametros_id_seq OWNED BY parametros.id;
 
 
 --
--- Name: parametros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('parametros_id_seq', 1, true);
-
-
---
 -- Name: perfis; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1047,13 +1522,6 @@ ALTER TABLE public.perfis_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE perfis_id_seq OWNED BY perfis.id;
-
-
---
--- Name: perfis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('perfis_id_seq', 5, true);
 
 
 --
@@ -1091,13 +1559,6 @@ ALTER TABLE public.perfis_programas_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE perfis_programas_id_seq OWNED BY perfis_programas.id;
-
-
---
--- Name: perfis_programas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('perfis_programas_id_seq', 253, true);
 
 
 --
@@ -1161,13 +1622,6 @@ ALTER SEQUENCE pessoas_id_seq OWNED BY pessoas.id;
 
 
 --
--- Name: pessoas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('pessoas_id_seq', 7, true);
-
-
---
 -- Name: pessoas_tipos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1199,13 +1653,6 @@ ALTER TABLE public.pessoas_tipos_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE pessoas_tipos_id_seq OWNED BY pessoas_tipos.id;
-
-
---
--- Name: pessoas_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('pessoas_tipos_id_seq', 2, true);
 
 
 --
@@ -1246,13 +1693,6 @@ ALTER SEQUENCE programas_id_seq OWNED BY programas.id;
 
 
 --
--- Name: programas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('programas_id_seq', 22, true);
-
-
---
 -- Name: programas_parametros; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1285,13 +1725,6 @@ ALTER TABLE public.programas_parametros_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE programas_parametros_id_seq OWNED BY programas_parametros.id;
-
-
---
--- Name: programas_parametros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('programas_parametros_id_seq', 1, false);
 
 
 --
@@ -1332,13 +1765,6 @@ ALTER SEQUENCE sys_metodos_id_seq OWNED BY sys_metodos.id;
 
 
 --
--- Name: sys_metodos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('sys_metodos_id_seq', 44, true);
-
-
---
 -- Name: sys_permissoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1371,13 +1797,6 @@ ALTER TABLE public.sys_permissoes_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE sys_permissoes_id_seq OWNED BY sys_permissoes.id;
-
-
---
--- Name: sys_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('sys_permissoes_id_seq', 87, true);
 
 
 --
@@ -1417,13 +1836,6 @@ ALTER SEQUENCE telefones_id_seq OWNED BY telefones.id;
 
 
 --
--- Name: telefones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('telefones_id_seq', 1, false);
-
-
---
 -- Name: telefones_tipos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1459,13 +1871,6 @@ ALTER SEQUENCE telefones_tipos_id_seq OWNED BY telefones_tipos.id;
 
 
 --
--- Name: telefones_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('telefones_tipos_id_seq', 1, false);
-
-
---
 -- Name: tipo_enderecos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1496,259 +1901,6 @@ ALTER TABLE public.tipo_enderecos_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE tipo_enderecos_id_seq OWNED BY tipo_enderecos.id;
-
-
---
--- Name: tipo_enderecos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipo_enderecos_id_seq', 1, false);
-
-
---
--- Name: tipos_condicoes_ambientais; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tipos_condicoes_ambientais (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.tipos_condicoes_ambientais OWNER TO postgres;
-
---
--- Name: tipos_condicoes_ambientais_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE tipos_condicoes_ambientais_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.tipos_condicoes_ambientais_seq OWNER TO postgres;
-
---
--- Name: tipos_condicoes_ambientais_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE tipos_condicoes_ambientais_seq OWNED BY tipos_condicoes_ambientais.id;
-
-
---
--- Name: tipos_condicoes_ambientais_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipos_condicoes_ambientais_seq', 11, true);
-
-
---
--- Name: tipos_elementos_situacoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tipos_elementos_situacoes (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.tipos_elementos_situacoes OWNER TO postgres;
-
---
--- Name: tipos_elementos_situacoes_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE tipos_elementos_situacoes_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.tipos_elementos_situacoes_seq OWNER TO postgres;
-
---
--- Name: tipos_elementos_situacoes_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE tipos_elementos_situacoes_seq OWNED BY tipos_elementos_situacoes.id;
-
-
---
--- Name: tipos_elementos_situacoes_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipos_elementos_situacoes_seq', 6, true);
-
-
---
--- Name: tipos_locais; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tipos_locais (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.tipos_locais OWNER TO postgres;
-
---
--- Name: tipos_locais_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE tipos_locais_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.tipos_locais_seq OWNER TO postgres;
-
---
--- Name: tipos_locais_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE tipos_locais_seq OWNED BY tipos_locais.id;
-
-
---
--- Name: tipos_locais_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipos_locais_seq', 8, true);
-
-
---
--- Name: tipos_participacoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tipos_participacoes (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.tipos_participacoes OWNER TO postgres;
-
---
--- Name: tipos_participacoes_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE tipos_participacoes_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.tipos_participacoes_seq OWNER TO postgres;
-
---
--- Name: tipos_participacoes_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE tipos_participacoes_seq OWNED BY tipos_participacoes.id;
-
-
---
--- Name: tipos_participacoes_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipos_participacoes_seq', 10, true);
-
-
---
--- Name: tipos_pontes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tipos_pontes (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.tipos_pontes OWNER TO postgres;
-
---
--- Name: tipos_pontes_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE tipos_pontes_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.tipos_pontes_seq OWNER TO postgres;
-
---
--- Name: tipos_pontes_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE tipos_pontes_seq OWNED BY tipos_pontes.id;
-
-
---
--- Name: tipos_pontes_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipos_pontes_seq', 3, true);
-
-
---
--- Name: tipos_registros_atividades; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tipos_registros_atividades (
-    id integer NOT NULL,
-    descricao character varying(255) DEFAULT NULL::character varying,
-    dt_cadastro timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.tipos_registros_atividades OWNER TO postgres;
-
---
--- Name: tipos_registros_atividades_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE tipos_registros_atividades_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.tipos_registros_atividades_seq OWNER TO postgres;
-
---
--- Name: tipos_registros_atividades_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE tipos_registros_atividades_seq OWNED BY tipos_registros_atividades.id;
-
-
---
--- Name: tipos_registros_atividades_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('tipos_registros_atividades_seq', 5, true);
 
 
 --
@@ -1787,13 +1939,6 @@ ALTER SEQUENCE unidades_federativas_id_seq OWNED BY unidades_federativas.id;
 
 
 --
--- Name: unidades_federativas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('unidades_federativas_id_seq', 27, true);
-
-
---
 -- Name: uploads; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1828,13 +1973,6 @@ ALTER TABLE public.uploads_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
-
-
---
--- Name: uploads_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('uploads_id_seq', 20, true);
 
 
 --
@@ -1904,13 +2042,6 @@ ALTER SEQUENCE usuarios_grupos_acessos_id_seq OWNED BY usuarios_grupos_acessos.i
 
 
 --
--- Name: usuarios_grupos_acessos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('usuarios_grupos_acessos_id_seq', 2, true);
-
-
---
 -- Name: usuarios_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1929,13 +2060,6 @@ ALTER TABLE public.usuarios_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE usuarios_id_seq OWNED BY usuarios.id;
-
-
---
--- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('usuarios_id_seq', 3, true);
 
 
 --
@@ -1988,12 +2112,163 @@ ALTER TABLE public.usuarios_programas_acessos_id_seq OWNER TO postgres;
 ALTER SEQUENCE usuarios_programas_acessos_id_seq OWNED BY usuarios_programas_acessos.id;
 
 
+SET search_path = paraformal, pg_catalog;
+
 --
--- Name: usuarios_programas_acessos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
 --
 
-SELECT pg_catalog.setval('usuarios_programas_acessos_id_seq', 11439, true);
+ALTER TABLE ONLY atividades_registradas ALTER COLUMN id SET DEFAULT nextval('atividades_registradas_id_seq'::regclass);
 
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY cenas ALTER COLUMN id SET DEFAULT nextval('cenas_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY climas ALTER COLUMN id SET DEFAULT nextval('climas_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY condicionantes_ambientais ALTER COLUMN id SET DEFAULT nextval('condicionantes_ambientais_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY condicionantes_ambientais_paraformalidade ALTER COLUMN id SET DEFAULT nextval('condicionantes_ambientais_paraformalidade_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY condicoes_ambientais ALTER COLUMN id SET DEFAULT nextval('condicoes_ambientais_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY corpo_numeros ALTER COLUMN id SET DEFAULT nextval('corpo_numeros_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY corpo_posicoes ALTER COLUMN id SET DEFAULT nextval('corpo_posicoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipamento_instalacoes ALTER COLUMN id SET DEFAULT nextval('equipamento_instalacoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipamento_mobilidades ALTER COLUMN id SET DEFAULT nextval('equipamento_mobilidades_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipamento_portes ALTER COLUMN id SET DEFAULT nextval('equipamento_portes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipe_grupos_atividade ALTER COLUMN id SET DEFAULT nextval('equipe_grupos_atividade_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipe_registros_atividades ALTER COLUMN id SET DEFAULT nextval('equipe_registros_atividades_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY espaco_localizacoes ALTER COLUMN id SET DEFAULT nextval('espaco_localizacoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY grupos_atividades ALTER COLUMN id SET DEFAULT nextval('grupos_atividades_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades ALTER COLUMN id SET DEFAULT nextval('imagens_paraformalidades_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY participacoes_equipe ALTER COLUMN id SET DEFAULT nextval('participacoes_equipe_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_procedencias ALTER COLUMN id SET DEFAULT nextval('pessoa_procedencias_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY quantidades_registrada ALTER COLUMN id SET DEFAULT nextval('quantidades_registrada_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY sentidos ALTER COLUMN id SET DEFAULT nextval('sentidos_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY sentidos_paraformalidade ALTER COLUMN id SET DEFAULT nextval('sentidos_paraformalidade_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY turnos_ocorrencia ALTER COLUMN id SET DEFAULT nextval('turnos_ocorrencia_id_seq'::regclass);
+
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -2021,13 +2296,6 @@ ALTER TABLE ONLY enderecos ALTER COLUMN id SET DEFAULT nextval('enderecos_id_seq
 --
 
 ALTER TABLE ONLY enderecos_tipos ALTER COLUMN id SET DEFAULT nextval('enderecos_tipos_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY equipe_atividades_registros ALTER COLUMN id SET DEFAULT nextval('equipe_atividades_registros_id_seq'::regclass);
 
 
 --
@@ -2076,20 +2344,6 @@ ALTER TABLE ONLY grupos_acessos_programas_permissoes ALTER COLUMN id SET DEFAULT
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY grupos_atividades ALTER COLUMN id SET DEFAULT nextval('grupos_atividades_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY imagens_paraformais ALTER COLUMN id SET DEFAULT nextval('imagens_paraformais_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY log_fields ALTER COLUMN id SET DEFAULT nextval('log_fields_id_seq'::regclass);
 
 
@@ -2112,13 +2366,6 @@ ALTER TABLE ONLY log_tables ALTER COLUMN id SET DEFAULT nextval('log_tables_id_s
 --
 
 ALTER TABLE ONLY log_tables_structures ALTER COLUMN id SET DEFAULT nextval('log_tables_structures_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY paraformalidades ALTER COLUMN id SET DEFAULT nextval('paraformalidades_seq'::regclass);
 
 
 --
@@ -2209,48 +2456,6 @@ ALTER TABLE ONLY tipo_enderecos ALTER COLUMN id SET DEFAULT nextval('tipo_endere
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY tipos_condicoes_ambientais ALTER COLUMN id SET DEFAULT nextval('tipos_condicoes_ambientais_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY tipos_elementos_situacoes ALTER COLUMN id SET DEFAULT nextval('tipos_elementos_situacoes_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY tipos_locais ALTER COLUMN id SET DEFAULT nextval('tipos_locais_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY tipos_participacoes ALTER COLUMN id SET DEFAULT nextval('tipos_participacoes_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY tipos_pontes ALTER COLUMN id SET DEFAULT nextval('tipos_pontes_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY tipos_registros_atividades ALTER COLUMN id SET DEFAULT nextval('tipos_registros_atividades_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY unidades_federativas ALTER COLUMN id SET DEFAULT nextval('unidades_federativas_id_seq'::regclass);
 
 
@@ -2282,6 +2487,390 @@ ALTER TABLE ONLY usuarios_grupos_acessos ALTER COLUMN id SET DEFAULT nextval('us
 ALTER TABLE ONLY usuarios_programas_acessos ALTER COLUMN id SET DEFAULT nextval('usuarios_programas_acessos_id_seq'::regclass);
 
 
+SET search_path = paraformal, pg_catalog;
+
+--
+-- Data for Name: atividades_registradas; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY atividades_registradas (id, descricao, dt_cadastro) FROM stdin;
+1	Comércio	2013-02-24 09:33:22.304418
+2	Cultura/Arte	2013-02-24 09:33:32.2771
+3	Moradia	2013-02-24 09:33:41.023743
+\.
+
+
+--
+-- Name: atividades_registradas_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('atividades_registradas_id_seq', 3, true);
+
+
+--
+-- Data for Name: cenas; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY cenas (id, descricao, grupo_atividade_id, dt_ocorrencia, estaativo, dt_cadastro) FROM stdin;
+3	Cena A	1	2013-02-24	S	2013-02-24 12:56:52.972195
+6	Cena B	1	2013-02-24	S	2013-02-24 14:43:23.427395
+\.
+
+
+--
+-- Name: cenas_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cenas_id_seq', 6, true);
+
+
+--
+-- Data for Name: climas; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY climas (id, descricao, dt_cadastro) FROM stdin;
+1	Sol	2013-02-24 09:58:30.586089
+2	Chuva	2013-02-24 09:58:34.383718
+3	Nublado	2013-02-24 09:58:39.301544
+4	Vento	2013-02-24 09:58:44.853156
+5	Quente	2013-02-24 09:58:49.98123
+6	Ameno	2013-02-24 09:58:53.732659
+7	Frio	2013-02-24 09:58:58.753763
+\.
+
+
+--
+-- Name: climas_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('climas_id_seq', 7, true);
+
+
+--
+-- Data for Name: condicionantes_ambientais; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY condicionantes_ambientais (id, descricao, dt_cadastro) FROM stdin;
+1	Sombra	2013-02-24 10:18:57.296443
+2	Movimento	2013-02-24 10:19:06.132755
+3	Natureza	2013-02-24 10:19:19.971634
+4	Piso	2013-02-24 10:19:26.2203
+5	Parede para Apoio	2013-02-24 10:19:41.684907
+\.
+
+
+--
+-- Name: condicionantes_ambientais_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('condicionantes_ambientais_id_seq', 5, true);
+
+
+--
+-- Data for Name: condicionantes_ambientais_paraformalidade; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY condicionantes_ambientais_paraformalidade (id, condicionante_ambiental_id, imagem_paraformalidade_id, dt_cadastro) FROM stdin;
+\.
+
+
+--
+-- Name: condicionantes_ambientais_paraformalidade_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('condicionantes_ambientais_paraformalidade_id_seq', 1, false);
+
+
+--
+-- Data for Name: condicoes_ambientais; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY condicoes_ambientais (id, descricao, dt_cadastro) FROM stdin;
+\.
+
+
+--
+-- Name: condicoes_ambientais_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('condicoes_ambientais_id_seq', 6, true);
+
+
+--
+-- Data for Name: corpo_numeros; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY corpo_numeros (id, descricao, dt_cadastro) FROM stdin;
+1	Único	2013-02-24 10:19:57.419447
+2	Grupo	2013-02-24 10:20:05.973712
+\.
+
+
+--
+-- Name: corpo_numeros_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('corpo_numeros_id_seq', 2, true);
+
+
+--
+-- Data for Name: corpo_posicoes; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY corpo_posicoes (id, descricao, dt_cadastro) FROM stdin;
+1	Sentado	2013-02-24 10:20:17.938703
+2	Em pé	2013-02-24 10:20:25.70436
+\.
+
+
+--
+-- Name: corpo_posicoes_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('corpo_posicoes_id_seq', 2, true);
+
+
+--
+-- Data for Name: equipamento_instalacoes; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY equipamento_instalacoes (id, descricao, dt_cadastro) FROM stdin;
+1	Elétrica	2013-02-24 10:21:11.230024
+2	Hidráulica	2013-02-24 10:21:22.440499
+3	Sanitárias	2013-02-24 10:21:38.929426
+4	Telefônica	2013-02-24 10:21:51.217367
+5	Teve a Cabo	2013-02-24 10:22:02.122299
+6	Nenhuma	2013-02-24 10:22:08.571127
+\.
+
+
+--
+-- Name: equipamento_instalacoes_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('equipamento_instalacoes_id_seq', 6, true);
+
+
+--
+-- Data for Name: equipamento_mobilidades; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY equipamento_mobilidades (id, descricao, dt_cadastro) FROM stdin;
+1	Móvel	2013-02-24 10:22:26.243174
+2	Ambulante	2013-02-24 10:22:34.048025
+3	Fixo	2013-02-24 10:22:39.320931
+\.
+
+
+--
+-- Name: equipamento_mobilidades_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('equipamento_mobilidades_id_seq', 3, true);
+
+
+--
+-- Data for Name: equipamento_portes; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY equipamento_portes (id, descricao, dt_cadastro) FROM stdin;
+1	Pequeno	2013-02-24 10:20:40.911101
+2	Médio	2013-02-24 10:20:47.437376
+3	Grande	2013-02-24 10:20:53.812709
+\.
+
+
+--
+-- Name: equipamento_portes_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('equipamento_portes_id_seq', 3, true);
+
+
+--
+-- Data for Name: equipe_grupos_atividade; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY equipe_grupos_atividade (id, pessoa_id, grupo_atividade_id, participacao_equipe_id, dt_cadastro) FROM stdin;
+\.
+
+
+--
+-- Name: equipe_grupos_atividade_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('equipe_grupos_atividade_id_seq', 1, false);
+
+
+--
+-- Data for Name: equipe_registros_atividades; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY equipe_registros_atividades (id, pessoa_id, entrada_saida, data_hora, atividade, remote_addr, x_forwoard, dt_cadastro) FROM stdin;
+1	1	E	2013-02-24 14:37:04.277954	aaa	127.0.0.1/32	\N	2013-02-24 14:37:04.277954
+\.
+
+
+--
+-- Name: equipe_registros_atividades_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('equipe_registros_atividades_id_seq', 1, true);
+
+
+--
+-- Data for Name: espaco_localizacoes; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY espaco_localizacoes (id, descricao, dt_cadastro) FROM stdin;
+1	Vazio	2013-02-24 09:42:28.402134
+2	Esquina	2013-02-24 09:42:37.46747
+3	Praça	2013-02-24 09:42:43.47723
+\.
+
+
+--
+-- Name: espaco_localizacoes_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('espaco_localizacoes_id_seq', 3, true);
+
+
+--
+-- Data for Name: grupos_atividades; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY grupos_atividades (id, cidade_id, descricao, geocode_origem_latitude, geocode_origem_longitude, geocode_destino_latitude, geocode_destino_longitude, dt_ocorrencia, dt_cadastro) FROM stdin;
+1	4227	Maria Maria	-31.77148	-52.32679000000002	-31.77097	-52.32645000000002	2013-02-21	2013-02-17 14:46:55.37009
+\.
+
+
+--
+-- Name: grupos_atividades_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('grupos_atividades_id_seq', 1, true);
+
+
+--
+-- Data for Name: imagens_paraformalidades; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY imagens_paraformalidades (id, cena_id, upload_id, geo_latitude, geo_longitude, link, estaativo, turno_ocorrencia_id, atividade_registrada_id, quantidade_registrada_id, localizacao_id, condicao_ambiental_id, corpo_numero_id, corpo_posicao_id, equipamento_porte_id, equipamento_mobilidade_id, dt_ocorrencia, estaativa, dt_cadastro) FROM stdin;
+\.
+
+
+--
+-- Name: imagens_paraformalidades_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('imagens_paraformalidades_id_seq', 1, false);
+
+
+--
+-- Data for Name: participacoes_equipe; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY participacoes_equipe (id, descricao, dt_cadastro) FROM stdin;
+\.
+
+
+--
+-- Name: participacoes_equipe_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('participacoes_equipe_id_seq', 1, false);
+
+
+--
+-- Data for Name: pessoa_procedencias; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY pessoa_procedencias (id, descricao, dt_cadastro) FROM stdin;
+1	Nativo	2013-02-24 09:57:22.530299
+2	Turista	2013-02-24 09:57:27.846297
+\.
+
+
+--
+-- Name: pessoa_procedencias_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pessoa_procedencias_id_seq', 2, true);
+
+
+--
+-- Data for Name: quantidades_registrada; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY quantidades_registrada (id, descricao, dt_cadastro) FROM stdin;
+2	Único	2013-02-24 09:38:31.989037
+4	Grupo	2013-02-24 09:39:26.899063
+\.
+
+
+--
+-- Name: quantidades_registrada_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('quantidades_registrada_id_seq', 4, true);
+
+
+--
+-- Data for Name: sentidos; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY sentidos (id, descricao, dt_cadastro) FROM stdin;
+1	Tato	2013-02-24 09:40:17.395176
+2	Cheiro	2013-02-24 09:40:22.200937
+3	Sons	2013-02-24 09:40:26.42749
+4	Cor/Textura	2013-02-24 09:40:33.903044
+\.
+
+
+--
+-- Name: sentidos_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sentidos_id_seq', 4, true);
+
+
+--
+-- Data for Name: sentidos_paraformalidade; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY sentidos_paraformalidade (id, sentido_id, imagem_paraformalidade_id, dt_cadastro) FROM stdin;
+\.
+
+
+--
+-- Name: sentidos_paraformalidade_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sentidos_paraformalidade_id_seq', 1, false);
+
+
+--
+-- Data for Name: turnos_ocorrencia; Type: TABLE DATA; Schema: paraformal; Owner: postgres
+--
+
+COPY turnos_ocorrencia (id, descricao, dt_cadastro) FROM stdin;
+1	Manhã	2013-02-24 09:32:38.295477
+2	Tarde	2013-02-24 09:32:45.082532
+3	Noite	2013-02-24 09:32:51.401224
+4	Madrugada	2013-02-24 09:33:01.485284
+\.
+
+
+--
+-- Name: turnos_ocorrencia_id_seq; Type: SEQUENCE SET; Schema: paraformal; Owner: postgres
+--
+
+SELECT pg_catalog.setval('turnos_ocorrencia_id_seq', 4, true);
+
+
+SET search_path = public, pg_catalog;
+
 --
 -- Data for Name: ci_sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2289,6 +2878,8 @@ ALTER TABLE ONLY usuarios_programas_acessos ALTER COLUMN id SET DEFAULT nextval(
 COPY ci_sessions (session_id, ip_address, user_agent, last_activity, user_data) FROM stdin;
 4c206176082e6dcca5e0f981fed19c1a	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/536.5 (K	1340489226	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:3054:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/usuario">Usuários</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/perfil">Módulos</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/empresa">Setores</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastros/paraformalidade">Paraformalidades</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastros/grupoAtividade">Grupos de Atividade</a></span></ul></li><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/atividadeRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/colaborador">Colaboradores</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/condicaoAmbiental">Condições Ambientais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/elementoSituacao">Elementos Situação</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/local">Locais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/participacao">Participações</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/ponte">Pontes</a></span></ul></li><li class="closed"><span>Equipe</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/equipe/registroAtividade">Registros de Atividades</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/equipe/verRegistroAtividade">Ver Registros de Atividades</a></span></ul></li></ul></li>";}
 3d104a23b4db74039884bcfbd71299e5	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (	1337214452	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:1998:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/usuario">Usuários</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/perfil">Módulos</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/empresa">Setores</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://127.1.1.1/PlataformaDoParaformal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/atividadeRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/colaborador">Colaboradores</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/condicaoAmbiental">Condições Ambientais</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/elementoSituacao">Elementos Situação</a></span><li class="closed"><span><a href="http://127.1.1.1/PlataformaDoParaformal/paraformalidade/cadastrosBasicos/local">Locais</a></span></ul></li></ul></li>";}
+eb9d523339dd122589c8646e1cb151f6	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (	1361123511	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:3566:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://localhost/PlataformaParaFormal/gerenciador/usuario">Usuários</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/perfil">Módulos</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://localhost/PlataformaParaFormal/gerenciador/empresa">Setores</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros</span><ul style="background: none !important;"><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastros/paraformalidade">Paraformalidades</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastros/gruposAtividades">Grupos de Atividade</a></span></ul></li><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/atividadesRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/condicoesAmbiental">Condições Ambientais</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/corpoNumeros">Corpo Numeros</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/corpoPosicoes">Corpo Posições</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/equipamentoInstalacoes">Equipamento Instalações</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/equipamentoMobilidades">Equipamento Mobilidades</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/equipamentoPortes">Equipamento Portes</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/espacoLocalizacoes">Espaço Localizações</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/quantidadesRegistrada">Quantidades Registradas</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/turnosOcorrencia">Turnos Ocorrência</a></span></ul></li><li class="closed"><span>Equipe</span><ul style="background: none !important;"><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/equipe/registroAtividade">Registros de Atividades</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/equipe/verRegistroAtividade">Ver Registros de Atividades</a></span></ul></li></ul></li>";}
+8b4587ee85311643277bc8f1cd7db1d5	127.0.0.1	Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (	1361727781	a:2:{s:7:"usuario";s:242:"{"id":"1","pessoa_id":"1","login":"admin","senha":"d033e22ae348aeb5660fc2140aec35850c4da997","nome_pessoa":"Administrador do Sistema","email":"administrador@localhost","avatar_id":null,"nome_gerado":null,"nome_original":null,"tema":"redmond"}";s:4:"menu";s:3573:"<li><span>Área Administrativa</span><ul style="background: none !important;"><li class="closed"><span>Administrador do Sistema</span><ul style="background: none !important;"><li class="closed"><span>Usuários e módulos</span><ul style="background: none !important;"><li><a href="http://localhost/PlataformaParaFormal/gerenciador/usuario">Usuários</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/perfil">Módulos</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/grupoAcesso">Grupos de Acesso</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/pessoaTipo">Tipo Pessoas</a></li></ul></li><li class="closed"><span>Gerenciador</span><ul style="background: none !important;"><li><a href="http://localhost/PlataformaParaFormal/gerenciador/empresa">Setores</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/parametro">Parâmetros</a></li><li><a href="http://localhost/PlataformaParaFormal/gerenciador/programa">Programas</a></li></ul></li></ul></li></ul></li><li><span>Plataforma do Paraformal</span><ul style="background: none !important;"><li class="closed"><span>Cadastros</span><ul style="background: none !important;"><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastros/paraformalidade">Paraformalidades</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastros/gruposAtividades">Grupos de Atividade</a></span></ul></li><li class="closed"><span>Cadastros Básicos</span><ul style="background: none !important;"><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/atividadesRegistrada">Atividades Registradas</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/condicionantesAmbiental">Condicionantes Ambiental</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/corpoNumeros">Corpo Numeros</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/corpoPosicoes">Corpo Posições</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/equipamentoInstalacoes">Equipamento Instalações</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/equipamentoMobilidades">Equipamento Mobilidades</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/equipamentoPortes">Equipamento Portes</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/espacoLocalizacoes">Espaço Localizações</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/quantidadesRegistrada">Quantidades Registradas</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/cadastrosBasicos/turnosOcorrencia">Turnos Ocorrência</a></span></ul></li><li class="closed"><span>Equipe</span><ul style="background: none !important;"><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/equipe/registroAtividade">Registros de Atividades</a></span><li class="closed"><span><a href="http://localhost/PlataformaParaFormal/paraformalidade/equipe/verRegistroAtividade">Ver Registros de Atividades</a></span></ul></li></ul></li>";}
 \.
 
 
@@ -7866,6 +8457,13 @@ COPY cidades (id, unidade_federativa_id, nome, dt_cadastro, geocode_id) FROM std
 
 
 --
+-- Name: cidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cidades_id_seq', 5565, true);
+
+
+--
 -- Data for Name: empresas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -7873,6 +8471,13 @@ COPY empresas (id, nome, cnpj, dt_cadastro) FROM stdin;
 1	Área Administrativa	\N	2010-01-07
 3	Plataforma do Paraformal	\N	2012-05-05
 \.
+
+
+--
+-- Name: empresas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('empresas_id_seq', 3, true);
 
 
 --
@@ -7896,6 +8501,13 @@ COPY enderecos (id, pessoa_id, endereco_tipo_id, cidade_id, cep, rua, numero, ba
 
 
 --
+-- Name: enderecos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('enderecos_id_seq', 1, false);
+
+
+--
 -- Data for Name: enderecos_tipos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -7904,13 +8516,10 @@ COPY enderecos_tipos (id, descricao, flg_tipo, dt_cadastro) FROM stdin;
 
 
 --
--- Data for Name: equipe_atividades_registros; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: enderecos_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-COPY equipe_atividades_registros (id, pessoa_id, entrada_saida, data_hora, atividade, remote_addr, x_forward, dt_cadastro) FROM stdin;
-1	1	E	\N	Início das atividades de registros	127.0.0.1/32	\N	2012-05-19 12:47:53.820399
-2	1	S	\N	Fim da atividade de registros	127.0.0.1/32	\N	2012-05-19 12:48:21.901614
-\.
+SELECT pg_catalog.setval('enderecos_tipos_id_seq', 1, false);
 
 
 --
@@ -7928,12 +8537,24 @@ COPY estados_civis (id, descricao) FROM stdin;
 
 
 --
--- Data for Name: geocode; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: estados_civis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-COPY geocode (id, lat, lng, dt_cadastro) FROM stdin;
-1	-31.76979690022849	-52.341903525253315	2012-06-07 13:18:11.654901
-\.
+SELECT pg_catalog.setval('estados_civis_id_seq', 13, true);
+
+
+--
+-- Name: geocode_cache_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('geocode_cache_seq', 1, false);
+
+
+--
+-- Name: geocode_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('geocode_id_seq', 2, true);
 
 
 --
@@ -7958,6 +8579,20 @@ COPY grupos_acessos_empresas (id, grupo_acesso_id, empresa_id) FROM stdin;
 
 
 --
+-- Name: grupos_acessos_empresas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('grupos_acessos_empresas_id_seq', 3, true);
+
+
+--
+-- Name: grupos_acessos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('grupos_acessos_id_seq', 2, true);
+
+
+--
 -- Data for Name: grupos_acessos_perfis; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -7973,28 +8608,36 @@ COPY grupos_acessos_perfis (id, grupo_acesso_id, empresa_id, perfil_id) FROM std
 
 
 --
+-- Name: grupos_acessos_perfis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('grupos_acessos_perfis_id_seq', 9, true);
+
+
+--
 -- Data for Name: grupos_acessos_programas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY grupos_acessos_programas (id, grupo_acesso_id, empresa_id, perfil_id, programa_id, dt_cadastro) FROM stdin;
-1	1	1	1	8	2012-04-26 00:00:00
-2	1	1	1	9	2012-04-26 00:00:00
-3	1	1	1	3	2012-04-26 00:00:00
-4	1	1	1	10	2012-04-26 00:00:00
-5	1	1	1	1	2012-04-26 00:00:00
-6	1	1	1	5	2012-04-26 00:00:00
-7	1	1	1	4	2012-04-26 00:00:00
-8	1	1	1	2	2012-04-26 00:00:00
-31	2	3	4	18	2012-06-05 18:29:22.964619
-32	2	3	4	19	2012-06-05 18:29:22.964619
-33	2	3	3	15	2012-06-05 18:29:22.964619
-34	2	3	3	11	2012-06-05 18:29:22.964619
-35	2	3	3	13	2012-06-05 18:29:22.964619
-36	2	3	3	16	2012-06-05 18:29:22.964619
-37	2	3	3	14	2012-06-05 18:29:22.964619
-38	2	3	3	17	2012-06-05 18:29:22.964619
-39	2	3	3	20	2012-06-05 18:29:22.964619
+40	2	3	4	18	2013-02-17 13:22:32.663387
+41	2	3	4	19	2013-02-17 13:22:32.663387
+50	1	1	1	8	2013-02-17 13:24:28.788576
+51	1	1	1	9	2013-02-17 13:24:28.788576
+52	1	1	1	3	2013-02-17 13:24:28.788576
+53	1	1	1	10	2013-02-17 13:24:28.788576
+54	1	1	1	12	2013-02-17 13:24:28.788576
+55	1	1	1	1	2013-02-17 13:24:28.788576
+56	1	1	1	5	2013-02-17 13:24:28.788576
+57	1	1	1	4	2013-02-17 13:24:28.788576
+58	1	1	1	2	2013-02-17 13:24:28.788576
 \.
+
+
+--
+-- Name: grupos_acessos_programas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('grupos_acessos_programas_id_seq', 58, true);
 
 
 --
@@ -8012,22 +8655,10 @@ COPY grupos_acessos_programas_permissoes (id, grupo_acesso_id, sys_metodo_id, dt
 
 
 --
--- Data for Name: grupos_atividades; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: grupos_acessos_programas_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-COPY grupos_atividades (id, cidade_id, descricao, dt_cadastro, dt_ocorrencia, geocode_origem_lat, geocode_origem_lng, geocode_destino_lat, geocode_destino_lng) FROM stdin;
-4	4227	O evento foi realizado com a comunidade do bairro fragata, contando com a participação de 20 pessoas 	2012-06-05 19:22:51.419417	2012-05-27 00:00:00	-31.77502	-52.32972000000001	-31.762	-52.34036000000003
-6	3285	Curitiba, Paraná, contou com a ajuda de 200 colaboradores entre eles 100 turistas.	2012-06-09 16:38:50.805828	2012-06-20 00:00:00	-25.43325	-49.25819000000001	-25.4348	-49.25346999999999
-7	4259	Ocorreu na semana de comemoração do aniversário da Cidade de Rio Grande contando com 100 paraformalidades registras por 20 colaboradores	2012-06-09 17:16:59.184074	2012-06-30 00:00:00	-32.03196000000001	-52.102840000000015	-32.0396	-52.10086000000001
-\.
-
-
---
--- Data for Name: imagens_paraformais; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY imagens_paraformais (id, descricao, figura, dt_cadastro) FROM stdin;
-\.
+SELECT pg_catalog.setval('grupos_acessos_programas_permissoes_id_seq', 6, true);
 
 
 --
@@ -8039,11 +8670,25 @@ COPY log_fields (id, log_table_id, field_name, old_value, new_value) FROM stdin;
 
 
 --
+-- Name: log_fields_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('log_fields_id_seq', 1, false);
+
+
+--
 -- Data for Name: log_fields_structures; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY log_fields_structures (id, log_table_structure_id, field_name) FROM stdin;
 \.
+
+
+--
+-- Name: log_fields_structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('log_fields_structures_id_seq', 1, false);
 
 
 --
@@ -8055,6 +8700,13 @@ COPY log_tables (id, table_name, table_id, flg_action, dt_register) FROM stdin;
 
 
 --
+-- Name: log_tables_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('log_tables_id_seq', 1, false);
+
+
+--
 -- Data for Name: log_tables_structures; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -8063,11 +8715,10 @@ COPY log_tables_structures (id, table_name) FROM stdin;
 
 
 --
--- Data for Name: paraformalidades; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: log_tables_structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-COPY paraformalidades (id, descricao, imagem_id, grupo_atividade_id, colaborador_pessoa_id, tipo_registro_atividade_id, tipo_local_id, tipo_condicao_ambiental_id, tipo_elemento_situacao_id, tipo_ponte_id, esta_ativo, dt_cadastro, geocode_lat, geocode_lng) FROM stdin;
-\.
+SELECT pg_catalog.setval('log_tables_structures_id_seq', 1, false);
 
 
 --
@@ -8077,6 +8728,13 @@ COPY paraformalidades (id, descricao, imagem_id, grupo_atividade_id, colaborador
 COPY parametros (id, nome, descricao, valor, dt_cadastro) FROM stdin;
 1	PESSOA_TIPO_COLABORADOR	id da tabela pessoas_tipos relativo a colaboradores	1	2012-05-05
 \.
+
+
+--
+-- Name: parametros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('parametros_id_seq', 1, true);
 
 
 --
@@ -8093,6 +8751,13 @@ COPY perfis (id, nome_perfil, flg_ativo, dt_cadastro) FROM stdin;
 
 
 --
+-- Name: perfis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('perfis_id_seq', 5, true);
+
+
+--
 -- Data for Name: perfis_programas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -8106,18 +8771,29 @@ COPY perfis_programas (id, perfil_id, programa_id, programa_pai, ordem, flg_ativ
 19	1	1	0	1	S
 240	1	10	8	4	S
 242	1	12	8	5	S
-245	3	15	0	0	S
-241	3	11	0	1	S
-243	3	13	0	2	S
-246	3	16	0	3	S
-244	3	14	0	4	S
-247	3	17	0	5	S
 249	4	18	0	1	S
 250	4	19	0	2	S
-251	3	20	0	6	S
 252	5	21	0	1	S
 253	5	22	0	2	S
+247	3	17	0	5	S
+254	3	23	0	6	S
+255	3	24	0	7	S
+256	3	14	0	8	S
+257	3	25	0	9	S
+258	3	26	0	10	S
+259	3	27	0	11	S
+260	3	28	0	12	S
+261	3	29	0	13	S
+262	3	30	0	14	S
+263	5	31	0	3	S
 \.
+
+
+--
+-- Name: perfis_programas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('perfis_programas_id_seq', 263, true);
 
 
 --
@@ -8133,6 +8809,13 @@ COPY pessoas (id, nome, cpf, rg, estado_civil_id, sexo, dt_nascimento, nome_pai,
 
 
 --
+-- Name: pessoas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pessoas_id_seq', 7, true);
+
+
+--
 -- Data for Name: pessoas_tipos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -8140,6 +8823,13 @@ COPY pessoas_tipos (id, tipo, dt_cadastro) FROM stdin;
 1	Colaborador	2012-05-05 22:51:38.600373
 2	Integrante	2012-06-09 17:48:37.038521
 \.
+
+
+--
+-- Name: pessoas_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pessoas_tipos_id_seq', 2, true);
 
 
 --
@@ -8155,19 +8845,30 @@ COPY programas (id, nome_programa, descricao, link, onclick, dt_cadastro) FROM s
 5	Setores		gerenciador/empresa		2008-04-05
 9	Usuários		gerenciador/usuario		2008-04-09
 10	Grupos de Acesso	Montar os itens de menu que o grupo poderá visualizar	gerenciador/grupoAcesso		2012-04-26
-11	Colaboradores	Colaboradores que participaram na captura de uma paraformalidade	paraformalidade/cadastrosBasicos/colaborador		2012-05-05
 12	Tipo Pessoas	Tipo de pessoas	gerenciador/pessoaTipo		2012-05-05
-13	Condições Ambientais		paraformalidade/cadastrosBasicos/condicaoAmbiental		2012-05-12
-14	Locais		paraformalidade/cadastrosBasicos/local		2012-05-13
-15	Atividades Registradas		paraformalidade/cadastrosBasicos/atividadeRegistrada		2012-05-13
-16	Elementos Situação		paraformalidade/cadastrosBasicos/elementoSituacao		2012-05-16
-17	Participações		paraformalidade/cadastrosBasicos/participacao		2012-05-17
 18	Registros de Atividades		paraformalidade/equipe/registroAtividade		2012-05-19
 19	Ver Registros de Atividades		paraformalidade/equipe/verRegistroAtividade		2012-05-19
-20	Pontes		paraformalidade/cadastrosBasicos/ponte		2012-05-25
 21	Paraformalidades		paraformalidade/cadastros/paraformalidade		2012-05-29
-22	Grupos de Atividade		paraformalidade/cadastros/grupoAtividade		2012-06-05
+14	Corpo Posições		paraformalidade/cadastrosBasicos/corpoPosicoes		2012-05-13
+17	Atividades Registradas		paraformalidade/cadastrosBasicos/atividadesRegistrada		2012-05-17
+24	Corpo Numeros		paraformalidade/cadastrosBasicos/corpoNumeros		2013-02-17
+25	Equipamento Instalações		paraformalidade/cadastrosBasicos/equipamentoInstalacoes		2013-02-17
+26	Equipamento Mobilidades		paraformalidade/cadastrosBasicos/equipamentoMobilidades		2013-02-17
+27	Equipamento Portes		paraformalidade/cadastrosBasicos/equipamentoPortes		2013-02-17
+28	Espaço Localizações		paraformalidade/cadastrosBasicos/espacoLocalizacoes		2013-02-17
+29	Quantidades Registradas		paraformalidade/cadastrosBasicos/quantidadesRegistrada		2013-02-17
+30	Turnos Ocorrência		paraformalidade/cadastrosBasicos/turnosOcorrencia		2013-02-17
+22	Grupos de Atividade		paraformalidade/cadastros/gruposAtividades		2012-06-05
+23	Condicionantes Ambiental		paraformalidade/cadastrosBasicos/condicionantesAmbiental		2013-02-17
+31	Colaboradores		paraformalidade/cadastros/colaboradores		2013-02-24
 \.
+
+
+--
+-- Name: programas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('programas_id_seq', 31, true);
 
 
 --
@@ -8176,6 +8877,13 @@ COPY programas (id, nome_programa, descricao, link, onclick, dt_cadastro) FROM s
 
 COPY programas_parametros (id, programa_id, nome, dt_cadastro) FROM stdin;
 \.
+
+
+--
+-- Name: programas_parametros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('programas_parametros_id_seq', 1, false);
 
 
 --
@@ -8198,6 +8906,13 @@ COPY sys_metodos (id, classe, metodo, apelido, privado, dt_cadastro) FROM stdin;
 
 
 --
+-- Name: sys_metodos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sys_metodos_id_seq', 44, true);
+
+
+--
 -- Data for Name: sys_permissoes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -8212,11 +8927,25 @@ COPY sys_permissoes (id, sys_metodo_id, usuario_id, dt_cadastro) FROM stdin;
 
 
 --
+-- Name: sys_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sys_permissoes_id_seq', 87, true);
+
+
+--
 -- Data for Name: telefones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY telefones (id, pessoa_id, telefone_tipo_id, numero, dt_cadastro) FROM stdin;
 \.
+
+
+--
+-- Name: telefones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('telefones_id_seq', 1, false);
 
 
 --
@@ -8228,6 +8957,13 @@ COPY telefones_tipos (id, descricao, flg_tipo, dt_cadastro) FROM stdin;
 
 
 --
+-- Name: telefones_tipos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('telefones_tipos_id_seq', 1, false);
+
+
+--
 -- Data for Name: tipo_enderecos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -8236,71 +8972,10 @@ COPY tipo_enderecos (id, nome) FROM stdin;
 
 
 --
--- Data for Name: tipos_condicoes_ambientais; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: tipo_enderecos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-COPY tipos_condicoes_ambientais (id, descricao, dt_cadastro) FROM stdin;
-10	Movimento Comercial	2012-05-13 13:07:15.061691
-11	Complexo/Grupo	2012-05-13 13:07:28.814924
-9	Sombra	2012-05-13 13:06:55.495878
-\.
-
-
---
--- Data for Name: tipos_elementos_situacoes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY tipos_elementos_situacoes (id, descricao, dt_cadastro) FROM stdin;
-3	Móvel	2012-05-16 20:35:20.326578
-4	Fixo	2012-05-16 20:35:28.959255
-5	Em movimento	2012-05-16 20:35:38.740097
-6	Parado	2012-05-16 20:35:48.462646
-\.
-
-
---
--- Data for Name: tipos_locais; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY tipos_locais (id, descricao, dt_cadastro) FROM stdin;
-1	Marquise	2012-05-13 13:29:09.638331
-2	Abandono	2012-05-13 13:30:36.556246
-3	Vazio Urbano	2012-05-13 13:31:13.346312
-6	Maria	2012-05-17 14:13:50.809056
-\.
-
-
---
--- Data for Name: tipos_participacoes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY tipos_participacoes (id, descricao, dt_cadastro) FROM stdin;
-8	Coordenador	2012-05-17 19:23:22.349975
-9	Funcionário	2012-05-17 19:23:37.750027
-10	Voluntário	2012-05-17 19:23:55.196218
-\.
-
-
---
--- Data for Name: tipos_pontes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY tipos_pontes (id, descricao, dt_cadastro) FROM stdin;
-1	Pequeno Porte	2012-05-26 15:41:59.460327
-3	Grande Porte	2012-05-26 15:42:26.994988
-2	Médio Porte	2012-05-26 15:42:10.666732
-\.
-
-
---
--- Data for Name: tipos_registros_atividades; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY tipos_registros_atividades (id, descricao, dt_cadastro) FROM stdin;
-1	Comércio	2012-05-13 13:56:03.784501
-2	Cultura/Arte	2012-05-13 13:56:32.836508
-3	Moradia	2012-05-13 13:56:46.600363
-\.
+SELECT pg_catalog.setval('tipo_enderecos_id_seq', 1, false);
 
 
 --
@@ -8339,11 +9014,25 @@ COPY unidades_federativas (id, sigla, nome, dt_cadastro) FROM stdin;
 
 
 --
+-- Name: unidades_federativas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('unidades_federativas_id_seq', 27, true);
+
+
+--
 -- Data for Name: uploads; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY uploads (id, nome_gerado, nome_original, tamanho, tipo, dt_cadastro) FROM stdin;
 \.
+
+
+--
+-- Name: uploads_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('uploads_id_seq', 20, true);
 
 
 --
@@ -8371,8 +9060,21 @@ COPY usuarios_empresas (usuario_id, empresa_id, empresa_boot) FROM stdin;
 --
 
 COPY usuarios_grupos_acessos (id, usuario_id, grupo_acesso_id, dt_cadastro) FROM stdin;
-2	3	2	2012-05-19 12:40:52.254349
 \.
+
+
+--
+-- Name: usuarios_grupos_acessos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuarios_grupos_acessos_id_seq', 2, true);
+
+
+--
+-- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuarios_id_seq', 3, true);
 
 
 --
@@ -8394,28 +9096,210 @@ COPY usuarios_perfis (empresa_id, usuario_id, perfil_id) FROM stdin;
 --
 
 COPY usuarios_programas_acessos (id, usuario_id, empresa_id, perfil_id, programa_id, dt_cadastro) FROM stdin;
-11420	1	1	1	8	2012-06-05 18:28:53.656328
-11421	1	1	1	9	2012-06-05 18:28:53.656328
-11422	1	1	1	3	2012-06-05 18:28:53.656328
-11423	1	1	1	10	2012-06-05 18:28:53.656328
-11424	1	1	1	12	2012-06-05 18:28:53.656328
-11425	1	1	1	1	2012-06-05 18:28:53.656328
-11426	1	1	1	5	2012-06-05 18:28:53.656328
-11427	1	1	1	4	2012-06-05 18:28:53.656328
-11428	1	1	1	2	2012-06-05 18:28:53.656328
-11429	1	3	3	15	2012-06-05 18:28:53.656328
-11430	1	3	3	11	2012-06-05 18:28:53.656328
-11431	1	3	3	13	2012-06-05 18:28:53.656328
-11432	1	3	3	16	2012-06-05 18:28:53.656328
-11433	1	3	3	14	2012-06-05 18:28:53.656328
-11434	1	3	3	17	2012-06-05 18:28:53.656328
-11435	1	3	3	20	2012-06-05 18:28:53.656328
-11436	1	3	4	18	2012-06-05 18:28:53.656328
-11437	1	3	4	19	2012-06-05 18:28:53.656328
-11438	1	3	5	21	2012-06-05 18:28:53.656328
-11439	1	3	5	22	2012-06-05 18:28:53.656328
+11467	1	1	1	8	2013-02-17 13:57:08.433981
+11468	1	1	1	9	2013-02-17 13:57:08.433981
+11469	1	1	1	3	2013-02-17 13:57:08.433981
+11470	1	1	1	10	2013-02-17 13:57:08.433981
+11471	1	1	1	12	2013-02-17 13:57:08.433981
+11472	1	1	1	1	2013-02-17 13:57:08.433981
+11473	1	1	1	5	2013-02-17 13:57:08.433981
+11474	1	1	1	4	2013-02-17 13:57:08.433981
+11475	1	1	1	2	2013-02-17 13:57:08.433981
+11476	1	3	3	17	2013-02-17 13:57:08.433981
+11477	1	3	3	23	2013-02-17 13:57:08.433981
+11478	1	3	3	24	2013-02-17 13:57:08.433981
+11479	1	3	3	14	2013-02-17 13:57:08.433981
+11480	1	3	3	25	2013-02-17 13:57:08.433981
+11481	1	3	3	26	2013-02-17 13:57:08.433981
+11482	1	3	3	27	2013-02-17 13:57:08.433981
+11483	1	3	3	28	2013-02-17 13:57:08.433981
+11484	1	3	3	29	2013-02-17 13:57:08.433981
+11485	1	3	3	30	2013-02-17 13:57:08.433981
+11486	1	3	4	18	2013-02-17 13:57:08.433981
+11487	1	3	4	19	2013-02-17 13:57:08.433981
+11488	1	3	5	21	2013-02-17 13:57:08.433981
+11489	1	3	5	22	2013-02-17 13:57:08.433981
 \.
 
+
+--
+-- Name: usuarios_programas_acessos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuarios_programas_acessos_id_seq', 11489, true);
+
+
+SET search_path = paraformal, pg_catalog;
+
+--
+-- Name: atividades_registradas_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividades_registradas
+    ADD CONSTRAINT atividades_registradas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cenas_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cenas
+    ADD CONSTRAINT cenas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: climas_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY climas
+    ADD CONSTRAINT climas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: condicionantes_ambientais_paraformalidade_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY condicionantes_ambientais_paraformalidade
+    ADD CONSTRAINT condicionantes_ambientais_paraformalidade_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: condicionantes_ambientais_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY condicionantes_ambientais
+    ADD CONSTRAINT condicionantes_ambientais_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: condicoes_ambientais_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY condicoes_ambientais
+    ADD CONSTRAINT condicoes_ambientais_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: corpo_numeros_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY corpo_numeros
+    ADD CONSTRAINT corpo_numeros_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: corpo_posicoes_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY corpo_posicoes
+    ADD CONSTRAINT corpo_posicoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: equipamento_instalacoes_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY equipamento_instalacoes
+    ADD CONSTRAINT equipamento_instalacoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: equipamento_mobilidades_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY equipamento_mobilidades
+    ADD CONSTRAINT equipamento_mobilidades_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: equipamento_portes_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY equipamento_portes
+    ADD CONSTRAINT equipamento_portes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: equipe_registros_atividades_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY equipe_registros_atividades
+    ADD CONSTRAINT equipe_registros_atividades_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: espaco_localizacoes_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY espaco_localizacoes
+    ADD CONSTRAINT espaco_localizacoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: grupos_atividades_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY grupos_atividades
+    ADD CONSTRAINT grupos_atividades_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: imagens_paraformalidades_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT imagens_paraformalidades_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: participacoes_equipe_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY participacoes_equipe
+    ADD CONSTRAINT participacoes_equipe_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pessoa_procedencias_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa_procedencias
+    ADD CONSTRAINT pessoa_procedencias_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: quantidades_registrada_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY quantidades_registrada
+    ADD CONSTRAINT quantidades_registrada_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sentidos_paraformalidade_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sentidos_paraformalidade
+    ADD CONSTRAINT sentidos_paraformalidade_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sentidos_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sentidos
+    ADD CONSTRAINT sentidos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: turnos_ocorrencia_pkey; Type: CONSTRAINT; Schema: paraformal; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY turnos_ocorrencia
+    ADD CONSTRAINT turnos_ocorrencia_pkey PRIMARY KEY (id);
+
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: ci_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
@@ -8455,14 +9339,6 @@ ALTER TABLE ONLY enderecos
 
 ALTER TABLE ONLY enderecos_tipos
     ADD CONSTRAINT enderecos_tipos_pkey PRIMARY KEY (id);
-
-
---
--- Name: equipe_atividades_registros_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY equipe_atividades_registros
-    ADD CONSTRAINT equipe_atividades_registros_pkey PRIMARY KEY (id);
 
 
 --
@@ -8514,22 +9390,6 @@ ALTER TABLE ONLY grupos_acessos_programas
 
 
 --
--- Name: grupos_atividades_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY grupos_atividades
-    ADD CONSTRAINT grupos_atividades_pkey PRIMARY KEY (id);
-
-
---
--- Name: imagens_paraformais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY imagens_paraformais
-    ADD CONSTRAINT imagens_paraformais_pkey PRIMARY KEY (id);
-
-
---
 -- Name: log_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -8559,14 +9419,6 @@ ALTER TABLE ONLY log_tables
 
 ALTER TABLE ONLY log_tables_structures
     ADD CONSTRAINT log_tables_structures_pkey PRIMARY KEY (id);
-
-
---
--- Name: paraformalidades_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT paraformalidades_pkey PRIMARY KEY (id);
 
 
 --
@@ -8666,54 +9518,6 @@ ALTER TABLE ONLY tipo_enderecos
 
 
 --
--- Name: tipos_condicoes_ambientais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY tipos_condicoes_ambientais
-    ADD CONSTRAINT tipos_condicoes_ambientais_pkey PRIMARY KEY (id);
-
-
---
--- Name: tipos_elementos_situacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY tipos_elementos_situacoes
-    ADD CONSTRAINT tipos_elementos_situacoes_pkey PRIMARY KEY (id);
-
-
---
--- Name: tipos_locais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY tipos_locais
-    ADD CONSTRAINT tipos_locais_pkey PRIMARY KEY (id);
-
-
---
--- Name: tipos_participacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY tipos_participacoes
-    ADD CONSTRAINT tipos_participacoes_pkey PRIMARY KEY (id);
-
-
---
--- Name: tipos_pontes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY tipos_pontes
-    ADD CONSTRAINT tipos_pontes_pkey PRIMARY KEY (id);
-
-
---
--- Name: tipos_registros_atividades_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY tipos_registros_atividades
-    ADD CONSTRAINT tipos_registros_atividades_pkey PRIMARY KEY (id);
-
-
---
 -- Name: unidades_federativas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -8753,13 +9557,153 @@ ALTER TABLE ONLY usuarios_programas_acessos
     ADD CONSTRAINT usuarios_programas_acessos_pkey PRIMARY KEY (id);
 
 
+SET search_path = paraformal, pg_catalog;
+
 --
--- Name: cidade_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fk_cenas_1; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY cenas
+    ADD CONSTRAINT fk_cenas_1 FOREIGN KEY (grupo_atividade_id) REFERENCES grupos_atividades(id);
+
+
+--
+-- Name: fk_colaboradores_grupos_atividade_2; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipe_grupos_atividade
+    ADD CONSTRAINT fk_colaboradores_grupos_atividade_2 FOREIGN KEY (pessoa_id) REFERENCES public.pessoas(id);
+
+
+--
+-- Name: fk_colaboradores_grupos_atividade_3; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipe_grupos_atividade
+    ADD CONSTRAINT fk_colaboradores_grupos_atividade_3 FOREIGN KEY (grupo_atividade_id) REFERENCES grupos_atividades(id);
+
+
+--
+-- Name: fk_condicionantes_ambientais_paraformalidade_1; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY condicionantes_ambientais_paraformalidade
+    ADD CONSTRAINT fk_condicionantes_ambientais_paraformalidade_1 FOREIGN KEY (condicionante_ambiental_id) REFERENCES condicionantes_ambientais(id);
+
+
+--
+-- Name: fk_equipe_grupos_atividade_3; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipe_grupos_atividade
+    ADD CONSTRAINT fk_equipe_grupos_atividade_3 FOREIGN KEY (participacao_equipe_id) REFERENCES participacoes_equipe(id);
+
+
+--
+-- Name: fk_equipe_registros_atividades_1; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY equipe_registros_atividades
+    ADD CONSTRAINT fk_equipe_registros_atividades_1 FOREIGN KEY (pessoa_id) REFERENCES public.pessoas(id);
+
+
+--
+-- Name: fk_grupos_atividades_1; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
 --
 
 ALTER TABLE ONLY grupos_atividades
-    ADD CONSTRAINT cidade_id_fkey FOREIGN KEY (cidade_id) REFERENCES cidades(id);
+    ADD CONSTRAINT fk_grupos_atividades_1 FOREIGN KEY (cidade_id) REFERENCES public.cidades(id);
 
+
+--
+-- Name: fk_imagens_paraformais_2; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformais_2 FOREIGN KEY (upload_id) REFERENCES public.uploads(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_10; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_10 FOREIGN KEY (quantidade_registrada_id) REFERENCES quantidades_registrada(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_11; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_11 FOREIGN KEY (id) REFERENCES cenas(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_12; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_12 FOREIGN KEY (turno_ocorrencia_id) REFERENCES turnos_ocorrencia(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_4; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_4 FOREIGN KEY (atividade_registrada_id) REFERENCES atividades_registradas(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_5; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_5 FOREIGN KEY (condicao_ambiental_id) REFERENCES condicoes_ambientais(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_6; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_6 FOREIGN KEY (equipamento_porte_id) REFERENCES equipamento_portes(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_7; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_7 FOREIGN KEY (equipamento_mobilidade_id) REFERENCES equipamento_mobilidades(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_8; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_8 FOREIGN KEY (corpo_numero_id) REFERENCES corpo_numeros(id);
+
+
+--
+-- Name: fk_imagens_paraformalidades_9; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY imagens_paraformalidades
+    ADD CONSTRAINT fk_imagens_paraformalidades_9 FOREIGN KEY (corpo_posicao_id) REFERENCES corpo_posicoes(id);
+
+
+--
+-- Name: fk_sentidos_paraformalidades_1; Type: FK CONSTRAINT; Schema: paraformal; Owner: postgres
+--
+
+ALTER TABLE ONLY sentidos_paraformalidade
+    ADD CONSTRAINT fk_sentidos_paraformalidades_1 FOREIGN KEY (sentido_id) REFERENCES sentidos(id);
+
+
+SET search_path = public, pg_catalog;
 
 --
 -- Name: cidade_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -8767,22 +9711,6 @@ ALTER TABLE ONLY grupos_atividades
 
 ALTER TABLE ONLY pessoas
     ADD CONSTRAINT cidade_id_fkey FOREIGN KEY (cidade_id) REFERENCES cidades(id);
-
-
---
--- Name: colaborador_pessao_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT colaborador_pessao_id_fkey FOREIGN KEY (colaborador_pessoa_id) REFERENCES pessoas(id);
-
-
---
--- Name: fk_bolsistas_registros_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY equipe_atividades_registros
-    ADD CONSTRAINT fk_bolsistas_registros_1 FOREIGN KEY (pessoa_id) REFERENCES pessoas(id);
 
 
 --
@@ -9119,38 +10047,6 @@ ALTER TABLE ONLY pessoas
 
 ALTER TABLE ONLY pessoas
     ADD CONSTRAINT pessoas_pessoa_tipo_id_fkey FOREIGN KEY (pessoa_tipo_id) REFERENCES pessoas_tipos(id);
-
-
---
--- Name: tipo_condicao_ambiental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT tipo_condicao_ambiental_id_fkey FOREIGN KEY (tipo_condicao_ambiental_id) REFERENCES tipos_condicoes_ambientais(id);
-
-
---
--- Name: tipo_elemento_situacao_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT tipo_elemento_situacao_id_fkey FOREIGN KEY (tipo_elemento_situacao_id) REFERENCES tipos_elementos_situacoes(id);
-
-
---
--- Name: tipo_local_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT tipo_local_id_fkey FOREIGN KEY (tipo_local_id) REFERENCES tipos_locais(id);
-
-
---
--- Name: tipo_registro_atividade_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY paraformalidades
-    ADD CONSTRAINT tipo_registro_atividade_id_fkey FOREIGN KEY (tipo_registro_atividade_id) REFERENCES tipos_registros_atividades(id);
 
 
 --

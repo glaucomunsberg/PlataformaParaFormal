@@ -33,15 +33,17 @@
         }
         
 	function pesquisar(){
-               gripEquipeGruposAtividades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
-               gripEquipeGruposAtividades.load();
+           gripEquipeGruposAtividades.addParam('txtGrupoAtividadeId', $('#txtGrupoAtividadeId').val());
+           gripEquipeGruposAtividades.load();
+           $('#txtPessoaId').val('');
+           $('#searchtxtPessoaId').val('');
+           cmbParticipacao.setValueCombo(''); 
         }
         
         function novo(){
-            $('#txtPessoaId').val('');
-            $('#searchtxtPessoaId').val('');
-            $('#cmbCoordenador').select('')
-            
+           $('#txtPessoaId').val('');
+           $('#searchtxtPessoaId').val('');
+           cmbParticipacao.setValueCombo(''); 
 	}
         
         function excluir(){

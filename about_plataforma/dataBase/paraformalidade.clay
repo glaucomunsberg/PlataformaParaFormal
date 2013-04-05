@@ -398,7 +398,7 @@
 </table>
 <table id="aba910:13c97ee044a:-7c90" name="equipe_grupos_atividade">
 <column-list>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7c8c" mandatory="false" name="id">
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7c8c" mandatory="true" name="id">
 <data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7c89" mandatory="false" name="pessoa_id">
@@ -414,7 +414,9 @@
 <data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
 </column>
 </column-list>
-<primary-key id="aba910:13c97ee044a:-7c8f" name="PK_EQUIPE_GRUPOS_ATIVIDADE"/>
+<primary-key id="aba910:13c97ee044a:-7c8f" name="PK_EQUIPE_GRUPOS_ATIVIDADE">
+<primary-key-column name="id"/>
+</primary-key>
 <foreign-key-list>
 <foreign-key id="aba910:13c97ee044a:-7c24" name="FK_colaboradores_grupos_atividade_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PESSOAS" referenced-table="pessoas" referenced-table-schema="public" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
 <foreign-key-column column-name="pessoa_id" referenced-key-column-name="id"/>
