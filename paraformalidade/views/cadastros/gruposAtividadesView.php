@@ -25,7 +25,11 @@
 
                                 <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeData'), 80);?>
-                        	<?=form_dateField('Dt_Ocorrencia');?>
+                        	<?
+                                    $parts = explode('-', @$grupo_atividade_cidade->dt_cadastro);
+                                    $date  = "$parts[0]/$parts[1]/$parts[2]";
+                                    echo form_dateField('Dt_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);
+                                    ?>
                                 <?=new_line();?>
 
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeMetragem'), 80);?>
@@ -50,7 +54,7 @@
                         <?=new_line();?>
 
                         <?=form_label('lblCenaDtInicio', lang('cenasDtOcorrencia'), 80);?>
-                        <?=form_dateField('Dt_Cena_Ocorrencia');?>
+                        <?=form_dateField('Dt_Cena_Ocorrencia', @$grupo_atividade->dt_cadastro);?>
                         <?=new_line();?>
 
                         <?=form_label('lblCenaAtivo', lang('cenasEstaAtivo'), 80);?>
@@ -77,6 +81,9 @@
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
 <script> 
+        if($('#txtGrupoAtividadeId').val() == ''){
+            $("#tabPonte").tabs("option", {"disabled": [1]});
+        }
         function reloadGrid(){
             limparCena();
             gridCenas.addParam('txtGrupoAtividadeId',$('#txtGrupoAtividadeId').val());
@@ -96,6 +103,7 @@
 	}
 
 	function salvar(){
+                
 		formGruposAtividades_submit();
 	}
 	
@@ -122,10 +130,13 @@
 		if(confirmaExclusao){
 			$.post(BASE_URL+'paraformalidade/cadastros/gruposAtividades/excluir/', {id: $('#txtGrupoAtividadeId').val()}, 
 				function(data){
-					if(data.success)
-						messageBox("<?=lang('registroExcluido')?>", listaGruposAtividades);
-					else
-						messageErrorBox("<?=lang('registroNaoExcluido')?>");
+					if(data.success){
+                                            $("#tabParaformalidade").tabs('enable',1);
+                                            messageBox("<?=lang('registroExcluido')?>", listaGruposAtividades);
+                                        }else{
+                                            messageErrorBox("<?=lang('registroNaoExcluido')?>");
+                                        }
+						
 				});
 		}
 	}	
