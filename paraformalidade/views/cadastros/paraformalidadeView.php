@@ -148,7 +148,7 @@
                         <b><?=form_label('lblInstalacoes', lang('paraformalidadesInstalacoes'), 150);?></b>
                         <?=new_line();?>
                         <hr>
-                        <?=form_combo('cmbInstalacoes', @$condicionantes_ambientais, '', 150, '');?>
+                        <?=form_combo('cmbInstalacoes', @$equipamento_instalacoes, '', 150, '');?>
                         <?=form_button('inserirInstalacao', lang('paraformalidadesInserir'), 'inserirInstalacao()', 100) ?>
                         <?=new_line();?>
                         
@@ -162,7 +162,7 @@
                         <?=new_line();?>
                         
                         <!-- Clima-->
-                        <b><?=form_label('lblInstalacoes', lang('paraformalidadesClimas'), 150);?></b>
+                        <b><?=form_label('lblClimas', lang('paraformalidadesClimas'), 150);?></b>
                         <?=new_line();?>
                         <hr>
                         <?=form_combo('cmbClimas', @$climas, '', 150, '');?>
@@ -326,10 +326,11 @@
                 document.getElementById('txtLngOrigem').value = paraformal.geo_longitude;
                 document.getElementById('txtDescricao').value = paraformal.descricao;
                 document.getElementById('txtLink').value = paraformal.link_para;
+                document.getElementById('txtArquivoImportacaoId').value = paraformal.upload_id;
                 
                 cmbTurnoOcorrencia.setValueCombo(paraformal.turno_ocorrencia_id);
                 cmbAtividadeRegistrada.setValueCombo(paraformal.atividade_registrada_id);
-                cmbQuantidadeRegistrada.setValueCombo(paraformal.qunatidade_registrada_id);
+                cmbQuantidadeRegistrada.setValueCombo(paraformal.quantidade_registrada_id);
                 cmbEspacoLocalizacao.setValueCombo(paraformal.espaco_localizacao_id);
                 cmbCorpoPosicao.setValueCombo(paraformal.corpo_posicao_id);
                 cmbCorposNumero.setValueCombo(paraformal.corpo_numero_id);

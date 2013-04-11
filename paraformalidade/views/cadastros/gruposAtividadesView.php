@@ -54,7 +54,12 @@
                         <?=new_line();?>
 
                         <?=form_label('lblCenaDtInicio', lang('cenasDtOcorrencia'), 80);?>
-                        <?=form_dateField('Dt_Cena_Ocorrencia', @$grupo_atividade->dt_cadastro);?>
+                       
+                        <?
+                            $parts = explode('-', @$grupo_atividade_cidade->dt_cadastro);
+                            $date  = "$parts[0]/$parts[1]/$parts[2]";
+                            echo form_dateField('Dt_Cena_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);
+                        ?>
                         <?=new_line();?>
 
                         <?=form_label('lblCenaAtivo', lang('cenasEstaAtivo'), 80);?>
@@ -67,11 +72,12 @@
                     <?=form_button('excluirCena', lang('cenasExcluir'), 'excluirCena()', 100) ?>
                     <?=new_line();?>
 
-                    <?=begin_JqGridPanel('gridCenas', 'auto', '', base_url().'paraformalidade/cadastros/cenas/listaCenas/', array('sortname'=> 'descricao', 'multiselect'=>false,'autoload'=>false,'autowidth'=> true, 'pager'=> true, 'caption'=>lang('cenasCenas')));?>
+                    <?=begin_JqGridPanel('gridCenas', 'auto', '', base_url().'paraformalidade/cadastros/cenas/listaCenas/', array('sortname'=> 'descricao','sortorder'=>'desc', 'multiselect'=>false,'autoload'=>false,'autowidth'=> true, 'pager'=> true, 'caption'=>lang('cenasCenas')));?>
                             <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-                            <?=addJqGridColumn('descricao', lang('cenasDescricao'), 70, 'left', array('sortable'=>true));?>
+                            <?=addJqGridColumn('descricao', lang('cenasDescricao'), 50, 'left', array('sortable'=>true));?>
                             <?=addJqGridColumn('estaativo', lang('cenasEstaAtivo'), 10, 'center', array('sortable'=>true));?>
-                            <?=addJqGridColumn('dt_ocorrencia', lang('cenasDtOcorrencia'), 10, 'center', array('sortable'=>true));?>
+                            <?=addJqGridColumn('contribuicao_publica', lang('cenasContribuicaoPública'), 20, 'center', array('sortable'=>true));?>
+                            <?=addJqGridColumn('dt_ocorrencia', lang('cenasDtOcorrencia'), 20, 'center', array('sortable'=>true));?>
                     <?=end_JqGridPanel();?>
 
 
@@ -153,7 +159,6 @@
             $('#txtCenaId').val('');
             $('#txtCenaDescricao').val('');
             $('#esta_ativo').val('N');
-            $('#Dt_Cena_Ocorrencia').val('');
         }
         
         function excluirCena(){

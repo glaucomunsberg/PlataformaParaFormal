@@ -28,7 +28,7 @@
                 <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                 <?=addJqGridColumn('grupo_atividade', 'Ano/Período', 20, 'center', array('hidden' => true));?>
                 <?=addJqGridColumn('descricao', lang('cenasDescricao'), 70, 'left', array('sortable'=>true));?>
-                <?=addJqGridColumn('estaativo', lang('cenasEstaAtivo'), 10, 'center', array('sortable'=>true));?>
+                <?=addJqGridColumn('estaativa', lang('cenasEstaAtivo'), 10, 'center', array('sortable'=>true));?>
                 <?=addJqGridColumn('dt_ocorrencia', lang('cenasDtOcorrencia'), 10, 'center', array('sortable'=>true));?>
         <?=end_JqGridPanel();?>
 

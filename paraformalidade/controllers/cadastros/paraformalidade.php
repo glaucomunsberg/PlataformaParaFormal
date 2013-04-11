@@ -20,6 +20,7 @@ class Paraformalidade extends Controller {
         $this->load->model('cadastrosBasicos/CorpoNumerosModel', 'corpoNumerosModel');
         $this->load->model('cadastrosBasicos/EquipamentoMobilidadesModel', 'equipamentoMobilidadesModel');
         $this->load->model('cadastrosBasicos/EquipamentoPortesModel', 'equipamentoPortesModel');
+        $this->load->model('cadastrosBasicos/EquipamentoInstalacoesModel', 'equipamentoInstalacoesModel');
         $this->load->model('cadastrosBasicos/SentidosModel', 'sentidosModel');
         $this->load->model('cadastrosBasicos/ClimasModel', 'climasModel');
     }
@@ -63,6 +64,7 @@ class Paraformalidade extends Controller {
         $data['corpos_numeros'] = $this->corpoNumerosModel->getCorpoNumerosCombo();
         $data['equipamento_portes'] = $this->equipamentoPortesModel->getEquipamentoPortesCombo();
         $data['equipamento_mobilidades'] = $this->equipamentoMobilidadesModel->getEquipamentoMobilidadesCombo();
+        $data['equipamento_instalacoes'] = $this->equipamentoInstalacoesModel->getEquipamentoInstalacoesCombo();
         $data['sentidos'] = $this->sentidosModel->getSentidosCombo();
         $data['climas'] = $this->climasModel->getClimasCombo();
 	$this->load->view('cadastros/paraformalidadeView', $data);	

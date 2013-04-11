@@ -182,6 +182,7 @@ $lang['cenasSalvar'] = 'Salvar';
 $lang['cenasExcluir'] = 'Excluir';
 $lang['cenasNovo'] = 'Novo';
 $lang['cenasCenasporGA'] = 'Cenas por Grupos de Atividade';
+$lang['cenasContribuicaoPública'] = 'Contribuicao Pública';
 
 /**
  * Equipe
@@ -189,6 +190,6 @@ $lang['cenasCenasporGA'] = 'Cenas por Grupos de Atividade';
 $lang['equipeEquipe'] = 'Equipe';
 $lang['equipePessoa'] = 'Pessoa';
 
-$lang['cenasCenas'] = 'Cenas';
+
 $lang['cenasCenas'] = 'Cenas';
 $lang['cenasCenas'] = 'Cenas';

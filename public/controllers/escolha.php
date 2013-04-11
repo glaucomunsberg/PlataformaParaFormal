@@ -15,7 +15,7 @@ class Escolha extends Controller{
     function exibir($GrupoAtividadeId){
         $data['grupo_atividade'] = $this->grupoAtividadeModel->getGrupoAtividade($GrupoAtividadeId);
         $data['paraformalidadesToMaps'] = $this->paraformalidadeModel->getParaformalidadeToMaps($GrupoAtividadeId);
-        $this->load->view('escolhaView', $data);
+        $this->load->view('paraformalidadesView', $data);
     }
     
     function exibirCena(){

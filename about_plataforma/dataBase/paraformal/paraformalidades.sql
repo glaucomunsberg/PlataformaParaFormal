@@ -3,6 +3,7 @@ CREATE TABLE paraformal.paraformalidades (
      , cena_id INTEGER
      , upload_id INTEGER
      , descricao VARCHAR(255)
+     , contribuicao_publica CHAR(1) DEFAULT 'N'
      , geo_latitude VARCHAR(30)
      , geo_longitude VARCHAR(30)
      , link VARCHAR(255)

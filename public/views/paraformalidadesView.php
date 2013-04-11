@@ -7,7 +7,7 @@
     <div class='row' style='margin-left: 0px'>
         <div id='geral'>
             
-            <div id='cenaNome' style="margin-top: 10px;margin-left: 5px">
+            <div id='cenaNome' style="margin-top: 15px;margin-left: 5px">
                 <strong>Cena </strong>Descricao da cena
             </div>
             <div class="thumbnail" >
@@ -45,10 +45,12 @@
                                   <ul class="dropdown-menu">
                                     <li><a href="#" OnClick="compartilhar()"><?=lang('escolhaCompartilhar')?></a></li>
                                     <li><a href="#" OnClick="outrosdados()"><?=lang('escolhaVerOutrosDados')?></a></li>
-                                    <li><a href="#" OnClick="fechar()"><?=lang('escolhaFechar')?></a></li>
+                                    <li><a href="#" OnClick="sobreGrupoAtividade()"><?=lang('escolhaSobreGrupoAtividade')?></a></li>
+                                    
                                     <li class="divider"></li>
                                     <li><a OnClick="contribuir()"><?=lang('escolhaAtualizarDados')?></a></li>
                                   </ul>
+                                  <button class="btn" style='margin-left: 3px' OnClick="fechar()"><?=lang('escolhaFechar')?></button>
                                 </div>
                             </p>
                         </div>
@@ -71,6 +73,13 @@
                             </p>
                             <button class="btn" href="#" OnClick="voltar()"><?=lang('escolhaVoltar')?></button>
                         </div>
+                        <div id='sobre' style='display: none'>
+                            <p >
+                                <div id="sobreGrupo" style="text-align: justify">
+                                </div>
+                            </p>
+                            <button class="btn" href="#" OnClick="voltar()"><?=lang('escolhaVoltar')?></button>
+                        </div>
                         <div id='compartilhar' style='display: none'>
                             <p >
                                 <p>
@@ -86,7 +95,7 @@
                                 <span class="label label-info"><?=lang('escolhaQuerAjudar')?></span>
                                  <?=lang('escolhaQuerAjudarMensagem')?>
                             </p>
-                            <button class="btn" href="#" OnClick="voltar()"><?=lang('escolhaVoltar')?></button>
+                            <button class="btn btn-primary" href="#" OnClick="colaborar()"><?=lang('paraformalidadesContribuir')?></button><button class="btn"  style='margin-left: 3px'href="#" OnClick="voltar()"><?=lang('paraformalidadesContribuirOutraHora')?></button>
                        </div>
                     </div>
                 </div>
@@ -105,6 +114,7 @@
 <?=$this->load->view("../../static/_views/footerPublicView");?>
 <script> 
     var paraformalidadesListadas;
+    var paraformalidadeVingenteId;
     var descricao;
     var cenaId;
     var imagem;
@@ -112,7 +122,8 @@
        var para_id = $id;
        $.post(BASE_URL+'public/escolha/exibirCena/',{ id:  para_id},function(data){
                 var paraformal = data.paraformalidade;
-               $('#cenaNome').html('<strong>'+paraformal.cena_descricao+'</strong>  '+paraformal.grupo_descricao);
+               $('#sobreGrupo').html(paraformal.grupo_descricao);
+               $('#cenaNome').html('<strong>'+paraformal.cidade_nome+'</strong> '+paraformal.cena_descricao);
                $('#paraData').text(paraformal.dt_ocorrencia);
                $('#dt_cadastro').text(paraformal.dt_cadastro);
                $('#txtCenaId').text(paraformal.id);
@@ -130,6 +141,7 @@
                    }
                }
                $('#paginas').html(pagina);
+               paraformalidadeVingenteId = paraformal.para_id;
                carregarSrcDeImagem(BASE_URL+'archives/'+paraformal.nome_gerado);
                carregaColaboradores(paraformal.para_id);
                carregaSentidos(paraformal.para_id);
@@ -225,6 +237,7 @@
             });
     }
     function mudarParaformalidade($id){
+        paraformalidadeVingenteId = $id;
         $('#paraDescricao').text(paraformalidadesListadas[$id].para_descricao);
         $('#atividadeRegistrada').text(paraformalidadesListadas[$id].atividade_registrada);
         $('#equipamentoMobilidade').text(paraformalidadesListadas[$id].equipamento_mobilidade);
@@ -261,8 +274,13 @@
     function fechar(){
         $('#conteudo').hide('drop');
     }
+    function sobreGrupoAtividade(){
+        $('#informacoesGerais').hide('blind');
+        $('#sobre').show('blind');
+    }
     
     function voltar(){
+        $('#sobre').hide('blind');
         $('#compartilhar').hide('blind');
         $('#outrosDados').hide('blind')
         $('#contribuir').hide('blind');
@@ -270,6 +288,9 @@
         $('#informacoesGerais').show('blind')
     }
     
+    function colaborar(){
+        location.href = '<?=BASE_URL?>public/colaborar/contribuirParaformalidade/'+paraformalidadeVingenteId;
+    }
     function twitter(){
         $var = descricao;
         $local = BASE_URL+'public/escolha/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId;

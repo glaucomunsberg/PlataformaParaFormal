@@ -124,7 +124,7 @@
 		
                 }
 		function getParaformalidadeComDados($paraformalidadeID){
-                        $this->db->select('ip.id, ip.cena_id, ip.descricao, up.nome_gerado,up.nome_original, ip.geo_latitude, ip.geo_longitude, ip.link, case when estaativa = \'S\' then \'true\' when estaativo != \'S\' then \'false\' end as estaativa, turno_ocorrencia_id, atividade_registrada_id, quantidade_registrada_id, espaco_localizacao_id, corpo_numero_id, corpo_posicao_id, equipamento_porte_id, equipamento_mobilidade_id, ip.dt_cadastro, to_char(ip.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia',false);
+                        $this->db->select('ip.id, ip.cena_id, ip.descricao, up.id as upload_id,up.nome_gerado,up.nome_original, ip.geo_latitude, ip.geo_longitude, ip.link, case when estaativa = \'S\' then \'true\' when estaativo != \'S\' then \'false\' end as estaativa, turno_ocorrencia_id, atividade_registrada_id, quantidade_registrada_id, espaco_localizacao_id, corpo_numero_id, corpo_posicao_id, equipamento_porte_id, equipamento_mobilidade_id, ip.dt_cadastro, to_char(ip.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia',false);
                         $this->db->from('paraformal.paraformalidades as ip');
                         $this->db->join('paraformal.cenas as c', 'c.id = ip.cena_id');
                         $this->db->join('public.uploads as up','ip.upload_id = up.id');
@@ -147,7 +147,7 @@
                 }
                 
                 function getCenaParaExibir($cena_id){
-                    $this->db->select('c.id, c.descricao as cena_descricao, ga.descricao as grupo_descricao,p.descricao as para_descricao, up.nome_gerado, (select count(ptemp.id) from paraformal.paraformalidades as ptemp where ptemp.cena_id = c.id and ptemp.estaativa = \'S\') as num_paraformalidades, p.id as para_id, p."link", to_char(p.dt_cadastro, \'dd/mm/yyyy \') as dt_cadastro, to_char(p.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia, ar.descricao as atividade_registrada, em.descricao as equipamento_mobilidade, tu.descricao as turno_ocorrencia, el.descricao as espaco_localizacao',false);
+                    $this->db->select('c.id, c.descricao as cena_descricao, ga.descricao as grupo_descricao,cid.nome as cidade_nome, p.descricao as para_descricao, up.nome_gerado, (select count(ptemp.id) from paraformal.paraformalidades as ptemp where ptemp.cena_id = c.id and ptemp.estaativa = \'S\') as num_paraformalidades, p.id as para_id, p."link", to_char(p.dt_cadastro, \'dd/mm/yyyy \') as dt_cadastro, to_char(p.dt_ocorrencia, \'dd/mm/yyyy \') as dt_ocorrencia, ar.descricao as atividade_registrada, em.descricao as equipamento_mobilidade, tu.descricao as turno_ocorrencia, el.descricao as espaco_localizacao',false);
                     $this->db->from('paraformal.cenas as c');
                     $this->db->join('paraformal.grupos_atividades as ga', 'ga.id = c.grupo_atividade_id');
                     $this->db->join('paraformal.paraformalidades as p', 'p.id = (select para.id from paraformal.paraformalidades as para where para.cena_id = c.id and para.estaativa = \'S\' order by dt_ocorrencia DESC limit 1)');
@@ -156,6 +156,7 @@
                     $this->db->join('paraformal.equipamento_mobilidades as em', 'em.id = p.equipamento_mobilidade_id');
                     $this->db->join('paraformal.turnos_ocorrencia as tu', 'tu.id = p.turno_ocorrencia_id');
                     $this->db->join('paraformal.espaco_localizacoes as el', 'el.id = p.espaco_localizacao_id');
+                    $this->db->join('cidades as cid','cid.id = ga.cidade_id');
                     $this->db->where('c.id', $cena_id);
                     $this->db->where('c.estaativo', 'S');
                     return $this->db->get()->row();
@@ -201,7 +202,7 @@
                  }
                
 		function getParaformalidades($parametros) {
-                        $this->db->select('ip.id, ip.cena_id, ip.descricao, up.nome_gerado, up.nome_original, ip.upload_id, ip.link as link_para, case when estaativa = \'S\' then \'Publico\' when estaativo != \'S\' then \'Privado\' end as estaativa, to_char(ip.dt_ocorrencia, \'dd/mm/yyyy\') as dt_ocorrencia',false);
+                        $this->db->select('ip.id, ip.cena_id, ip.descricao, up.nome_gerado, up.nome_original, ip.upload_id, ip.link as link_para, case when ip.estaativa = \'S\' then \'Publico\' when ip.estaativa != \'S\' then \'Privado\' end as estaativa, to_char(ip.dt_ocorrencia, \'dd/mm/yyyy\') as dt_ocorrencia',false);
                         $this->db->from('paraformal.paraformalidades as ip');
                         $this->db->join('paraformal.cenas as c', 'c.id = ip.cena_id');
                         $this->db->join('public.uploads as up','ip.upload_id = up.id');

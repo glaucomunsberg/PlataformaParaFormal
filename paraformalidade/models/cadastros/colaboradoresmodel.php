@@ -88,7 +88,6 @@ class ColaboradoresModel extends Model {
     public function getColaboradorByNome($nome) {
         $this->db->select('p.id, p.nome');
         $this->db->from('pessoas as p');
-        $this->db->where('p.pessoa_tipo_id = 1');
         if($nome != '')
             $this->db->like('upper(p.nome)', strtoupper($nome));
         $this->db->order_by('p.nome', 'asc');

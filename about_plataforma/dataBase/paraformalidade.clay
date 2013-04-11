@@ -56,6 +56,9 @@
 <column auto-increment="false" column-size="1" decimal-digits="0" default-value="'S'" id="aba910:13c97ee044a:-7fae" mandatory="false" name="estaAtivo">
 <data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
+<column auto-increment="false" column-size="1" decimal-digits="0" default-value="N" id="646cbb:13df915ebc5:-7f9f" mandatory="false" name="contribuicao_publica">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7fd9" mandatory="false" name="dt_cadastro">
 <data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
 </column>
@@ -77,8 +80,8 @@
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fc8" mandatory="false" name="cidade_id">
 <data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
 </column>
-<column auto-increment="false" column-size="400" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fc3" mandatory="false" name="descricao">
-<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fc3" mandatory="false" name="descricao">
+<data-type name="TEXT" selected-variant-pattern="TEXT"/>
 </column>
 <column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7fc7" mandatory="false" name="geocode_origem_latitude">
 <data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
@@ -94,6 +97,9 @@
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7bed" mandatory="false" name="dt_ocorrencia">
 <data-type name="DATE" selected-variant-pattern="DATE"/>
+</column>
+<column auto-increment="false" column-size="1" decimal-digits="0" default-value="N" id="646cbb:13df915ebc5:-7f9a" mandatory="false" name="contribuicao_publica">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="aba910:13c97ee044a:-7bee" mandatory="false" name="dt_cadastro">
 <data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
@@ -122,6 +128,9 @@
 </column>
 <column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="18990b:13da8e15eb3:-7ed2" mandatory="false" name="descricao">
 <data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="1" decimal-digits="0" default-value="N" id="646cbb:13df915ebc5:-7fa8" mandatory="false" name="contribuicao_publica">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
 <column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="aba910:13c97ee044a:-7ed2" mandatory="false" name="geo_latitude">
 <data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
@@ -621,6 +630,97 @@
 </foreign-key>
 </foreign-key-list>
 </table>
+<table id="b2903d:13df924b642:-7fb2" name="denuncias">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7fad" mandatory="true" name="id">
+<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
+</column>
+<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7fae" mandatory="false" name="pessoa_nome">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7fac" mandatory="false" name="pessoa_email">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7faa" mandatory="false" name="denuncia">
+<data-type name="TEXT" selected-variant-pattern="TEXT"/>
+</column>
+<column auto-increment="false" column-size="300" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7e56" mandatory="false" name="link">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="ac353d:13dfa691192:-7fa2" mandatory="false" name="remote_addr">
+<data-type name="CIDR" selected-variant-pattern="CIDR"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7fa4" mandatory="false" name="revisor_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="b2903d:13df924b642:-7fa9" mandatory="false" name="dt_cadastro">
+<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
+</column>
+</column-list>
+<primary-key id="b2903d:13df924b642:-7fb1" name="PK_DENUNCIAS">
+<primary-key-column name="id"/>
+</primary-key>
+</table>
+<table id="b2903d:13df924b642:-7f46" name="correcao_paraformalidades">
+<table-description>Tabela que corrigirá uma paraformalidade, aqui está escrito as contribuições do publico
+e quando por revisado deve-se colocar no antigo_* as informações 
+que foram atualizadas por esse campo e o id do revisor</table-description>
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7f3e" mandatory="true" name="id">
+<data-type name="SERIAL" selected-variant-pattern="SERIAL"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7f32" mandatory="false" name="paraformalidade_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7eac" mandatory="false" name="pessoa_nome">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7eab" mandatory="false" name="pessoa_email">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7f34" mandatory="false" name="geo_latitude">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7f33" mandatory="false" name="geo_longitude">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7f2b" mandatory="false" name="descricao">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7f28" mandatory="false" name="upload_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="13bfaf8:13dfa650c33:-7faa" mandatory="false" name="remote_addr">
+<data-type name="CIDR" selected-variant-pattern="CIDR"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7eb1" mandatory="false" name="antiga_latitude">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7eb0" mandatory="false" name="antiga_longitude">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7eaf" mandatory="false" name="antiga_upload_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="255" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7eae" mandatory="false" name="antiga_descricao">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="b2903d:13df924b642:-7ead" mandatory="false" name="revisor_id">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="now()" id="b2903d:13df924b642:-7f3d" mandatory="false" name="dt_cadastro">
+<data-type name="TIMESTAMP" selected-variant-pattern="TIMESTAMP"/>
+</column>
+</column-list>
+<primary-key id="b2903d:13df924b642:-7f45" name="PK_CORRECAO_PARAFORMALIDADES">
+<primary-key-column name="id"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="b2903d:13df924b642:-7e6a" name="FK_correcao_paraformalidades_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PARAFORMALIDADES" referenced-table="paraformalidades" referenced-table-schema="paraformal" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="paraformalidade_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+</table>
 </table-list>
 </schema>
 </schema-list>
@@ -629,10 +729,10 @@
 <table-figure refid="aba910:13c97ee044a:-7fea" x="447" y="516"/>
 <table-figure refid="aba910:13c97ee044a:-7fd4" x="19" y="197"/>
 <table-figure refid="aba910:13c97ee044a:-7fb7" x="1717" y="4"/>
-<table-figure refid="aba910:13c97ee044a:-7fe2" x="575" y="17"/>
+<table-figure refid="aba910:13c97ee044a:-7fe2" x="512" y="46"/>
 <table-figure refid="aba910:13c97ee044a:-7fcd" x="181" y="15"/>
 <table-figure refid="aba910:13c97ee044a:-7fc0" x="1268" y="17"/>
-<table-figure refid="aba910:13c97ee044a:-7fa9" x="592" y="158"/>
+<table-figure refid="aba910:13c97ee044a:-7fa9" x="541" y="183"/>
 <table-figure refid="aba910:13c97ee044a:-7f70" x="591" y="635"/>
 <table-figure refid="aba910:13c97ee044a:-7f51" x="2413" y="16"/>
 <table-figure refid="aba910:13c97ee044a:-7f58" x="922" y="636"/>
@@ -644,13 +744,15 @@
 <table-figure refid="aba910:13c97ee044a:-7f06" x="2444" y="222"/>
 <table-figure refid="aba910:13c97ee044a:-7efd" x="1722" y="640"/>
 <table-figure refid="aba910:13c97ee044a:-7c90" x="293" y="258"/>
-<table-figure refid="aba910:13c97ee044a:-7747" x="1912" y="40"/>
+<table-figure refid="aba910:13c97ee044a:-7747" x="1916" y="28"/>
 <table-figure refid="18afde8:13ca1df81b9:-7fc9" x="17" y="677"/>
 <table-figure refid="1c7602f:13d07ccc2bb:-7fc6" x="26" y="457"/>
 <table-figure refid="180808f:13d0c3bd515:-7fc3" x="2409" y="129"/>
-<table-figure refid="180808f:13d0c3bd515:-7fb9" x="1915" y="141"/>
+<table-figure refid="180808f:13d0c3bd515:-7fb9" x="1911" y="150"/>
 <table-figure refid="180808f:13d0c3bd515:-7fb0" x="2442" y="375"/>
-<table-figure refid="71be31:13d0c5f1165:-7fbd" x="1933" y="260"/>
-<table-figure height="83" refid="180808f:13d0c3bd515:-7fa8" width="179" x="1915" y="405"/>
+<table-figure refid="71be31:13d0c5f1165:-7fbd" x="1955" y="307"/>
+<table-figure height="83" refid="180808f:13d0c3bd515:-7fa8" width="179" x="1916" y="454"/>
+<table-figure refid="b2903d:13df924b642:-7fb2" x="2199" y="573"/>
+<table-figure height="247" refid="b2903d:13df924b642:-7f46" width="190" x="1913" y="565"/>
 </diagram>
 </clay-model>

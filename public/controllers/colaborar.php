@@ -4,6 +4,7 @@ class Colaborar extends Controller{
     function __construct(){
         parent::__construct();
         $this->load->model('../../paraformalidade/models/cadastros/paraformalidadeModel', 'paraformalidadeModel');
+        $this->load->model('../models/colaborarModel', 'colaborarModel');
     }
     
     function index(){
@@ -15,9 +16,20 @@ class Colaborar extends Controller{
     }
     
     function contribuirParaformalidade($idParaformalidade){
-        //$data['paraformalidade'] = $this->paraformalidadeModel->getParaformalidadeComDados($idParaformalidade);
-        $data['data'] = '';
-        $this->load->view('colaborar/contribuirParaformalidadeView',$data);
+        if($idParaformalidade != ''){
+            $data['paraformalidade'] = $this->paraformalidadeModel->getParaformalidadeComDados($idParaformalidade);
+            $this->load->view('colaborar/contribuirParaformalidadeView',$data); 
+        }else{
+            redirect(BASE_URL.'public/escolha');
+        }
+          
     }
-    
+    function colaborarComDados(){
+        $this->ajax->addAjaxData('colaboracao', $this->colaborarModel->inserir($_POST) );
+	$this->ajax->returnAjax();
+    }
+    function colaborarDenunciar(){
+        $this->ajax->addAjaxData('colaboracao', $this->colaborarModel->inserirDenuncia($_POST) );
+	$this->ajax->returnAjax();
+    }
 }
