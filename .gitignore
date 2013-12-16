@@ -27,6 +27,7 @@
 # Folder hiden	     #
 ######################
 .svn/
+archives/
 
 # OS generated files #
 ######################

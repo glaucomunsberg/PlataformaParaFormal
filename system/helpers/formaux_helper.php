@@ -336,7 +336,8 @@ function form_combo($name = '', $options = array(), $selected = '', $width = '15
             "<script type='text/javascript'>
             var $name = '$name';
             $(document).ready(function(){
-                $('#$name').selectmenu({style:'dropdown', width: " . ($width + 4) . "});
+                var width = $('#$name').width()+4;
+                $('#$name').selectmenu({style:'dropdown', width: width});
             });
         </script>";
     return $combo;
@@ -581,6 +582,7 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
         unset($attributes['parentElement']);
     }
     $ajax_data.= "}";
+
     $search = "search$name";
 
     $formAutoCompleteScript =
@@ -592,6 +594,7 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
             minLength: 3,
             source: function(request, response) {
                 $('#$name').val('');
+                try{{$name}_find(); } catch(err){}
                 $.ajax({
                     url: '$url',
                     dataType: 'json',
@@ -612,6 +615,7 @@ function form_textFieldAutoComplete($name = '', $url = '', $key = '', $value = '
             if($('#$search').val() == ''){
                  $('#$name').val('');
             }
+            try{ {$name}_blur(); } catch(err){}
         });
     });
 </script>";
@@ -678,8 +682,7 @@ function begin_fieldset($name = "", $width = '', $height = '', $marginLeft = '')
     }
     $html = "<fieldset class=\"ui-widget ui-widget-content ui-corner-all\" style=\"$style background: none; padding: 5px;\">";
     if (!empty($name)) {
-    $html .= "<legend class=\"legend\">$name</legend>";
-
+        $html .= "<legend class=\"legend\">$name</legend>";
     }
     return $html;
 }
@@ -797,14 +800,14 @@ function form_buttonHit($name = '', $url = '', $titleButtonHit = 'Título button
  * @param integer $width largura
  * @param string $methodReturnUpload Callback. Nome da função javascript a ser executada após upload na janela suspensa
  * @return string
- */ 
+ */
 function form_file($name, $valueIdUpload = '', $valueNameUpload = '', $allowed_types = '', $width = '250', $methodReturnUpload = '') {
     if (empty($methodReturnUpload)) {
         $methodReturnUpload = 'finishUpload' . ucfirst($name);
     }
     $form_file = form_hidden($name . 'Id', $valueIdUpload);
     $form_file.= form_textField($name . 'Name', $valueNameUpload, $width, '', '', array('readonly' => true));
-    $form_file.= '<button id="btn' . $name . '" name="btn' . $name . '" onclick="openWindow(BASE_URL+\'util/upload/choiceFile/' . $name . 'Id' . '/' . $name . 'Name/' . $methodReturnUpload . '/' . $allowed_types . '\', \'' . lang('uploadChoiceFileTitle') . '\', 600, false);" style="height: 24px; margin-left:0px; margin-bottom: 5px; margin-right: 5px;" class="ui-button ui-button-text-icon-primary ui-widget ui-state-default ui-corner-all">';
+    $form_file.= '<button id="btn' . $name . '" name="btn' . $name . '" onclick="openWindow(BASE_URL+\'util/upload/choiceFile/' . $name . 'Id' . '/' . $name . 'Name/' . $methodReturnUpload . '/' . $allowed_types . '\', \'' . lang('uploadChoiceFileTitle') . '\', 600);" style="height: 24px; margin-left:0px; margin-bottom: 5px; margin-right: 5px;" class="ui-button ui-button-text-icon-primary ui-widget ui-state-default ui-corner-all">';
     $form_file.= '<span class="ui-button-icon-primary ui-icon ui-icon-newwin" style="float: left;"></span>Fazer upload';
     $form_file.= '</button>';
     return $form_file;
@@ -871,15 +874,29 @@ function form_image_webcam($name = '', $valueIdUpload = '', $valueNameUpload = '
  * @param integer $height Altura
  * @param array $extra Array com opções de estilos e atributos extras
  * @return string
- */ function form_textEditor($name = '', $value = '', $width = 100, $height = 50, $extra = '') {
+ */ function form_textEditor($name = '', $value = '', $width = '100', $height = 50, $maxlength = '2000', $extra = '', $disabled = false) {
     if (is_array($extra) && array_key_exists("style", $extra)) {
         $extra['style'] = $extra['style'] . _style_width($width) . _style_height($height);
     } else {
-        $extra['style'] = _style_width($width) . _style_height($height);
+        $extra['style'] = _style_width($width) . _style_height($height);;
     }
-
-    $defaults = array('name' => $name, 'id' => $name, 'class' => 'textEditor',);
-    return "<div class='nicEdit'><textarea " . _parse_form_attributes($defaults, $extra) . ">" . $value . "</textarea></div>\n";
+    $defaults = array('name' => $name, 'id' => $name, 'class' => 'ui-state-default ui-corner-all htmlEditor',);
+    if ($disabled) {
+        $disabled = ' disabled';
+    }
+    $nameComponentJavaScript = "<script>var $name = $('#$name');</script>";
+    $loadHtmlEditor = "<script>
+				    	require([
+							BASE_URL + 'static/_js/ckeditor/ckeditor.js',	
+							], function(){
+								require([
+									BASE_URL + 'static/_js/ckeditor/adapters/jquery.js',
+									BASE_URL + 'static/_js/editorHtml.js'
+									], function(){new HtmlEditor('$name');});
+							});
+						</script>";
+	
+    return "<textarea " . _parse_form_attributes($defaults, $extra) . $disabled . ">$value</textarea>\n$nameComponentJavaScript $loadHtmlEditor\n";    
 }
 
 /**

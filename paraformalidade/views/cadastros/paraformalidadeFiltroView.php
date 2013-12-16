@@ -24,10 +24,11 @@
 	<?=end_TabPanel();?>
 
         <?=begin_JqGridPanel('gridCenas', 'auto', '', base_url().'paraformalidade/cadastros/cenas/listaCenas/', array('sortname'=> 'descricao', 'multiselect'=>false,'autoload'=>true,'autowidth'=> true, 'pager'=> true, 'caption'=>lang('cenasCenasporGA'),
-            'grouping' => true, 'groupingView' => '##{groupField:[\'grupo_atividade\'], groupColumnShow: [false], groupSummary: [false], groupDataSorted: true, groupOrder: [\'desc\'], showSummaryOnHide: false, groupText : [\'<b style="display: block; float: left; margin: 2px;">{0}</b>\']}##'));?>
-                <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-                <?=addJqGridColumn('grupo_atividade', 'Ano/Período', 20, 'center', array('hidden' => true));?>
-                <?=addJqGridColumn('descricao', lang('cenasDescricao'), 70, 'left', array('sortable'=>true));?>
+            'grouping' => true, 'groupingView' => '##{groupField:[\'cidade\'], groupColumnShow: [false], groupSummary: [false], groupDataSorted: true, groupOrder: [\'desc\'], showSummaryOnHide: false, groupText : [\'<b style="display: block; float: left; margin: 2px;">{0}</b>\']}##'));?>
+                <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>    
+                <?=addJqGridColumn('descricao', lang('cenasDescricao'), 20, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('cidade', 'Cidade', 20, 'center', array('sortable' => true));?>
+                <?=addJqGridColumn('grupo_atividade', 'Grupo Descrição', 70, 'center', array('sortable' => true));?>
                 <?=addJqGridColumn('estaativa', lang('cenasEstaAtivo'), 10, 'center', array('sortable'=>true));?>
                 <?=addJqGridColumn('dt_ocorrencia', lang('cenasDtOcorrencia'), 10, 'center', array('sortable'=>true));?>
         <?=end_JqGridPanel();?>

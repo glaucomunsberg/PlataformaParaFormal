@@ -22,8 +22,8 @@
 	
 	<?=begin_JqGridPanel('gridGrupoAtividade', 'auto', '', base_url().'paraformalidade/cadastros/gruposAtividades/listaGruposAtividades/', array('sortname'=> 'descricao', 'autowidth'=> true, 'pager'=> true, 'caption'=>lang('grupoAtividadeLista')));?>
 		<?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
-		<?=addJqGridColumn('descricao', lang('grupoAtividadeDescricao'), 70, 'left', array('sortable'=>true));?>
                 <?=addJqGridColumn('nomecidade', lang('grupoAtividadeCidade'), 20, 'left', array('sortable'=>true));?>
+                <?=addJqGridColumn('descricao', lang('grupoAtividadeDescricao'), 70, 'left', array('sortable'=>true));?>
 		<?=addJqGridColumn('dt_ocorrencia', lang('grupoAtividadeDtCadastro'), 10, 'center', array('sortable'=>true));?>
 	<?=end_JqGridPanel();?>
 	

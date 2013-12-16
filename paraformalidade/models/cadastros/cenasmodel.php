@@ -85,11 +85,14 @@
 		}
 		
 		function getCenas($parametros){
-			$this->db->select('c.id, c.descricao, c.dt_ocorrencia, case when c.estaAtivo = \'S\' then \'ativo\' when c.estaAtivo != \'S\' then \'não ativo\' end as estaativo, case when c.contribuicao_publica = \'S\' then \'Sim\' when c.contribuicao_publica != \'S\' then \'Não\' end as contribuicao_publica, c.dt_cadastro, ga.descricao as grupo_atividade, c.grupo_atividade_id', false);
+			$this->db->select('c.id, c.descricao, c.dt_ocorrencia, ci.nome as cidade, case when c.estaAtivo = \'S\' then \'ativo\' when c.estaAtivo != \'S\' then \'não ativo\' end as estaativo, case when c.contribuicao_publica = \'S\' then \'Sim\' when c.contribuicao_publica != \'S\' then \'Não\' end as contribuicao_publica, c.dt_cadastro, ga.descricao as grupo_atividade, c.grupo_atividade_id', false);
                         $this->db->from('paraformal.cenas as c');
                         $this->db->join('paraformal.grupos_atividades as ga','ga.id = c.grupo_atividade_id');
+                        $this->db->join('cidades as ci ','ga.cidade_id = ci.id');
                         if(@$parametros['txtGrupoAtividadeCidadeId'] != null )
                                 $this->db->where('ga.cidade_id', @$parametros['txtGrupoAtividadeCidadeId']);
+                        if(@$parametros['txtGrupoAtividadeId'] != null )
+                                $this->db->where('ga.id', @$parametros['txtGrupoAtividadeId']);
                         if(@$parametros['txtAtividadeNome'] != null )
                                 $this->db->like('upper(ga.descricao)', strtoupper(@$parametros['txtAtividadeNome']));
 			$this->db->sendToGrid();

@@ -17,29 +17,26 @@ class Upload extends Controller {
         $data['objectName'] = $objectName;
         $data['methodReturn'] = $methodReturn;
         $data['allowed_types'] = $allowed_types;
+        $data['buttonHit'] = TRUE;
         $this->load->view('upload/uploadChoiceFileView', $data);
     }
 
-    function progress($progress_key) {
-        $status = apc_fetch('upload_' . $progress_key);
-        $this->ajax->addAjaxData('statusUpload', $status);
-        $this->ajax->returnAjax();
-    }
-
     function enviarArquivo() {
-        $status = apc_fetch('upload_' . $_POST['APC_UPLOAD_PROGRESS']);
+        $path = array_reverse(explode('/', $_SERVER['DOCUMENT_ROOT']));
+        $pathArchive = $_SERVER['DOCUMENT_ROOT'] . ($path[1] != 'cobalto' ? '/cobalto/' : '/');
         
         $config['upload_path'] = '../archives/';
-        if ($_POST['paramUploadAllowedTypes'] != '') {
+        if (!empty($_POST['paramUploadAllowedTypes'])) {
             $config['allowed_types'] = $_POST['paramUploadAllowedTypes'];
         }
+
         $config['max_size'] = '500000';
         $config['max_width'] = '0';
         $config['max_height'] = '0';
         $config['encrypt_name'] = TRUE;
         $config['remove_spaces'] = TRUE;
         $this->load->library('upload', $config);
-
+        
         if (!$files = $this->upload->do_upload()) {
             $this->ajax->addAjaxData('success', false);
             $this->ajax->ajaxMessage('error', $this->upload->display_errors('', ''));
@@ -97,13 +94,12 @@ class Upload extends Controller {
             $this->ajax->addAjaxData('uploads', $uploads);
         }
 
-        $this->ajax->addAjaxData('statusUpload', $status);
         $this->ajax->returnAjax();
     }
 
     function enviarImagemWebCam() {
         $path = array_reverse(explode('/', $_SERVER['DOCUMENT_ROOT']));
-        $pathArchive = $_SERVER['DOCUMENT_ROOT'] . ($path[1] != 'cobalto' ? '/cobalto' : '');
+        $pathArchive = $_SERVER['DOCUMENT_ROOT'] . ($path[1] != 'cobalto' ? '/cobalto/' : '/');
 
         $config['max_size'] = '500000';
         $config['max_width'] = '0';
@@ -125,7 +121,12 @@ class Upload extends Controller {
         $original = $folder . $filename;
         $result = file_put_contents($original, $input);
 
-        $image = array('file_name' => $filename, 'orig_name' => $filename, 'file_size' => round(filesize($original) / 1024, 2), 'file_type' => 'image/jpeg');
+        $image = array(
+            'file_name' => $filename,
+            'orig_name' => $filename,
+            'file_size' => round(filesize($original) / 1024, 2),
+            'file_type' => 'image/jpeg'
+        );
 
         $upload = $this->uploadModel->inserir($image);
 
@@ -142,7 +143,8 @@ class Upload extends Controller {
         $storedfile = $gridFS->storeFile($pathArchive . 'archives/crop_3x4/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'thumb' => '3x4'));
+            'thumb' => '3x4')
+        );
 
         unlink($pathArchive . 'archives/crop_3x4/' . $upload->nome_gerado);
 
@@ -158,10 +160,12 @@ class Upload extends Controller {
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
 
-        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_48x48/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
+        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_48x48/' . $upload->nome_gerado, array(
+            'filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'thumb' => '48x48'));
+            'thumb' => '48x48')
+        );
 
         unlink($pathArchive . 'archives/thumbs_48x48/' . $upload->nome_gerado);
 
@@ -177,10 +181,12 @@ class Upload extends Controller {
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
 
-        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_80x80/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
+        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_80x80/' . $upload->nome_gerado, array(
+            'filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'thumb' => '80x80'));
+            'thumb' => '80x80')
+        );
 
         unlink($pathArchive . 'archives/thumbs_80x80/' . $upload->nome_gerado);
 
@@ -196,10 +202,12 @@ class Upload extends Controller {
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
 
-        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_256x309/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
+        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_256x309/' . $upload->nome_gerado, array(
+            'filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'thumb' => '256x309'));
+            'thumb' => '256x309')
+        );
 
         unlink($pathArchive . 'archives/thumbs_256x309/' . $upload->nome_gerado);
 
@@ -215,10 +223,12 @@ class Upload extends Controller {
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
 
-        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_354x472/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
+        $storedfile = $gridFS->storeFile($pathArchive . 'archives/thumbs_354x472/' . $upload->nome_gerado, array(
+            'filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'thumb' => '354x472'));
+            'thumb' => '354x472')
+        );
 
         unlink($pathArchive . 'archives/thumbs_354x472/' . $upload->nome_gerado);
 
@@ -234,19 +244,23 @@ class Upload extends Controller {
         $this->image_lib->initialize($configResized);
         $this->image_lib->resize();
 
-        $storedfile = $gridFS->storeFile($pathArchive . 'archives/resized_640x480/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
+        $storedfile = $gridFS->storeFile($pathArchive . 'archives/resized_640x480/' . $upload->nome_gerado, array(
+            'filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'thumb' => '640x480'));
+            'thumb' => '640x480')
+        );
 
         unlink($pathArchive . 'archives/resized_640x480/' . $upload->nome_gerado);
 
         $this->image_lib->clear();
 
-        $storedfile = $gridFS->storeFile($pathArchive . 'archives/' . $upload->nome_gerado, array('filename' => $upload->nome_gerado,
+        $storedfile = $gridFS->storeFile($pathArchive . 'archives/' . $upload->nome_gerado, array(
+            'filename' => $upload->nome_gerado,
             'filename_original' => $upload->nome_original,
             'type' => $upload->tipo,
-            'no_thumb' => true));
+            'no_thumb' => true)
+        );
 
         unlink($pathArchive . 'archives/' . $upload->nome_gerado);
 

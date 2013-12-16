@@ -28,14 +28,12 @@
                 <div id="opcoes">
                    <!-- PARFORMALIDADE INFO-->
                    <div id="paraformalidadeInfo" class='span9'>
-                        <div class="thumbnail">
-                                <img id="paraformalidade" src="<?=base_url()?>archives/<?=@$paraformalidade->nome_gerado?>">
-                                <div class="caption">
-                                    <h5><?=lang('contribuirInfo')?></h5>
-                                    <p><?=@$paraformalidade->descricao?></p>
-                                    <button class="btn btn-success" onClick="window.history.go(-1) "><?=lang('contribuirDesejoVoltar')?></button>
-                                </div>
-                            </div>
+                        <img id="paraformalidade" style="height:500px;width: auto" src="<?=base_url()?>archives/<?=@$paraformalidade->nome_gerado?>">
+                        <div class="caption">
+                            <h3><?=lang('contribuirInfo')?></h3>
+                            <p><?=@$paraformalidade->descricao?></p>
+                            <button class="btn btn-success" onClick="window.history.go(-1) "><?=lang('contribuirDesejoVoltar')?></button>
+                        </div>
                    </div>
                    <!-- Nova Imagem-->
                    <div id="Novaimagem" class='span9' style="display: none">
@@ -417,7 +415,6 @@
                       $('#txtNomeNaoPresente').val('');
                       $('#txtEmailNaoPresente').val('');
                       $('#textPqNaoPresente').val('');
-                     home();
              });
          }
       }

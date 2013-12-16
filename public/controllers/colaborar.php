@@ -5,6 +5,7 @@ class Colaborar extends Controller{
         parent::__construct();
         $this->load->model('../../paraformalidade/models/cadastros/paraformalidadeModel', 'paraformalidadeModel');
         $this->load->model('../models/colaborarModel', 'colaborarModel');
+        $this->load->model('../models/denunciarModel', 'denunciarModel');
     }
     
     function index(){
@@ -29,7 +30,7 @@ class Colaborar extends Controller{
 	$this->ajax->returnAjax();
     }
     function colaborarDenunciar(){
-        $this->ajax->addAjaxData('colaboracao', $this->colaborarModel->inserirDenuncia($_POST) );
+        $this->ajax->addAjaxData('colaboracao', $this->denunciarModel->inserirDenuncia($_POST) );
 	$this->ajax->returnAjax();
     }
 }

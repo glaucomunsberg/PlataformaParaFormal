@@ -314,7 +314,7 @@
     }
     
     function callback(response){
-        console.log(response)
+        console.log(response);
     }
     
     $('#map').css('width',$(document).width());
@@ -325,7 +325,7 @@
     
     function mudarComments(){
         $link = BASE_URL+'public/escolha/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId;
-        document.getElementById('comments').innerHTML='<div class="fb-comments" data-href="'+$link+'" data-num-posts="10" data-width="375px"></div>'; 
+        document.getElementById('comments').innerHTML='<div class="fb-comments" data-href="'+$link+'" data-num-posts="10"></div>'; 
         FB.XFBML.parse(document.getElementById('comments'));
     }
     

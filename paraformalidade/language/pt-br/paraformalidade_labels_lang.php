@@ -190,6 +190,33 @@ $lang['cenasContribuicaoPública'] = 'Contribuicao Pública';
 $lang['equipeEquipe'] = 'Equipe';
 $lang['equipePessoa'] = 'Pessoa';
 
+/**
+ * Denúncias
+ */
+$lang['denunciaDenuncia'] = 'Denúncia';
+$lang['denunciaDenuncias'] = 'Denúncias';
+$lang['denunciaLista'] = 'Lista de Denúncias';
+$lang['denunciaRevisado'] = 'Revisado';
+$lang['denunciaPessoa'] = 'Pessoa denunciante';
+$lang['denunciaPessoaEmail'] = 'Contato Email';
+$lang['denunciaLinkDenunciado'] = 'Link';
 
-$lang['cenasCenas'] = 'Cenas';
-$lang['cenasCenas'] = 'Cenas';
+
+/**
+ * Atualização
+ */
+$lang['atualizacaoAtualizacao'] = 'Atualização';
+$lang['atualizacaoFiltro'] = 'Filtro';
+$lang['atualizacaoLista'] = 'Lista de Atualizações Sugeridas';
+$lang['atualizacaoInformacoes'] = 'Informações';
+$lang['atualizacaoRevisado'] = 'Revisado';
+$lang['atualizacaoJustificativa'] = 'Justificativa';
+$lang['atualizacaoPessoaEmail'] = 'Email';
+$lang['atualizacaoPessoa'] = 'Nome';
+$lang['atualizacaoImgAtual'] = 'Imagem Atual';
+$lang['atualizacaoLocEnviada'] = 'Localização Enviada';
+$lang['atualizacaoLocAtual'] = 'Localização Atual';
+$lang['atualizacao'] = '';
+$lang['atualizacao'] = '';
+$lang['atualizacao'] = '';
+$lang['atualizacao'] = '';

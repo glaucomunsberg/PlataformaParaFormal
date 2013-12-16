@@ -25,11 +25,7 @@
 
                                 <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeData'), 80);?>
-                        	<?
-                                    $parts = explode('-', @$grupo_atividade_cidade->dt_cadastro);
-                                    $date  = "$parts[0]/$parts[1]/$parts[2]";
-                                    echo form_dateField('Dt_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);
-                                    ?>
+                        	<?=form_dateField('Dt_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);?>
                                 <?=new_line();?>
 
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeMetragem'), 80);?>
@@ -55,11 +51,7 @@
 
                         <?=form_label('lblCenaDtInicio', lang('cenasDtOcorrencia'), 80);?>
                        
-                        <?
-                            $parts = explode('-', @$grupo_atividade_cidade->dt_cadastro);
-                            $date  = "$parts[0]/$parts[1]/$parts[2]";
-                            echo form_dateField('Dt_Cena_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);
-                        ?>
+                        <?=form_dateField('Dt_Cena_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);?>
                         <?=new_line();?>
 
                         <?=form_label('lblCenaAtivo', lang('cenasEstaAtivo'), 80);?>
@@ -72,7 +64,7 @@
                     <?=form_button('excluirCena', lang('cenasExcluir'), 'excluirCena()', 100) ?>
                     <?=new_line();?>
 
-                    <?=begin_JqGridPanel('gridCenas', 'auto', '', base_url().'paraformalidade/cadastros/cenas/listaCenas/', array('sortname'=> 'descricao','sortorder'=>'desc', 'multiselect'=>false,'autoload'=>false,'autowidth'=> true, 'pager'=> true, 'caption'=>lang('cenasCenas')));?>
+                    <?=begin_JqGridPanel('gridCenas', 'auto', '', base_url().'paraformalidade/cadastros/cenas/listaCenas/', array('sortname'=> 'descricao','sortorder'=>'asc', 'multiselect'=>false,'autoload'=>false,'autowidth'=> true, 'pager'=> false, 'caption'=>lang('cenasCenas')));?>
                             <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                             <?=addJqGridColumn('descricao', lang('cenasDescricao'), 50, 'left', array('sortable'=>true));?>
                             <?=addJqGridColumn('estaativo', lang('cenasEstaAtivo'), 10, 'center', array('sortable'=>true));?>
@@ -92,7 +84,7 @@
         }
         function reloadGrid(){
             limparCena();
-            gridCenas.addParam('txtGrupoAtividadeId',$('#txtGrupoAtividadeId').val());
+            gridCenas.addParam('txtGrupoAtividadeId','<?=@$grupo_atividade->id?>');
             gridCenas.load();  
         }
 

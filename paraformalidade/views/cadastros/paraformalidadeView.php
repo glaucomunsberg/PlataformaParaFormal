@@ -49,7 +49,7 @@
                                     <?=form_label('lblAtivo', lang('paraformalidadesVisibilidade'), 110);?>
                                     <?=form_checkbox('chkParaformalidadeAtivo', 'chkParaformalidadeAtivo', 'S', (@$grupo_atividade->esta_ativo == 'S' || @$grupo_atividade->esta_ativo == '' ? true : false));?>
                                     <?=new_line();?>
-                                    <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'estaativa,id', 'autowidth'=> true, 'pager'=> true, 'autoload'=>false,'caption'=>lang('paraformalidadeParaformalidade')));?>
+                                    <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'estaativa,id', 'autowidth'=> true, 'pager'=> false, 'autoload'=>false,'caption'=>lang('paraformalidadeParaformalidade')));?>
                                         <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
                                         <?=addJqGridColumn('descricao', lang('paraformalidadesDescricao'), 45, 'left', array('sortable'=>true));?>
                                         <?=addJqGridColumn('nome_original', lang('paraformalidadesNomeArquivo'), 25, 'center', array('sortable'=>true));?>
