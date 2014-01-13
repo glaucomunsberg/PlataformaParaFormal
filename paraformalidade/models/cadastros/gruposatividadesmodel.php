@@ -86,7 +86,7 @@
 		}
 
 		function getGrupoAtividade($grupoAtividadeId){
-			$this->db->select('id,cidade_id,geocode_origem_latitude,geocode_origem_longitude,geocode_destino_latitude,geocode_destino_longitude,to_char(dt_ocorrencia, \'dd/mm/yyyy\') as dt_ocorrencia,dt_cadastro,descricao',false);
+			$this->db->select('id,cidade_id,geocode_origem_latitude,geocode_origem_longitude,geocode_destino_latitude,geocode_destino_longitude,dt_ocorrencia,dt_cadastro,descricao',false);
                         $this->db->from('paraformal.grupos_atividades');
                         $this->db->where('id', $grupoAtividadeId);
 			return $this->db->get()->row();

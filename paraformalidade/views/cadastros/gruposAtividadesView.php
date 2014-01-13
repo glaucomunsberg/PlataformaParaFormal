@@ -25,7 +25,7 @@
 
                                 <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeData'), 80);?>
-                        	<?=form_dateField('Dt_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);?>
+                        	<?=form_dateField('Dt_Ocorrencia',@$grupo_atividade_cidade->dt_ocorrencia);?>
                                 <?=new_line();?>
 
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeMetragem'), 80);?>
@@ -78,10 +78,13 @@
 
 <?=$this->load->view("../../static/_views/footerGlobalView");?>
 
-<script> 
-        if($('#txtGrupoAtividadeId').val() == ''){
-            $("#tabPonte").tabs("option", {"disabled": [1]});
-        }
+<script>
+        $(function(){
+           if( $('#txtGrupoAtividadeId').val() === ""){
+                $("#tabPonte").tabs("option", {"disabled": [1]});
+            } 
+        });
+        
         function reloadGrid(){
             limparCena();
             gridCenas.addParam('txtGrupoAtividadeId','<?=@$grupo_atividade->id?>');
@@ -111,6 +114,12 @@
 		} else {
 			if(data.success !== undefined) {
 				$('#txtGrupoAtividadeId').val(data.grupo_atividade.id);
+                                
+                                //$("#tabPonte").tabs("option", {"disabled": [0]});
+                                gridCenas.addParam('txtGrupoAtividadeId',data.grupo_atividade.id);
+                                gridCenas.load();
+                                $("#tabPonte").tabs('enable', 1);
+                                $("#tabPonte").tabs('select', 1);
                                 messageBox(data.success.message);
 			}
 	    }

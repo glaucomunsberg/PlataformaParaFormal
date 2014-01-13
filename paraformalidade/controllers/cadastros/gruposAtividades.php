@@ -51,7 +51,6 @@
                         $ret = $this->gruposAtividadesModel->alterar($_POST);
                     }
                     if ($ret !== FALSE) {
-                        $this->ajax->addAjaxData('grupo_atividade', $ret);
                         $this->ajax->ajaxMessage('success', lang('registroGravado'));
                     } else {
                         if (!$this->gruposAtividadesModel->validate->existsErrors()) {

@@ -90,11 +90,11 @@
                         $this->db->join('paraformal.grupos_atividades as ga','ga.id = c.grupo_atividade_id');
                         $this->db->join('cidades as ci ','ga.cidade_id = ci.id');
                         if(@$parametros['txtGrupoAtividadeCidadeId'] != null )
-                                $this->db->where('ga.cidade_id', @$parametros['txtGrupoAtividadeCidadeId']);
+                                $this->db->where('ga.cidade_id', $parametros['txtGrupoAtividadeCidadeId']);
                         if(@$parametros['txtGrupoAtividadeId'] != null )
-                                $this->db->where('ga.id', @$parametros['txtGrupoAtividadeId']);
+                                $this->db->where('ga.id', $parametros['txtGrupoAtividadeId']);
                         if(@$parametros['txtAtividadeNome'] != null )
-                                $this->db->like('upper(ga.descricao)', strtoupper(@$parametros['txtAtividadeNome']));
+                                $this->db->like('upper(ga.descricao)', strtoupper($parametros['txtAtividadeNome']));
 			$this->db->sendToGrid();
 		}
 
