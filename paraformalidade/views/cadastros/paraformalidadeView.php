@@ -47,7 +47,7 @@
                                     <?=new_line();?>
        
                                     <?=form_label('lblAtivo', lang('paraformalidadesVisibilidade'), 110);?>
-                                    <?=form_checkbox('chkParaformalidadeAtivo', 'chkParaformalidadeAtivo', 'S', (@$grupo_atividade->esta_ativo == 'S' || @$grupo_atividade->esta_ativo == '' ? true : false));?>
+                                    <?=form_checkbox('chkParaformalidadeAtivo', 'chkParaformalidadeAtivo', 'S','S');?>
                                     <?=new_line();?>
                                     <?=begin_JqGridPanel('gridParaformalidades', 'auto', '', base_url().'paraformalidade/cadastros/paraformalidade/listaParaformalidades/', array('sortname'=> 'estaativa,id', 'autowidth'=> true, 'pager'=> false, 'autoload'=>false,'caption'=>lang('paraformalidadeParaformalidade')));?>
                                         <?=addJqGridColumn('id', 'ID', 0, 'right', array('sortable'=>true, 'hidden'=> true));?>
@@ -327,7 +327,11 @@
                 document.getElementById('txtDescricao').value = paraformal.descricao;
                 document.getElementById('txtLink').value = paraformal.link_para;
                 document.getElementById('txtArquivoImportacaoId').value = paraformal.upload_id;
-                
+                if(paraformal.estaativa == 'S'){
+                    $('#chkParaformalidadeAtivo').attr('checked', true);
+                }else{
+                    $('#chkParaformalidadeAtivo').attr('checked', false);
+                }
                 cmbTurnoOcorrencia.setValueCombo(paraformal.turno_ocorrencia_id);
                 cmbAtividadeRegistrada.setValueCombo(paraformal.atividade_registrada_id);
                 cmbQuantidadeRegistrada.setValueCombo(paraformal.quantidade_registrada_id);
@@ -342,7 +346,7 @@
                 if( $("#link").val() != 'em_branco'){
                     document.getElementById('txtArquivoImportacaoId').value = paraformal.upload_id;
                     document.getElementById('txtArquivoImportacaoName').value = paraformal.nome_original;
-                    carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'archives/resized_640x480/'+paraformal.nome_gerado);
+                    carregarSrcDeImagem(document.getElementById('enderecoBaseImagem').value +'archives/'+paraformal.nome_gerado);
                     $('#txtLink').val(paraformal.link_para);
                     $("#imagem").show("clip");
                     $("#link").hide("blind");                    

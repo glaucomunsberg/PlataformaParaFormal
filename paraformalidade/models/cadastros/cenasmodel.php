@@ -22,7 +22,7 @@
                         if (!empty($cena['Dt_Ocorrencia'])) {
                             $this->db->set('dt_ocorrencia', ($cena['Dt_Cena_Ocorrencia'] == '' ? 'NULL' : 'to_date(\'' . $cena['Dt_Cena_Ocorrencia'] . '\', \'dd/mm/yyyy\')'), false);
                         }
-                        $this->db->set('estaativo', $cena['chkCenaAtivo']);
+                        $this->db->set('estaativo', (!empty($cena['chkCenaAtivo'])?'S':'N'));
 			$this->db->set('dt_cadastro', 'NOW()', false);
 			$this->db->insert('paraformal.cenas');
 			$this->db->trans_complete();
@@ -43,7 +43,7 @@
                         if (!empty($cena['Dt_Ocorrencia'])) {
                             $this->db->set('dt_ocorrencia', ($cena['Dt_Cena_Ocorrencia'] == '' ? 'NULL' : 'to_date(\'' . $cena['Dt_Cena_Ocorrencia'] . '\', \'dd/mm/yyyy\')'), false);
                         }
-                        $this->db->set('estaativo', $cena['chkCenaAtivo']);
+                        $this->db->set('estaativo', (!empty($cena['chkCenaAtivo'])?'S':'N'));
 			$this->db->set('dt_cadastro', 'NOW()', false);
 			$this->db->where('id', $cena['txtCenaId']);
 			$this->db->update('paraformal.cenas');

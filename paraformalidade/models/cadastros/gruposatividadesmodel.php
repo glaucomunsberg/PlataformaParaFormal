@@ -43,18 +43,27 @@
 		function alterar($gruposAtividades){
 
 			$this->db->trans_start();
-			$this->db->set('descricao', $gruposAtividades['txtDescricao']);	
-                        $this->db->set('cidade_id', $gruposAtividades['txtGrupoAtividadeCidadeId']);
-                        $this->db->set('geocode_origem_latitude', $gruposAtividades['txtLatOrigem']);
-                        $this->db->set('geocode_origem_longitude', $gruposAtividades['txtLngOrigem']);
-                        $this->db->set('geocode_destino_latitude', $gruposAtividades['txtLatDestino']);
-                        $this->db->set('geocode_destino_longitude', $gruposAtividades['txtLngDestino']);
-                        if (!empty($gruposAtividades['Dt_Ocorrencia'])) {
-                            $this->db->set('dt_ocorrencia', ($gruposAtividades['Dt_Ocorrencia'] == '' ? 'NULL' : 'to_date(\'' . $gruposAtividades['Dt_Ocorrencia'] . '\', \'dd/mm/yyyy\')'), false);
-                        }
-			$this->db->where('id', $gruposAtividades['txtGrupoAtividadeId']);
-			$this->db->update('paraformal.grupos_atividades');
+                            $this->db->set('descricao', $gruposAtividades['txtDescricao']);	
+                            $this->db->set('cidade_id', $gruposAtividades['txtGrupoAtividadeCidadeId']);
+                            $this->db->set('geocode_origem_latitude', $gruposAtividades['txtLatOrigem']);
+                            $this->db->set('geocode_origem_longitude', $gruposAtividades['txtLngOrigem']);
+                            $this->db->set('geocode_destino_latitude', $gruposAtividades['txtLatDestino']);
+                            $this->db->set('geocode_destino_longitude', $gruposAtividades['txtLngDestino']);
+                            if (!empty($gruposAtividades['Dt_Ocorrencia'])) {
+                                $this->db->set('dt_ocorrencia', ($gruposAtividades['Dt_Ocorrencia'] == '' ? 'NULL' : 'to_date(\'' . $gruposAtividades['Dt_Ocorrencia'] . '\', \'dd/mm/yyyy\')'), false);
+                            }
+                            $this->db->where('id', $gruposAtividades['txtGrupoAtividadeId']);
+                            $this->db->update('paraformal.grupos_atividades');
 			$this->db->trans_complete();
+                        
+                        if($this->db->trans_status() !== FALSE && !empty($gruposAtividades['Dt_Ocorrencia'])){
+                            $this->db->trans_start();
+                                $this->db->set('dt_ocorrencia', ($gruposAtividades['Dt_Ocorrencia'] == '' ? 'NULL' : 'to_date(\'' . $gruposAtividades['Dt_Ocorrencia'] . '\', \'dd/mm/yyyy\')'), false);
+                                $this->db->where('grupo_atividade_id', $gruposAtividades['txtGrupoAtividadeId']);
+                                $this->db->where('contribuicao_publica like \'N\'');
+                                $this->db->update('paraformal.cenas');
+                            $this->db->trans_complete();
+                        }
 
 			if($this->db->trans_status() === FALSE){
 				$this->validate->addError('txtCodigo', lang('registroNaoGravado'));
@@ -86,7 +95,7 @@
 		}
 
 		function getGrupoAtividade($grupoAtividadeId){
-			$this->db->select('id,cidade_id,geocode_origem_latitude,geocode_origem_longitude,geocode_destino_latitude,geocode_destino_longitude,dt_ocorrencia,dt_cadastro,descricao',false);
+			$this->db->select('id,cidade_id,geocode_origem_latitude,geocode_origem_longitude,geocode_destino_latitude,geocode_destino_longitude,to_char(dt_ocorrencia, \'dd/mm/yyyy\') as dt_ocorrencia,dt_cadastro,descricao',false);
                         $this->db->from('paraformal.grupos_atividades');
                         $this->db->where('id', $grupoAtividadeId);
 			return $this->db->get()->row();

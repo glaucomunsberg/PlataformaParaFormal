@@ -5,10 +5,16 @@ class Inicio extends Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('../../gerenciador/models/UsuarioModel', 'usuarioModel');
+        $this->load->model('../../public/models/DenunciarModel','denunciarModel');
+        $this->load->model('../../public/models/ColaborarModel','colaborarModel');
+        $this->load->model('../../paraformalidade/models/cadastros/ParaformalidadeModel','paraformalidadeModel');
     }
 
     function index() {
-        $this->load->view('inicioView');
+        $data['numDenuncias'] = $this->denunciarModel->getNumeroDeDenunciasNaoSolucionados();
+        $data['numAtualizacoes'] = $this->colaborarModel->getNumeroDeColaboracoesNaoProcessadas();
+        $data['novasParaformalidades'] = $this->paraformalidadeModel->getNumeroDeColaboracoesPublicas();
+        $this->load->view('inicioView',$data);
     }
 
     function perfil() {

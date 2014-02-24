@@ -51,7 +51,6 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="<?=CSS;?>/metro-boostrap/metro-bootstrap.css">
-<!--script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery-1.8.2.js"></script>-->
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-alert.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-button.js"></script>
@@ -59,7 +58,6 @@
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-collapse.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-dropdown.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-modal.js"></script>
-<!--<script type="text/javascript" src="<JS>/metro-boostrap/bootstrap-popover.js"></script> -->
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-scrollspy.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-tab.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-transition.js"></script>

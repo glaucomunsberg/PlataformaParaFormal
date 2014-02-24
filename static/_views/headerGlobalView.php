@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html; charset=utf-8') ?>
 <? if(!isset($buttonHit)){?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
@@ -42,8 +43,14 @@
 				</div>-->
 				<div style="display: block; float:left; margin: 0px;">
 					<h2 style="margin: 5px 0px 6px 5px; font-size: 15px;"><?=humanize(getUsuarioSession()->nome_pessoa);?></h2>
-					<button id="btnConfiguracoes" onclick="configuracoesUsuario()" style="margin: 0px 0px 0px 5px; display: block; float: left; font-weight: 11px;">Configurações</button>
-					<button id="btnSair" onclick="logout()" style="margin: 0px 5px 0px; display: block; float: left;">Sair do sistema</button>
+					<button id="btnPublico"  onclick="toPublico()" style="margin: 0px 0px 0px; display: block; float: left;">Área Pública</button>
+                                        <script>
+                                            function toPublico(){
+                                                location.href = '<?= base_url()?>';
+                                            }
+                                        </script>
+                                        <button id="btnConfiguracoes" onclick="configuracoesUsuario()" style="margin: 0px 0px 0px 5px; display: block; float: left; font-weight: 11px;">Configurações</button>
+                                        <button id="btnSair" onclick="logout()" style="margin: 0px 5px 0px; display: block; float: left;">Sair do sistema</button>
 				</div>
 			</div>
 		</div>

@@ -58,6 +58,13 @@ class DenunciarModel extends Model {
         $this->db->sendToGrid();
     }
     
+    function getNumeroDeDenunciasNaoSolucionados(){
+        $this->db->select('*');
+        $this->db->from('paraformal.denuncias');
+        $this->db->where('revisor_id','0');
+        return $this->db->get()->num_rows();
+    }
+    
     function getDenuncia($corpoNumeroId){
             $this->db->select('id, pessoa_nome, pessoa_email, denuncia, link, to_char(dt_cadastro, \'dd/mm/yyyy hh24:mi:ss\') as dt_cadastro, case when revisor_id = 0 then \'N\' else \'S\' end as revisado',false);
             $this->db->where('id', $corpoNumeroId);

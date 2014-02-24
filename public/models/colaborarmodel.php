@@ -53,6 +53,13 @@ class ColaborarModel extends Model {
             return $this->db->get('paraformal.correcao_paraformalidades as cp')->row();
     }
     
+    function getNumeroDeColaboracoesNaoProcessadas(){
+        $this->db->select('*');
+        $this->db->from('paraformal.correcao_paraformalidades');
+        $this->db->where('revisor_id','0');
+        return $this->db->get()->num_rows();
+    }
+    
     function excluir($id) {
 
         $this->db->trans_start();

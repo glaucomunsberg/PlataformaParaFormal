@@ -52,6 +52,7 @@
                     }
                     if ($ret !== FALSE) {
                         $this->ajax->ajaxMessage('success', lang('registroGravado'));
+                        $this->ajax->ajaxMessage('mensage', $this->db->_error_message());
                     } else {
                         if (!$this->gruposAtividadesModel->validate->existsErrors()) {
                             $this->gruposAtividadesModel->validate->addError("txtGrupoAtividadeId", lang('registroNaoGravado'));

@@ -47,7 +47,7 @@
                             $this->db->set('equipamento_porte_id', $paraformalidade['cmbEquipamentoPorte']);
                             $this->db->set('equipamento_mobilidade_id', $paraformalidade['cmbEquipamentoMobilidade']);
                             $this->db->set('dt_ocorrencia', $paraformalidade['txtCenaOcorrencia']);
-                            $this->db->set('estaativa', $paraformalidade['chkParaformalidadeAtivo']);
+                            $this->db->set('estaativa', (!empty($paraformalidade['chkParaformalidadeAtivo'])?'S':'N'));
                             $this->db->set('dt_cadastro', 'NOW()', false);
                             $this->db->insert('paraformal.paraformalidades');
 			$this->db->trans_complete();
@@ -83,7 +83,7 @@
                             $this->db->set('equipamento_porte_id', $paraformalidade['cmbEquipamentoPorte']);
                             $this->db->set('equipamento_mobilidade_id', $paraformalidade['cmbEquipamentoMobilidade']);
                             $this->db->set('dt_ocorrencia', $paraformalidade['txtCenaOcorrencia']);
-                            $this->db->set('estaativa', $paraformalidade['chkParaformalidadeAtivo']);
+                            $this->db->set('estaativa', (!empty($paraformalidade['chkParaformalidadeAtivo'])?'S':'N'));
 			$this->db->where('id', $paraformalidade['txtParaformalidadeId']);
 			$this->db->update('paraformal.paraformalidades');
 			$this->db->trans_complete();
@@ -216,8 +216,17 @@
                     $this->db->from('paraformal.cenas as c');
                     $this->db->join('paraformal.paraformalidades as p','p.id = (select para.id from paraformal.paraformalidades as para where para.cena_id = c.id order by dt_ocorrencia DESC limit 1) ');
                     $this->db->where('c.estaativo', 'S');
+                    $this->db->where('p.estaativa', 'S');
                     $this->db->where('c.grupo_atividade_id', $grupoAtividadeID);
                     return $this->db->get()->result_array();
+                }
+                
+                function getNumeroDeColaboracoesPublicas(){
+                    $this->db->select('*');
+                    $this->db->from('paraformal.paraformalidades');
+                    $this->db->where('contribuicao_publica','S');
+                    $this->db->where('estaativa','N');
+                    return $this->db->get()->num_rows();
                 }
                 
                 

@@ -4,7 +4,6 @@
 
 	<?=begin_ToolBar(array('imprimir', 'abrir', 'pesquisar', 'excluir'));?>
 	<?=end_ToolBar();?>
-        <?=warning('warning', lang('gruposDeAtividadesDevidoProblema'), true, true);?>
 	<?=begin_TabPanel('tabPonte');?>
 		<?=begin_Tab(lang('grupoAtividadeFiltroLocal'));?>
 			<?=begin_form('paraformalidade/cadastros/gruposAtividades/salvar', 'formGruposAtividades');?>
@@ -25,7 +24,7 @@
 
                                 <?=form_hidden('txtCidadeNome', @$grupo_atividade_cidade->nome);?>
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeData'), 80);?>
-                        	<?=form_dateField('Dt_Ocorrencia',@$grupo_atividade_cidade->dt_ocorrencia);?>
+                        	<?=form_dateField('Dt_Ocorrencia',@$grupo_atividade->dt_ocorrencia);?>
                                 <?=new_line();?>
 
                                 <?=form_label('lblDtInicio', lang('grupoAtividadeMetragem'), 80);?>
@@ -51,7 +50,7 @@
 
                         <?=form_label('lblCenaDtInicio', lang('cenasDtOcorrencia'), 80);?>
                        
-                        <?=form_dateField('Dt_Cena_Ocorrencia',@$grupo_atividade_cidade->dt_cadastro);?>
+                        <?=form_dateField('Dt_Cena_Ocorrencia',@$grupo_atividade->dt_ocorrencia);?>
                         <?=new_line();?>
 
                         <?=form_label('lblCenaAtivo', lang('cenasEstaAtivo'), 80);?>
@@ -115,7 +114,7 @@
 			if(data.success !== undefined) {
 				$('#txtGrupoAtividadeId').val(data.grupo_atividade.id);
                                 
-                                //$("#tabPonte").tabs("option", {"disabled": [0]});
+                                $('#Dt_Cena_Ocorrencia').val($('#Dt_Ocorrencia').val());
                                 gridCenas.addParam('txtGrupoAtividadeId',data.grupo_atividade.id);
                                 gridCenas.load();
                                 $("#tabPonte").tabs('enable', 1);
@@ -187,6 +186,7 @@
                 messageErrorBox("<?=lang('cenasCamposDevemSerInformados')?>");
             }else{
                 formCenas_submit();
+                reloadGrid();
             }
             
         }
@@ -209,16 +209,15 @@
                                             var cena = data.cena
                                                 $('#txtCenaId').val(cena.id);
                                                 $('#txtCenaDescricao').val(cena.descricao);
-                                                $('#esta_ativo').val(cena.estaativo);
+                                                if(cena.estaativo == 'S'){
+                                                    $('#chkCenaAtivo').attr('checked', true);
+                                                }else{
+                                                    $('#chkCenaAtivo').attr('checked', false);
+                                                }
                                                 $('#Dt_Cena_Ocorrencia').val(cena.dt_ocorrencia);
                                     });
 	}
         
-        if( $('#txtLatOrigem').val() != '' ){
-            warning.showMessageWarning();
-        }else{
-            warning.hideMessageWarning();
-        }
         reloadGrid();
         
 </script>
