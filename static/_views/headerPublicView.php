@@ -24,12 +24,12 @@
 	<?php flush();?>
 	<!--[if lt IE 7 ]> <body class="ui-widget-content ie ie6" style="border: none !important;"> <![endif]-->
 	<!--[if (gt IE 9)|!(IE)]><!--> <body class="ui-widget-content" style="border: none !important; margin: 0px;overflow-y: hidden !important;"> <!--<![endif]-->
-		<div class="ui-layout-north ui-widget-content" style="background: url('<?=IMG;?>/head_paraformalidades.jpg')">
+		<div class="ui-layout-north ui-widget-content" style="background: url('<?=IMG;?>/head_paraformalidades.jpg');border: none !important;">
 			<div id="carregando" class="ui-state-active ui-widget ui-state-default ui-corner-all">
 				Carregando <img src="<?=IMG;?>/ajax-loader.gif" style="margin-right: 5px; margin-left: 2px;" width="16px" height="11px"/>
 			</div>
 			<div class="">
-                            <a href="#" OnClick="window.open('<?=BASE_URL;?>public/escolha/','_self');" > <img src="<?=IMG;?>/cidade_mais_contemporaneidade_to_head.png" style="margin-right: 5px; margin-left: 40px; margin-top:19px; z-index:9999;position: absolute" z-index="auto" width="366px" height="82px"/></a>
+                            <a href="#" OnClick="window.open('<?=BASE_URL;?>public/cidade/','_self');" > <img src="<?=IMG;?>/cidade_mais_contemporaneidade_to_head.png" style="margin-right: 5px; margin-left: 40px; margin-top:19px; z-index:10;position: absolute" z-index="auto" width="366px" height="82px"/></a>
                         </div>
 			<h1 style="float: left; background:none !important; border: none !important; font-size: 21px; padding: 0px; margin-top: 15px; margin-bottom: 0px;" class="ui-widget-content">
                             <!--img src="<?=IMG;?>/logo_plataforma_paraformal.png"/!-->
@@ -63,6 +63,7 @@
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-transition.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-typeahead.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery.validate.js"></script>
+<script type="text/javascript" src="<?=JS?>/metro-boostrap/bootstrap-popover.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery.validate.unobtrusive.js"></script>
 <script type="text/javascript" src="<?=JS?>/metro-boostrap/jquery.unobtrusive-ajax.js"></script>
 <div id="fb-root"></div>

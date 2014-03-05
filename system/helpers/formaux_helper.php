@@ -1230,7 +1230,7 @@ function form_MapForParaformal($nameMarker = 'MarcadorNoMapa',$latitude =-15.876
     $script = '<script src="http://maps.google.com/maps/api/js?sensor=false" 
                     type="text/javascript">
                </script>
-               <div id="map" style="width: 100%; height: 600px;"></div>
+               <div id="map" style="min-width: 600; min-height: 600;"></div>
                
                 <script type="text/javascript">
 

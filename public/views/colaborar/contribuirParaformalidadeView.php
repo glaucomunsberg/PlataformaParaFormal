@@ -38,42 +38,14 @@
                    <!-- Nova Imagem-->
                    <div id="Novaimagem" class='span9' style="display: none">
                        <div class="hero-unit">
-                           <p>
-                              <span class="label label-info"><?=lang('contribuirImagem')?></span><?=lang('contribuirImagemMensagem')?>
-                            </p>
-                           <form class="form-horizontal" novalidate="novalidate">
-                                <fieldset>
-                                    <div class="control-group">
-                                          <label class="control-label"><?=lang('contribuirSeuNome')?></label>
-                                          <div class="controls">
-                                              <input type="text" class="input-xlarge" id="txtNomeImagem">
-                                          </div>
-                                    </div> 
-                                    <div class="control-group">
-                                          <label class="control-label"><?=lang('contribuirSeuEmail')?></label>
-                                          <div class="controls">
-                                              <input type="text" class="input-xlarge" id="txtEmailImagem">
-                                          </div>
-                                    </div> 
-                                    <div class="control-group">
-                                          <label class="control-label"><?=lang('contribuirImagem')?></label>
-                                          <div class="controls">
-                                              <?=form_file('txtFileImage', '', '','')?>
-                                          </div>
-                                    </div> 
-                                    <div class="control-group">
-                                          <label class="control-label"><?=lang('contribuirPqModificarImagem')?></label>
-                                          <div class="controls">
-                                              <textarea class="input-xlarge" id="txtPqImagem" rows="3"></textarea>
-                                          </div>
-                                    </div>
-                                    <div class="form-actions">
-                                        <button type="submit" class="btn btn-primary" onClick="submeterImagem()" ><?=lang('contribuirEnviarImagem')?></button>
-                                        <button class="btn" onClick="home()"><?=lang('contribuirCancelar')?></button>
-                                    </div>
-                                </fieldset>
-                            </form>
-                           <br>
+                           <div class="row-fluid">
+                               <div class="span3">
+                                   <img src="<?= IMG . '/icon_android_ios.png' ?>" width="auto">
+                               </div>
+                               <div class="span9">
+                                   <p>Atualmente estamos trabalhando nos app's do <b>Android</b> e <b>iOS</b> para você executar essa ação!</p>
+                               </div>
+                           </div>
                        </div>
                    </div>
                    <!-- DENUNCIAR -->
@@ -261,12 +233,20 @@
     $('#bottonPosicaoCorrecao').click(function(){
         fechar();
         $('#posicaoCorrecao').show();
-    });  
+    });
+    $('#bottonNovaImagem').click(function(){
+        fechar();
+        $('#Novaimagem').show();
+    });
+    $('#bottonOutraCidade').click(function(){
+        fechar();
+        $('#Novaimagem').show();
+    });
     $('#bottonDenunciar').click( function(){
         fechar();
         $('#denunciar').show();
     });
-    $('#bottonNovaImagem').click( function(){
+    $('#bottonNovaCena').click( function(){
         fechar();
         $('#Novaimagem').show();
     });

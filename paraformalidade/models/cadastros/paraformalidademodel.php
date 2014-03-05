@@ -169,6 +169,7 @@
                      $this->db->join('pessoas as p', 'p.id = cp.pessoa_id');
                      $this->db->where('par.id', $paraformalidade_id);
                      $this->db->where('par.estaativa', 'S');
+                     $this->db->limit(2);
                      return $this->db->get()->result();
                  }
                  
@@ -218,6 +219,68 @@
                     $this->db->where('c.estaativo', 'S');
                     $this->db->where('p.estaativa', 'S');
                     $this->db->where('c.grupo_atividade_id', $grupoAtividadeID);
+                    return $this->db->get()->result_array();
+                }
+                
+                function getParaformalidadeToMapsDiscovery($parametros){
+                    $this->db->select('c.id, p.geo_latitude as geocode_lat,p.geo_longitude as geocode_lng', false);
+                    $this->db->from('paraformal.cenas as c');
+                    $this->db->join('paraformal.paraformalidades as p','p.id = (select para.id from paraformal.paraformalidades as para where para.cena_id = c.id order by dt_ocorrencia DESC limit 1) ');
+                    if(!empty($parametros['sentidos'])){
+                        $values = "";
+                        foreach ($parametros['sentidos'] as $val){
+                            if($values == ""){
+                                $values.=$val;
+                            }else{
+                                $values.=",".$val;
+                            }
+                        }
+                        $this->db->join('paraformal.sentidos_paraformalidade as sp','sp.id = (select sp.id from paraformal.sentidos_paraformalidade as sp where sp.sentido_id in ('.$values.') and sp.paraformalidade_id = p.id limit 1)');
+                    }
+                    if(!empty($parametros['instalacao_equipamento'])){
+                        $values = "";
+                        foreach ($parametros['instalacao_equipamento'] as $val){
+                            if($values == ""){
+                                $values.=$val;
+                            }else{
+                                $values.=",".$val;
+                            }
+                        }
+                        $this->db->join('paraformal.equipamento_instalacoes_paraformalidade as eip','eip.id = (select eip.id from paraformal.equipamento_instalacoes_paraformalidade as eip where eip.equipamento_instalacao_id in ('.$values.') and eip.paraformalidade_id = p.id limit 1)');
+                    }
+                    
+                    if(!empty($parametros['tipo_atividade'])){
+                        $this->db->where_in('atividade_registrada_id',$parametros['tipo_atividade']);
+                    }
+                    if(!empty($parametros['turno'])){
+                        $this->db->where_in('turno_ocorrencia_id',$parametros['turno']);
+                    }
+                    if(!empty($parametros['quantidade'])){
+                        $this->db->where_in('quantidade_registrada_id',$parametros['quantidade']);
+                    }
+                    if(!empty($parametros['localizacao'])){
+                        $this->db->where_in('espaco_localizacao_id',$parametros['localizacao']);
+                    }
+                    if(!empty($parametros['corpo_posicao'])){
+                        $this->db->where_in('corpo_posicao_id',$parametros['corpo_posicao']);
+                    }
+                    if(!empty($parametros['corpo_numero'])){
+                        $this->db->where_in('corpo_numero_id',$parametros['corpo_numero']);
+                    }
+                    if(!empty($parametros['mobilidade_equipamento'])){
+                        $this->db->where_in('equipamento_mobilidade_id',$parametros['mobilidade_equipamento']);
+                    }
+                    if(!empty($parametros['tamanho_equipamento'])){
+                        $this->db->where_in('equipamento_porte_id',$parametros['tamanho_equipamento']);
+                    }
+                    if(!empty($parametros['grupo_atividade'])){
+                        $this->db->where('grupo_atividade_id',$parametros['grupo_atividade']);
+                    }
+                    if(!empty($parametros['cena'])){
+                        $this->db->where('c.id',$parametros['cena']);
+                    }
+                    $this->db->where('c.estaativo', 'S');
+                    $this->db->where('p.estaativa', 'S');
                     return $this->db->get()->result_array();
                 }
                 

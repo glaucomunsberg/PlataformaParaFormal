@@ -3,113 +3,35 @@
 <?=form_hidden('txtGrupoAtividadeId', @$grupo_atividade->id); ?>
 <input type="hidden" name="enderecoBaseImagem" id="enderecoBaseImagem" value="<?=BASE_URL;?>" />
 <div id="fb-root"></div>
-<div id="conteudo" style='position: absolute; z-index: 20; width: 40% !important; min-height: 80%; background-color:white;display: none;'>
-    <div class='row' style='margin-left: 0px'>
-        <div id='geral'>
-            
-            <div id='cenaNome' style="margin-top: 15px;margin-left: 5px">
-                <strong>Cena </strong>Descricao da cena
-            </div>
-            <div class="thumbnail" >
-                    <img id='imageVisualizador' src="http://placehold.it/260x180" alt="">
-                    <div class="caption" style='margin-top: -10px'>
-                        <p>
-                            <div class="pagination pagination-centered" style='margin-top: -5px'>
-                                <ul id='paginas'>
-
-                                </ul>  
-                            </div>
-                        <div id="informacoesGerais">
-                            <p >
-                                <dl class="dl-horizontal" id='descricao' style='margin-top: -15px' >
-                                    <dt><?=lang('escolhaColaborador')?></dt>
-                                        <div id='paraPessoas'></div>
-                                    <dt><?=lang('escolhaDescricao')?></dt>
-                                        <dd ><div id='paraDescricao'></div></dd>
-                                    <dt><?=lang('escolhaAtividadeRegistrada')?></dt>
-                                        <dd><div id='atividadeRegistrada'></div></dd>
-                                    <dt><?=lang('escolhaMobilidade')?></dt>
-                                        <dd><div id='equipamentoMobilidade'></div></dd>
-                                    <dt><?=lang('escolhaSentido')?></dt>
-                                        <div id='paraSentidos'></div>
-                                    <dt><?=lang('escolhaEspaco')?></dt>
-                                        <dd><div id='espacoLocalizacao'></div></dd>
-                                   <dt><?=lang('escolhaCapturado')?></dt>
-                                        <dd><div id='paraData'></div></dd>
-                                    <dt><?=lang('escolhaPeriodo')?></dt>
-                                        <dd><div id='turnoOcorrencia'></div></dd>
-                               </dl>
-                                <div class="btn-group">
-                                  <button class="btn btn-primary" OnClick="comentar()"><?=lang('escolhaComentar')?></button>
-                                  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="#" OnClick="compartilhar()"><?=lang('escolhaCompartilhar')?></a></li>
-                                    <li><a href="#" OnClick="outrosdados()"><?=lang('escolhaVerOutrosDados')?></a></li>
-                                    <li><a href="#" OnClick="sobreGrupoAtividade()"><?=lang('escolhaSobreGrupoAtividade')?></a></li>
-                                    
-                                    <li class="divider"></li>
-                                    <li><a OnClick="contribuir()"><?=lang('escolhaAtualizarDados')?></a></li>
-                                  </ul>
-                                  <button class="btn" style='margin-left: 3px' OnClick="fechar()"><?=lang('escolhaFechar')?></button>
-                                </div>
-                            </p>
-                        </div>
-                        <div id='comentar' style='display: none'>
-                            <div id="comments"></div>
-                            <button class="btn" href="#" OnClick="voltar()"><?=lang('escolhaVoltar')?></button>
-                        </div>
-                        <div id='outrosDados' style='display: none'>
-                            <p >
-                                <dl class="dl-horizontal" id='descricao' style='margin-top: -15px' >
-                                    <dt><?=lang('escolhaInstalacoes')?></dt>
-                                        <div id=instalacoes></div>
-                                    <dt><?=lang('escolhaClima')?></dt>
-                                        <div id='clima'></div>
-                                    <dt><?=lang('escolhaDtCadastro')?></dt>
-                                        <dd><div id='dt_cadastro'></div></dd>
-                                    
-                               </dl>
-                                
-                            </p>
-                            <button class="btn" href="#" OnClick="voltar()"><?=lang('escolhaVoltar')?></button>
-                        </div>
-                        <div id='sobre' style='display: none'>
-                            <p >
-                                <div id="sobreGrupo" style="text-align: justify">
-                                </div>
-                            </p>
-                            <button class="btn" href="#" OnClick="voltar()"><?=lang('escolhaVoltar')?></button>
-                        </div>
-                        <div id='compartilhar' style='display: none'>
-                            <p >
-                                <p>
-                                    <a href="#" class="btn btn-primary" OnClick="facebookBrag()"><?=lang('escolhaFacebook')?></a> <a href="#" class="btn btn-warning" OnClick="twitter()"><?=lang('escolhaTwitter')?></a>
-                                </p>
-                                
-                            </p>
-                            <button class="btn" OnClick="voltar()" href="#"><?=lang('escolhaVoltar')?></button>
-                        </div>
-                        
-                        <div id='contribuir' style='display: none'>
-                            <p>
-                                <span class="label label-info"><?=lang('escolhaQuerAjudar')?></span>
-                                 <?=lang('escolhaQuerAjudarMensagem')?>
-                            </p>
-                            <button class="btn btn-primary" href="#" OnClick="colaborar()"><?=lang('paraformalidadesContribuir')?></button><button class="btn"  style='margin-left: 3px'href="#" OnClick="voltar()"><?=lang('paraformalidadesContribuirOutraHora')?></button>
-                       </div>
-                    </div>
-                </div>
-        </div>
-        <div id='share' style='display: none' class='row'>
-            
-        </div>
-        
+<div id="imagemCompleta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Imagem</h3>
     </div>
-    
-</div> 
-
-
-<?=form_MapForParaformal('marcador', @$grupo_atividade->geocode_origem_latitude, @$grupo_atividade->geocode_origem_longitude, @$paraformalidadesToMaps, 'map', true, false)?>
+    <div class="modal-body" style="max-height:none !important">
+        <img id="imagemFull" src="http://placehold.it/260x180">
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span3" >
+        <div id="menu_geral" style="padding-left: 30px;margin-top: 20px">
+            <?=$this->load->view('painelGeralView')?>
+        </div>
+        <div id="menu_conteudo" style='margin-left: 5px;margin-top: 20px;display: none;'>
+            <?=$this->load->view('painelConteudoView')?>
+        </div>
+        <div id="menu_discovery" style="margin-left: 5px;margin-top: 20px;display: none;">
+            <?=$this->load->view("painelDiscoveryView")?>
+        </div>
+        <div id="menu_cidade" style="padding-left: 30px;margin-top: 20px;display: none">
+            <?=$this->load->view("painelCidadeView")?>
+        </div>
+        </br>
+    </div>
+    <div class="span9" id="span_map">
+        <?=form_MapForParaformal('marcador', @$grupo_atividade->geocode_origem_latitude, @$grupo_atividade->geocode_origem_longitude, @$paraformalidadesToMaps, 'map', true, false,3)?>
+    </div>
+</div>
 
 <?=$this->load->view("../../static/_views/footerPublicView");?>
 <script> 
@@ -118,10 +40,12 @@
     var descricao;
     var cenaId;
     var imagem;
+    var painelSelecionado = 1; //1-discovery 2-city 3-geral
+    
     function getIdFromMaps($id){
        var para_id = $id;
-       $.post(BASE_URL+'public/escolha/exibirCena/',{ id:  para_id},function(data){
-                var paraformal = data.paraformalidade;
+       $.post(BASE_URL+'public/cidade/exibirCena/',{ id:  para_id},function(data){
+               var paraformal = data.paraformalidade;
                $('#sobreGrupo').html(paraformal.grupo_descricao);
                $('#cenaNome').html('<strong>'+paraformal.cidade_nome+'</strong> '+paraformal.cena_descricao);
                $('#paraData').text(paraformal.dt_ocorrencia);
@@ -142,29 +66,33 @@
                }
                $('#paginas').html(pagina);
                paraformalidadeVingenteId = paraformal.para_id;
-               carregarSrcDeImagem(BASE_URL+'archives/'+paraformal.nome_gerado);
+               carregarSrcDeImagem(BASE_URL+'archives/resized_640x480/'+paraformal.nome_gerado);
                carregaColaboradores(paraformal.para_id);
                carregaSentidos(paraformal.para_id);
                carregaParaformPaginar(paraformal.id);
                carregaClimas(paraformal.para_id);
                carregaInstalacoes(paraformal.para_id);
                descricao = paraformal.cena_descricao;
-               image = BASE_URL+'archives/'+paraformal.nome_gerado;
+               image = BASE_URL+'archives/resized_640x480/'+paraformal.nome_gerado;
                mudarComments();
             });
-            $('#conteudo').show();
+            $('#menu_geral').hide();
+            $('#menu_discovery').hide();
+            $('#menu_cidade').hide();
+            $('#menu_conteudo').show('drop');
     }
     
     function carregarSrcDeImagem(urlImagem){
         var imagemThu = document.getElementById("imageVisualizador");
         imagemThu.style.height = 'auto';
-        imagemThu.style.width = '200px';
+        imagemThu.style.width = 'auto';
         imagemThu.src = urlImagem;
         $('#imageVisualizador').css('width','350px auto');
+        $("#imagemFull").attr("src", urlImagem);
     }
     
     function carregaColaboradores($paraformalidade_id){
-        $.post(BASE_URL+'public/escolha/carregaColaboradores/',{ id:  $paraformalidade_id},function(data){
+        $.post(BASE_URL+'public/cidade/carregaColaboradores/',{ id:  $paraformalidade_id},function(data){
                var colaboradores = data.colaboradores;
                var count = 0;
                 for (i in colaboradores) {
@@ -173,7 +101,7 @@
                     }
                 }
                 var pessoas = '';
-                for(var a=0; a< count; a++){
+                for( var a=0; a< count; a++){
                     pessoas+='<dd>'+colaboradores[a].nome+'</dd>';
                 }
                 $('#paraPessoas').html(pessoas);
@@ -181,7 +109,7 @@
     }
     
     function carregaSentidos($paraformalidade_id){
-        $.post(BASE_URL+'public/escolha/carregaSentidos/',{ id:  $paraformalidade_id},function(data){
+        $.post(BASE_URL+'public/cidade/carregaSentidos/',{ id:  $paraformalidade_id},function(data){
                var sentidos = data.sentidos;
                var count = 0;
                 for (i in sentidos) {
@@ -198,7 +126,7 @@
     }
     
     function carregaClimas($paraformalidade_id){
-        $.post(BASE_URL+'public/escolha/carregaClimas/',{ id:  $paraformalidade_id},function(data){
+        $.post(BASE_URL+'public/cidade/carregaClimas/',{ id:  $paraformalidade_id},function(data){
                var climas = data.climas;
                var count = 0;
                 for (i in climas) {
@@ -215,7 +143,7 @@
     }
     
     function carregaInstalacoes($paraformalidade_id){
-        $.post(BASE_URL+'public/escolha/carregaInstalacoes/',{ id:  $paraformalidade_id},function(data){
+        $.post(BASE_URL+'public/cidade/carregaInstalacoes/',{ id:  $paraformalidade_id},function(data){
                var instalacoes = data.instalacoes;
                var count = 0;
                 for (i in instalacoes) {
@@ -232,10 +160,11 @@
     }
     
     function carregaParaformPaginar($cena_id){
-        $.post(BASE_URL+'public/escolha/carregarParaformalides/',{ id:  $cena_id},function(data){
+        $.post(BASE_URL+'public/cidade/carregarParaformalides/',{ id:  $cena_id},function(data){
                paraformalidadesListadas = data.paraformalidades;
             });
     }
+    
     function mudarParaformalidade($id){
         paraformalidadeVingenteId = $id;
         $('#paraDescricao').text(paraformalidadesListadas[$id].para_descricao);
@@ -244,13 +173,13 @@
         $('#espacoLocalizacao').text(paraformalidadesListadas[$id].espaco_localizacao);
         $('#turnoOcorrencia').text(paraformalidadesListadas[$id].turno_ocorrencia);
         $('#dt_cadastro').text(paraformalidadesListadas[$id].dt_cadastro);
-        carregarSrcDeImagem(BASE_URL+'archives/'+paraformalidadesListadas[$id].nome_gerado);
+        carregarSrcDeImagem(BASE_URL+'archives/resized_640x480/'+paraformalidadesListadas[$id].nome_gerado);
         carregaColaboradores(paraformalidadesListadas[$id].id)
         carregaSentidos(paraformalidadesListadas[$id].id);
         carregaClimas(paraformalidadesListadas[$id].id);
         carregaInstalacoes(paraformalidadesListadas[$id].id);
         descricao = paraformalidadesListadas[$id].para_descricao;
-        imagem = BASE_URL+'archives/'+paraformalidadesListadas[$id].nome_gerado;
+        imagem = BASE_URL+'archives/resized_640x480/'+paraformalidadesListadas[$id].nome_gerado;
         mudarComments();
     }
     
@@ -263,17 +192,37 @@
         $('#informacoesGerais').hide('blind');
         $('#outrosDados').show('blind');
     }
+    
     function comentar(){
         $('#informacoesGerais').hide('blind');
         $('#comentar').show('blind');
     }
+    
     function compartilhar(){
         $('#informacoesGerais').hide('blind');
         $('#compartilhar').show('blind');
     }
+    
     function fechar(){
-        $('#conteudo').hide('drop');
+        $('#menu_conteudo').hide();
+        if(painelSelecionado == 1){
+            $('#menu_discovery').show('drop');
+        }
+        if(painelSelecionado == 2){
+            $('#menu_cidade').show('drop');
+        }
+        if(painelSelecionado == 3){
+            $('#menu_geral').show('drop');
+        }
+        
     }
+    function back_geral(){
+        painelSelecionado = 3;
+        $('#menu_discovery').hide();
+        $('#menu_cidade').hide();
+        $('#menu_geral').show('drop');
+    }
+    
     function sobreGrupoAtividade(){
         $('#informacoesGerais').hide('blind');
         $('#sobre').show('blind');
@@ -291,9 +240,10 @@
     function colaborar(){
         location.href = '<?=BASE_URL?>public/colaborar/contribuirParaformalidade/'+paraformalidadeVingenteId;
     }
+    
     function twitter(){
         $var = descricao;
-        $local = BASE_URL+'public/escolha/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId;
+        $local = BASE_URL+'public/cidade/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId;
         $var = $var.substring(0,20);
         $var = 'Paraformal - '+$var+' '+$local;
         $var = 'http://twitter.com/?status='+$var;
@@ -305,7 +255,7 @@
     function facebookBrag() {
        FB.ui({ 
          method: 'feed',
-         link: $local = BASE_URL+'public/escolha/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId,
+         link: $local = BASE_URL+'public/cidade/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId,
          picture: imagem,
          name: descricao,
          caption: descricao,
@@ -317,20 +267,18 @@
         console.log(response);
     }
     
-    $('#map').css('width',$(document).width());
-    $('#map').css('height',$(document).height()-106);
+    $('#map').css('min-height',$(document).height()-106);
     $('#footer').css('background-color','#c5c5c5');
     $('#footer').css('background-image','none');
     $('#footer').css('border','none');
     
     function mudarComments(){
-        $link = BASE_URL+'public/escolha/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId;
+        $link = BASE_URL+'public/cidade/exibir/?cena='+cenaId;
         document.getElementById('comments').innerHTML='<div class="fb-comments" data-href="'+$link+'" data-num-posts="10"></div>'; 
         FB.XFBML.parse(document.getElementById('comments'));
     }
     
     function strip_tags(html){
-
             //PROCESS STRING
             if(arguments.length < 3) {
                 html=html.replace(/<\/?(?!\!)[^>]*>/gi, '');
@@ -352,17 +300,46 @@
             //RETURN THE CLEAN STRING
             return clean_string;
          }
-</script>
-<script type="text/javascript" DEFER="DEFER">
          
+         function showDiscovery(){
+             
+             painelSelecionado = 1;
+             $('#menu_geral').hide();
+             $('#menu_discovery').show('drop');
+             $('#welcome_back').hide();
+             $('#welcom_back_cidade').hide();
+             $("#welcome_img").attr("src", IMG+'/welcome.png');
+             map.setZoom(4);
+             map.setCenter(new google.maps.LatLng(-16.37, -49.26));
+         }
     <?
-        
         if(@$_GET['cena'] != ''){
             $post = $_GET['cena'];
             if(is_numeric($post)){
-                echo 'var cena_recebida = '.$post.';';
+               ?>
+                   $.ready($.post(BASE_URL+'public/cidade/carregarParaformalidesToDiscovery/',{ cena:<?=$post?>},function(data){
+                    var location = data.paraformalidades;
+                    setAllMap(null);
+                    var latCenter =0;
+                    var lngCenter =0;
+                    for(i=0; i < location.length ; i++){
+                        latCenter=latCenter+parseInt(location[i][0]);
+                        lngCenter=lngCenter+parseInt(location[i][1]);
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(location[i][0], location[i][1]),
+                            map: map
+                          });
+                          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                getIdFromMaps(location[i][2]);
+                            }
+                          })(marker, i));
+                        allMarkers.push(marker);
+                    }
+                    map.setCenter(new google.maps.LatLng(latCenter/location.length, lngCenter/location.length));
+                }));
+               <?
             }
         }
     ?>
-    
 </script>
