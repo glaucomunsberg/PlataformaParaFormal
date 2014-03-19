@@ -89,7 +89,7 @@ class ColaboradoresModel extends Model {
         $this->db->select('p.id, p.nome');
         $this->db->from('pessoas as p');
         if($nome != '')
-            $this->db->like('upper(p.nome)', strtoupper($nome));
+            $this->db->likeName('upper(p.nome)', strtoupper($nome));
         $this->db->order_by('p.nome', 'asc');
         $this->db->limit('20');
         return $this->db->get('')->result();

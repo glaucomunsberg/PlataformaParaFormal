@@ -97,7 +97,7 @@ class Cidade extends Controller{
                          $id = $value;
                      }
                 }
-                array_push($array,[$lat,$lng,$id]);
+                array_push($array,array($lat,$lng,$id));
             }
         }
         $this->ajax->addAjaxData('paraformalidades', $array );
