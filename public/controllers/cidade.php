@@ -79,8 +79,9 @@ class Cidade extends Controller{
 	$this->ajax->returnAjax();
     }
     
-    function carregarParaformalidesToDiscovery(){
-        $positions = $this->paraformalidadeModel->getParaformalidadeToMapsDiscovery($_POST);
+    public function carregarParaformalidesToDiscovery(){
+        $parametros = $_GET;
+        $positions = $this->paraformalidadeModel->getParaformalidadeToMapsDiscovery($parametros);
         $array = array();
         if (count($positions) > 0 && !empty($positions)){
             foreach ($positions as $arrayObject) {
@@ -100,7 +101,6 @@ class Cidade extends Controller{
                 array_push($array,array($lat,$lng,$id));
             }
         }
-        $this->ajax->addAjaxData('paraformalidades', $array );
-	$this->ajax->returnAjax();
+        print json_encode($array);
     }
 }

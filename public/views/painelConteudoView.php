@@ -3,13 +3,13 @@
         <strong>Cena </strong>Descricao da cena
     </div>
     <div class="thumbnail" style="border: none!important;width: 100%" >
-        <a href="#imagemCompleta" role="button" class="btn" data-toggle="modal">
+        <a href="#imagemCompleta" role="button" class="" data-toggle="modal">
             <img id='imageVisualizador' src="http://placehold.it/260x180" style="height: auto; width: auto;">
         </a>
         <div class="caption" style='margin-top: -40px'>
             <p>
             <div class="pagination pagination-centered" style='margin-top: -5px'>
-                <ul id='paginas'>
+                <ul id='paginas' style="cursor: pointer">
                 </ul>  
             </div>
             <div id="informacoesGerais">

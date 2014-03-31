@@ -8,12 +8,12 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Imagem</h3>
     </div>
-    <div class="modal-body" style="max-height:none !important">
+    <div id="myModelBody" class="modal-body" style="max-height:none !important">
         <img id="imagemFull" src="http://placehold.it/260x180">
     </div>
 </div>
 <div class="row-fluid">
-    <div class="span3" >
+    <div id="painelLateral" class="span3" >
         <div id="menu_geral" style="padding-left: 30px;margin-top: 20px">
             <?=$this->load->view('painelGeralView')?>
         </div>
@@ -83,11 +83,13 @@
     }
     
     function carregarSrcDeImagem(urlImagem){
+        var painelLateral = document.getElementById("painelLateral"); 
         var imagemThu = document.getElementById("imageVisualizador");
         imagemThu.style.height = 'auto';
         imagemThu.style.width = 'auto';
         imagemThu.src = urlImagem;
-        $('#imageVisualizador').css('width','350px auto');
+        $('#myModalLabel').text("Imagem");
+        $('#myModelBody').text("");
         $("#imagemFull").attr("src", urlImagem);
     }
     
@@ -317,27 +319,45 @@
             $post = $_GET['cena'];
             if(is_numeric($post)){
                ?>
-                   $.ready($.post(BASE_URL+'public/cidade/carregarParaformalidesToDiscovery/',{ cena:<?=$post?>},function(data){
-                    var location = data.paraformalidades;
-                    setAllMap(null);
-                    var latCenter =0;
-                    var lngCenter =0;
-                    for(i=0; i < location.length ; i++){
-                        latCenter=latCenter+parseInt(location[i][0]);
-                        lngCenter=lngCenter+parseInt(location[i][1]);
-                        marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(location[i][0], location[i][1]),
-                            map: map
-                          });
-                          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                            return function() {
-                                getIdFromMaps(location[i][2]);
+                $.realy(
+                        $.ajaxSetup({
+                            cache:false
+                        });
+                        $.ajax({
+                            url : BASE_URL+'public/cidade/carregarParaformalidesToDiscovery/',
+                            dataType : "json",
+                            data:{ cena:<?=$post?>},
+                            success : function(data){
+                                var locations = data;
+                                setAllMap(null);
+                                var latCenter =0;
+                                var lngCenter =0;
+                                for(i=0; i < locations.length ; i++){
+                                      latCenter=latCenter+parseInt(locations[i][0]);
+                                      lngCenter=lngCenter+parseInt(locations[i][1]);
+                                      marker = new google.maps.Marker({
+                                        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                                        map: map
+                                      });
+                                      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                        return function() {
+                                            getIdFromMaps(locations[i][2]);
+                                        }
+                                      })(marker, i));
+                                    allMarkers.push(marker);
+                                }
+                                console.log(latCenter/locations.length);
+                                console.log(lngCenter/locations.length);
+                                map.setCenter(new google.maps.LatLng(latCenter/locations.length, lngCenter/locations.length));
+                            },
+                            error: function(xhr, ajaxOptions, thrownError){
+                                $('#myModalLabel').text("Error");
+                                $('#imagemFull').attr('src',null);
+                                $('#myModelBody').text("Ooops! Um erro no servidor aconteceu, tente novamente mais tarde");
+                                $("#imagemCompleta").modal('show');
                             }
-                          })(marker, i));
-                        allMarkers.push(marker);
-                    }
-                    map.setCenter(new google.maps.LatLng(latCenter/location.length, lngCenter/location.length));
-                }));
+                        });
+                        );
                <?
             }
         }

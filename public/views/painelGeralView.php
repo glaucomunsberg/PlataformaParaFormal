@@ -35,27 +35,43 @@ function selectCity($value){
     $("#welcome_img").attr("src", IMG+'/welcome.png');
     painelSelecionado = 2;
     clearTags();
-    $.post(BASE_URL+'public/cidade/carregarParaformalidesToDiscovery/',{ grupo_atividade:$value},function(data){
-        var locations = data.paraformalidades;
-        setAllMap(null);
-        var latCenter =0;
-        var lngCenter =0;
-        for(i=0; i < locations.length ; i++){
-            latCenter=latCenter+parseInt(locations[i][0]);
-            lngCenter=lngCenter+parseInt(locations[i][1]);
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-                map: map
-              });
-              google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    getIdFromMaps(locations[i][2]);
-                }
-              })(marker, i));
-            allMarkers.push(marker);
-        }
-        map.setCenter(new google.maps.LatLng(latCenter/locations.length, lngCenter/locations.length));
+    $.ajaxSetup({
+        cache:false
     });
+    $.ajax({
+            url : BASE_URL+'public/cidade/carregarParaformalidesToDiscovery/',
+            dataType : "json",
+            data:{ grupo_atividade:$value},
+            success : function(data){
+                var locations = data;
+                setAllMap(null);
+                var latCenter =0;
+                var lngCenter =0;
+                for(i=0; i < locations.length ; i++){
+                      latCenter=latCenter+parseInt(locations[i][0]);
+                      lngCenter=lngCenter+parseInt(locations[i][1]);
+                      marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                        map: map
+                      });
+                      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            getIdFromMaps(locations[i][2]);
+                        }
+                      })(marker, i));
+                    allMarkers.push(marker);
+                }
+                console.log(latCenter/locations.length);
+                console.log(lngCenter/locations.length);
+                map.setCenter(new google.maps.LatLng(latCenter/locations.length, lngCenter/locations.length));
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                $('#myModalLabel').text("Error");
+                $('#imagemFull').attr('src',null);
+                $('#myModelBody').text("Ooops! Um erro no servidor aconteceu, tente novamente mais tarde");
+                $("#imagemCompleta").modal('show');
+            }
+        });
     $('#menu_geral').hide();
     $('#menu_menu').hide();
     $('#menu_cidade').show('drop');

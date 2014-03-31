@@ -19,6 +19,8 @@
 			}
 		?>
 		<title><?=lang('titulo');?><?=(@$path_bread != '' ? ' - ' : '').@$path_bread;?>&nbsp;</title>
+                <meta name="keywords" content="paraformalidade, plataforma paraformal, plataforma paraformalidade, paraformal, para-formal, para-formalidade"></meta>
+                <meta name="description" content="Plataforma do Paraformal: Controvércias e Medições no Espaço Público"></meta>
 		<?=$this->load->view('../../static/_views/headerScripts');?>
 	</head>
 	<?php flush();?>
