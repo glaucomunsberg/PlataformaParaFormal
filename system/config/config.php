@@ -29,7 +29,7 @@ define('PRODUCAO', false);
  * Configuracao
  */
 $config['app_fb_id'] = '';
-
+$config['analytics_id'] = '';
 /*
 |--------------------------------------------------------------------------
 | Index File

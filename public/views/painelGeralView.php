@@ -30,6 +30,9 @@
 </div>
 <script>
 function selectCity($value){
+    
+    ga('send', 'event', 'Principal', 'click', 'Go_Cidade', $value);
+    
     $('#welcome_back').hide();
     $('#welcom_back_cidade').hide();
     $("#welcome_img").attr("src", IMG+'/welcome.png');

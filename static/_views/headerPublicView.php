@@ -21,7 +21,14 @@
 		<title><?=lang('titulo');?><?=(@$path_bread != '' ? ' - ' : '').@$path_bread;?>&nbsp;</title>
                 <meta name="keywords" content="paraformalidade, plataforma paraformal, plataforma paraformalidade, paraformal, para-formal, para-formalidade"></meta>
                 <meta name="description" content="Plataforma do Paraformal: Controvércias e Medições no Espaço Público"></meta>
-		<?=$this->load->view('../../static/_views/headerScripts');?>
+                <meta property="og:title" content="Plataforma Paraformal" />
+                <meta property="og:site_name" content="Plataforma Paraformal" />
+                <meta property="og:description" content="A 'Plataforma do Para-formal': Controvérsias e medições no espaço 
+                          público”, cria um ambiente digital para armazenar, promover a interação e o 
+                          pensamento crítico sobre as cenas dos territórios “para-formais” no centro de 
+                          cidades, investigando repertórios, redes de interação, conflitos e potenciais." /> 
+                <meta property="og:image" content="http://plataformaparaformal.com.br/static/_img/welcome.png" /> 
+                <?=$this->load->view('../../static/_views/headerScripts');?>
 	</head>
 	<?php flush();?>
 	<!--[if lt IE 7 ]> <body class="ui-widget-content ie ie6" style="border: none !important;"> <![endif]-->
@@ -102,3 +109,23 @@
    }());
 </script>
 <div id="fb-root"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<?=$this->config->item('analytics_id')?>', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<?=$this->config->item('analytics_id')?>', 'auto');
+  ga('send', 'pageview');
+  
+</script>

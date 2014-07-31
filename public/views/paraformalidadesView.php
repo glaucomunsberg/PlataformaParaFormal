@@ -80,6 +80,8 @@
             $('#menu_discovery').hide();
             $('#menu_cidade').hide();
             $('#menu_conteudo').show('drop');
+            
+            ga('send', 'event', 'Paraformalidade', 'click', 'Ver', para_id);
     }
     
     function carregarSrcDeImagem(urlImagem){
@@ -186,21 +188,25 @@
     }
     
     function contribuir(){
+        ga('send', 'event', 'Paraformalidade', 'click', 'Contrinuir', 0);
         $('#informacoesGerais').hide('blind');
         $('#contribuir').show('blind');
     }
     
     function outrosdados(){
+        ga('send', 'event', 'Paraformalidade', 'click', 'OutrosDados', 0);
         $('#informacoesGerais').hide('blind');
         $('#outrosDados').show('blind');
     }
     
     function comentar(){
+        ga('send', 'event', 'Paraformalidade', 'click', 'Comentar', 0);
         $('#informacoesGerais').hide('blind');
         $('#comentar').show('blind');
     }
     
     function compartilhar(){
+        ga('send', 'event', 'Paraformalidade', 'click', 'Compartilhar', 0);
         $('#informacoesGerais').hide('blind');
         $('#compartilhar').show('blind');
     }
@@ -219,6 +225,8 @@
         
     }
     function back_geral(){
+        ga('send', 'event', 'Principal', 'click', 'Go_Home', 0);
+        
         painelSelecionado = 3;
         $('#menu_discovery').hide();
         $('#menu_cidade').hide();
@@ -255,14 +263,14 @@
     }
     
     function facebookBrag() {
-       FB.ui({ 
-         method: 'feed',
-         link: $local = BASE_URL+'public/cidade/exibir/'+$('#txtGrupoAtividadeId').val()+'?cena='+cenaId,
-         picture: imagem,
-         name: descricao,
-         caption: descricao,
-         description: strip_tags($('#paraDescricao').val())
-       }, callback);
+       FB.ui({
+        method: 'share',
+        href: BASE_URL+'?cena='+cenaId,
+        picture: imagem
+      }, function(response){
+          callback(response);
+      });
+   
     }
     
     function callback(response){
@@ -304,6 +312,8 @@
          }
          
          function showDiscovery(){
+             
+            ga('send', 'event', 'Principal', 'click', 'Go_Discovery', 0);
              
              painelSelecionado = 1;
              $('#menu_geral').hide();

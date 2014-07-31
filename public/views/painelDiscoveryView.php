@@ -431,70 +431,102 @@ function getParaformalidades(){
     $('#atividade .btn.active').each(function() {
         atividade.push(this.id);
     });
-    console.log("atividade");console.log(atividade);
+    if(atividade.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Atividade', atividade);
+        console.log("atividade");
+        console.log(atividade);
+    }
     
     var turno = Array();
     $('#turno .btn.active').each(function() {
         turno.push(this.id);
     });
-    console.log("turno");
-    console.log(turno);
+    if(turno.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Turno', turno);
+        console.log("turno");
+        console.log(turno);
+    }
     
     var quantidade = Array();
     $('#quantidade .btn.active').each(function() {
         quantidade.push(this.id);
     });
-    console.log("quantidade");
-    console.log(quantidade);
+    if(quantidade.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Quantidade', quantidade);
+        console.log("quantidade");
+        console.log(quantidade);
+    }
     
     var localizacao = Array();
     $('#localizacao .btn.active').each(function() {
         localizacao.push(this.id);
     });
-    console.log("localizacao");
-    console.log(localizacao);
+    if(localizacao.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Localizacao', localizacao);
+        console.log("localizacao");
+        console.log(localizacao);
+    }
     
     var corpo_posicao = Array();
     $('#corpo_posicao .btn.active').each(function() {
         corpo_posicao.push(this.id);
     });
-    console.log("corpo_posicao");
-    console.log(corpo_posicao);
+    if(corpo_posicao.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Corpo_posicao', corpo_posicao);
+        console.log("corpo_posicao");
+        console.log(corpo_posicao);
+    }
     
     var numero_pessoas = Array();
     $('#numero_pessoas .btn.active').each(function() {
         numero_pessoas.push(this.id);
     });
-    console.log("numero_pessoas");
-    console.log(numero_pessoas);
+    if(numero_pessoas.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Numero_pessoas', numero_pessoas);
+        console.log("numero_pessoas");
+        console.log(numero_pessoas);
+    }
     
     var sentidos = Array();
     $('#sentidos .btn.active').each(function() {
         sentidos.push(this.id);
     });
-    console.log("sentidos");
-    console.log(sentidos);
+    if(sentidos.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Sentidos', sentidos);
+        console.log("sentidos");
+        console.log(sentidos);
+    }
     
     var mobilidade_equipamento = Array();
     $('#mobilidade_equipamento .btn.active').each(function() {
         mobilidade_equipamento.push(this.id);
     });
-    console.log("mobilidade_equipamento");
-    console.log(mobilidade_equipamento);
+    if(mobilidade_equipamento.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Mobilidade_equipamento', mobilidade_equipamento);
+        console.log("mobilidade_equipamento");
+        console.log(mobilidade_equipamento);
+    }
     
     var tamanho_equipamento = Array();
     $('#tamanho_equipamento .btn.active').each(function() {
         tamanho_equipamento.push(this.id);
     });
-    console.log("tamanho_equipamento");
-    console.log(tamanho_equipamento);
+    if(tamanho_equipamento.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Tamanho_Equipamento', tamanho_equipamento);
+        console.log("tamanho_equipamento");
+        console.log(tamanho_equipamento);
+    }
     
     var instalacao_equipamento = Array();
     $('#instalacao_equipamento .btn.active').each(function() {
         instalacao_equipamento.push(this.id);
     });
-    console.log("instalacao_equipamento");
-    console.log(instalacao_equipamento);
+    if(instalacao_equipamento.length > 0){
+        ga('send', 'event', 'Discovery', 'click', 'Instalacao_Equipamento', instalacao_equipamento);
+        console.log("instalacao_equipamento");
+        console.log(instalacao_equipamento);
+    }
+    
     $.ajaxSetup({
         cache:false
     });
