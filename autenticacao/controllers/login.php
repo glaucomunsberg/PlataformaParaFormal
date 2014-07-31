@@ -18,7 +18,7 @@ class Login extends Controller {
      * Direciona para a tela login caso o usuário não esteja logado
      */
     function index() {
-        if (@$_COOKIE['92c29c1ac4d85b45639f741599c24cd7'] != '') {
+        if (@$_COOKIE['8qq5tzydi0nyd9p7mo6l3xhjvvadpzek'] != '') {
             redirect('dashboard');
         } else {
             $this->load->view('loginView');
@@ -47,7 +47,7 @@ class Login extends Controller {
      */
     function sair() {
         $this->session->sess_destroy();
-        setcookie('92c29c1ac4d85b45639f741599c24cd7', '', time() - 3600, PATH_COOKIE);
+        setcookie('8qq5tzydi0nyd9p7mo6l3xhjvvadpzek', '', time() - 3600, PATH_COOKIE);
         setcookie('navigationtree', '', time() - 3600, PATH_COOKIE);
         setcookie('showMenu', '', time() - 3600, PATH_COOKIE);
         setcookie('tema', '', time() - 3600, PATH_COOKIE);
@@ -61,7 +61,7 @@ class Login extends Controller {
      * @todo Este método deve ser implementado na bibliteca javascript do sistema
      */
     function validaAutenticacaoAjax() {
-        if (@$_COOKIE['92c29c1ac4d85b45639f741599c24cd7'] == '') {
+        if (@$_COOKIE['8qq5tzydi0nyd9p7mo6l3xhjvvadpzek'] == '') {
             $this->ajax->ajaxMessage('logged', false);
         } else {
             $this->ajax->ajaxMessage('logged', true);

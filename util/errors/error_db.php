@@ -1,5 +1,5 @@
 <?$this->CI =& get_instance();
-if(@$_COOKIE['92c29c1ac4d85b45639f741599c24cd7'] == '')
+if(@$_COOKIE['8qq5tzydi0nyd9p7mo6l3xhjvvadpzek'] == '')
 	echo $this->CI->load->view("../../static/_views/headerLoginView");	
 else	
 	echo $this->CI->load->view("../../static/_views/headerGlobalView");

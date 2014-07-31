@@ -9,7 +9,7 @@ class Auth_filter extends Filter {
         if (@$_COOKIE['tema'] == '')
             setcookie('tema', 'redmond', 0, PATH_COOKIE);
 
-        if (@$_COOKIE['92c29c1ac4d85b45639f741599c24cd7'] == '')
+        if (@$_COOKIE['8qq5tzydi0nyd9p7mo6l3xhjvvadpzek'] == '')
             $this->_logout_redirect();
 
         if (!IS_AJAX) {

@@ -28,7 +28,7 @@ class LoginModel extends Model {
                     return false;
                 } else {
                     $this->session->set_userdata('usuario', json_encode($usuario));
-                    setcookie('92c29c1ac4d85b45639f741599c24cd7', true, 0, PATH_COOKIE);
+                    setcookie('8qq5tzydi0nyd9p7mo6l3xhjvvadpzek', true, 0, PATH_COOKIE);
                     setcookie('tema', $usuario->tema, 0, PATH_COOKIE);
                     setcookie('avatar', $usuario->nome_gerado, 0, PATH_COOKIE);
                     return true;
@@ -51,7 +51,7 @@ class LoginModel extends Model {
         $usuario = $this->db->get()->row();
 
         $this->session->set_userdata('usuario', json_encode($usuario));
-        setcookie('92c29c1ac4d85b45639f741599c24cd7', true, 0, PATH_COOKIE);
+        setcookie('8qq5tzydi0nyd9p7mo6l3xhjvvadpzek', true, 0, PATH_COOKIE);
         setcookie('tema', $usuario->tema, 0, PATH_COOKIE);
         setcookie('avatar', $usuario->nome_gerado, 0, PATH_COOKIE);
     }
