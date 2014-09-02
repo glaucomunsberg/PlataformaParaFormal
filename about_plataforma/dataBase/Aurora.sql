@@ -1700,6 +1700,8 @@ CREATE TABLE pessoas (
     nome_consulta character varying(255),
     cidade_id integer,
     profissao character varying(50)
+    conexao_social character varying(1)
+    conexao_social_id character varying(255)
 );
 
 
